@@ -1,0 +1,7 @@
+search_text=ŒŸõ•¶š
+close=•Â‚¶‚é
+case_sensitive=‘å•¶š¬•¶š‚ğ‹æ•Ê‚·‚é
+search_prev=‘OŒŸõ
+search_next=ŸŒŸõ
+title=jFD2 - Search
+use_regex=³‹K•\Œ»‚ğg‚¤

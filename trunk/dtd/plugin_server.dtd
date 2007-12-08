@@ -1,0 +1,9 @@
+<!ELEMENT plugin-server plugin*>
+
+<!ELEMENT plugin description? >
+<!ATTLIST plugin
+	name CDATA #REQUIRED
+	href CDATA #REQUIRED
+	encode CDATA #REQUIRED
+	version CDATA #REQUIRED
+>

@@ -1,0 +1,15 @@
+<!ELEMENT plugin (param*, classpath?, description?)>
+<!ATTLIST plugin
+	name CDATA #REQUIRED
+	class CDATA #REQUIRED
+>
+
+<!ELEMENT param any>
+<!ATTLIST param
+	name CDATA #REQUIRED
+	type CDATA #REQUIRED
+>
+
+<!ELEMENT description #PCDATA>
+
+<!ELEMENT classpath #PCDATA>

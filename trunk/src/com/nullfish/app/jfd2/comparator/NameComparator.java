@@ -1,0 +1,29 @@
+/*
+ * Created on 2004/06/07
+ *
+ * To change the template for this generated file go to
+ * Window - Preferences - Java - Code Generation - Code and Comments
+ */
+package com.nullfish.app.jfd2.comparator;
+
+import com.nullfish.lib.vfs.VFile;
+
+/**
+ * @author shunji
+ *
+ * To change the template for this generated type comment go to
+ * Window - Preferences - Java - Code Generation - Code and Comments
+ */
+public class NameComparator implements FileComparator {
+	private int order;
+	
+	public NameComparator(boolean ascend) {
+		order = ascend ? 1 : -1;
+	}
+	/* (non-Javadoc)
+	 * @see com.nullfish.app.jfd2.comparator.FileComparator#compare(com.nullfish.lib.vfs.VFile, com.nullfish.lib.vfs.VFile)
+	 */
+	public int compare(VFile file1, VFile file2) {
+		return (file1.getFileName().getLowerName().compareTo(file2.getFileName().getLowerName())) * order;
+	}
+}

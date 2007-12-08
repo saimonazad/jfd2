@@ -1,0 +1,24 @@
+<!ELEMENT extcommandset extcommand+>
+
+<!ELEMENT extcommand (shellcommand, script, scriptfile)>
+<!ATTLIST extcommand
+	label CDATA #REQUIRED
+	title CDATA #IMPLIED
+>
+
+<!ELEMENT shellcommand PCDATA>
+<!ATTLIST shellcommand
+	useshell CDATA "false"
+	workdir CDATA #IMPLIED
+>
+
+<!ELEMENT script PCDATA>
+<!ATTLIST script
+	title CDATA #REQUIRED
+	file CDATA #IMPLIED
+>
+
+<!ELEMENT scriptfile PCDATA>
+<!ATTLIST scriptfile
+	title CDATA #REQUIRED
+>
