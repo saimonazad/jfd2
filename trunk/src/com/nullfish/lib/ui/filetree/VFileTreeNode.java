@@ -18,13 +18,21 @@ public class VFileTreeNode implements TreeNode {
 	
 	private List childNodes = new ArrayList();
 	
+	private List tempChildNodes = new ArrayList();
+	
 	private VFileTreeNode parent;
 	
 	private boolean showsFile = true;
 	
 	private DefaultTreeModel model;
 	
-	private boolean loading = false;
+	private int status = STATUS_NOT_LOADED;
+	
+	public static final int STATUS_NOT_LOADED = 0;
+	
+	public static final int STATUS_LOADING = 1;
+	
+	public static final int STATUS_LOADED = 2;
 	
 	public VFileTreeNode(DefaultTreeModel model, VFileTreeNode parent, VFile file) {
 		this.model = model;
@@ -52,7 +60,7 @@ public class VFileTreeNode implements TreeNode {
 		} else {
 			Thread thread = new Thread() {
 				public void run() {
-					setLoading(true);
+					setStatus(STATUS_LOADING);
 					Runnable runnable = new Runnable() {
 						public void run() {
 							model.reload(VFileTreeNode.this);
@@ -64,16 +72,20 @@ public class VFileTreeNode implements TreeNode {
 						VFile[] children = file.getChildren();
 						for(int i=0; i<children.length; i++) {
 							if(showsFile || children[i].isDirectory()) {
-								childNodes.add(new VFileTreeNode(model, VFileTreeNode.this, children[i]));
+								VFileTreeNode child = new VFileTreeNode(model, VFileTreeNode.this, children[i]);
+								int index = tempChildNodes.indexOf(child);
+								if(index != -1) {
+									child = (VFileTreeNode)tempChildNodes.get(index);
+								}
+								childNodes.add(child);
 							}
 						}
 						
-						setLoading(false);
+						setStatus(STATUS_LOADED);
 						ThreadSafeUtilities.executeRunnable(runnable);
 					} catch (VFSException e) {
 						e.printStackTrace();
 					}
-					
 				}
 			};
 			thread.start();
@@ -133,7 +145,7 @@ public class VFileTreeNode implements TreeNode {
 	}
 	
 	public String toString() {
-		return (file.isRoot() ? file.getAbsolutePath() : file.getName()) + (isLoading() ? "(loading)" : "");
+		return (file.isRoot() ? file.getAbsolutePath() : file.getName()) + (status == STATUS_LOADING ?  "(loading)" : "");
 	}
 	
 	public boolean equals(Object o) {
@@ -156,11 +168,11 @@ public class VFileTreeNode implements TreeNode {
 		this.model = model;
 	}
 
-	private synchronized boolean isLoading() {
-		return loading;
+	private synchronized int getStatus() {
+		return status;
 	}
 
-	private synchronized void setLoading(boolean loading) {
-		this.loading = loading;
+	private synchronized void setStatus(int status) {
+		this.status = status;
 	}
 }

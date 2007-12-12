@@ -1,10 +1,13 @@
 package com.nullfish.app.jfd2.util;
 
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.swing.KeyStroke;
+
+import org.monazilla.migemo.Migemo;
 
 import com.nullfish.app.jfd2.Initable;
 import com.nullfish.app.jfd2.JFD;
@@ -30,6 +33,11 @@ public class IncrementalSearcher implements Initable {
 	private List commandKeys;
 
 	private KeyStroke backSpace = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0);
+	
+	{
+		Migemo.loadDictionary(new File("migemo-dict"),"EUC_JP");
+//		Migemo.loadDictionary(new File("cmigemo-dict"),"MS932");
+	}
 	
 	public IncrementalSearcher(JFD jfd) {
 		this.jfd = jfd;
@@ -135,7 +143,8 @@ public class IncrementalSearcher implements Initable {
 		
 		lastSearch = initial;
 		initial = initial.toLowerCase();
-		initial = "^" + WildCardUtil.wildCard2Regex(initial) + ".*";
+		initial = Migemo.lookup(initial);
+//		initial = "^" + WildCardUtil.wildCard2Regex(initial) + ".*";
 
 		Pattern pattern = Pattern.compile(initial);
 		
@@ -145,7 +154,7 @@ public class IncrementalSearcher implements Initable {
 		VFile parent = current.getParent();
 		
 		for(int i=selectedIndex + (includeCurrent ? 0 : 1); i<model.getFilesCount(); i++) {
-			if(pattern.matcher(model.getFileAt(i).getName().toLowerCase()).matches()
+			if(pattern.matcher(model.getFileAt(i).getName().toLowerCase()).find()
 					&& !model.getFileAt(i).equals(current)
 					&& !model.getFileAt(i).equals(parent)) {
 				model.setSelectedIndex(i);
@@ -154,7 +163,7 @@ public class IncrementalSearcher implements Initable {
 		}
 		
 		for(int i=0; i < selectedIndex; i++) {
-			if(pattern.matcher(model.getFileAt(i).getName().toLowerCase()).matches()
+			if(pattern.matcher(model.getFileAt(i).getName().toLowerCase()).find()
 					&& !model.getFileAt(i).equals(current)
 					&& !model.getFileAt(i).equals(parent)) {
 				model.setSelectedIndex(i);
@@ -173,7 +182,8 @@ public class IncrementalSearcher implements Initable {
 		
 		lastSearch = initial;
 		initial = initial.toLowerCase();
-		initial = "^" + WildCardUtil.wildCard2Regex(initial) + ".*";
+		initial = ".*" + Migemo.lookup(initial) + ".*";
+//		initial = "^" + WildCardUtil.wildCard2Regex(initial) + ".*";
 
 		Pattern pattern = Pattern.compile(initial);
 		
@@ -183,7 +193,7 @@ public class IncrementalSearcher implements Initable {
 		VFile parent = current.getParent();
 		
 		for(int i=selectedIndex - (includeCurrent ? 0 : 1); i >= 0; i--) {
-			if(pattern.matcher(model.getFileAt(i).getName().toLowerCase()).matches()
+			if(pattern.matcher(model.getFileAt(i).getName().toLowerCase()).find()
 					&& !model.getFileAt(i).equals(current)
 					&& !model.getFileAt(i).equals(parent)) {
 				model.setSelectedIndex(i);
@@ -192,7 +202,7 @@ public class IncrementalSearcher implements Initable {
 		}
 		
 		for(int i=model.getFilesCount() - 1; i > selectedIndex; i--) {
-			if(pattern.matcher(model.getFileAt(i).getName().toLowerCase()).matches()
+			if(pattern.matcher(model.getFileAt(i).getName().toLowerCase()).find()
 					&& !model.getFileAt(i).equals(current)
 					&& !model.getFileAt(i).equals(parent)) {
 				model.setSelectedIndex(i);

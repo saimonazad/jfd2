@@ -86,6 +86,8 @@ jFD2をインストールしたディレクトリと、以下のディレクトリを削除してください。
 
 *This products uses jcifs library(http://jcifs.samba.org/).
 
+本ソフトウェアのインクリメンタルサーチに、n|a氏製作のJ/Migemoを使用しています。
+
 ●ライセンス
 
 本バージョンはベータ版のため、再配布を禁止します。

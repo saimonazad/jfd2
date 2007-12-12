@@ -39,7 +39,7 @@ public class KeyStrokeMap {
 	}
 	
 	public KeyStroke convertReverse(KeyStroke keyStroke) {
-		Integer keyCode = (Integer)reverseKeyCodeMap.get(Integer.valueOf(keyStroke.getKeyCode()));
+		Integer keyCode = (Integer)reverseKeyCodeMap.get(new Integer(keyStroke.getKeyCode()));
 		if(keyCode == null) {
 			return keyStroke;
 		}

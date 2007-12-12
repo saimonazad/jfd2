@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="/TableLayout"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jre1.6.0_03/lib/ext/QTJava.zip"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/VFS"/>
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
 	<classpathentry kind="lib" path="lib/jl1.0.jar"/>
 	<classpathentry kind="lib" path="lib/juniversalchardet-1.0.2.jar"/>
@@ -15,20 +12,24 @@
 	<classpathentry kind="lib" path="lib/groovy/asm-tree-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/groovy/asm-util-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/groovy/groovy-1.1-rc-2.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/ant.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/commons-codec-1.3.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/commons-httpclient-3.1.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/commons-logging-api.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/commons-net-1.4.1.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/fastfile.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/h2.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/jakarta-oro-2.0.8.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/jaxen-core.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/jaxen-jdom.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/jcifs-1.2.17.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/jdom.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/jlha.jar"/>
-	<classpathentry kind="lib" path="/VFS/lib/saxpath.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/ant.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/commons-logging-api.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/commons-net-1.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/dummyui.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/fastfile.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/h2.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/jakarta-oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/jaxen-core.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/jaxen-jdom.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/jcifs-1.2.17.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/jlha.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/saxpath.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/filefish.jar"/>
+	<classpathentry kind="lib" path="lib/vfs/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/migemo-0.002.jar"/>
+	<classpathentry kind="lib" path="lib/HtmlTablePanel.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
