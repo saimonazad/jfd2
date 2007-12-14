@@ -10,7 +10,7 @@
 		<td colspan="3" vfix="true">
 			<table border="line" cellpading="5">
 				<tr>
-					<td width="10" rowspan="10"/><td>color_file</td>
+					<td width="10" rowspan="11"/><td>color_file</td>
 				</tr>
 				<tr>
 					<td>color_readonly</td>
@@ -39,6 +39,9 @@
 				<tr>
 					<td>color_list</td>
 				</tr>
+				<tr>
+					<td>color_inactive</td>
+				</tr>
 			</table>
 		</td>
 	</tr>
@@ -56,6 +59,12 @@
 	</tr>
 	<tr>
 		<td colspan="2" vfix="true">double_line_grid</td>
+	</tr>
+	<tr>
+		<td colspan="2" vfix="true">hides_cursor</td>
+	</tr>
+	<tr>
+		<td colspan="2" vfix="true">changes_color</td>
 	</tr>
 	<tr>
 		<td colspan="2" vfix="true">use_mac_metal</td>

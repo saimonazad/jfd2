@@ -115,7 +115,7 @@ public class FindCommand extends Command {
 					new ConfigulationInfo(localConfig, CASE_SENSITIVE), false);
 			dialog.addCheckBox(USE_MIGEMO, JFDResource.LABELS
 					.getString("use_migemo"), 'm', false, new ConfigulationInfo(
-					localConfig, USE_REGEX), false);
+					localConfig, USE_MIGEMO), false);
 			dialog.addCheckBox(USE_REGEX, JFDResource.LABELS
 					.getString("use_regex"), 'r', false, new ConfigulationInfo(
 					localConfig, USE_REGEX), false);

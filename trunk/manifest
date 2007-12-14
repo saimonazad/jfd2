@@ -1,3 +1,3 @@
 Manifest-version: 1.0
-Class-Path: antlr-2.7.5.jar asm-2.2.jar filefish.jar groovy-1.0-jsr-05.jar h2.jar jakarta-oro-2.0.8.jar jdom.jar jl1.0.jar l2fprod-common-fontchooser.jar tablelayoutpanel.jar juniversalchardet-1.0.2.jar HtmlTablePanel.jar migemo-0.002.jar
+Class-Path: antlr-2.7.5.jar asm-2.2.jar filefish.jar groovy-1.0-jsr-05.jar h2.jar jakarta-oro-2.0.8.jar jdom.jar jl1.0.jar l2fprod-common-fontchooser.jar tablelayoutpanel.jar juniversalchardet-1.0.2.jar HtmlTablePanel.jar migemo-0.003.jar
 Main-Class: com.nullfish.app.jfd2.Launcher

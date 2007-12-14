@@ -55,6 +55,16 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 
 	private RendererMode mode;
 	
+	/**
+	 * 非フォーカス時にカーソルを隠すかどうかのフラグ
+	 */
+	private boolean hidesCursor = true;
+	
+	/**
+	 * 非フォーカス時に文字色を変えるか同化のフラグ
+	 */
+	private boolean changesColor = true;
+	
 	private ImagePanel thumbnailPanel = new ImagePanel();
 	JPanel paddingPanel = new JPanel(new GridBagLayout());
 	
@@ -326,10 +336,13 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		}
 		
 		String extension = file.getFileName().getExtension();
-		if (jfd != null
+		boolean noFocus =
+			jfd != null
 			&& jfd.getJFDOwner() != null
 			&& jfd.getJFDOwner().getActiveComponent() != null
-			&& !jfd.getComponent().equals(jfd.getJFDOwner().getActiveComponent())) {
+			&& !jfd.getComponent().equals(jfd.getJFDOwner().getActiveComponent());
+		
+		if (changesColor && noFocus) {
 			foreColor = unfocusedColor;
 	    } else if(file.equals(current)) {
 			foreColor = currentDirectoryColor;
@@ -348,7 +361,7 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 			foreColor = defaultLabelColor;
 		}
 
-		if (selected) {
+		if (selected && (!hidesCursor || !noFocus)) {
 			setOpaque(true);
 			backColor = foreColor;
 			foreColor = bgColor;
@@ -497,5 +510,9 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		listColor = (Color)config.getParam("list_color", Color.MAGENTA);
 		
 		unfocusedColor = (Color)config.getParam("grid_color_no_focus", Color.GRAY);
+		
+		hidesCursor = ((Boolean)config.getParam("hides_cursor", Boolean.TRUE)).booleanValue();
+		
+		changesColor = ((Boolean)config.getParam("change_color_with_focus", Boolean.TRUE)).booleanValue();
 	}
 }

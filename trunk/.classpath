@@ -29,7 +29,7 @@
 	<classpathentry kind="lib" path="lib/vfs/saxpath.jar"/>
 	<classpathentry kind="lib" path="lib/vfs/filefish.jar"/>
 	<classpathentry kind="lib" path="lib/vfs/jdom.jar"/>
-	<classpathentry kind="lib" path="lib/migemo-0.002.jar"/>
 	<classpathentry kind="lib" path="lib/HtmlTablePanel.jar"/>
+	<classpathentry kind="lib" path="lib/migemo-0.003.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

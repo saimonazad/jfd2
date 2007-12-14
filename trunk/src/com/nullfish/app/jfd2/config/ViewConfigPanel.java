@@ -78,6 +78,9 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 	private ColorConfig listColorConfig = new ColorConfig("list_color", "list",
 			Color.MAGENTA);
 
+	private ColorConfig inactiveColorConfig = new ColorConfig("grid_color_no_focus", "inactive",
+			Color.GRAY);
+
 
 	private PathConfig bgImageConfig = new PathConfig("bg_image", "bg_image", JFileChooser.FILES_ONLY);
 	private DialogComboBox bgImageCombo = new DialogComboBox(frame);
@@ -89,6 +92,9 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 	private JCheckBox doubleLineCheckBox = new JCheckBox(JFDResource.LABELS.getString("double_line_grid"));
 	private JLabel insetLabel = new JLabel(JFDResource.LABELS.getString("row_inset"));
 	private JSpinner insetSpinner = new JSpinner(new SpinnerNumberModel(0, -10, 10, 1));
+
+	private JCheckBox cursorRequresFocusCheckBox = new JCheckBox(JFDResource.LABELS.getString("cursor_requires_focus"));
+	private JCheckBox changeColorWhenNoFocusCheckBox = new JCheckBox(JFDResource.LABELS.getString("change_color_with_focus"));
 
 	// Mac
 //	private JCheckBox metalCheckBox = new JCheckBox(JFDResource.LABELS.getString("use_mac_metal"));
@@ -141,8 +147,11 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		appearancePanel.addComponent(parentDirColorConfig, "color_parent");
 		appearancePanel.addComponent(linkColorConfig, "color_link");
 		appearancePanel.addComponent(listColorConfig, "color_list");
+		appearancePanel.addComponent(inactiveColorConfig, "color_inactive");
 
 		appearancePanel.addComponent(doubleLineCheckBox, "double_line_grid");
+		appearancePanel.addComponent(cursorRequresFocusCheckBox, "hides_cursor");
+		appearancePanel.addComponent(changeColorWhenNoFocusCheckBox, "changes_color");
 		appearancePanel.addComponent(insetLabel, "line_inset_label");
 		appearancePanel.addComponent(insetSpinner, "line_inset_input");
 		appearancePanel.addComponent(bgImageConfig, "bg_image");
@@ -179,8 +188,11 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		parentDirColorConfig.setConfigulation(commonConfig);
 		linkColorConfig.setConfigulation(commonConfig);
 		listColorConfig.setConfigulation(commonConfig);
+		inactiveColorConfig.setConfigulation(commonConfig);
 		
 		doubleLineCheckBox.setSelected(((Boolean)commonConfig.getParam("double_line", Boolean.TRUE)).booleanValue());
+		cursorRequresFocusCheckBox.setSelected(((Boolean)commonConfig.getParam("hides_cursor", Boolean.TRUE)).booleanValue());
+		changeColorWhenNoFocusCheckBox.setSelected(((Boolean)commonConfig.getParam("change_color_with_focus", Boolean.TRUE)).booleanValue());
 		insetSpinner.setValue(commonConfig.getParam("row-inset", new Integer(0)));
 		bgImageConfig.setConfigulation(commonConfig);
 		transparencySlider.setValue(((Integer)commonConfig.getParam("bg_image_transparency", new Integer(100))).intValue());
@@ -214,8 +226,11 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		parentDirColorConfig.apply(commonConfig);
 		linkColorConfig.apply(commonConfig);
 		listColorConfig.apply(commonConfig);
+		inactiveColorConfig.apply(commonConfig);
 		
 		commonConfig.setParam("double_line", new Boolean(doubleLineCheckBox.isSelected()));
+		commonConfig.setParam("hides_cursor", new Boolean(cursorRequresFocusCheckBox.isSelected()));
+		commonConfig.setParam("change_color_with_focus", new Boolean(changeColorWhenNoFocusCheckBox.isSelected()));
 		commonConfig.setParam("row-inset", insetSpinner.getValue());
 		bgImageConfig.apply(commonConfig);
 		commonConfig.setParam("bg_image_align", bgImageCombo.getSelectedItem());
