@@ -7,6 +7,7 @@
 package com.nullfish.app.jfd2.ext_command_panel.translators;
 
 import com.nullfish.app.jfd2.JFD;
+import com.nullfish.app.jfd2.util.WindowsUtil;
 import com.nullfish.lib.vfs.VFile;
 
 /**
@@ -27,7 +28,7 @@ public class NoExtensionMarkedFilesTranslator implements CommandTranslator {
 		StringBuffer buffer = new StringBuffer();
 
 		for (int i = 0; i < 10 && i < markedFiles.length; i++) {
-			String name = markedFiles[i].getName();
+			String name = WindowsUtil.escapeFileName( markedFiles[i].getName() );
 			int periodIndex = name.indexOf('.');
 			if(periodIndex < 0) {
 				name = name.substring(0, periodIndex);

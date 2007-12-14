@@ -34,11 +34,6 @@ public class IncrementalSearcher implements Initable {
 
 	private KeyStroke backSpace = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0);
 	
-	{
-		Migemo.loadDictionary(new File("migemo-dict"),"EUC_JP");
-//		Migemo.loadDictionary(new File("cmigemo-dict"),"MS932");
-	}
-	
 	public IncrementalSearcher(JFD jfd) {
 		this.jfd = jfd;
 	}
@@ -143,9 +138,12 @@ public class IncrementalSearcher implements Initable {
 		
 		lastSearch = initial;
 		initial = initial.toLowerCase();
-		initial = Migemo.lookup(initial);
-//		initial = "^" + WildCardUtil.wildCard2Regex(initial) + ".*";
-
+		if(MigemoInfo.usesMigemo()) {
+			initial = Migemo.lookup(initial);
+		} else {
+			initial = "^" + WildCardUtil.wildCard2Regex(initial);
+		}
+		
 		Pattern pattern = Pattern.compile(initial);
 		
 		JFDModel model = jfd.getModel();
@@ -182,9 +180,12 @@ public class IncrementalSearcher implements Initable {
 		
 		lastSearch = initial;
 		initial = initial.toLowerCase();
-		initial = ".*" + Migemo.lookup(initial) + ".*";
-//		initial = "^" + WildCardUtil.wildCard2Regex(initial) + ".*";
-
+		if(MigemoInfo.usesMigemo()) {
+			initial = ".*" + Migemo.lookup(initial) + ".*";
+		} else {
+			initial = "^" + WildCardUtil.wildCard2Regex(initial);
+		}
+		
 		Pattern pattern = Pattern.compile(initial);
 		
 		JFDModel model = jfd.getModel();

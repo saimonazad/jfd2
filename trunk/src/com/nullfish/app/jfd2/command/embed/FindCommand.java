@@ -9,6 +9,8 @@ package com.nullfish.app.jfd2.command.embed;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.monazilla.migemo.Migemo;
+
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
@@ -18,6 +20,7 @@ import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
+import com.nullfish.app.jfd2.util.MigemoInfo;
 import com.nullfish.app.jfd2.util.SortUtility;
 import com.nullfish.app.jfd2.util.StringHistory;
 import com.nullfish.app.jfd2.util.WildCardUtil;
@@ -57,6 +60,11 @@ public class FindCommand extends Command {
 	 * 正規表現使用チェックボックス
 	 */
 	public static final String USE_REGEX = "find_use_regex";
+
+	/**
+	 * migemoチェックボックス
+	 */
+	public static final String USE_MIGEMO = "find_use_migemo";
 
 	/**
 	 * サブディレクトリ検索チェックボックス
@@ -105,6 +113,9 @@ public class FindCommand extends Command {
 			dialog.addCheckBox(CASE_SENSITIVE, JFDResource.LABELS
 					.getString("case_sensitive"), 's', false,
 					new ConfigulationInfo(localConfig, CASE_SENSITIVE), false);
+			dialog.addCheckBox(USE_MIGEMO, JFDResource.LABELS
+					.getString("use_migemo"), 'm', false, new ConfigulationInfo(
+					localConfig, USE_REGEX), false);
 			dialog.addCheckBox(USE_REGEX, JFDResource.LABELS
 					.getString("use_regex"), 'r', false, new ConfigulationInfo(
 					localConfig, USE_REGEX), false);
@@ -134,6 +145,7 @@ public class FindCommand extends Command {
 			boolean searchesDirectory = dialog.isChecked(SEARCH_DIRECTORY);
 			boolean caseSensitive = dialog.isChecked(CASE_SENSITIVE);
 			boolean useRegex = dialog.isChecked(USE_REGEX);
+			boolean useMigemo = dialog.isChecked(USE_MIGEMO);
 
 			int mode;
 
@@ -149,7 +161,10 @@ public class FindCommand extends Command {
 
 			FileMatcher matcher;
 			
-			if(useRegex) {
+			if(MigemoInfo.usesMigemo() && useMigemo) {
+				matcher = new RegexMatcher(Migemo.lookup(fileName), fileNameExcept, mode,
+						false);
+			} else if(useRegex) {
 				matcher = new RegexMatcher(fileName, fileNameExcept, mode,
 						caseSensitive);
 			} else {

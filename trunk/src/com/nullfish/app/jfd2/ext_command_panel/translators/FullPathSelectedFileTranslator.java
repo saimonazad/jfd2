@@ -7,6 +7,7 @@
 package com.nullfish.app.jfd2.ext_command_panel.translators;
 
 import com.nullfish.app.jfd2.JFD;
+import com.nullfish.app.jfd2.util.WindowsUtil;
 import com.nullfish.lib.vfs.VFile;
 
 /**
@@ -25,6 +26,7 @@ public class FullPathSelectedFileTranslator implements CommandTranslator {
 		}
 		
 		String path = selectedFile.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\");
+		path = WindowsUtil.escapeFileName(path);
 		if(path.indexOf(" ") >= 0) {
 			path = "\"" + path + "\"";
 		}

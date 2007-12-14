@@ -14,6 +14,7 @@ import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.config.DefaultConfig;
 import com.nullfish.app.jfd2.ext_command.CommandExecuter;
+import com.nullfish.app.jfd2.util.WindowsUtil;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 import com.nullfish.lib.vfs.exception.VFSIOException;
@@ -38,12 +39,7 @@ public class ExtensionMapCommand extends Command {
 		try {
 			model.lockAutoUpdate(this);
 			String fileName = model.getSelectedFile().getSecurePath();
-			if(System.getProperty("os.name").indexOf("Windows") != -1 
-					&& ShellCommand.isCommandToEscape(fileName)) {
-				for(int i=0; i<ShellCommand.ESCAPE_REGEXS.length; i++) {
-					fileName = fileName.replaceAll(ShellCommand.ESCAPE_REGEXS[i][0], "^" + ShellCommand.ESCAPE_REGEXS[i][1]);
-				}
-			}
+			fileName = WindowsUtil.escapeFileName(fileName);
 			
 			String mapper = (String)jfd.getCommonConfigulation().getParam(PARAM_MAPPER, DefaultConfig.getDefaultConfig().getExtensionMapping());
 			

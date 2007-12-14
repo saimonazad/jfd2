@@ -103,9 +103,9 @@ public class CommandExecuter {
 		Process process = null;
 		if (shellType == USE_FILE_SHELL && shell != null && shell.length() > 0) {
 			String[] interpretedCommand = interpretShell(command, shell);
-for(int i=0; i<interpretedCommand.length; i++) {
-			System.out.println(i + ":" + interpretedCommand[i]);
-}
+//for(int i=0; i<interpretedCommand.length; i++) {
+//			System.out.println(i + ":" + interpretedCommand[i]);
+//}
 			if(interpretedCommand.length == 1) {
 				process = Runtime.getRuntime().exec(interpretedCommand[0],
 						null, dir);

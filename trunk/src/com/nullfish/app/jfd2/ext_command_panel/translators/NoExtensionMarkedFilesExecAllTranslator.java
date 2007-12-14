@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nullfish.app.jfd2.JFD;
+import com.nullfish.app.jfd2.util.WindowsUtil;
 import com.nullfish.lib.vfs.VFile;
 
 /**
@@ -35,8 +36,8 @@ public class NoExtensionMarkedFilesExecAllTranslator implements CommandTranslato
 		
 		for(int i=0; i<original.length; i++) {
 			for(int j=0; j<markedFiles.length; i++) {
-				String name = markedFiles[j].getName();
-				int periodIndex = name.indexOf(',');
+				String name = WindowsUtil.escapeFileName(markedFiles[j].getName());
+				int periodIndex =  name.indexOf(',');
 				if(periodIndex >= 0) {
 					name = name.substring(0, periodIndex);
 				}

@@ -18,6 +18,7 @@ import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.ext_command.CommandExecuter;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.util.StringHistory;
+import com.nullfish.app.jfd2.util.WindowsUtil;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 import com.nullfish.lib.vfs.exception.VFSIOException;
@@ -43,27 +44,6 @@ public class ShellCommand extends Command {
 	
 	public static final String MODE_EXECUTE = "execute";
 	
-	public static final String ESCAPE_CHARS = " &()[]{}^=;!'+,`~";
-
-	public static final String[][] ESCAPE_REGEXS = {
-		{"\\^", "^"},
-		{" ",   " "},
-		{"&",   "&"},
-		{"\\(", "("},
-		{"\\)", ")"},
-		{"\\[",   "["},
-		{"\\]",   "]"},
-		{"\\{", "{"},
-		{"\\}", "}"},
-		{"=",   "="},
-		{";",   ";"},
-		{"!",   "!"},
-		{"'",   "'"},
-		{"\\+",   "+"},
-		{",",   ","},
-		{"`",   "`"},
-		{"~",   "~"}
-	};
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -96,9 +76,8 @@ public class ShellCommand extends Command {
 			
 			List historyList = history.toList();
 			if(MODE_EXECUTE.equals(getParameter(MODE))) {
-				String fileName = model.getSelectedFile().getAbsolutePath();
-				if(System.getProperty("os.name").indexOf("Windows") != -1 
-					&& isCommandToEscape(fileName)) {
+				String fileName = WindowsUtil.escapeFileName(model.getSelectedFile().getAbsolutePath());
+				if(fileName.indexOf(' ') != -1) {
 					fileName = "\"" + fileName + "\"";
 				}
 				historyList.add(0, fileName);
@@ -155,16 +134,6 @@ public class ShellCommand extends Command {
 		}
 	}
 	
-	public static boolean isCommandToEscape(String command) {
-		for(int i=0; i<ESCAPE_CHARS.length(); i++) {
-			if(command.indexOf(ESCAPE_CHARS.charAt(i)) >= 0) { 
-				return true;
-			}
-		}
-		
-		return false;
-	}
-
 	/* (non-Javadoc)
 	 * @see com.nullfish.app.jfd2.command.Command#closesUnusingFileSystem()
 	 */

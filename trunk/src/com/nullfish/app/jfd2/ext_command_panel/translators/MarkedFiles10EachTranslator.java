@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nullfish.app.jfd2.JFD;
+import com.nullfish.app.jfd2.util.WindowsUtil;
 import com.nullfish.lib.vfs.VFile;
 
 /**
@@ -34,7 +35,7 @@ public class MarkedFiles10EachTranslator implements CommandTranslator {
 				buffers.add(buffer);
 			}
 			
-			String name = markedFiles[i].getName();
+			String name = WindowsUtil.escapeFileName(markedFiles[i].getName());
 			if(name.indexOf(' ') >= 0) {
 				buffer.append("\"");
 				buffer.append(name);

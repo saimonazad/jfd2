@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nullfish.app.jfd2.JFD;
+import com.nullfish.app.jfd2.util.WindowsUtil;
 import com.nullfish.lib.vfs.VFile;
 
 /**
@@ -35,7 +36,7 @@ public class MarkedFilesExecAllTranslator implements CommandTranslator {
 		
 		for(int i=0; i<original.length; i++) {
 			for(int j=0; j<markedFiles.length; i++) {
-				list.add(original[i].replaceAll("\\$M", markedFiles[j].getName()));
+				list.add(original[i].replaceAll("\\$M", WindowsUtil.escapeFileName(markedFiles[j].getName())));
 			}
 		}
 		

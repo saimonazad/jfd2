@@ -6,6 +6,10 @@
  */
 package com.nullfish.app.jfd2;
 
+import java.io.File;
+
+import org.monazilla.migemo.Migemo;
+
 import com.nullfish.app.jfd2.aliase.AliaseManager;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.command.CommandManager;
@@ -164,4 +168,5 @@ public interface JFD extends JFDComponent {
 	public boolean showsRelativePath();
 	
 	public IncrementalSearcher getIncrementalSearcher();
+	
 }

@@ -1,6 +1,5 @@
 package com.nullfish.app.jfd2.viewer.text_viewer;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.Frame;
@@ -24,11 +23,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.text.Element;
 
+import org.monazilla.migemo.Migemo;
+
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.embed.GrepCommand;
 import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
 import com.nullfish.app.jfd2.dialog.components.ConfigCheckBox;
 import com.nullfish.app.jfd2.dialog.components.DialogComboBox;
+import com.nullfish.app.jfd2.util.MigemoInfo;
 import com.nullfish.app.jfd2.util.StringHistory;
 import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.tablelayout.HtmlTablePanel;
@@ -44,6 +46,9 @@ public class FindDialog extends JDialog {
 
 	private ConfigCheckBox regexCheckBox = new ConfigCheckBox(TextFileViewer.RESOURCE
 			.getString("use_regex"));
+
+	private ConfigCheckBox migemoCheckBox = new ConfigCheckBox(TextFileViewer.RESOURCE
+			.getString("use_migemo"));
 
 	private JButton prevButton = new JButton(TextFileViewer.RESOURCE
 			.getString("search_prev") + "(B)");
@@ -90,6 +95,7 @@ public class FindDialog extends JDialog {
 		
 		caseSensitiveCheckBox.setMnemonic('i');
 		regexCheckBox.setMnemonic('r');
+		migemoCheckBox.setMnemonic('m');
 
 		prevButton.setMnemonic(KeyEvent.VK_B);
 		nextButton.setMnemonic(KeyEvent.VK_F);
@@ -111,6 +117,7 @@ public class FindDialog extends JDialog {
 		rootPanel.addComponent(prevButton, "prev_button");
 		rootPanel.addComponent(nextButton, "next_button");
 		rootPanel.addComponent(regexCheckBox, "regex_checkbox");
+		rootPanel.addComponent(migemoCheckBox, "migemo_checkbox");
 
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -176,6 +183,7 @@ public class FindDialog extends JDialog {
 		
 		caseSensitiveCheckBox.setConfigulationInfo(new ConfigulationInfo(jfd.getLocalConfigulation(), GrepCommand.CASE_SENSITIVE));
 		regexCheckBox.setConfigulationInfo(new ConfigulationInfo(jfd.getLocalConfigulation(), "grep_use_regex"));
+		migemoCheckBox.setConfigulationInfo(new ConfigulationInfo(jfd.getLocalConfigulation(), "grep_use_migemo"));
 		
 		comboBox.requestFocusInWindow();
 	}
@@ -190,6 +198,7 @@ public class FindDialog extends JDialog {
 		
 		caseSensitiveCheckBox.applyConfigulation();
 		regexCheckBox.applyConfigulation();
+		migemoCheckBox.applyConfigulation();
 	}
 
 	private StringHistory getHistory() {
@@ -222,8 +231,13 @@ public class FindDialog extends JDialog {
 		}
 
 		initFromJFD();
-
-		if(regexCheckBox.isSelected()) {
+		if(MigemoInfo.usesMigemo() && migemoCheckBox.isSelected()) {
+			if (ascend) {
+				searchRegexForward(text, Migemo.lookup(searchText));
+			} else {
+				searchRegexBack(text, Migemo.lookup(searchText));
+			}
+		} else if(regexCheckBox.isSelected()) {
 			if (ascend) {
 				searchRegexForward(text, searchText);
 			} else {

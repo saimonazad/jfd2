@@ -7,6 +7,7 @@
 package com.nullfish.app.jfd2.ext_command_panel.translators;
 
 import com.nullfish.app.jfd2.JFD;
+import com.nullfish.app.jfd2.util.WindowsUtil;
 import com.nullfish.lib.vfs.VFile;
 
 /**
@@ -25,7 +26,7 @@ public class CurrentDirectoryTranslator implements CommandTranslator {
 		}
 		
 		for(int i=0; i<original.length; i++) {
-			original[i] = original[i].replaceAll("\\$P", currentDir.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\"));
+			original[i] = original[i].replaceAll("\\$P", WindowsUtil.escapeFileName(currentDir.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\")));
 		}
 		return original;
 	}
