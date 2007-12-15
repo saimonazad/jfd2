@@ -15,9 +15,11 @@ public class MigemoInfo {
 			return;
 		}
 		init = true;
-		Migemo.loadDictionary(new File("migemo-dict"),"EUC_JP");
-//		Migemo.loadDictionary(new File("cmigemo-dict"),"MS932");
-		usesMigemo = true;
+		if(new File("migemo-dict").exists()) {
+			Migemo.loadDictionary(new File("migemo-dict"),"EUC_JP");
+//			Migemo.loadDictionary(new File("cmigemo-dict"),"MS932");
+			usesMigemo = true;
+		}
 	}
 
 	public static boolean usesMigemo() {

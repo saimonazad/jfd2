@@ -16,6 +16,8 @@
 				<tr>
 					<td hfix="false" fill="horizontal">checkbox</td>
 					<td hfix="false" fill="horizontal">regex_checkbox</td>
+				</tr>
+				<tr>
 					<td hfix="false" fill="horizontal">migemo_checkbox</td>
 				</tr>
 			</table>
