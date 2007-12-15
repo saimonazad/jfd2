@@ -84,6 +84,8 @@ public class JFDFrame extends JFrame implements JFDOwner {
 
 	private EqualSplitLayout layout = new EqualSplitLayout();
 	
+	private JFDComponent activeComponent;
+	
 	/**
 	 * コンポーネントとコンテナのマップ
 	 */
@@ -276,12 +278,15 @@ public class JFDFrame extends JFrame implements JFDOwner {
 	 * @return
 	 */
 	public JFDComponent getActiveComponent() {
+/*
 		JTabbedPane tabbedPane = getActiveTabbedPane();
 		if(tabbedPane == null) {
 			return null;
 		}
 		
 		return ((JFDContainer)tabbedPane.getSelectedComponent()).getComponent();
+*/
+		return activeComponent;
 	}
 	
 	/*
@@ -579,5 +584,9 @@ public class JFDFrame extends JFrame implements JFDOwner {
 	 */
 	public static void setServerMode(boolean serverMode) {
 		JFDFrame.serverMode = serverMode;
+	}
+
+	public void componentActivated(JFDComponent component) {
+		this.activeComponent = component;
 	}
 }

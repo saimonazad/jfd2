@@ -169,6 +169,7 @@ public class TabContainer extends JPanel implements JFDContainer {
 		ThreadSafeUtilities.executeRunnable(runnable);
 	}
 
+	/*
 	private boolean isTabbedPaneFocusOwnerAncestor() {
 		Component focusOwner = FocusManager.getCurrentManager().getFocusOwner();
 		if(focusOwner == null) {
@@ -181,9 +182,11 @@ public class TabContainer extends JPanel implements JFDContainer {
 				return true;
 			}
 			
-			container = container.getParent();
+			container = container.getParent()
+			;
 		}
 		
 		return false;
 	}
+*/
 }

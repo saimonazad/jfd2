@@ -95,7 +95,11 @@ public class IncrementalSearcher implements Initable {
 			return;
 		}
 		
-		buffer.append(Character.toUpperCase(e.getKeyChar()));
+		if((e.getModifiersEx() & KeyEvent.SHIFT_DOWN_MASK) != 0) {
+			buffer.append(Character.toUpperCase(e.getKeyChar()));
+		} else {
+			buffer.append(e.getKeyChar());
+		}
 /*		
 		Thread t = new Thread() {
 			public void run() {
@@ -137,11 +141,11 @@ public class IncrementalSearcher implements Initable {
 		jfd.setMessage("@" + initial);
 		
 		lastSearch = initial;
-		initial = initial.toLowerCase();
+		//initial = initial.toLowerCase();
 		if(MigemoInfo.usesMigemo()) {
 			initial = Migemo.lookup(initial);
 		} else {
-			initial = "^" + WildCardUtil.wildCard2Regex(initial);
+			initial = "^" + WildCardUtil.wildCard2Regex(initial).toLowerCase();
 		}
 		
 		Pattern pattern = Pattern.compile(initial);

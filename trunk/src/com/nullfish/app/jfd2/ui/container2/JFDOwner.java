@@ -30,6 +30,11 @@ public interface JFDOwner {
 	public void setActiveComponent(JFDComponent component);
 
 	/**
+	 * アクティブなコンポーネントが変更された際に呼び出される。
+	 */
+	public void componentActivated(JFDComponent component);
+
+	/**
 	 * 保持しているコンポーネントの数を返す。
 	 * @return
 	 */

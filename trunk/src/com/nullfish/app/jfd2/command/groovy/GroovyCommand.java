@@ -39,7 +39,21 @@ public class GroovyCommand extends Command {
 			binding.setVariable("jfd", getJFD());
 			binding.setVariable("command", this);
 			GroovyShell shell = new GroovyShell(binding);
-			VFile script = vfs.getFile((String)getParameter(SCRIPT_PATH));
+			String scriptDirPath = (String)getJFD().getCommonConfigulation().getParam(GroovySelectCommand.SCRIPT_DIR_PATH, GroovySelectCommand.DEFAULT_SCRIPT_DIR);
+			VFile scriptDir = vfs.getFile(scriptDirPath);
+			boolean found = false;
+			String path = (String)getParameter(SCRIPT_PATH);
+			VFile script =null;
+			try {
+				script = scriptDir.getChild(path);
+				if(script.exists(this)) {
+					found = true;
+				}
+			} catch (VFSException e) {
+			}
+			if(!found) {
+				script = vfs.getFile(path);
+			}
 			shell.evaluate(script.getInputStream(this));
 		} catch (CompilationFailedException e) {
 			// TODO Auto-generated catch block

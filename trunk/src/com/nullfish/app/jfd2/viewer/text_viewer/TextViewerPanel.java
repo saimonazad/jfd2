@@ -167,6 +167,10 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 		
 		textArea.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
+				JFDOwner owner = getJFDOwner();
+				if(owner != null) {
+					owner.componentActivated(TextViewerPanel.this);
+				}
 				changeColor();
 			}
 

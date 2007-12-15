@@ -614,6 +614,10 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 		addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
+				JFDOwner owner = getJFDOwner();
+				if(owner != null) {
+					owner.componentActivated(JFD2.this);
+				}
 				functionPanel.setMode(0);
 			}
 
