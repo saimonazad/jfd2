@@ -157,6 +157,10 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 
 		this.addFocusListener(new FocusAdapter() {
 			public void focusGained(FocusEvent e) {
+				JFDOwner owner = getJFDOwner();
+				if(owner != null) {
+					owner.componentActivated(TextViewerPanel.this);
+				}
 				textArea.requestFocusInWindow();
 			}
 
@@ -625,6 +629,7 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 		
 		public void actionPerformed(ActionEvent e) {
 			JFDOwner owner = ((JFDComponent)TextViewerPanel.this).getJFDOwner();
+			ContainerPosition thisPosition = owner.getComponentPosition(TextViewerPanel.this);
 			ContainerPosition position = null;
 			if("main".equals(pane)) {
 				position = ContainerPosition.MAIN_PANEL;
@@ -633,12 +638,11 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 			}
 
 			JFDComponent oponent = currentJFD.getJFDOwner().getComponent(position);
-System.out.println(oponent);
 			boolean multiWindowMode = 
 				((Boolean)currentJFD.getCommonConfigulation().getParam(
 						CursorMoveCommand.MULTI_WINDOW_CURSOR, Boolean.FALSE)).booleanValue()
+				&& !thisPosition.equals(position)
 				&& oponent != null;
-System.out.println(multiWindowMode);
 
 			if(multiWindowMode) {
 				owner.setActiveComponent(oponent);

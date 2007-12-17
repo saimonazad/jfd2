@@ -190,5 +190,4 @@ public class NumberedJFD2 extends JFD2 {
 		System.out.println("finalize NumberedJFD2");
 		super.finalize();
 	}
-
 }

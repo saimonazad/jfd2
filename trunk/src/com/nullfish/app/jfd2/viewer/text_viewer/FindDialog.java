@@ -338,6 +338,10 @@ public class FindDialog extends JDialog {
 
 		while (true) {
 			if (!matcher.find(lastStart + 1)) {
+				if (lastStart < pos) {
+					textArea.setSelectionStart(lastStart);
+					textArea.setSelectionEnd(lastEnd);
+				}
 				return;
 			}
 

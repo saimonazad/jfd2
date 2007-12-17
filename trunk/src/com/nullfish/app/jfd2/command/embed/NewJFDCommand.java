@@ -28,6 +28,11 @@ public class NewJFDCommand extends Command {
 	 */
 	public static final String CONSTRAINTS = "constraints";
 
+	/**
+	 * ディレクトリの場合はそのディレクトリを開く
+	 */
+	public static final String OPENS_DIR = "opens_dir";
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -62,6 +67,11 @@ public class NewJFDCommand extends Command {
 		try {
 			String path = (String) newJFD.getLocalConfigulation().getParam(
 					JFD2.CONFIG_LAST_OPENED, System.getProperty("user.home"));
+			if (getParameter(OPENS_DIR) != null
+					&& ((Boolean) getParameter(OPENS_DIR)).booleanValue()
+					&& jfd.getModel().getSelectedFile().isDirectory(this)) {
+				path = jfd.getModel().getSelectedFile().getAbsolutePath();
+			}
 
 			VFile dir = VFS.getInstance(newJFD).getFile(path);
 			if (!dir.exists()) {

@@ -19,6 +19,7 @@ import com.nullfish.app.jfd2.ui.container2.JFD2TitleUpdater;
 import com.nullfish.app.jfd2.ui.container2.JFDFrame;
 import com.nullfish.app.jfd2.ui.container2.NumberedJFD2;
 import com.nullfish.app.jfd2.util.CommandLineParameters;
+import com.nullfish.app.jfd2.util.MigemoInfo;
 import com.nullfish.app.jfd2.util.thumbnail.ThumbnailDataBase;
 import com.nullfish.app.jfd2.viewer.FileViewerManager;
 import com.nullfish.lib.plugin.PluginManager;
@@ -72,6 +73,8 @@ public class Launcher {
 					configDirStr = new File(configDirStr).getAbsolutePath();
 				}
 			}
+			
+			MigemoInfo.init(configDirStr);
 			
 			VFile configDir = VFS.getInstance().getFile(configDirStr);
 

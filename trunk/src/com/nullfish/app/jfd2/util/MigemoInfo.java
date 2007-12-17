@@ -10,20 +10,25 @@ public class MigemoInfo {
 
 	private static boolean init = false;
 	
-	private static void init() {
+	public static void init(String configDir) {
 		if(init) {
 			return;
 		}
 		init = true;
-		if(new File("migemo-dict").exists()) {
-			Migemo.loadDictionary(new File("migemo-dict"),"EUC_JP");
-//			Migemo.loadDictionary(new File("cmigemo-dict"),"MS932");
+		
+		load(new File(configDir, "migemo-dict"));
+		load(new File("migemo-dict"));
+		load(new File(System.getProperty("user.home"), "migemo-dict"));
+	}
+	
+	private static void load(File file) {
+		if(file.exists()) {
+			Migemo.loadDictionary(file,"EUC_JP");
 			usesMigemo = true;
 		}
 	}
 
 	public static boolean usesMigemo() {
-		init();
 		return usesMigemo;
 	}
 }

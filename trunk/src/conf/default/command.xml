@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<commands version="1.0">
+<commands version="20071215">
 	<command name="cursor-up" class="com.nullfish.app.jfd2.command.embed.CursorMoveCommand" cache="true">
 		<param name="direction">
 			<int>0</int>
@@ -183,7 +183,31 @@
 			<text>new_window</text>
 		</param>
 	</command>
-	<command name="next_jfd" class="com.nullfish.app.jfd2.command.embed.NextJFDCommand">
+	<command name="new_tab_dir" class="com.nullfish.app.jfd2.command.embed.NewJFDCommand">
+		<param name="constraints">
+			<text>new_main_panel</text>
+		</param>
+		<param name="opens_dir">
+			<boolean>true</boolean>
+		</param>
+	</command>
+	<command name="new_sub_tab_dir" class="com.nullfish.app.jfd2.command.embed.NewJFDCommand">
+		<param name="constraints">
+			<text>new_sub_panel</text>
+		</param>
+		<param name="opens_dir">
+			<boolean>true</boolean>
+		</param>
+	</command>
+	<command name="new_window_dir" class="com.nullfish.app.jfd2.command.embed.NewJFDCommand">
+		<param name="constraints">
+			<text>new_window</text>
+		</param>
+		<param name="opens_dir">
+			<boolean>true</boolean>
+		</param>
+	</command>
+m	<command name="next_jfd" class="com.nullfish.app.jfd2.command.embed.NextJFDCommand">
 		<param name="delta">
 			<int>1</int>
 		</param>

@@ -31,7 +31,7 @@ public class ConfigVersionManager {
 
 	private static final FileVersion[] ETC_FILES_XML_WIN = {
 		new FileVersion("aliase.xml", "aliase_win.xml", 0),
-		new FileVersion("command.xml", "command.xml", 1.0),
+		new FileVersion("command.xml", "command.xml", 20071215),
 		new FileVersion("external_command.xml", "external_command.xml", 0),
 		new FileVersion("keys.xml", "keys.xml", 1.0),
 		new FileVersion("menubar.xml", "menubar.xml", 0.9),
@@ -43,7 +43,7 @@ public class ConfigVersionManager {
 
 	private static final FileVersion[] ETC_FILES_XML_UNIX = {
 		new FileVersion("aliase.xml", "aliase_unix.xml", 0.3),
-		new FileVersion("command.xml", "command.xml", 1.0),
+		new FileVersion("command.xml", "command.xml", 20071215),
 		new FileVersion("external_command.xml", "external_command.xml", 0),
 		new FileVersion("keys.xml", "keys.xml", 1.0),
 		new FileVersion("menubar.xml", "menubar.xml", 0.9),
