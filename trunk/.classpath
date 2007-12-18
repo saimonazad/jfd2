@@ -30,6 +30,6 @@
 	<classpathentry kind="lib" path="lib/vfs/filefish.jar"/>
 	<classpathentry kind="lib" path="lib/vfs/jdom.jar"/>
 	<classpathentry kind="lib" path="lib/HtmlTablePanel.jar"/>
-	<classpathentry kind="lib" path="lib/migemo-0.004.jar"/>
+	<classpathentry kind="lib" path="lib/migemo-0.005.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

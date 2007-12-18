@@ -10,7 +10,13 @@
 					<td fill="both" border="lowered" colspan="4" cellpadding="3">
 						<table>
 							<tr>
-								<td colspan="2">command_radio</td>
+								<td colspan="2" fill="both">
+									<table>
+										<tr>
+											<td hfix="true" vfix="true">command_radio</td><td vfix="true" fill="horizontal" align="right">use_shell_check</td>
+										</tr>
+									</table>
+								</td>
 							</tr>
 							<tr>
 								<td hfix="true">command_label</td><td fill="horizontal">command_input</td><td hfix="true">command_refer_button</td>

@@ -1287,6 +1287,11 @@ public class JFD2 extends JPanel implements JFD, Initable {
 		thumbnailCache.stop();
 
 		LineGrid.removeGroup(this);
+		
+		labelTotalPanel.dispose();
+		labelUsedPanel.dispose();
+		labelFreePanel.dispose();
+		
 		removeAll();
 	}
 

@@ -170,7 +170,7 @@ public class ShellExternalCommand {
 		}
 		
 		shellCommand = node.getText();
-		useShell = "true".equals(node.getAttributeValue(ATTR_USE_SHELL));
+		useShell = node.getAttributeValue(ATTR_USE_SHELL) == null || "true".equals(node.getAttributeValue(ATTR_USE_SHELL));
 		workDir = node.getAttributeValue(ATTR_WORKDIR);
 	}
 

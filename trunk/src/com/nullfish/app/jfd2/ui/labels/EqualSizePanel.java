@@ -32,6 +32,9 @@ public class EqualSizePanel extends JPanel {
 	}
 	
 	public Dimension getPreferredSize() {
+		if(keySetMap.get(key) == null) {
+			return new Dimension(0, 0);
+		}
 		Iterator iterator = ((Set)keySetMap.get(key)).iterator();
 		
 		Dimension maximumSize = new Dimension();
@@ -52,6 +55,9 @@ public class EqualSizePanel extends JPanel {
 	}
 	
 	public Dimension getMinimumSize() {
+		if(keySetMap.get(key) == null) {
+			return new Dimension(0,0);
+		}
 		Iterator iterator = ((Set)keySetMap.get(key)).iterator();
 		
 		Dimension maximumSize = new Dimension();
@@ -89,5 +95,9 @@ public class EqualSizePanel extends JPanel {
 	
 	private Dimension getSuperSize() {
 		return super.getMinimumSize();
+	}
+	
+	public void dispose() {
+		keySetMap.clear();
 	}
 }

@@ -15,6 +15,7 @@ import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -78,6 +79,7 @@ public class ExternalCommandConfigFrame extends JDialog {
 	private JLabel workDirLabel = new JLabel(JFDResource.LABELS.getString("work_dir"));
 	private JTextField workDirField = new JTextField();
 	private JButton workDirReferButton = new JButton(JFDResource.LABELS.getString("refer"));
+	private JCheckBox useShellCheckBox = new JCheckBox(JFDResource.LABELS.getString("use_shell"));
 	
 	private JLabel scriptLabel = new JLabel(JFDResource.LABELS.getString("script"));
 	private JTextField scriptField = new JTextField();
@@ -201,6 +203,7 @@ public class ExternalCommandConfigFrame extends JDialog {
 		    	commandReferButton.setEnabled(enabled);
 		    	workDirReferButton.setEnabled(enabled);
 		    	workDirField.setEnabled(enabled);
+		    	useShellCheckBox.setEnabled(enabled);
 		    }
 		});
 		
@@ -259,12 +262,15 @@ public class ExternalCommandConfigFrame extends JDialog {
 		scriptField.addActionListener(new ApplyAndFocusNextAction(commandTable));
 		
 		commandRadio.getInputMap().put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
-		commandRadio.getActionMap().put("enter", new FocusAction(commandField));
+		commandRadio.getActionMap().put("enter", new FocusAction(useShellCheckBox));
 		commandRadio.getInputMap().put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_RIGHT, 0), "next");
 		commandRadio.getInputMap().put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_UP, 0), "next");
 		commandRadio.getInputMap().put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_LEFT, 0), "next");
 		commandRadio.getInputMap().put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_DOWN, 0), "next");
 		commandRadio.getActionMap().put("next", new FocusAndSelectAction(scriptRadio));
+
+		useShellCheckBox.getInputMap().put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
+		useShellCheckBox.getActionMap().put("enter", new FocusAction(commandField));
 
 		scriptRadio.getInputMap().put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
 		scriptRadio.getActionMap().put("enter", new FocusAction(scriptField));
@@ -316,6 +322,7 @@ public class ExternalCommandConfigFrame extends JDialog {
 		mainPanel.addComponent(okButton, "ok_button");
 		mainPanel.addComponent(cancelButton, "cancel_button");
 		mainPanel.addComponent(tableScroll, "table");
+		mainPanel.addComponent(useShellCheckBox, "use_shell_check");
 	}
 	
 	private void applyCurrentCommand() {
@@ -332,6 +339,7 @@ public class ExternalCommandConfigFrame extends JDialog {
 		
 		currentCommand.getShellCommand().setShellCommand(commandField.getText());
 		currentCommand.getShellCommand().setWorkDir(workDirField.getText());
+		currentCommand.getShellCommand().setUseShell(useShellCheckBox.isSelected());
 		
 		currentCommand.getScriptFileCommand().setScriptFile(scriptField.getText());
 		tableModel.fireTableRowsUpdated(0, 52);
@@ -350,6 +358,7 @@ public class ExternalCommandConfigFrame extends JDialog {
 		commandField.setText(command.getShellCommand().getShellCommand());
 		workDirField.setText(command.getShellCommand().getWorkDir());
 		scriptField.setText(command.getScriptFileCommand().getScriptFile());
+		useShellCheckBox.setSelected(command.getShellCommand().isUseShell());
 	}
 	
 	/**
