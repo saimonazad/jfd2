@@ -26,10 +26,10 @@ public class FullPathSelectedFileTranslator implements CommandTranslator {
 		}
 		
 		String path = selectedFile.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\");
-		path = WindowsUtil.escapeFileName(path);
 		if(path.indexOf(" ") >= 0) {
 			path = "\"" + path + "\"";
 		}
+		path = WindowsUtil.escapeFileName(path);
 		for(int i=0; i<original.length; i++) {
 			original[i] = original[i].replaceAll("\\$F", path);
 		}

@@ -25,10 +25,9 @@ public class SelectedFileTranslator implements CommandTranslator {
 			return original;
 		}
 		
-		String path = WindowsUtil.escapeFileName(selectedFile.getName());
-		if(path.indexOf(" ") >= 0) {
-			path = "\"" + path + "\"";
-		}
+		String name = selectedFile.getName();
+		name = name.indexOf(' ') != -1 ? "\"" + name + "\"" : name;
+		String path = WindowsUtil.escapeFileName(name);
 
 		for(int i=0; i<original.length; i++) {
 			original[i] = original[i].replaceAll("\\$C", path);

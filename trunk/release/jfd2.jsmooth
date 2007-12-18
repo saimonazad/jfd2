@@ -34,8 +34,8 @@
 <classPath>lib\jlha.jar</classPath>
 <classPath>lib\juniversalchardet-1.0.2.jar</classPath>
 <classPath>lib\l2fprod-common-fontchooser.jar</classPath>
-<classPath>lib\migemo-0.004.jar</classPath>
 <classPath>lib\saxpath.jar</classPath>
+<classPath>lib\migemo-0.005.jar</classPath>
 <embeddedJar>false</embeddedJar>
 <executableName>jfd2.exe</executableName>
 <initialMemoryHeap>-1</initialMemoryHeap>

@@ -35,8 +35,14 @@ public class MarkedFilesExecAllTranslator implements CommandTranslator {
 		List list = new ArrayList();
 		
 		for(int i=0; i<original.length; i++) {
-			for(int j=0; j<markedFiles.length; i++) {
-				list.add(original[i].replaceAll("\\$M", WindowsUtil.escapeFileName(markedFiles[j].getName())));
+			if(original[i].indexOf("$M") == -1) {
+				list.add(original[i]);
+			} else {
+				for(int j=0; j<markedFiles.length; j++) {
+					String name = markedFiles[j].getName();
+					name = name.indexOf(' ') != -1 ? "\"" + name + "\"" : name;
+					list.add(original[i].replaceAll("\\$M", WindowsUtil.escapeFileName(name)));
+				}
 			}
 		}
 		

@@ -31,7 +31,9 @@ public class RootTranslator implements CommandTranslator {
 		}
 		
 		for(int i=0; i<original.length; i++) {
-			original[i] = original[i].replaceAll("\\$D", WindowsUtil.escapeFileName(file.getAbsolutePath()));
+			String path = file.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\");
+			path = path.indexOf(' ') != -1 ? "\"" + path + "\"" : path;
+			original[i] = original[i].replaceAll("\\$D", WindowsUtil.escapeFileName(path));
 		}
 		return original;
 	}

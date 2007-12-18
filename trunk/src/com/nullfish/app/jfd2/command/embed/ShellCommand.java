@@ -76,10 +76,11 @@ public class ShellCommand extends Command {
 			
 			List historyList = history.toList();
 			if(MODE_EXECUTE.equals(getParameter(MODE))) {
-				String fileName = WindowsUtil.escapeFileName(model.getSelectedFile().getAbsolutePath());
+				String fileName = model.getSelectedFile().getAbsolutePath();
 				if(fileName.indexOf(' ') != -1) {
 					fileName = "\"" + fileName + "\"";
 				}
+				fileName = WindowsUtil.escapeFileName(fileName);
 				historyList.add(0, fileName);
 			}
 

@@ -25,14 +25,10 @@ public class MarkedFilesTranslator implements CommandTranslator {
 		StringBuffer buffer = new StringBuffer();
 		
 		for(int i=0; i < 10 && i<markedFiles.length; i++) {
-			String name = WindowsUtil.escapeFileName(markedFiles[i].getName());
-			if(name.indexOf(' ') >= 0) {
-				buffer.append("\"");
-				buffer.append(name);
-				buffer.append("\"");
-			} else {
-				buffer.append(name);
-			}
+			String name = markedFiles[i].getName();
+			name = name.indexOf(' ') != -1 ? "\"" + name + "\"" : name;
+			name = WindowsUtil.escapeFileName(name);
+			buffer.append(name);
 
 			buffer.append(" ");
 		}

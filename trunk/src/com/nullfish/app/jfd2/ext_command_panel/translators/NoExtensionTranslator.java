@@ -25,15 +25,11 @@ public class NoExtensionTranslator implements CommandTranslator {
 			return original;
 		}
 		
-		String fileName = WindowsUtil.escapeFileName(selectedFile.getName());
-		int periodIndex = fileName.lastIndexOf(".");
-		
+		String fileName = selectedFile.getFileName().getExceptExtension();
+		fileName = fileName.indexOf(' ') != -1 ? "\"" + fileName + "\"" : fileName;
+		fileName = WindowsUtil.escapeFileName(fileName);
 		for(int i=0; i<original.length; i++) {
-			if(periodIndex >= 0) {
-				original[i] = original[i].replaceAll("\\$X", fileName.substring(0, periodIndex));
-			} else {
-				original[i] = original[i].replaceAll("\\$X", fileName);
-			}
+			original[i] = original[i].replaceAll("\\$X", fileName);
 		}
 		
 		return original;

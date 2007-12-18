@@ -28,19 +28,11 @@ public class NoExtensionMarkedFilesTranslator implements CommandTranslator {
 		StringBuffer buffer = new StringBuffer();
 
 		for (int i = 0; i < 10 && i < markedFiles.length; i++) {
-			String name = WindowsUtil.escapeFileName( markedFiles[i].getName() );
-			int periodIndex = name.indexOf('.');
-			if(periodIndex < 0) {
-				name = name.substring(0, periodIndex);
-			}
+			String name = markedFiles[i].getFileName().getExceptExtension();
+			name = name.indexOf(' ') != -1 ? "\"" + name + "\"" : name;
+			name = WindowsUtil.escapeFileName(name);
 			
-			if (name.indexOf(' ') >= 0) {
-				buffer.append("\"");
-				buffer.append(name);
-				buffer.append("\"");
-			} else {
-				buffer.append(name);
-			}
+			buffer.append(name);
 
 			buffer.append(" ");
 		}

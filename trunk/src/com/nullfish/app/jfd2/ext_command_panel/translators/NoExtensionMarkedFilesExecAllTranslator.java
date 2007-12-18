@@ -35,14 +35,16 @@ public class NoExtensionMarkedFilesExecAllTranslator implements CommandTranslato
 		List list = new ArrayList();
 		
 		for(int i=0; i<original.length; i++) {
-			for(int j=0; j<markedFiles.length; i++) {
-				String name = WindowsUtil.escapeFileName(markedFiles[j].getName());
-				int periodIndex =  name.indexOf(',');
-				if(periodIndex >= 0) {
-					name = name.substring(0, periodIndex);
+			if(original[i].indexOf("$XM") == -1) {
+				list.add(original[i]);
+			} else {
+				for(int j=0; j<markedFiles.length; j++) {
+					String name = markedFiles[j].getFileName().getExceptExtension();
+					name = name.indexOf(' ') != -1 ? "\"" + name + "\"" : name;
+					name = WindowsUtil.escapeFileName(name);
+					
+					list.add(original[i].replaceAll("\\$XM", name));
 				}
-				
-				list.add(original[i].replaceAll("$XM", name));
 			}
 		}
 		

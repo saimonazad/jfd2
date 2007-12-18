@@ -27,35 +27,27 @@ public class NoExtensionMarkedFiles10EachTranslator implements CommandTranslator
 		
 		List buffers = new ArrayList();
 		
-		StringBuffer buffer = new StringBuffer();
-		buffers.add(buffer);
-		for(int i=0; i < markedFiles.length; i++) {
-			if(i/10 != (i-1) / 10) {
-				buffer = new StringBuffer();
-				buffers.add(buffer);
-			}
-			
-			String name = WindowsUtil.escapeFileName(markedFiles[i].getName());
-			int periodIndex = name.indexOf('.');
-			if(periodIndex >= 0) {
-				name = name.substring(0, periodIndex);
-			}
-			
-			if(name.indexOf(' ') >= 0) {
-				buffer.append("\"");
+		for(int i=0; i*10<markedFiles.length; i++) {
+			StringBuffer buffer = new StringBuffer();
+			buffers.add(buffer);
+			for(int j=0; i*10 + j<markedFiles.length; j++) {
+				String name = markedFiles[i*10 + j].getFileName().getExceptExtension();
+				name = name.indexOf(' ') != -1 ? "\"" + name + "\"" : name;
+				name = WindowsUtil.escapeFileName(name);
 				buffer.append(name);
-				buffer.append("\"");
-			} else {
-				buffer.append(name);
-			}
 
-			buffer.append(" ");
+				buffer.append(" ");
+			}
 		}
 		
 		List rtn = new ArrayList();
 		for(int i=0; i<original.length; i++) {
-			for(int j = 0; j<buffers.size(); j++) {
-				rtn.add(original[i].replaceAll("\\$XTA", ((StringBuffer)buffers.get(j)).toString()));
+			if(original[i].indexOf("$XTA") == -1) {
+				rtn.add(original[i]);
+			} else {
+				for(int j = 0; j<buffers.size(); j++) {
+					rtn.add(original[i].replaceAll("\\$XTA", ((StringBuffer)buffers.get(j)).toString()));
+				}
 			}
 		}
 		

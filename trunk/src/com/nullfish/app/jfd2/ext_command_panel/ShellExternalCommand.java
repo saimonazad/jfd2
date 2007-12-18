@@ -107,7 +107,7 @@ public class ShellExternalCommand {
 						return;
 					}
 				}
-				CommandExecuter.getInstance().exec(translatedCommands[i], 
+				CommandExecuter.getInstance().exec(command, 
 						useShell ? CommandExecuter.USE_FILE_SHELL : CommandExecuter.SHELL_NONE, workDirFile);
 			} catch (IOException e) {
 				e.printStackTrace();

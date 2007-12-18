@@ -36,7 +36,8 @@ public class ExternalCommandTable extends JTable implements Initable {
 	}
 	
 	public void increaseSetNumber() {
-		model.setSetNumber(model.getSetNumber() == 0 ? 1 : 0);
+//		model.setSetNumber(model.getSetNumber() == 0 ? 1 : 0);
+		model.setSetNumber(1);
 	}
 	
 	public void initSetNumber() {

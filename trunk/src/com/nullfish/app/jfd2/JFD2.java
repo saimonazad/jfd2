@@ -944,6 +944,14 @@ public class JFD2 extends JPanel implements JFD, Initable {
 			return;
 		}
 
+		if (keyStroke.getKeyEventType() == KeyEvent.KEY_RELEASED
+				&& keyCode == KeyEvent.VK_SHIFT
+				&& (keyStroke.getModifiers() & KeyEvent.ALT_MASK) != 0
+				&& (keyStroke.getModifiers() & KeyEvent.CTRL_MASK) == 0) {
+			externalCommandPanel.initSet();
+			return;
+		}
+
 		if (keyStroke.getKeyEventType() == KeyEvent.KEY_PRESSED
 				&& (keyStroke.getModifiers() & KeyEvent.ALT_MASK) != 0
 				&& (keyStroke.getModifiers() & KeyEvent.CTRL_MASK) == 0
