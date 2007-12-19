@@ -932,6 +932,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 		if (keyStroke.getKeyEventType() == KeyEvent.KEY_RELEASED
 				&& keyCode == KeyEvent.VK_ALT) {
 			externalCommandPanel.setVisible(false);
+			externalCommandPanel.initSet();
 			e.consume();
 			return;
 		}
@@ -955,7 +956,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 		if (keyStroke.getKeyEventType() == KeyEvent.KEY_PRESSED
 				&& (keyStroke.getModifiers() & KeyEvent.ALT_MASK) != 0
 				&& (keyStroke.getModifiers() & KeyEvent.CTRL_MASK) == 0
-				&& (keyStroke.getModifiers() & KeyEvent.SHIFT_MASK) == 0
+//				&& (keyStroke.getModifiers() & KeyEvent.SHIFT_MASK) == 0
 				&& KeyEvent.VK_A <= keyCode && keyCode <= KeyEvent.VK_Z) {
 			int set = externalCommandPanel.getSet();
 			int number = keyCode - KeyEvent.VK_A;
