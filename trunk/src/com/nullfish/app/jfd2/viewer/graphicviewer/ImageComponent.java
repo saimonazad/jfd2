@@ -205,6 +205,7 @@ public class ImageComponent extends JComponent implements Scrollable {
 				applyChange();
 				
 				ImageComponent.this.revalidate();
+				repaint();
 			}
 		};
 		

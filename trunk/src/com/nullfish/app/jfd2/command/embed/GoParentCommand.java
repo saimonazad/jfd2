@@ -10,8 +10,10 @@ import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.lib.vfs.FileSystem;
+import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
+import com.nullfish.lib.vfs.impl.root.RootFileName;
 
 /**
  * 親ディレクトリ移動コマンド
@@ -35,7 +37,8 @@ public class GoParentCommand extends Command {
 				model.setDirectoryAsynchIfNecessary(mountPoint.getParent(), mountPoint, jfd);
 				return;
 			}
-			model.setDirectory(currentDirectory, 0);
+//			model.setDirectory(currentDirectory, 0);
+			model.setDirectory(VFS.getInstance(jfd).getFile("root:///"), currentDirectory);
 		}
 	}
 

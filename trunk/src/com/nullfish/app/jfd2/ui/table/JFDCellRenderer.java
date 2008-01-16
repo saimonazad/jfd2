@@ -207,14 +207,19 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		VFile file = (VFile) value;
 
 		VFile current = jfdModel.getCurrentDirectory();
-
-		if (file.equals(current.getFileSystem().getMountPoint())) {
+		
+		boolean isMountPoint = file.equals(current.getFileSystem().getMountPoint());
+		boolean isCurrent = file.equals(current);
+		boolean isParent = file.equals(current.getParent());
+		
+		if (isMountPoint) {
+			isMountPoint = true;
 			nameLabel.setText("...");
 		} else {
 			if(jfd.showsRelativePath()) {
 				nameLabel.setText(current.getRelation(file));
 			} else {
-				if(current.equals(file) || (current.getParent() != null && current.getParent().equals(file))) {
+				if(isCurrent || isParent) {
 					nameLabel.setText(current.getRelation(file));
 				} else if(file.isRoot()) {
 					nameLabel.setText(file.getAbsolutePath());

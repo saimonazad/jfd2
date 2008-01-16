@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.command.JFDManipulationListener;
@@ -115,6 +117,11 @@ public class JFDModel implements FileListener {
 	 * "."で始まるファイルをフィルタするかどうかのフラグ
 	 */
 	private boolean filtersDotFile = true;
+	
+	/**
+	 * フィルター正規表現
+	 */
+	private String filter = "^\\..*";
 	
 	/**
 	 * デフォルトコンストラクタ
@@ -345,8 +352,9 @@ public class JFDModel implements FileListener {
 		registerActiveFileSystem(currentDirectory);
 		if(filtersDotFile) {
 			List filesList = new ArrayList();
+			Pattern pattern = Pattern.compile(filter);
 			for(int i=0; i<files.length; i++) {
-				if(!files[i].getName().startsWith(".")) {
+				if(!pattern.matcher(files[i].getName()).matches()) {
 					filesList.add(files[i]);
 				}
 			}
@@ -887,7 +895,15 @@ public class JFDModel implements FileListener {
 	 * "."で始まるファイルを非表示にするかどうかを設定する。
 	 * @param filtersDotFile	trueなら非表示
 	 */
-	public void setFiltersDotFile(boolean filtersDotFile) {
+	public void setFiltersFile(boolean filtersDotFile) {
 		this.filtersDotFile = filtersDotFile;
+	}
+	
+	/**
+	 * フィルター文字列を設定する。
+	 * @param filter
+	 */
+	public void setFilter(String filter) {
+		this.filter = filter;
 	}
 }

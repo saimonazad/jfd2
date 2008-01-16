@@ -290,7 +290,6 @@ public class GraphicViewerWindow extends JFrame {
 		nameLabel.setText(file != null ? file.getName() : "");
 		this.setVisible(true);
 		imageComponent.setImage(file);
-		
 	}
 
 	public void close() {

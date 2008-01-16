@@ -8,6 +8,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import org.jdom.JDOMException;
@@ -36,6 +37,9 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 	
 	private PathConfig keyMapPathConfig = new PathConfig("key_map", "key_map", JFileChooser.FILES_ONLY);
 	
+	private JLabel filterLabel = new JLabel(JFDResource.LABELS.getString("filter_regex"));
+	private JTextArea filterTextArea = new JTextArea();
+	
 	public ETCConfigPanel() {
 		super(new BorderLayout());
 		try {
@@ -52,7 +56,8 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		grepAllEncodeTextArea.setRows(5);
 		grepAllEncodeTextArea.setColumns(20);
 		grepAllEncodeTextArea.setBorder(BorderFactory.createEtchedBorder());
-		
+		filterTextArea.setRows(5);
+		filterTextArea.setBorder(BorderFactory.createEtchedBorder());
 	}
 
 	public void layoutComponent() {
@@ -66,6 +71,9 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		etcPanel.addComponent(afxStyleCursorCheckBox, "afx_style_cursor_check");
 
 		etcPanel.addComponent(keyMapPathConfig, "key_map");
+		
+		etcPanel.addComponent(filterLabel, "filter_label");
+		etcPanel.addComponent(filterTextArea, "filter_text");
 	}
 
 	/**
@@ -86,6 +94,8 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		afxStyleCursorCheckBox.setSelected(((Boolean)commonConfig.getParam("multi_window_cursor", Boolean.FALSE)).booleanValue());
 
 		keyMapPathConfig.setConfigulation(commonConfig);
+		
+		filterTextArea.setText(((String)commonConfig.getParam("filter_regex", "^\\..*")));
 	}
 
 	/***
@@ -103,6 +113,8 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		commonConfig.setParam("cursor_loops", Boolean.valueOf(cursorLoopsCheckBox.isSelected()));
 		commonConfig.setParam("multi_window_cursor", Boolean.valueOf(afxStyleCursorCheckBox.isSelected()));
 		keyMapPathConfig.apply(commonConfig);
+		
+		commonConfig.setParam("filter_regex", filterTextArea.getText());
 	}
 	
 	public 	String getTitle() {

@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.JFDModelListener;
+import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 
 /**
@@ -69,10 +70,17 @@ public class FileSumLabel extends JLabel {
 	private class CaliculationThread extends Thread {
 		public void run() {
 			try {
+				VFile currentDir = model.getCurrentDirectory();
+				VFile parentDir = currentDir.getParent();
+				VFile mountPoint = currentDir.getFileSystem().getMountPoint();
+				
 				int filesCount = model.getFilesCount();
 				long sum = 0;
 				for(int i=0; getThread() == (CaliculationThread)this && i<filesCount; i++) {
-					sum += model.getFileAt(i).getLength();
+					VFile file = model.getFileAt(i);
+					if(!file.equals(currentDir) && !file.equals(parentDir) && !file.equals(mountPoint)) {
+						sum += model.getFileAt(i).getLength();
+					}
 				}
 				
 				if(getThread() != (CaliculationThread)this) {

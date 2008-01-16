@@ -9,6 +9,8 @@ package com.nullfish.app.jfd2.command.groovy;
 import groovy.lang.GroovyShell;
 
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import org.codehaus.groovy.control.CompilationFailedException;
@@ -44,6 +46,13 @@ public class GroovySelectCommand extends AbstractGroovyCommand {
 				scriptDir.createDirectory(this);
 			}
 			VFile[] files = scriptDir.getChildren(this);
+			Arrays.sort(files,  new Comparator() {
+				public int compare(Object arg0, Object arg1) {
+					VFile file1 = (VFile)arg0;
+					VFile file2 = (VFile)arg1;
+					return file1.getName().compareTo(file2.getName());
+				}
+			});
 			String[] scripts = new String[files.length];
 			for(int i=0; i<files.length; i++) {
 				scripts[i] = files[i].getName();

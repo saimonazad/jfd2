@@ -108,7 +108,7 @@ public class CommandExecuter {
 //			System.out.println(i + ":" + interpretedCommand[i]);
 //}
 			if(interpretedCommand.length == 1) {
-System.out.println(interpretedCommand[0]);
+//System.out.println(interpretedCommand[0]);
 				process = Runtime.getRuntime().exec(interpretedCommand[0],
 						null, dir);
 //				process = Runtime.getRuntime().exec("cmd.exe /C \"Explorer /e,/root,C:\\Program^ Files\\DIFX\"",

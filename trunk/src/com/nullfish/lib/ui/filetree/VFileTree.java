@@ -21,15 +21,16 @@ public class VFileTree extends JPanel {
 	
 	private JScrollPane scroll = new JScrollPane(tree);
 	
+	private DefaultTreeModel model;
+	
 	public VFileTree() {
 		add(scroll);
 	}
 	
 	public void setRoot(VFile root) {
-		VFileTreeNode rootNode = new VFileTreeNode(null, null, root);
-		DefaultTreeModel model = new DefaultTreeModel(rootNode);
+		VFileTreeNode rootNode = new VFileTreeNode(this, null, root);
+		model = new DefaultTreeModel(rootNode);
 		tree.setModel(model);
-		rootNode.setModel(model);
 		this.root = root;
 	}
 	
@@ -76,15 +77,19 @@ public class VFileTree extends JPanel {
 			JFrame frame = new JFrame();
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			VFileTree tree = new VFileTree();
-//			tree.setRoot(VFS.getInstance().getFile("c:\\"));
-			tree.setRoot(VFS.getInstance().getFile("ftp://hogehoge:tkcstiis@hogehoge.sakura.ne.jp/"));
+			tree.setRoot(VFS.getInstance().getFile("root:///"));
+//			tree.setRoot(VFS.getInstance().getFile("ftp://hogehoge:tkcstiis@hogehoge.sakura.ne.jp/"));
 			frame.setContentPane(tree);
 			frame.pack();
 			frame.setVisible(true);
-//			tree.setSelectedFile(VFS.getInstance().getFile("C:\\Program Files2\\ChangeKey"));
-			tree.setSelectedFile(VFS.getInstance().getFile("ftp://hogehoge:tkcstiis@hogehoge.sakura.ne.jp/home/hogehoge/www/ikemen"));
+			tree.setSelectedFile(VFS.getInstance().getFile("C:\\Program Files2\\ChangeKey"));
+//			tree.setSelectedFile(VFS.getInstance().getFile("ftp://hogehoge:tkcstiis@hogehoge.sakura.ne.jp/home/hogehoge/www/ikemen"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public DefaultTreeModel getModel() {
+		return model;
 	}
 }

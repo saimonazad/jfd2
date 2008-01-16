@@ -17,7 +17,7 @@ public class ChangeDotFileVisibilityCommand extends Command {
 		Configulation config = jfd.getLocalConfigulation();
 		boolean value = !((Boolean) config.getParam("filters_dot_file", Boolean.FALSE)).booleanValue();
 		config.setParam("filters_dot_file", Boolean.valueOf(value));
-		jfd.getModel().setFiltersDotFile(value);
+		jfd.getModel().setFiltersFile(value);
 		jfd.setMessage(JFDResource.LABELS.getString(value ? "dot_file_invisible" : "dot_file_visible"), 3000);
 		
 		jfd.getCommandManager().execute("refresh");

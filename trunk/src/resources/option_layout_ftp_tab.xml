@@ -19,6 +19,12 @@
 								<td vfix="true">passive_check</td>
 							</tr>
 							<tr>
+								<td vfix="true">ftp_encoding_label</td>
+							</tr>
+							<tr>
+								<td vfix="true" fill="horizontal">ftp_encoding_text</td>
+							</tr>
+							<tr>
 								<td vfix="true" >
 									<table>
 										<tr>

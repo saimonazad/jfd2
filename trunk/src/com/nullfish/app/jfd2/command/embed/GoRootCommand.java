@@ -9,8 +9,10 @@ package com.nullfish.app.jfd2.command.embed;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
+import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
+import com.nullfish.lib.vfs.impl.root.RootFileName;
 
 /**
  * ルートディレクトリ移動コマンド
@@ -31,7 +33,8 @@ public class GoRootCommand extends Command {
 			if(mountPoint != null) {
 				model.setDirectoryAsynchIfNecessary(mountPoint.getParent(), mountPoint, jfd);
 			} else {
-				model.setDirectory(current, 0);
+//				model.setDirectory(current, 0);
+				model.setDirectory(VFS.getInstance(jfd).getFile(RootFileName.getInstance()), current);
 			}
 			return;
 		}

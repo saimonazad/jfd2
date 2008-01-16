@@ -53,6 +53,9 @@ public class FileSystemConfigPanel extends JPanel implements ConfigPanel {
 		}
 	};
 	
+	private JLabel ftpEncodeLabel = new JLabel(JFDResource.LABELS.getString("ftp_encoding"));
+	private JTextField ftpEncodeTextArea = new JTextField();
+	
 	private JLabel proxyHostLabel = new JLabel(JFDResource.LABELS.getString("proxy_host"));
 	private JLabel proxyPortLabel = new JLabel(JFDResource.LABELS.getString("proxy_port"));
 	private JTextField proxyHostText = new JTextField();
@@ -138,6 +141,8 @@ public class FileSystemConfigPanel extends JPanel implements ConfigPanel {
 		ftpPanel.addComponent(asciiExtensionLabel, "ascii_extension");
 		ftpPanel.addComponent(new JScrollPane( asciiExtensionTextArea ), "ascii_extension_input");
 		ftpPanel.addComponent(passiveModeCheckBox, "passive_check");
+		ftpPanel.addComponent(ftpEncodeLabel, "ftp_encoding_label");
+		ftpPanel.addComponent(ftpEncodeTextArea, "ftp_encoding_text");
 /*
 		ftpPanel.addComponent(proxyCheckBox, "use_ftp_proxy_check");
 		ftpPanel.addComponent(proxyHostLabel, "proxy_host_label");
@@ -178,6 +183,7 @@ public class FileSystemConfigPanel extends JPanel implements ConfigPanel {
 			asciiExtensionTextArea.append(extensions.next().toString() + " ");
 		}
 		passiveModeCheckBox.setSelected(((Boolean)commonConfig.getParam("passive_mode", Boolean.FALSE)).booleanValue());
+		ftpEncodeTextArea.setText((String)commonConfig.getParam("ftp_encoding", "EUC-JP"));
 		
 		proxyCheckBox.setSelected(((Boolean)commonConfig.getParam("ftp_use_proxy", Boolean.FALSE)).booleanValue());
 		proxyHostText.setText((String)commonConfig.getParam("ftp_proxy_host", ""));
@@ -209,6 +215,7 @@ public class FileSystemConfigPanel extends JPanel implements ConfigPanel {
 		}
 		commonConfig.setParam("auto_ascii_mode_extension", autoAsciiList);
 		commonConfig.setParam("passive_mode", Boolean.valueOf(passiveModeCheckBox.isSelected()));
+		commonConfig.setParam("ftp_encoding", ftpEncodeTextArea.getText());
 		
 		commonConfig.setParam("ftp_use_proxy",  Boolean.valueOf(proxyCheckBox.isSelected()));
 		commonConfig.setParam("ftp_proxy_host", proxyHostText.getText());

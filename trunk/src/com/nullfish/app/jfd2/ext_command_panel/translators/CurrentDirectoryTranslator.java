@@ -25,7 +25,7 @@ public class CurrentDirectoryTranslator implements CommandTranslator {
 			return original;
 		}
 		
-		String currentDirStr = currentDir.getAbsolutePath().replaceAll("\\\\", "\\\\\\\\");
+		String currentDirStr = currentDir.getAbsolutePath();
 		currentDirStr = currentDirStr.indexOf(' ') != -1 ? "\"" + currentDirStr + "\"" : currentDirStr;
 		for(int i=0; i<original.length; i++) {
 			original[i] = original[i].replaceAll("\\$P", WindowsUtil.escapeFileName(currentDirStr.replaceAll("\\\\", "\\\\\\\\")));

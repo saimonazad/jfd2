@@ -21,7 +21,7 @@ import com.nullfish.lib.vfs.exception.VFSIOException;
 import com.nullfish.lib.vfs.impl.local.LocalFile;
 
 /**
- * ソートコマンド
+ * 拡張子関連付け実行コマンド
  * 
  * @author shunji
  */
@@ -39,6 +39,10 @@ public class ExtensionMapCommand extends Command {
 		try {
 			model.lockAutoUpdate(this);
 			String fileName = model.getSelectedFile().getSecurePath();
+			String shell = (String)jfd.getCommonConfigulation().getParam("shell", DefaultConfig.getDefaultConfig().getShell());
+			if(fileName.indexOf(' ') != -1 && shell.indexOf('\n') == -1) {
+				fileName = "\"" + fileName + "\"";
+			}
 			fileName = WindowsUtil.escapeFileName(fileName);
 			
 			String mapper = (String)jfd.getCommonConfigulation().getParam(PARAM_MAPPER, DefaultConfig.getDefaultConfig().getExtensionMapping());

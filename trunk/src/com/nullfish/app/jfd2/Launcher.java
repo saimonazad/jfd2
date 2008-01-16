@@ -89,7 +89,9 @@ public class Launcher {
 			// プラグイン機能
 			Configulation commonConfig = Configulation.getInstance(configDir.getChild(JFD.COMMON_PARAM_FILE));
 			
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			if(System.getProperty("os.name").toLowerCase().indexOf("linux") == -1) {
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			}
 
 			ThumbnailDataBase.getInstance().setIconDir(configDir.getChild("icon_cache"));
 			

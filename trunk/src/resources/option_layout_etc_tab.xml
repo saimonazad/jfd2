@@ -19,6 +19,15 @@
 		<td colspan="2" vfix="true">key_map</td>
 	</tr>
 	<tr>
+		<td colspan="2" vfix="true" height="10"></td>
+	</tr>
+	<tr>
+		<td colspan="2" vfix="true">filter_label</td>
+	</tr>
+	<tr>
+		<td colspan="2" vfix="true" fill="both">filter_text</td>
+	</tr>
+	<tr>
 		<td colspan="2"/>
 	</tr>
 </table>

@@ -19,6 +19,8 @@ import org.jdom.input.SAXBuilder;
 import com.nullfish.app.jfd2.Initable;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.JFDException;
+import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 import com.nullfish.lib.vfs.exception.VFSIOException;
@@ -61,7 +63,27 @@ public class AliaseManager implements Initable {
 	 */
 	public void init(VFile baseDir) throws VFSException {
 		try {
-			VFile configFile = baseDir.getChild(CONFIG_FILE);
+			initFromFile(baseDir.getChild(CONFIG_FILE));
+			
+			Configulation commonConfig = Configulation.getInstance(baseDir.getChild(JFD.COMMON_PARAM_FILE));
+			VFile userConfDir = VFS.getInstance(jfd).getFile(
+					(String) commonConfig.getParam(
+							"user_conf_dir",
+							baseDir.getRelativeFile("../.jfd2_user/conf")
+									.getAbsolutePath()));
+			initFromFile(userConfDir.getChild(CONFIG_FILE));
+		} catch (JDOMException e) {
+			throw new JFDException("failed to init aliase");
+		} catch (IOException e) {
+			throw new VFSIOException(e);
+		}
+	}
+	
+	private void initFromFile(VFile configFile) throws VFSException {
+		try {
+			if(!configFile.exists()) {
+				return;
+			}
 			SAXBuilder builder = new SAXBuilder();
 			Document doc = builder.build(configFile.getInputStream());
 			Element root = doc.getRootElement();

@@ -27,9 +27,9 @@
 	<classpathentry kind="lib" path="lib/vfs/jcifs-1.2.17.jar"/>
 	<classpathentry kind="lib" path="lib/vfs/jlha.jar"/>
 	<classpathentry kind="lib" path="lib/vfs/saxpath.jar"/>
-	<classpathentry kind="lib" path="lib/vfs/filefish.jar"/>
 	<classpathentry kind="lib" path="lib/vfs/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/migemo-0.006.jar"/>
 	<classpathentry kind="lib" path="lib/HtmlTablePanel.jar"/>
-	<classpathentry kind="lib" path="lib/migemo-0.005.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/VFS"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

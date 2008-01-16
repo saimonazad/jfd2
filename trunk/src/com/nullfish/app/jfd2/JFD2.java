@@ -542,6 +542,11 @@ public class JFD2 extends JPanel implements JFD, Initable {
 					labelNameInfo.setText("..");
 					return;
 				}
+				if (selectedFile.isRoot()) {
+					labelPathInfo.setText(selectedFile.getSecurePath());
+					labelNameInfo.setText("");
+					return;
+				}
 
 				labelPathInfo.setText(selectedFile != null
 						&& selectedFile.getParent() != null ? selectedFile
@@ -1042,7 +1047,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 					.getString("read_config_failed"), null);
 		}
 
-		getModel().setFiltersDotFile(((Boolean)localConfig.getParam("filters_dot_file", Boolean.FALSE)).booleanValue());
+		getModel().setFiltersFile(((Boolean)localConfig.getParam("filters_dot_file", Boolean.FALSE)).booleanValue());
 		
 		setBackground((Color) commonConfig.getParam("background_color",
 				Color.BLACK));
@@ -1082,6 +1087,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 		FileComparator[] comparators = SortUtility.createComparators(this);
 		model.setComparator(new JFDComparator(comparators));
+		model.setFilter(((String)commonConfig.getParam("filter_regex", "^\\..*")).replaceAll("\\n", "|"));
 
 		initColor();
 
@@ -1243,6 +1249,10 @@ public class JFD2 extends JPanel implements JFD, Initable {
 				FTPFileSystem.CONFIG_PROXY_HOST,
 				commonConfig.getParam("ftp_proxy_port",
 						null));
+		config.setDefaultConfig(
+				FTPFileSystem.CONFIG_ENCODE,
+				commonConfig.getParam("ftp_encoding",
+						"EUC-JP"));
 		
 		//	HTTP‚ª‚ç‚Ý
 		Boolean useHttpProxy = (Boolean)commonConfig.getParam("http_use_proxy",

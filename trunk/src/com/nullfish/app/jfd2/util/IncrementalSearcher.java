@@ -22,6 +22,8 @@ public class IncrementalSearcher implements Initable {
 		
 	public static final String INCREMENTAL_SEARCH_COMMAND = "incremental_search";
 	
+	public static final String ESCAPE_COMMAND = "escape";
+	
 	private StringBuffer buffer = new StringBuffer();
 	
 	private String lastSearch;
@@ -31,6 +33,7 @@ public class IncrementalSearcher implements Initable {
 	private JFD jfd;
 	
 	private List commandKeys;
+	private List escapeCommandKeys;
 
 	private KeyStroke backSpace = KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0);
 	
@@ -40,7 +43,7 @@ public class IncrementalSearcher implements Initable {
 	
 	public void processKeyEvent(KeyEvent e) {
 		KeyStroke keyStroke = KeyStrokeMap.getKeyStrokeForEvent(e);
-		if(commandKeys.contains(keyStroke)) {
+		if(commandKeys.contains(keyStroke) || escapeCommandKeys.contains(keyStroke)) {
 			jfd.setIncrementalSearchMode(false);
 			jfd.setMessage("");
 			e.consume();
@@ -131,6 +134,7 @@ public class IncrementalSearcher implements Initable {
 
 	public void init(VFile baseDir) throws VFSException {
 		commandKeys = jfd.getCommandManager().getKeys(INCREMENTAL_SEARCH_COMMAND);
+		escapeCommandKeys = jfd.getCommandManager().getKeys(ESCAPE_COMMAND);
 	}
 	
 	
