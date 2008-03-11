@@ -93,7 +93,7 @@
 						<table>
 							<tr>
 								<td vfix="true" hfix="true" align="left">label_path</td>
-								<td vfix="true" align="left">info_path</td>
+								<td vfix="true" align="left" prefwidth="1">info_path</td>
 							</tr>
 						</table>
 					</td>
@@ -101,11 +101,11 @@
 				</tr>
 				<tr>
 					<td vfix="true" hfix="true">label_name</td>
-					<td vfix="true" fill="both" hfix="true">info_name</td>
+					<td vfix="true">info_name</td>
 					<td vfix="true" hfix="true" align="right">info_mark</td>
 					<td vfix="true" hfix="true">label_mark</td>
 					<td vfix="true" hfix="true" align="right">info_marksize</td>
-				</tr>
+				</tr>	
 				<tr>
 					<td vfix="true" hfix="true">label_info</td>
 					<td vfix="true">info_info</td>

@@ -23,6 +23,7 @@ import com.nullfish.app.jfd2.util.MigemoInfo;
 import com.nullfish.app.jfd2.util.thumbnail.ThumbnailDataBase;
 import com.nullfish.app.jfd2.viewer.FileViewerManager;
 import com.nullfish.lib.plugin.PluginManager;
+import com.nullfish.lib.tablelayout.HtmlTablePanel;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -89,9 +90,9 @@ public class Launcher {
 			// プラグイン機能
 			Configulation commonConfig = Configulation.getInstance(configDir.getChild(JFD.COMMON_PARAM_FILE));
 			
-			if(System.getProperty("os.name").toLowerCase().indexOf("linux") == -1) {
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			}
+			String uiName = (String)commonConfig.getParam("look_and_feel", null);
+			uiName = uiName != null ? uiName : UIManager.getSystemLookAndFeelClassName();
+			UIManager.setLookAndFeel(uiName);
 
 			ThumbnailDataBase.getInstance().setIconDir(configDir.getChild("icon_cache"));
 			

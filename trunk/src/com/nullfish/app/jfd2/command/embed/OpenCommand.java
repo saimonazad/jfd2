@@ -73,9 +73,9 @@ public class OpenCommand extends Command {
 			try {
 				VFile currentDir = model.getCurrentDirectory();
 				if(currentDir instanceof LocalFile) {
-					CommandExecuter.getInstance().exec(selectedFile.getAbsolutePath(), CommandExecuter.USE_FILE_SHELL, ((LocalFile)currentDir).getFile());
+					CommandExecuter.getInstance().exec(selectedFile.getAbsolutePath(), true, ((LocalFile)currentDir).getFile());
 				} else {
-					CommandExecuter.getInstance().exec(selectedFile.getAbsolutePath(), CommandExecuter.USE_FILE_SHELL);
+					CommandExecuter.getInstance().exec(selectedFile.getAbsolutePath(), true);
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

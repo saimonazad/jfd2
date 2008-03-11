@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
+<?xml version=	"1.0"?>
 
-<commandmaps version="1.0">
+<commandmaps version="20080211">
 	<commandmap name="cursor-up">
 		<key name="VK_UP"/>
 	</commandmap>
@@ -213,10 +213,10 @@
 		<key name="VK_PERIOD"/>
 	</commandmap>
 	<commandmap name="this2target">
-		<key name="VK_T"/>
+		<key name="VK_Y"/>
 	</commandmap>
 	<commandmap name="target2this">
-		<key name="VK_T" shift="true"/>
+		<key name="VK_Y" shift="true"/>
 	</commandmap>
 	<commandmap name="change_dot_file_visible">
 		<key name="VK_PERIOD" shift="true"/>
@@ -235,5 +235,14 @@
 	</commandmap>
 	<commandmap name="incremental_search_prev">
 		<key name="VK_UP" ctrl="true"/>
+	</commandmap>
+	<commandmap name="incremental_search_prev">
+		<key name="VK_UP" ctrl="true"/>
+	</commandmap>
+	<commandmap name="change_auto_column_mode">
+		<key name="VK_6"/>
+	</commandmap>
+	<commandmap name="tree">
+		<key name="VK_T"/>
 	</commandmap>
 </commandmaps>

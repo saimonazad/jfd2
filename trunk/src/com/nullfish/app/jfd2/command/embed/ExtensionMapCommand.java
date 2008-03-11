@@ -56,9 +56,9 @@ public class ExtensionMapCommand extends Command {
 
 			VFile currentDir = model.getCurrentDirectory();
 			if(currentDir instanceof LocalFile) {
-				CommandExecuter.getInstance().exec(command, CommandExecuter.USE_FILE_SHELL, ((LocalFile)currentDir).getFile());
+				CommandExecuter.getInstance().exec(command, true, ((LocalFile)currentDir).getFile());
 			} else {
-				CommandExecuter.getInstance().exec(command, CommandExecuter.USE_FILE_SHELL);
+				CommandExecuter.getInstance().exec(command, true);
 			}
 		} catch (IOException e) {
 			throw new VFSIOException(e);

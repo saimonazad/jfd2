@@ -112,8 +112,7 @@ public class ShellCommand extends Command {
 				}
 				
 				CommandExecuter.getInstance().exec(command,
-						dialog.isChecked(USE_SHELL) ? CommandExecuter.USE_FILE_SHELL
-										: CommandExecuter.SHELL_NONE, directory);
+						dialog.isChecked(USE_SHELL), directory);
 				dialog.applyConfig();
 				return;
 			}
@@ -123,7 +122,7 @@ public class ShellCommand extends Command {
 
 			dialog.applyConfig();
 			CommandExecuter.getInstance().exec(command,
-					dialog.isChecked(USE_SHELL) ? CommandExecuter.USE_FILE_SHELL : CommandExecuter.SHELL_NONE, directory);
+					dialog.isChecked(USE_SHELL), directory);
 		} catch (IOException e) {
 			throw new VFSIOException(e);
 		} finally {

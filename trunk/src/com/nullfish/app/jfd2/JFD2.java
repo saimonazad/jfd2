@@ -24,6 +24,9 @@ import java.awt.Rectangle;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DropTarget;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -229,7 +232,13 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 	private JLabel labelPath = new JLabel("Path=");
 
-	private JLabel labelPathInfo = new ToolTipLabel();
+	private JLabel labelPathInfo = new ToolTipLabel();/* {
+		public Dimension getMinimumSize() {
+			Dimension rtn = super.getMinimumSize();
+//			rtn.width = 1;
+			return rtn;
+		}
+	};*/
 
 	private JLabel labelPage = new JLabel(" Page:");
 
@@ -237,7 +246,13 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 	private JLabel labelName = new JLabel("Name=");
 
-	private JLabel labelNameInfo = new ToolTipLabel();
+	private JLabel labelNameInfo = new ToolTipLabel();/* {
+		public Dimension getMinimumSize() {
+			Dimension rtn = super.getMinimumSize();
+//			rtn.width = 1;
+			return rtn;
+		}
+	};*/
 
 	private JLabel labelMark = new JLabel("Marked");
 
@@ -257,7 +272,13 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 	private JLabel labelMessagePad = new JLabel(" ");
 
-	private JLabel labelMessage = new JLabel();
+	private JLabel labelMessage = new JLabel()  {
+		public Dimension getMinimumSize() {
+			Dimension rtn = super.getMinimumSize();
+			rtn.width = 1;
+			return rtn;
+		}
+	};
 
 	private JLabel labelTopLeftPad = new JLabel(" ");
 
@@ -701,6 +722,21 @@ public class JFD2 extends JPanel implements JFD, Initable {
 				externalCommandPanel.setVisible(false);
 			}
 		});
+		
+		addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				resizeResizableLabels();
+			}
+		});
+	}
+	
+	private void resizeResizableLabels() {
+/*
+		labelNameInfo.setMaximumSize(panel.getGridPanel("info_name").getSize());
+		labelMessage.setMaximumSize(panel.getGridPanel("message").getSize());
+		
+		System.out.println(labelNameInfo.getMaximumSize());
+*/
 	}
 
 	/**
@@ -836,6 +872,9 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	 * @param columnCount
 	 */
 	public void setColumnCount(int columnCount) {
+		if(isAdjustsColumnCountAuto()) {
+			setAdjustsColumnCountAuto(false, 1);
+		}
 		table.setColumnCount(columnCount);
 
 		getLocalConfigulation().setParam(CONFIG_COLUMNS,
@@ -881,6 +920,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 		updateRowHeight();
 
 		LineGrid.setGroupFont(font, this);
+		
 	}
 
 	/**
@@ -1363,12 +1403,8 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	 * 
 	 */
 	public void setThumbnailVisible(boolean visible) {
-table.setPreferredColumnWidth(150);
-
 		renderer.setThumbnailVisible(visible);
-		updateRowHeight();
-		table.setAutoAdjustColumnCount(visible);
-		table.repaint();
+		setAdjustsColumnCountAuto(visible, 150);
 	}
 
 	/**
@@ -1379,6 +1415,29 @@ table.setPreferredColumnWidth(150);
 		return renderer.isThumbnailVisible();
 	}
 	
+	private boolean adjustsColumnCountAuto = false;
+	
+	/**
+	 * 最小カラム幅に合わせて自動で列数調整を行うか設定する
+	 * @param bool	trueなら自動で列数調整する
+	 * @param minWidth	最小のカラム幅
+	 */
+	public void setAdjustsColumnCountAuto(boolean adjustsColumnWidthAuto, int minWidth) {
+		if(isThumbnailVisible() && !adjustsColumnWidthAuto) {
+			setThumbnailVisible(false);
+			return;
+		}
+		this.adjustsColumnCountAuto = adjustsColumnWidthAuto;
+		table.setPreferredColumnWidth(minWidth);
+		updateRowHeight();
+		table.setAutoAdjustColumnCount(adjustsColumnWidthAuto);
+		table.repaint();
+	}
+	
+	public boolean isAdjustsColumnCountAuto() {
+		return adjustsColumnCountAuto;
+	}
+
 	/**
 	 * 空のダイアログを生成する。
 	 * 

@@ -83,6 +83,7 @@ public class GraphicViewerWindow extends JFrame {
 	private void initGui() {
 		scroll.getViewport().setBackground(Color.BLACK);
 
+		imageComponent.setFocusable(true);
 		imageComponent.addImageComponentListener(new ImageComponentListener() {
 			public void imageComponentUpdated(ImageComponent c) {
 				scroll.getVerticalScrollBar().setValue(0);
@@ -202,11 +203,20 @@ public class GraphicViewerWindow extends JFrame {
 			
 			MouseListener mouseListener =  new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {
-					showPopup(e);
+//					showPopup(e);
 				}
 				
 				public void mouseReleased(MouseEvent e) {
-					showPopup(e);
+					boolean mouseButtonOperation = ((Boolean)viewer.getJFD().getCommonConfigulation().getParam("graphic_viewer_mouse_button_operate", Boolean.TRUE)).booleanValue();
+					if(!mouseButtonOperation) {
+						showPopup(e);
+					} else {
+						if(e.getButton() == MouseEvent.BUTTON1) {
+							viewer.getJFD().getCommandManager().execute("cursor-down");
+						} else {
+							viewer.getJFD().getCommandManager().execute("cursor-down");
+						}
+					}
 				}
 				
 				private void showPopup(MouseEvent e) {

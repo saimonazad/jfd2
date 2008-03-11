@@ -42,7 +42,11 @@ public class ManipulationProgressBar extends JProgressBar {
 		
 		setMinimum(0);
 		setMaximum(1000);
-		setValue((int)((progress-min) * 1000 / (max-min)));
+		if(max != min) {
+			setValue((int)((progress-min) * 1000 / (max-min)));
+		} else {
+			setIndeterminate(true);
+		}
 				
 		buffer.setLength(0);
 

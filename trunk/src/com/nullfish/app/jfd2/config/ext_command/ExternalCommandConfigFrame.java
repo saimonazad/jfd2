@@ -16,6 +16,7 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -80,6 +81,7 @@ public class ExternalCommandConfigFrame extends JDialog {
 	private JTextField workDirField = new JTextField();
 	private JButton workDirReferButton = new JButton(JFDResource.LABELS.getString("refer"));
 	private JCheckBox useShellCheckBox = new JCheckBox(JFDResource.LABELS.getString("use_shell"));
+	private JComboBox shellComboBox = new JComboBox();
 	
 	private JLabel scriptLabel = new JLabel(JFDResource.LABELS.getString("script"));
 	private JTextField scriptField = new JTextField();

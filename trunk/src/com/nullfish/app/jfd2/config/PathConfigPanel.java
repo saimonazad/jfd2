@@ -50,6 +50,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 
 	private JLabel pathNotice = new JLabel(JFDResource.LABELS.getString("path_notice"));
 	private JLabel shellNotice = new JLabel(JFDResource.LABELS.getString("shell_notice"));
+	private JLabel appshellNotice = new JLabel(JFDResource.LABELS.getString("appshell_notice"));
 
 	public PathConfigPanel() {
 		super(new BorderLayout());
@@ -88,6 +89,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 		directoryPanel.addComponent(shellConfigLabel, "shell_label");
 		directoryPanel.addComponent(new JScrollPane(shellConfig), "shell_input");
 		directoryPanel.addComponent(shellNotice, "shell_notice");
+		directoryPanel.addComponent(appshellNotice, "appshell_notice");
 
 		directoryPanel.addComponent(appShellConfigLabel, "app_shell_label");
 		directoryPanel.addComponent(new JScrollPane(appShellConfig), "app_shell_input");

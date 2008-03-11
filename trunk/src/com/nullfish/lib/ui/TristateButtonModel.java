@@ -47,7 +47,7 @@ public class TristateButtonModel extends ToggleButtonModel {
     setState(state.next());
   }
 
-  private void setState(TristateState state) {
+  public void setState(TristateState state) {
     //Set internal state
     this.state = state;
     displayState();

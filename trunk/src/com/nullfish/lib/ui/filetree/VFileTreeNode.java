@@ -1,10 +1,11 @@
 package com.nullfish.lib.ui.filetree;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
 import com.nullfish.lib.ui.ThreadSafeUtilities;
@@ -18,12 +19,10 @@ public class VFileTreeNode implements TreeNode {
 
 	private List childNodes = new ArrayList();
 
-	private List tempChildNodes = new ArrayList();
-
 	private VFileTreeNode parent;
 
-	private boolean showsFile = true;
-	
+	private boolean showsFile = false;
+
 	private boolean showsArchive = true;
 
 	private VFileTree tree;
@@ -36,97 +35,81 @@ public class VFileTreeNode implements TreeNode {
 
 	public static final int STATUS_LOADED = 2;
 
-	public VFileTreeNode(VFileTree tree, VFileTreeNode parent,
-			VFile file) {
+	private Object statusLockObj = new Object();
+	
+	public VFileTreeNode(VFileTree tree, VFileTreeNode parent, VFile file) {
 		this.tree = tree;
 		this.parent = parent;
 		this.file = file;
 	}
 
 	private void initChild() {
-		if (childInit) {
+		if (isChildInit()) {
 			return;
 		}
 
-		childInit = true;
-		try {
-			if (file.isDirectory()) {
-				if (file.getFileSystem().isLocal()) {
-					VFile[] children = file.getChildren();
-					for (int i = 0; i < children.length; i++) {
-						if (showsFile || children[i].isDirectory() || (showsArchive && children[i].getInnerRoot() != null)) {
-							childNodes.add(new VFileTreeNode(tree, this,
-									children[i]));
-						}
-					}
-				} else {
-					Thread thread = new Thread() {
-						public void run() {
-							setStatus(STATUS_LOADING);
-							Runnable runnable = new Runnable() {
-								public void run() {
-									tree.getModel().reload(VFileTreeNode.this);
-								}
-							};
-							ThreadSafeUtilities.executeRunnable(runnable);
+		setChildInit(true);
+		Thread thread = new Thread() {
+			public void run() {
+				try {
+					setStatus(STATUS_LOADING);
+					tree.reload(VFileTreeNode.this);
 
-							try {
-								filterChildren(file.getChildren());
-								setStatus(STATUS_LOADED);
-								ThreadSafeUtilities.executeRunnable(runnable);
-							} catch (VFSException e) {
-								e.printStackTrace();
-							}
-						}
-					};
-					thread.start();
+					if(file.isDirectory()) {
+						filterChildren(file.getChildren());
+					} else if(file.getInnerRoot() != null) {
+						filterChildren(file.getInnerRoot().getChildren());
+					}
+				} catch (VFSException e) {
+					e.printStackTrace();
+				} finally {
+					setStatus(STATUS_LOADED);
+					tree.reload(VFileTreeNode.this);
 				}
-			} else if (file.getInnerRoot() != null) {
-				Thread thread = new Thread() {
-					public void run() {
-						setStatus(STATUS_LOADING);
-						Runnable runnable = new Runnable() {
-							public void run() {
-								tree.getModel().reload(VFileTreeNode.this);
-							}
-						};
-						ThreadSafeUtilities.executeRunnable(runnable);
-
-						try {
-							filterChildren(file.getInnerRoot().getChildren());
-							setStatus(STATUS_LOADED);
-							ThreadSafeUtilities.executeRunnable(runnable);
-						} catch (VFSException e) {
-							e.printStackTrace();
-						}
-
-					}
-				};
-				thread.start();
 			}
-		} catch (VFSException e) {
-			e.printStackTrace();
+		};
+		tree.invoke(thread);
+	}
+
+	public synchronized VFileTreeNode getChild(VFile file) {
+		VFileTreeNode rtn = new VFileTreeNode(tree, this, file);
+		if(childNodes.contains(rtn)) {
+			rtn = (VFileTreeNode)childNodes.get(childNodes.indexOf(rtn));
+		} else {
+			childNodes.add(rtn);
 		}
+		sort(childNodes);
+		initChild();
+		return rtn;
 	}
 
 	private void filterChildren(VFile[] children) throws VFSException {
+		final List filteredList = new ArrayList();
+		
 		for (int i = 0; i < children.length; i++) {
-			if (showsFile || children[i].isDirectory() || (showsArchive && children[i].getInnerRoot() != null)) {
-				VFileTreeNode child = new VFileTreeNode(
-						tree, VFileTreeNode.this,
-						children[i]);
-				int index = tempChildNodes.indexOf(child);
-				if (index != -1) {
-					child = (VFileTreeNode) tempChildNodes
-							.get(index);
+			if (showsFile || children[i].isDirectory()
+					|| (showsArchive && children[i].getInnerRoot() != null)) {
+				VFileTreeNode child = new VFileTreeNode(tree,
+						VFileTreeNode.this, children[i]);
+				if(childNodes.contains(child)) {
+					filteredList.add(childNodes.get(childNodes.indexOf(child)));
+				} else {
+					filteredList.add(child);
 				}
-				childNodes.add(child);
 			}
 		}
-
-
+		sort(filteredList);
+		
+		Runnable runnable = new Runnable() {
+			public void run() {
+				childNodes = filteredList;
+			}
+		};
+		ThreadSafeUtilities.executeRunnable(runnable);
 	}
+
 	public Enumeration children() {
+System.out.println("children " + file);
 		initChild();
 		return new Enumeration() {
 			int index = -1;
@@ -141,13 +124,14 @@ public class VFileTreeNode implements TreeNode {
 			}
 		};
 	}
-
+	
 	public boolean getAllowsChildren() {
-		try {
+		return true;
+/*		try {
 			return file.isDirectory();
 		} catch (VFSException e) {
 			return false;
-		}
+		}*/
 	}
 
 	public TreeNode getChildAt(int childIndex) {
@@ -170,6 +154,8 @@ public class VFileTreeNode implements TreeNode {
 	}
 
 	public boolean isLeaf() {
+return false;
+/*
 		try {
 			if (file.isDirectory()) {
 				return false;
@@ -182,12 +168,12 @@ public class VFileTreeNode implements TreeNode {
 		} catch (VFSException e) {
 			e.printStackTrace();
 			return true;
-		}
+		}*/
 	}
 
 	public String toString() {
-		return (file.isRoot() ? file.getAbsolutePath() : file.getName())
-				+ (status == STATUS_LOADING ? "(loading)" : "");
+		return (file.isRoot() ? file.getSecurePath() : file.getName())
+				+ (getStatus() == STATUS_LOADING ? "(loading)" : "");
 	}
 
 	public boolean equals(Object o) {
@@ -206,11 +192,35 @@ public class VFileTreeNode implements TreeNode {
 		return file;
 	}
 
-	private synchronized int getStatus() {
-		return status;
+	private int getStatus() {
+		synchronized(statusLockObj) {
+			return status;
+		}
 	}
 
-	private synchronized void setStatus(int status) {
-		this.status = status;
+	private void setStatus(int status) {
+		synchronized(statusLockObj) {
+			this.status = status;
+		}
+	}
+	
+	private void sort(List childNodes) {
+		Collections.sort(childNodes, new Comparator() {
+			public int compare(Object o1, Object o2) {
+				return (((VFileTreeNode)o1).file.getAbsolutePath().toLowerCase().compareTo(((VFileTreeNode)o2).file.getAbsolutePath().toLowerCase()));
+			}
+		});
+	}
+
+	private boolean isChildInit() {
+		synchronized (statusLockObj) {
+			return childInit;
+		}
+	}
+
+	private void setChildInit(boolean childInit) {
+		synchronized (statusLockObj) {
+			this.childInit = childInit;
+		}
 	}
 }

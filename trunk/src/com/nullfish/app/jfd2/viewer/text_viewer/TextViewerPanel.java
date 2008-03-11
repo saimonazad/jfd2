@@ -43,7 +43,6 @@ import org.jdom.Document;
 import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.JFD;
-import com.nullfish.app.jfd2.JFD2;
 import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.command.embed.CursorMoveCommand;
 import com.nullfish.app.jfd2.config.Configulation;
@@ -59,7 +58,6 @@ import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.resource.ResourceManager;
 import com.nullfish.lib.ui.LineNumberView;
 import com.nullfish.lib.ui.ThreadSafeUtilities;
-import com.nullfish.lib.ui.grid.LineGrid;
 import com.nullfish.lib.ui.xml_menu.XMLPopupMenu;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;

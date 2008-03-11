@@ -473,7 +473,7 @@ public class JFDDialog extends JDialog {
 
 		if (shortCutRoot != null) {
 			TextEditorTreeExtension extension = new TextEditorTreeExtension(
-					editor, editor, this, shortCutRoot);
+					editor, editor, this, shortCutRoot, jfd);
 			mainPanel.add(name, (TextEditor) extension, title);
 		} else {
 			mainPanel.add(name, (TextEditor) editor, title);
@@ -632,7 +632,7 @@ public class JFDDialog extends JDialog {
 			if (shortCutRoot != null) {
 				TextEditorTreeExtension extension = new TextEditorTreeExtension(
 						combo, (JComponent) combo.getEditor()
-								.getEditorComponent(), this, shortCutRoot);
+								.getEditorComponent(), this, shortCutRoot, jfd);
 				mainPanel.add(name, (TextEditor) extension, title);
 			} else {
 				mainPanel.add(name, (TextEditor) combo, title);
@@ -659,7 +659,7 @@ public class JFDDialog extends JDialog {
 
 			if (shortCutRoot != null) {
 				TextEditorTreeExtension extension = new TextEditorTreeExtension(
-						editor, editor, this, shortCutRoot);
+						editor, editor, this, shortCutRoot, jfd);
 				mainPanel.add(name, extension, title);
 			} else {
 				mainPanel.add(name, editor, title);

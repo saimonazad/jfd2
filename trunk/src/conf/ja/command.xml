@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<commands version="20071215">
+<commands version="20080211">
 	<command name="cursor-up" class="com.nullfish.app.jfd2.command.embed.CursorMoveCommand" cache="true">
 		<param name="direction">
 			<int>0</int>
@@ -326,5 +326,9 @@
 		<param name="direction">
 			<text>prev</text>
 		</param>
+	</command>
+	<command name="change_auto_column_mode" class="com.nullfish.app.jfd2.command.embed.ChangeAutoAdjustsColumnCommand">
+	</command>
+	<command name="tree" class="com.nullfish.app.jfd2.command.embed.TreeCommand">
 	</command>
 </commands>

@@ -72,33 +72,17 @@ public class EditCommand extends Command {
 			}
 
 			if(selectedFile.isDirectory(this)) {
-				CommandExecuter.getInstance().exec(editor, CommandExecuter.USE_APP_SHELL);
+				CommandExecuter.getInstance().exec(editor, true);
 				return;
 			}
 			
 			if (model.getCurrentDirectory().getFileSystem().isShellCompatible()) {
 				File dir = new File(model.getCurrentDirectory().getAbsolutePath());
 				
-				StringBuffer buffer = new StringBuffer();
-
-				String filePath = selectedFile.getAbsolutePath();
-				buffer.append(editor);
+				String[] params = {selectedFile.getAbsolutePath()};
 				
-				boolean enterSplit = useShell.booleanValue() && shell.contains("\n");
-				buffer.append(enterSplit ?  "\n" : " ");
-				
-				if (filePath.indexOf(' ') >= 0 && !enterSplit) {
-					buffer.append("\"");
-					buffer.append(filePath);
-					buffer.append("\"");
-				} else {
-					buffer.append(filePath);
-				}
-
 				CommandExecuter.getInstance().exec(
-						buffer.toString(),
-						useShell.booleanValue() ? CommandExecuter.USE_APP_SHELL
-								: CommandExecuter.SHELL_NONE/*, dir*/);
+						editor, params, useShell.booleanValue(), null);
 			} else {
 				showProgress();
 				TemporaryFilePutBackCommand putBackCommand = new TemporaryFilePutBackCommand(
@@ -110,24 +94,11 @@ public class EditCommand extends Command {
 
 				VFile tempFile = putBackCommand.getTemporaryFile();
 				
-				StringBuffer buffer = new StringBuffer();
-				buffer.append(editor);
-				boolean enterSplit = useShell.booleanValue() && shell.contains("\n");
-				buffer.append(enterSplit ? "\n" : " ");
-
-				String filePath = tempFile.getAbsolutePath();
-				if (filePath.indexOf(' ') >= 0) {
-					buffer.append("\"");
-					buffer.append(filePath);
-					buffer.append("\"");
-				} else {
-					buffer.append(filePath);
-				}
+				String[] params = {tempFile.getAbsolutePath()};
 
 				Process process = CommandExecuter.getInstance().exec(
-						buffer.toString(),
-						useShell.booleanValue() ? CommandExecuter.USE_APP_SHELL
-								: CommandExecuter.SHELL_NONE);
+						editor, params, 
+						useShell.booleanValue(), null);
 				putBackCommand.setProcess(process);
 
 				putBackCommand.execute();

@@ -107,8 +107,7 @@ public class ShellExternalCommand {
 						return;
 					}
 				}
-				CommandExecuter.getInstance().exec(command, 
-						useShell ? CommandExecuter.USE_FILE_SHELL : CommandExecuter.SHELL_NONE, workDirFile);
+				CommandExecuter.getInstance().exec(command, useShell, workDirFile);
 			} catch (IOException e) {
 				e.printStackTrace();
 				throw new JFDException(e, JFDResource.MESSAGES.getString("failed_to_execute"), new Object[0]);

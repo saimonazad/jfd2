@@ -2,19 +2,24 @@ package com.nullfish.app.jfd2.config;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
+import javax.swing.ListCellRenderer;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.UIManager;
 
 import org.jdom.JDOMException;
 
@@ -24,6 +29,7 @@ import com.nullfish.app.jfd2.dialog.components.DialogComboBox;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.tablelayout.BgImagePainter;
 import com.nullfish.lib.tablelayout.HtmlTablePanel;
+import com.nullfish.lib.ui.ChooserPanel;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -99,6 +105,12 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 	// Mac
 //	private JCheckBox metalCheckBox = new JCheckBox(JFDResource.LABELS.getString("use_mac_metal"));
 
+	private JLabel lofLabel = new JLabel(JFDResource.LABELS.getString("look_and_feel"));
+	private DialogComboBox lofCombo = new DialogComboBox(frame);
+	
+	private JLabel minColumnWidthLabel = new JLabel(JFDResource.LABELS.getString("min_column_width"));
+	private JSpinner minColumnWidthSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 20));
+	
 	public ViewConfigPanel(ConfigFrame frame) {
 		super(new BorderLayout());
 		this.frame = frame;
@@ -129,6 +141,26 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		bgImageCombo.addItem("tile");
 		bgImageCombo.addItem("center");
 		bgImageCombo.addItem("fill");
+		
+		UIManager.LookAndFeelInfo[] lookAndFeels = UIManager.getInstalledLookAndFeels();
+		lofCombo.setRenderer(new DefaultListCellRenderer() {
+			public Component getListCellRendererComponent(JList list,
+					Object value, int index, boolean isSelected,
+					boolean cellHasFocus) {
+				return super.getListCellRendererComponent(list,
+						value != null ? ((UIManager.LookAndFeelInfo) value)
+								.getName() : JFDResource.LABELS
+								.getString("platform_native"), index,
+						isSelected, cellHasFocus);
+			}
+			
+		});
+		lofCombo.addItem(null);
+		for(int i=0; i<lookAndFeels.length; i++) {
+			lofCombo.addItem(lookAndFeels[i]);
+		}
+		
+		minColumnWidthSpinner.setEditor(new JSpinner.NumberEditor(minColumnWidthSpinner, "#,#00"));
 	}
 
 	public void layoutComponent() {
@@ -159,6 +191,10 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		appearancePanel.addComponent(bgImageCombo, "bg_image_align");
 		appearancePanel.addComponent(transparencyLabel, "bg_image_transparency_label");
 		appearancePanel.addComponent(transparencySlider, "bg_image_transparency");
+		appearancePanel.addComponent(lofLabel, "look_and_feel_label");
+		appearancePanel.addComponent(lofCombo, "look_and_feel_combo");
+		appearancePanel.addComponent(minColumnWidthLabel, "min_column_width_label");
+		appearancePanel.addComponent(minColumnWidthSpinner, "min_column_width_spinner");
 
 //		appearancePanel.addComponent(metalCheckBox, "use_mac_metal");
 	}
@@ -202,6 +238,16 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		bgImageCombo.setSelectedItem(bgAlign);
 
 //		metalCheckBox.setSelected(((Boolean)commonConfig.getParam("use_mac_metal", Boolean.TRUE)).booleanValue());
+		String lofClassName = (String)commonConfig.getParam("look_and_feel", null);
+		lofCombo.setSelectedItem(null);
+		for(int i=0; i<lofCombo.getItemCount(); i++) {
+			UIManager.LookAndFeelInfo lof = (UIManager.LookAndFeelInfo)lofCombo.getItemAt(i);
+			if(lof != null && lof.getClassName() == lofClassName) {
+				lofCombo.setSelectedItem(lof);
+			}
+		}
+		
+		minColumnWidthSpinner.setValue((Integer)commonConfig.getParam("min_column_width", Integer.valueOf(300)));
 	}
 
 	/***
@@ -237,6 +283,10 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		commonConfig.setParam("bg_image_transparency", new Integer(transparencySlider.getValue()));
 		
 //		commonConfig.setParam("use_mac_metal", new Boolean(metalCheckBox.isSelected()));
+		UIManager.LookAndFeelInfo lof = (UIManager.LookAndFeelInfo)lofCombo.getSelectedItem();
+		commonConfig.setParam("look_and_feel", lof != null ? lof.getClassName() : null);
+
+		commonConfig.setParam("min_column_width", minColumnWidthSpinner.getValue());
 	}
 	
 	public 	String getTitle() {

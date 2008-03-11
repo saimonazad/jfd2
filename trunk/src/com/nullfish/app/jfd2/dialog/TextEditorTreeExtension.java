@@ -16,8 +16,10 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.ui.shortcut_tree.ShortCutDialog;
+import com.nullfish.app.jfd2.ui.tree.TreeDialog;
 import com.nullfish.app.jfd2.util.ShortCutFile;
 import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.ui.FocusAndSelectAllTextField;
@@ -31,17 +33,22 @@ public class TextEditorTreeExtension extends JPanel implements TextEditor {
 
 	private Dialog owner;
 
+	private JFD jfd;
+	
 	private final VFile root;
 
-	private JButton treeButton = new JButton();
+	private JButton shortCutTreeButton = new JButton();
+
+	private JButton dirTreeButton = new JButton();
 
 	public TextEditorTreeExtension(final TextEditor editor,
 			final JComponent inputComponent, final Dialog owner,
-			final VFile root) {
+			final VFile root, JFD jfd) {
 		this.editor = editor;
 		this.inputComponent = inputComponent;
 		this.owner = owner;
 		this.root = root;
+		this.jfd = jfd;
 
 		setFocusable(true);
 		addFocusListener(new FocusListener() {
@@ -58,29 +65,53 @@ public class TextEditorTreeExtension extends JPanel implements TextEditor {
 		add(editor.getComponent(), new GridBagConstraints(0, 0, 1, 1, 1.0, 0.0,
 				GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0,
 						0, 0, 0), 0, 0));
-		add(treeButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+		add(shortCutTreeButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+				GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0,
+						0, 0, 0), 0, 0));
+		add(dirTreeButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
 				GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0,
 						0, 0, 0), 0, 0));
 
-		inputComponent.getActionMap().put("shortcut", new AbstractAction() {
+		getActionMap().put("shortcut", new AbstractAction() {
 			public void actionPerformed(ActionEvent e) {
 				showDoalog();
 			}
 		});
 
-		inputComponent.getInputMap().put(
+		getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
 				KeyStrokeMap.getKeyStroke(KeyEvent.VK_Q, KeyEvent.ALT_MASK),
 				"shortcut");
 
-		treeButton.addActionListener(new ActionListener() {
+		shortCutTreeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				showDoalog();
 			}
 		});
 
-		treeButton.setToolTipText(JFDResource.LABELS
+		shortCutTreeButton.setToolTipText(JFDResource.LABELS
 				.getString("choose_from_quickaccess"));
-	}
+		
+
+	
+		getActionMap().put("tree", new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				showTreeDialog();
+			}
+		});
+
+		getInputMap(WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(
+				KeyStrokeMap.getKeyStroke(KeyEvent.VK_T, KeyEvent.ALT_MASK),
+				"tree");
+
+		dirTreeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showTreeDialog();
+			}
+		});
+
+		dirTreeButton.setToolTipText(JFDResource.LABELS
+				.getString("choose_from_tree"));
+}
 
 	public String getAnswer() {
 		return editor.getAnswer();
@@ -126,18 +157,22 @@ public class TextEditorTreeExtension extends JPanel implements TextEditor {
 		}
 	}
 
-	public static void main(String[] args) {
+	private void showTreeDialog() {
+		TreeDialog dialog = null;
 		try {
-			JFrame frame = new JFrame();
-			FocusAndSelectAllTextField editor = new FocusAndSelectAllTextField();
-			TextEditorTreeExtension ext = new TextEditorTreeExtension(editor,
-					editor, null, VFS.getInstance().getFile(
-							"d:\\src\\java\\jfd2\\shortcut"));
-			frame.getContentPane().add(ext);
-			frame.pack();
-			frame.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
+			dialog = new TreeDialog(owner, jfd);
+			dialog.pack();
+			dialog.setLocationRelativeTo(owner);
+			dialog.setSelectedFile(jfd.getModel().getCurrentDirectory());
+			dialog.setVisible(true);
+			
+			VFile selectedFile = dialog.getSelectedFile();
+			if(selectedFile == null) {
+				return;
+			}
+			editor.setAnswer(selectedFile.getSecurePath());
+		} finally {
+			dialog.dispose();
 		}
 	}
 }

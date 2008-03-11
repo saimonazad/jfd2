@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menubar version="1.0">
+<menubar version="20080311">
 	<menu label="file" mnemonic="f">
 		<menu label="manipulation">
 			<menuitem label="create_file" command="create_file">
@@ -142,6 +142,10 @@
 		<menuitem label="change_relative_mode" command="change_relative_mode">
 			<key name="VK_BACK_SLASH" shift="true"/>
 		</menuitem>
+		<separator/>
+		<menuitem label="tree" command="tree">
+			<key name="VK_T"/>
+		</menuitem>
 	</menu>
 	<menu label="execute_menu">
 		<menuitem label="execute" command="execute">
@@ -176,10 +180,10 @@
 		</menuitem>
 		<separator/>
 		<menuitem label="this2target" command="this2target">
-			<key name="VK_T"/>
+			<key name="VK_Y"/>
 		</menuitem>
 		<menuitem label="target2this" command="target2this">
-			<key name="VK_T" shift="true"/>
+			<key name="VK_Y" shift="true"/>
 		</menuitem>
 		<separator/>
 		<menuitem label="shortcut" command="shortcut">

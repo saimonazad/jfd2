@@ -10,6 +10,7 @@ import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
+import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.vfs.Permission;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -60,6 +61,8 @@ public class AttributeCommand extends Command {
 			}
 		} catch (VFSException e) {
 			e.printStackTrace();
+			
+			DialogUtilities.showMessageDialog(getJFD(), JFDResource.MESSAGES.getString("fail_set_permission"), "jFD2");
 		}
 	}
 

@@ -20,7 +20,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.ActionMapUIResource;
 
-public final class TristateCheckBox extends JCheckBox {
+public class TristateCheckBox extends JCheckBox {
 	// Listener on model changes to maintain correct focusability
 	private final ChangeListener enableListener = new ChangeListener() {
 		public void stateChanged(ChangeEvent e) {

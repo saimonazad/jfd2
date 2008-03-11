@@ -21,14 +21,14 @@ public class DefaultConfig {
 	private static DefaultConfig instance;
 
 	public static DefaultConfig WINDOWS = new DefaultConfig(
-			"notepad.exe", true, "{0}", "cmd.exe /C $Q", "cmd.exe /C $Q", "start cmd.exe", false, false);
+			"notepad.exe", true, "{0}", "cmd.exe /C $Q", "cmd.exe /C \"$A $PQ\"", "start cmd.exe", false, false);
 
 	public static DefaultConfig MAC = new DefaultConfig(
 			"/Applications/TextEdit.app", true,
-			"{0}", "/usr/bin/open\n$C", "/usr/bin/open\n-W\n-a\n$C", "/Applications/Utilities/Terminal.app", true, true);
+			"{0}", "/usr/bin/open\n$C", "/usr/bin/open\n-W\n-a\n$A\n$PN", "/Applications/Utilities/Terminal.app", true, true);
 
-	public static DefaultConfig OTHER_UNIX = new DefaultConfig("editor", true,
-			"{0}", "/bin/sh\n-c\n$C", "/bin/sh\n-c\n$C", "kterm", false, false);
+	public static DefaultConfig OTHER_UNIX = new DefaultConfig("gedit", true,
+			"/usr/bin/gnome-open {0}", "/bin/sh\n-c\n$C", "/bin/sh\n-c\n$C", "gnome-terminal", false, false);
 
 	static  {
 		String osName = System.getProperty("os.name");

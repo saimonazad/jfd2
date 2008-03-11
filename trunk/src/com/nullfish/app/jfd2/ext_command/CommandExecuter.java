@@ -39,22 +39,6 @@ public class CommandExecuter {
 
     private String appShell;
 
-    /**
-     * シェル不使用
-     */
-    public static final int SHELL_NONE = 0;
-    
-    /**
-     * シェル使用
-     */
-    public static final int USE_FILE_SHELL = 1;
-    
-    /**
-     * アプリケーション用シェル使用
-     */
-    public static final int USE_APP_SHELL = 2;
-    
-    
 	/**
 	 * シェルパラメータ名
 	 */
@@ -92,37 +76,24 @@ public class CommandExecuter {
 		processReader.setShowsAutomatic(((Boolean)jfd.getCommonConfigulation().getParam("shows_console_auto", Boolean.TRUE)).booleanValue());
 	}
 
-	public Process exec(String command, int shellType) throws IOException {
-		return exec(command, shellType, null);
+	public Process exec(String command, boolean useShell)
+			throws IOException {
+		return exec(command, useShell, null);
 	}
-
-	public Process exec(String command, int shellType, File dir)
+	
+	public Process exec(String command, boolean useShell, File dir)
 			throws IOException {
 //System.out.println(shellType);
 //System.out.println(command);
 //Thread.dumpStack();
 		Process process = null;
-		if (shellType == USE_FILE_SHELL && shell != null && shell.length() > 0) {
-			String[] interpretedCommand = interpretShell(command, shell);
+		if (useShell && shell != null && shell.length() > 0) {
+			String[] interpretedCommand = interpretShell(command);
 //for(int i=0; i<interpretedCommand.length; i++) {
 //			System.out.println(i + ":" + interpretedCommand[i]);
 //}
 			if(interpretedCommand.length == 1) {
 //System.out.println(interpretedCommand[0]);
-				process = Runtime.getRuntime().exec(interpretedCommand[0],
-						null, dir);
-//				process = Runtime.getRuntime().exec("cmd.exe /C \"Explorer /e,/root,C:\\Program^ Files\\DIFX\"",
-//						null, dir);
-			} else {
-				process = Runtime.getRuntime().exec(interpretedCommand,
-						null, dir);
-			}
-		} else if (shellType == USE_APP_SHELL && appShell != null && appShell.length() > 0) {
-			String[] interpretedCommand = interpretShell(command, appShell);
-//for(int i=0; i<interpretedCommand.length; i++) {
-//				System.out.println(i + ":" + interpretedCommand[i]);
-//}
-			if(interpretedCommand.length == 1) {
 				process = Runtime.getRuntime().exec(interpretedCommand[0],
 						null, dir);
 			} else {
@@ -140,40 +111,6 @@ public class CommandExecuter {
 		return process;
 	}
 
-	private String[] command2Array(String shell, String command) {
-		String[] shellArray = string2CommandArray(shell);
-		String[] rtn = new String[shellArray.length + 1];
-		System.arraycopy(shellArray, 0, rtn, 0, shellArray.length);
-		rtn[rtn.length - 1] = command;
-
-		return rtn;
-	}
-
-	private String[] string2CommandArray(String command) {
-		boolean inQuote = false;
-		List list = new ArrayList();
-
-		StringTokenizer tokenizer = new StringTokenizer(command, "\" ", true);
-		while (tokenizer.hasMoreTokens()) {
-			String token;
-			if (inQuote) {
-				token = tokenizer.nextToken("\"");
-			} else {
-				token = tokenizer.nextToken("\" ");
-			}
-
-			if (token.equals("\"")) {
-				inQuote = !inQuote;
-			} else if (token.equals(" ")) {
-			} else {
-				list.add(token);
-			}
-		}
-		String[] rtn = new String[list.size()];
-
-		return (String[]) (list.toArray(rtn));
-	}
-	
 	/**
 	 * シェル定義を解釈する。
 	 * $C -> コマンド
@@ -183,7 +120,8 @@ public class CommandExecuter {
 	 * @param command
 	 * @return
 	 */
-	public String[] interpretShell(String command, String shell) {
+	public String[] interpretShell(String command) {
+		command = command.replaceAll("\\$N", "\n");
 		String formatStr = new String(shell);
 		formatStr = formatStr.replaceAll("\\$CQ", "{2}");
 		formatStr = formatStr.replaceAll("\\$C", "{0}");
@@ -198,6 +136,88 @@ public class CommandExecuter {
 		} else {
 			commands[2] = commands[0];
 		}
+		
+		String result = MessageFormat.format(formatStr, commands);
+		return result.split("\n");
+	}
+
+	public Process exec(String app, String[] params, boolean useShell)
+		throws IOException {
+		return exec(app, params, useShell, null);
+	}
+	
+	public Process exec(String app, String[] params, boolean useShell, File dir)
+		throws IOException {
+//System.out.println(app);
+//System.out.println(params);
+//Thread.dumpStack();
+		Process process = null;
+		
+		if (useShell && appShell != null && appShell.length() > 0) {
+			String[] interpretedCommand = interpretAppShell(app, params);
+//for(int i=0; i<interpretedCommand.length; i++) {
+//		System.out.println(i + ":" + interpretedCommand[i]);
+//}
+			if(interpretedCommand.length == 1) {
+				process = Runtime.getRuntime().exec(interpretedCommand[0],
+						null, dir);
+			} else {
+				process = Runtime.getRuntime().exec(interpretedCommand,
+						null, dir);
+			}
+		} else {
+//System.out.println(command);
+			StringBuffer sb = new StringBuffer(app);
+			sb.append(" ");
+			for(int i=0; i<params.length; i++) {
+				sb.append(params[i] + " ");
+			}
+			process = Runtime.getRuntime().exec(sb.toString(),
+					null, dir);
+		}
+		
+		processReader.addProcess(process);
+			
+		return process;
+	}
+
+	/**
+	 * シェル定義を解釈する。
+	 * $A -> アプリケーション
+	 * $P -> スペース区切りのパラメータ
+	 * $PQ -> スペース区切りのダブルクォートでかこったパラメータ
+	 * $PN -> 改行区切りのパラメータ
+	 * $PNQ -> スペース区切りのダブルクォートでかこったパラメータ
+	 * 
+	 * @param command
+	 * @return
+	 */
+	public String[] interpretAppShell(String app, String[] params) {
+		app = app.replaceAll("\\$N", "\n");
+		StringBuffer paramSpaceSplit = new StringBuffer();
+		StringBuffer paramSpaceSplitQuate = new StringBuffer();
+		StringBuffer paramLineSplit = new StringBuffer();
+		StringBuffer paramLineSplitQuate = new StringBuffer();
+		for(int i=0; i<params.length; i++) {
+			paramSpaceSplit.append(params[i] + " ");
+			paramSpaceSplitQuate.append("\"" +params[i] + "\" ");
+			paramLineSplit.append(params[i] + "\n");
+			paramLineSplitQuate.append("\"" + params[i] + "\"\n");
+		}
+		
+		String formatStr = new String(appShell);
+		formatStr = formatStr.replaceAll("\\$PNQ", "{4}");
+		formatStr = formatStr.replaceAll("\\$PQ", "{2}");
+		formatStr = formatStr.replaceAll("\\$PN", "{3}");
+		formatStr = formatStr.replaceAll("\\$A", "{0}");
+		formatStr = formatStr.replaceAll("\\$P", "{1}");
+		
+		String[] commands = new String[5];
+		commands[0] = app;
+		commands[1] = paramSpaceSplit.toString();
+		commands[2] = paramSpaceSplitQuate.toString();
+		commands[3] = paramLineSplit.toString();
+		commands[4] = paramLineSplitQuate.toString();
 		
 		String result = MessageFormat.format(formatStr, commands);
 		return result.split("\n");

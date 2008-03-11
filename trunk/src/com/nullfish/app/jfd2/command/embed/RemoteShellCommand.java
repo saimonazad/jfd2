@@ -101,7 +101,7 @@ public class RemoteShellCommand extends Command {
 
 			dialog.applyConfig();
 			Process process = CommandExecuter.getInstance().exec(command,
-					dialog.isChecked(USE_SHELL)? CommandExecuter.USE_FILE_SHELL : CommandExecuter.SHELL_NONE, directory);
+					dialog.isChecked(USE_SHELL), directory);
 			
 			putBackCommand.setProcess(process);
 			
