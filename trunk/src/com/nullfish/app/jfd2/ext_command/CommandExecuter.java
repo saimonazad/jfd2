@@ -184,10 +184,10 @@ public class CommandExecuter {
 	/**
 	 * シェル定義を解釈する。
 	 * $A -> アプリケーション
-	 * $P -> スペース区切りのパラメータ
-	 * $PQ -> スペース区切りのダブルクォートでかこったパラメータ
-	 * $PN -> 改行区切りのパラメータ
-	 * $PNQ -> スペース区切りのダブルクォートでかこったパラメータ
+	 * $B -> スペース区切りのパラメータ
+	 * $BQ -> スペース区切りのダブルクォートでかこったパラメータ
+	 * $BN -> 改行区切りのパラメータ
+	 * $BNQ -> スペース区切りのダブルクォートでかこったパラメータ
 	 * 
 	 * @param command
 	 * @return
@@ -206,11 +206,11 @@ public class CommandExecuter {
 		}
 		
 		String formatStr = new String(appShell);
-		formatStr = formatStr.replaceAll("\\$PNQ", "{4}");
-		formatStr = formatStr.replaceAll("\\$PQ", "{2}");
-		formatStr = formatStr.replaceAll("\\$PN", "{3}");
+		formatStr = formatStr.replaceAll("\\$BNQ", "{4}");
+		formatStr = formatStr.replaceAll("\\$BQ", "{2}");
+		formatStr = formatStr.replaceAll("\\$BN", "{3}");
 		formatStr = formatStr.replaceAll("\\$A", "{0}");
-		formatStr = formatStr.replaceAll("\\$P", "{1}");
+		formatStr = formatStr.replaceAll("\\$B", "{1}");
 		
 		String[] commands = new String[5];
 		commands[0] = app;

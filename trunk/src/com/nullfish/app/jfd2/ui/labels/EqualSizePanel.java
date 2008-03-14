@@ -17,9 +17,9 @@ public class EqualSizePanel extends JPanel {
 	private static Map keySetMap = new WeakHashMap();
 	
 	public EqualSizePanel(Object key, JComponent comp) {
-		//setLayout(new BorderLayout());
-		//add(comp, BorderLayout.EAST);
-		add(comp);
+		setLayout(new BorderLayout());
+		add(comp, BorderLayout.WEST);
+		//add(comp);
 		setOpaque(false);
 		
 		this.key = key;

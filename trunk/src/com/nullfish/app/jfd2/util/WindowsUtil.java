@@ -22,10 +22,11 @@ public class WindowsUtil {
 		{",",   ","},
 		{"`",   "`"},
 		{"\"",   "\""},
-		{"~",   "~"}
+		{"~",   "~"},
+		{"\\Å@",   "Å@"}
 	};
 	
-	public static final String ESCAPE_CHARS = " &()[]{}^=;!'+,`~";
+	public static final String ESCAPE_CHARS = " &()[]{}^=;!'+,`~Å@";
 
 	public static String escapeFileName(String fileName) {
 		if(isWindows && WindowsUtil.isCommandToEscape(fileName)) {

@@ -212,7 +212,7 @@ public class GraphicViewerWindow extends JFrame {
 						showPopup(e);
 					} else {
 						if(e.getButton() == MouseEvent.BUTTON1) {
-							viewer.getJFD().getCommandManager().execute("cursor-down");
+							viewer.getJFD().getCommandManager().execute("cursor-up");
 						} else {
 							viewer.getJFD().getCommandManager().execute("cursor-down");
 						}

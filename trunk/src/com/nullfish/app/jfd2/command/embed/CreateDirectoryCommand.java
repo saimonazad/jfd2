@@ -49,7 +49,7 @@ public class CreateDirectoryCommand extends Command {
 			dialog.addButton(CANCEL, JFDResource.LABELS.getString("cancel"), 'c',
 					false);
 	
-			dialog.addTextField(DIRECTORY, "", true);
+			dialog.addTextField(DIRECTORY, model.getSelectedFile().getName(), true);
 
 			dialog.pack();
 			dialog.setVisible(true);

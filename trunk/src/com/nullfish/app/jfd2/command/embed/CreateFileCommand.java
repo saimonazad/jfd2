@@ -49,7 +49,8 @@ public class CreateFileCommand extends Command {
 			dialog.addButton(CANCEL, JFDResource.LABELS.getString("cancel"), 'c',
 					false);
 	
-			dialog.addTextField(FILE, "", true);
+			VFile selectedFile = model.getSelectedFile();
+			dialog.addTextField(FILE, selectedFile.getName(), true);
 
 			dialog.pack();
 			dialog.setVisible(true);
