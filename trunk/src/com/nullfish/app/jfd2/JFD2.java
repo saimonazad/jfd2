@@ -232,13 +232,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 	private JLabel labelPath = new JLabel("Path=");
 
-	private JLabel labelPathInfo = new ToolTipLabel();/* {
-		public Dimension getMinimumSize() {
-			Dimension rtn = super.getMinimumSize();
-//			rtn.width = 1;
-			return rtn;
-		}
-	};*/
+	private JLabel labelPathInfo = new ToolTipLabel();
 
 	private JLabel labelPage = new JLabel(" Page:");
 
@@ -246,13 +240,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 	private JLabel labelName = new JLabel("Name=");
 
-	private JLabel labelNameInfo = new ToolTipLabel();/* {
-		public Dimension getMinimumSize() {
-			Dimension rtn = super.getMinimumSize();
-//			rtn.width = 1;
-			return rtn;
-		}
-	};*/
+	private JLabel labelNameInfo = new ToolTipLabel();
 
 	private JLabel labelMark = new JLabel("Marked");
 
@@ -733,7 +721,9 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	private void resizeResizableLabels() {
 /*
 		labelNameInfo.setMaximumSize(panel.getGridPanel("info_name").getSize());
+		labelNameInfo.setPreferredSize(panel.getGridPanel("info_name").getSize());
 		labelMessage.setMaximumSize(panel.getGridPanel("message").getSize());
+		labelMessage.setPreferredSize(panel.getGridPanel("message").getSize());
 		
 		System.out.println(labelNameInfo.getMaximumSize());
 */

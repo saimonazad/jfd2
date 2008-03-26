@@ -6,12 +6,17 @@
  */
 package com.nullfish.app.jfd2.command.groovy;
 
+import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyShell;
+import groovy.lang.Script;
 
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.groovy.control.CompilationFailedException;
 
@@ -30,6 +35,8 @@ import com.nullfish.lib.vfs.exception.VFSException;
  */
 public class GroovySelectCommand extends AbstractGroovyCommand {
 	public static final String CONFIG_ENCODING = "script_encoding";
+	
+	private static Map fileScriptCache = new HashMap();
 	
 	/* (non-Javadoc)
 	 * @see com.nullfish.lib.vfs.manipulation.abst.AbstractManipulation#doExecute()
@@ -73,7 +80,7 @@ public class GroovySelectCommand extends AbstractGroovyCommand {
 			dialog.setVisible(true);
 			
 			String answer = dialog.getButtonAnswer();
-			String script = dialog.getTextFieldAnswer(SCRIPT);
+			String scriptName = dialog.getTextFieldAnswer(SCRIPT);
 			if(OPEN_SCRIPT_DIR.equals(answer)) {
 				if(!scriptDir.exists(this)) {
 					scriptDir.createDirectory(this);
@@ -83,22 +90,38 @@ public class GroovySelectCommand extends AbstractGroovyCommand {
 				return;
 			}
 			
-			if (answer == null || JFDDialog.CANCEL.equals(answer) || script == null
-					|| script.length() == 0) {
+			if (answer == null || JFDDialog.CANCEL.equals(answer) || scriptName == null
+					|| scriptName.length() == 0) {
 				return;
 			}
 			
-			jfd.getLocalConfigulation().setParam("last_script", script);
-			VFile scriptFile = scriptDir.getChild(script);
-			//is = scriptFile.getInputStream(this);
+			jfd.getLocalConfigulation().setParam("last_script", scriptName);
+			VFile scriptFile = scriptDir.getChild(scriptName);
 
-			GroovyShell shell = new GroovyShell(getBinding());
-
-			//shell.evaluate(is);
 			String encoding = dialog.getTextFieldAnswer(CONFIG_ENCODING);
 			jfd.getCommonConfigulation().setParam(CONFIG_ENCODING, encoding);
-			String scriptText = new String(scriptFile.getContent(this), encoding);
-			shell.evaluate(scriptText);
+
+			CacheKey key = new CacheKey();
+			key.file = scriptFile;
+			key.encoding = encoding;
+			
+			Cache cache = (Cache)fileScriptCache.get(key);
+			if(cache == null || scriptFile.getTimestamp().after(cache.timestamp)) {
+				String scriptText = new String(scriptFile.getContent(this), encoding);
+				GroovyClassLoader gcl = new GroovyClassLoader();
+				Class scriptClass = gcl.parseClass(scriptText);
+				
+				cache = new Cache();
+				cache.clazz = scriptClass;
+				cache.timestamp = scriptFile.getTimestamp();
+				
+				fileScriptCache.put(key, cache);
+			}
+			
+
+			Script script = (Script)cache.clazz.newInstance();
+			script.setBinding(getBinding());
+			script.run();
 		} catch (ManipulationStoppedException e) {
 		} catch (CompilationFailedException e) {
 			showErrorMessage(e, e.getLocalizedMessage());
@@ -121,5 +144,28 @@ public class GroovySelectCommand extends AbstractGroovyCommand {
 				dialog.dispose();
 			}
 		}
+	}
+	
+	private static class CacheKey {
+		VFile file;
+		String encoding;
+
+		public int hashCode() {
+			return file.hashCode() + encoding.hashCode();
+		}
+		
+		public boolean equals(Object o) {
+			if(o == null || o.getClass() != CacheKey.class) {
+				return false;
+			}
+			
+			CacheKey other = (CacheKey)o;
+			return file.equals(other.file) && encoding.equals(other.encoding);
+		}
+	}
+	
+	private static class Cache {
+		Class clazz;
+		Date timestamp;
 	}
 }
