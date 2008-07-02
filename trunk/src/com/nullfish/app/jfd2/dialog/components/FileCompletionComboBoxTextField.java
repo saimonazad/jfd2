@@ -21,14 +21,19 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
+import org.monazilla.migemo.Migemo;
+
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.config.DefaultConfig;
+import com.nullfish.app.jfd2.dialog.components.FileCompletionTextField.FileComparator;
 import com.nullfish.app.jfd2.ui.container2.NumberedJFD2;
+import com.nullfish.app.jfd2.util.MigemoInfo;
 import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.ui.SimpleChooserDialog;
 import com.nullfish.lib.ui.UIUtilities;
@@ -202,15 +207,17 @@ public class FileCompletionComboBoxTextField extends ComboBoxTextField {
 			}
 
 			VFile directory;
-			String startsWith;
-			//			if (FileName.SEPARATOR.indexOf(path.charAt(path.length() - 1)) !=
-			// -1) {
+			Pattern pattern = null;
+
 			if ("\\/".indexOf(path.charAt(path.length() - 1)) != -1) {
 				directory = file;
-				startsWith = "";
+				pattern = Pattern.compile(".*");
+			} else if(MigemoInfo.usesMigemo()) {
+				directory = file.getParent();
+				pattern = Pattern.compile(Migemo.lookup(file.getName()));
 			} else {
 				directory = file.getParent();
-				startsWith = file.getName().toLowerCase();
+				pattern = Pattern.compile("^\\Q" + file.getName().toLowerCase() + "\\E");
 			}
 
 			if (directory == null) {
@@ -221,7 +228,7 @@ public class FileCompletionComboBoxTextField extends ComboBoxTextField {
 
 			List filesList = new ArrayList();
 			for (int i = 0; i < children.length; i++) {
-				if (children[i].getName().toLowerCase().startsWith(startsWith)) {
+				if( pattern.matcher(children[i].getName().toLowerCase()).find() ) {
 					if (mode == MODE_BOTH
 							|| (mode == MODE_DIRECTORY && children[i]
 									.isDirectory())
@@ -239,7 +246,7 @@ public class FileCompletionComboBoxTextField extends ComboBoxTextField {
 			return new VFile[0];
 		}
 	}
-
+	
 	private class FileComparator implements Comparator {
 		/*
 		 * (non-Javadoc)

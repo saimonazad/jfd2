@@ -1,4 +1,4 @@
-title=<< jFD2 beta11 by Shunji.Y >>
+title=<< jFD2 beta14 by Shunji.Y >>
 
 ok=OK
 cancel=ƒLƒƒƒ“ƒZƒ‹

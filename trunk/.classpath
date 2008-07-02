@@ -27,9 +27,9 @@
 	<classpathentry kind="lib" path="lib/vfs/jlha.jar"/>
 	<classpathentry kind="lib" path="lib/vfs/saxpath.jar"/>
 	<classpathentry kind="lib" path="lib/vfs/jdom.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/VFS"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/TableLayout"/>
-	<classpathentry kind="lib" path="lib/groovy/groovy-1.5.4.jar"/>
 	<classpathentry kind="lib" path="lib/migemo.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/VFS"/>
+	<classpathentry kind="lib" path="lib/groovy/groovy-1.5.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

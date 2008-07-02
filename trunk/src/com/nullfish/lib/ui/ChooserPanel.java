@@ -269,8 +269,10 @@ public class ChooserPanel extends JPanel implements FocusListener {
 		}
 			
 		public void actionPerformed(ActionEvent e) {
-			button.setSelected(true);
-			requestFocusInWindow();
+			if(button.isEnabled()) {
+				button.setSelected(true);
+				requestFocusInWindow();
+			}
 		}
 	}
 	

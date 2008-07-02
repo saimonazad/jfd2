@@ -21,6 +21,7 @@ import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
+import com.nullfish.app.jfd2.dialog.components.ConfigCheckBox;
 import com.nullfish.app.jfd2.dialog.focus.FocusOrderManagingPanel;
 import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.ui.OneKeyButton;
@@ -34,8 +35,8 @@ import com.nullfish.lib.ui.OneKeyButton;
  * Preferences - Java - Code Generation - Code and Comments
  */
 public class ButtonsPanel extends FocusOrderManagingPanel {
-	List buttons = new ArrayList();
-
+	OneKeyButton defaultSelectedButton;
+	
 	String answer;
 
 	List listeners = new ArrayList();
@@ -73,6 +74,10 @@ public class ButtonsPanel extends FocusOrderManagingPanel {
 		super.addMember(button);
 		if (defaultButton) {
 			answer = name;
+		}
+		
+		if(defaultSelectedButton == null || defaultButton) {
+			defaultSelectedButton = button;
 		}
 	}
 
@@ -146,5 +151,15 @@ public class ButtonsPanel extends FocusOrderManagingPanel {
 				}
 			}
 		}
+	}
+	
+	public boolean focusFirstComponent() {
+		if(defaultSelectedButton == null) {
+			return false;
+		}
+		
+		defaultSelectedButton.requestFocusInWindow();
+		
+		return true;
 	}
 }

@@ -230,7 +230,7 @@ public class RenameCommand extends Command {
 //			if(((Boolean)(getJFD().getCommonConfigulation().getParam("rename_sprit_text", Boolean.TRUE))).booleanValue() ) {
 //				dialog.addSpritFileNameField(NAME, originalValue, true, null);
 //			} else {
-				dialog.addTextField(NAME, originalValue, true);
+				dialog.addRenameTextField(NAME, originalValue, true, null);
 //			}
 			
 			dialog.pack();

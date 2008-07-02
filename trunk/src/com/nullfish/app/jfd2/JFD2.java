@@ -21,6 +21,7 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DropTarget;
@@ -42,9 +43,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
@@ -197,6 +200,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	private AliaseManager aliaseManager = new AliaseManager(this);
 
 	/**
+	 * 
 	 * ƒ‰ƒxƒ‹
 	 */
 	private JLabel labelTitle = new JLabel(JFDResource.LABELS
@@ -232,7 +236,13 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 	private JLabel labelPath = new JLabel("Path=");
 
-	private JLabel labelPathInfo = new ToolTipLabel();
+	private JLabel labelPathInfo = new ToolTipLabel() {
+		public Dimension getMinimumSize() {
+			Dimension rtn = super.getMinimumSize();
+			rtn.width = 1;
+			return rtn;
+		}
+	};
 
 	private JLabel labelPage = new JLabel(" Page:");
 
@@ -240,7 +250,13 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 	private JLabel labelName = new JLabel("Name=");
 
-	private JLabel labelNameInfo = new ToolTipLabel();
+	private JLabel labelNameInfo = new ToolTipLabel() {
+		public Dimension getMinimumSize() {
+			Dimension rtn = super.getMinimumSize();
+			rtn.width = 1;
+			return rtn;
+		}
+	};
 
 	private JLabel labelMark = new JLabel("Marked");
 
@@ -260,7 +276,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 	private JLabel labelMessagePad = new JLabel(" ");
 
-	private JLabel labelMessage = new JLabel()  {
+	private JLabel labelMessage = new JLabel() {
 		public Dimension getMinimumSize() {
 			Dimension rtn = super.getMinimumSize();
 			rtn.width = 1;
@@ -710,23 +726,6 @@ public class JFD2 extends JPanel implements JFD, Initable {
 				externalCommandPanel.setVisible(false);
 			}
 		});
-		
-		addComponentListener(new ComponentAdapter() {
-			public void componentResized(ComponentEvent e) {
-				resizeResizableLabels();
-			}
-		});
-	}
-	
-	private void resizeResizableLabels() {
-/*
-		labelNameInfo.setMaximumSize(panel.getGridPanel("info_name").getSize());
-		labelNameInfo.setPreferredSize(panel.getGridPanel("info_name").getSize());
-		labelMessage.setMaximumSize(panel.getGridPanel("message").getSize());
-		labelMessage.setPreferredSize(panel.getGridPanel("message").getSize());
-		
-		System.out.println(labelNameInfo.getMaximumSize());
-*/
 	}
 
 	/**

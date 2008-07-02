@@ -93,7 +93,7 @@
 						<table>
 							<tr>
 								<td vfix="true" hfix="true" align="left">label_path</td>
-								<td vfix="true" align="left" prefwidth="1">info_path</td>
+								<td vfix="true" align="left" prefwidth="1" fill="horizontal">info_path</td>
 							</tr>
 						</table>
 					</td>
@@ -101,7 +101,7 @@
 				</tr>
 				<tr>
 					<td vfix="true" hfix="true">label_name</td>
-					<td vfix="true">info_name</td>
+					<td vfix="true" prefwidth="1" fill="horizontal">info_name</td>
 					<td vfix="true" hfix="true" align="right">info_mark</td>
 					<td vfix="true" hfix="true">label_mark</td>
 					<td vfix="true" hfix="true" align="right">info_marksize</td>
@@ -136,7 +136,7 @@
 			<table>
 				<tr>
 					<td vfix="true" hfix="true">message_pad</td>
-					<td vfix="true" fill="horizontal" align="left">message</td>
+					<td vfix="true" fill="horizontal" align="left" prefwidth="1">message</td>
 					<td vfix="true" hfix="true">incremental_search_label</td>
 					<td vfix="true" hfix="true">incremental_search_pad</td>
 				</tr>

@@ -68,6 +68,7 @@ public class ProgressListPanel extends JPanel {
 				if(manipulations.size() == 0) {
 					yPosition = 0;
 				}
+				repaint();
 			}
 		};
 		

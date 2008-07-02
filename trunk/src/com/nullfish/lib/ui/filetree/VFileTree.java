@@ -13,13 +13,14 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import com.nullfish.lib.ui.MigemoTree;
 import com.nullfish.lib.ui.ThreadSafeUtilities;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 
 public class VFileTree extends JPanel {
-	private JTree tree = new JTree();
+	private JTree tree = new MigemoTree();
 	
 	private VFile root;
 	

@@ -6,6 +6,7 @@
  */
 package com.nullfish.app.jfd2.dialog;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -29,6 +30,8 @@ public class MainContainerPanel extends FocusOrderManagingPanel {
 	
 	private int yCount = 0;
 	
+	private Component firstComponent;
+	
 	public MainContainerPanel() {
 		setLayout(new GridBagLayout());
 	}
@@ -38,6 +41,10 @@ public class MainContainerPanel extends FocusOrderManagingPanel {
 //	}
 	
 	public void add(String name, TextEditor editor, String title) {
+		if(firstComponent == null) {
+			firstComponent = editor.getComponent();
+		}
+		
 		super.add(editor.getComponent(), new GridBagConstraints(1, yCount, 1, 1, 1,
 				1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
 				new Insets(0, 0, 0, 0), 0, 0));
@@ -74,5 +81,14 @@ public class MainContainerPanel extends FocusOrderManagingPanel {
 		};
 		
 		return (String)ThreadSafeUtilities.executeReturnableRunnable(runnable);
+	}
+	
+	public boolean focusFirstComponent() {
+		if(firstComponent != null) {
+			firstComponent.requestFocusInWindow();
+			return true;
+		}
+		
+		return false;
 	}
 }

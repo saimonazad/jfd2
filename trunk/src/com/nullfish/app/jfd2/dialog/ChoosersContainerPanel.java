@@ -94,4 +94,13 @@ public class ChoosersContainerPanel extends FocusOrderManagingPanel {
 			((DialogComponent)chooserList.get(i)).applyConfigulation();
 		}
 	}
+	
+	public boolean focusFirstComponent() {
+		if(chooserList.size() > 0) {
+			((ChooserPanel)chooserList.get(0)).requestFocusInWindow();
+			return true;
+		}
+		
+		return false;
+	}
 }

@@ -242,7 +242,7 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		lofCombo.setSelectedItem(null);
 		for(int i=0; i<lofCombo.getItemCount(); i++) {
 			UIManager.LookAndFeelInfo lof = (UIManager.LookAndFeelInfo)lofCombo.getItemAt(i);
-			if(lof != null && lof.getClassName() == lofClassName) {
+			if(lof != null && lof.getClassName().equals(lofClassName)) {
 				lofCombo.setSelectedItem(lof);
 			}
 		}

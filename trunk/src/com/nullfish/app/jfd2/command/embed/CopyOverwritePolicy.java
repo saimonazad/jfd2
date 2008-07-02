@@ -282,7 +282,7 @@ public class CopyOverwritePolicy implements OverwritePolicy {
 			String message = JFDResource.MESSAGES.getString("message_rename");
 			dialog.addMessage(message);
 
-			dialog.addTextField(NAME, name, true);
+			dialog.addRenameTextField(NAME, name, true, "");
 
 			// ƒ{ƒ^ƒ“
 			dialog.addButton(OK, JFDResource.LABELS.getString("ok"), 'o', true);

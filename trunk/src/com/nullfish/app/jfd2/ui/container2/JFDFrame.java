@@ -132,6 +132,13 @@ public class JFDFrame extends JFrame implements JFDOwner {
 				
 				dispose();
 			}
+			
+			public void windowActivated(WindowEvent e) {
+				JFDComponent c = getActiveComponent();
+				if(c != null) {
+					c.getComponent().requestFocusInWindow();
+				}
+			}
 		});
 	
 		try {
@@ -186,7 +193,7 @@ public class JFDFrame extends JFrame implements JFDOwner {
 	
 	private void initGUI() {
 		setContentPane(contentPanel);
-
+		
 		setTitle("jFD2");
 		
 		contentPanel.setLayout(layout);

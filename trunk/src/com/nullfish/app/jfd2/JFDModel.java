@@ -193,7 +193,7 @@ public class JFDModel implements FileListener {
 		if (currentDirectory.getFileSystem().isLocal()) {
 			setDirectory(currentDirectory, selectedFile);
 		} else {
-			setDirectoryAsynch(currentDirectory, selectedIndex, jfd);
+			setDirectoryAsynch(currentDirectory, selectedFile, jfd);
 		}
 	}
 

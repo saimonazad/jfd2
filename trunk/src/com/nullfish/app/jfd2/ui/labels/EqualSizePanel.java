@@ -70,7 +70,6 @@ public class EqualSizePanel extends JPanel {
 			maximumSize.width = maximumSize.width > d.width ? maximumSize.width : d.width;
 			maximumSize.height = maximumSize.height > d.height ? maximumSize.width : d.height;
 		}
-		
 		return maximumSize;
 	}
 	

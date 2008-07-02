@@ -43,6 +43,7 @@ import com.nullfish.app.jfd2.ui.container2.JFDOwner;
 import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.ui.Choice;
 import com.nullfish.lib.ui.FocusAndSelectAllTextField;
+import com.nullfish.lib.ui.FocusAndSelectExceptExtensionTextField;
 import com.nullfish.lib.ui.ThreadSafeUtilities;
 import com.nullfish.lib.ui.combobox.ComboBoxTextField;
 import com.nullfish.lib.ui.document.RestrictedDocument;
@@ -175,6 +176,10 @@ public class JFDDialog extends JDialog {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				buttonsPanel.canceled();
+			}
+			
+			public void windowOpened(WindowEvent e) {
+				focusDefaultComponent();
 			}
 		});
 	}
@@ -329,6 +334,22 @@ public class JFDDialog extends JDialog {
 			doc.addRestriction(restriction);
 			editor.setDocument(doc);
 		}
+		
+		editor.setColumns(DEFAULT_TEXT_WIDTH);
+		editor.setText(defaultText);
+
+		if (closeOnDecision) {
+			editor.getActionMap().put(CLOSE_ACTION, new CloseAction());
+			editor.getInputMap(JComponent.WHEN_FOCUSED).put(
+					KeyStrokeMap.getKeyStroke(KeyEvent.VK_ENTER, 0), CLOSE_ACTION);
+		}
+
+		mainPanel.add(name, (TextEditor) editor, title);
+	}
+
+	public void addRenameTextField(String name, String defaultText,
+			boolean closeOnDecision, String title) {
+		FocusAndSelectExceptExtensionTextField editor = new FocusAndSelectExceptExtensionTextField();
 		
 		editor.setColumns(DEFAULT_TEXT_WIDTH);
 		editor.setText(defaultText);
@@ -680,6 +701,21 @@ public class JFDDialog extends JDialog {
 
 		ThreadSafeUtilities.executeRunnable(runnable);
 	}
+	
+	private void  focusDefaultComponent() {
+		if(mainPanel.focusFirstComponent()) {
+			return;
+		}
+		if(chooserPanel.focusFirstComponent()) {
+			return;
+		}
+		if(checkBoxPanel.focusFirstComponent()) {
+			return;
+		}
+		if(buttonsPanel.focusFirstComponent()) {
+			return;
+		}
+	}
 
 	/**
 	 * ダイアログのクローズアクション
@@ -706,5 +742,4 @@ public class JFDDialog extends JDialog {
 			return null;
 		}
 	}
-
 }

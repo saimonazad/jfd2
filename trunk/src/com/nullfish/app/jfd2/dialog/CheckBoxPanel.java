@@ -99,4 +99,13 @@ public class CheckBoxPanel extends FocusOrderManagingPanel {
 			((DialogComponent)checkBoxList.get(i)).applyConfigulation();
 		}
 	}
+	
+	public boolean focusFirstComponent() {
+		if(checkBoxList.size() > 0) {
+			((ConfigCheckBox)checkBoxList.get(0)).requestFocusInWindow();
+			return true;
+		}
+		
+		return false;
+	}
 }

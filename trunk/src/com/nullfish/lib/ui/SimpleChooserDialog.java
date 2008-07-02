@@ -31,7 +31,7 @@ import com.nullfish.lib.keymap.KeyStrokeMap;
  * @author shunji
  */
 public class SimpleChooserDialog extends JDialog implements MouseListener {
-	JList list = new JList();
+	JList list = new MigemoList();
 	JScrollPane scroll = new JScrollPane();
 
 	//	リストのデータモデル

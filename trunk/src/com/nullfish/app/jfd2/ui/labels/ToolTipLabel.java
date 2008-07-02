@@ -6,6 +6,8 @@
  */
 package com.nullfish.app.jfd2.ui.labels;
 
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 
 /**
@@ -19,4 +21,11 @@ public class ToolTipLabel extends JLabel {
 		setToolTipText(text);
 		super.setText(text);
 	}
+/*	
+	public Dimension getMinimumSize() {
+		Dimension rtn = super.getMinimumSize();
+		rtn.width = 1;
+		return rtn;
+	}
+*/
 }
