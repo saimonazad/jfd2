@@ -83,7 +83,7 @@ public class CommandExecuter {
 	
 	public Process exec(String command, boolean useShell, File dir)
 			throws IOException {
-//System.out.println(shellType);
+//System.out.println(useShell);
 //System.out.println(command);
 //Thread.dumpStack();
 		Process process = null;

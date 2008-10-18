@@ -56,6 +56,7 @@ public class MetaDataManager {
 				new DimensionData(),
 				new StringHistoryData(),
 				new TextData(),
+				new MapData(),
 		};
 
 		dataTypes = d;

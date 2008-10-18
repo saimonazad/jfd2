@@ -92,4 +92,8 @@ public class FileViewerContainerPanel extends JPanel implements JFDComponent {
 	public FileViewer getViewer() {
 		return viewer;
 	}
+
+	public void focusChanged() {
+		//TODO:
+	}
 }

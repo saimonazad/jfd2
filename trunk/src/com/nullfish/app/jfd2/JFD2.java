@@ -21,13 +21,9 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.Window;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DropTarget;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -43,11 +39,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.FactoryConfigurationError;
@@ -707,17 +701,6 @@ public class JFD2 extends JPanel implements JFD, Initable {
 			public void focusLost(FocusEvent e) {
 				changeColor();
 			}
-			
-			private void changeColor() {
-				JFDOwner owner = getJFDOwner();
-				if(owner != null) {
-					JFDComponent comp = owner.getActiveComponent();
-					LineGrid.setGroupColor(comp == null
-							|| JFD2.this.equals(comp) ? focusedLineColor
-							: unfocusedLineColor, JFD2.this);
-				}
-				repaint();
-			}
 		});
 
 		externalCommandPanel.setVisible(false);
@@ -728,6 +711,17 @@ public class JFD2 extends JPanel implements JFD, Initable {
 		});
 	}
 
+	private void changeColor() {
+		JFDOwner owner = getJFDOwner();
+		if(owner != null) {
+			JFDComponent comp = owner.getActiveComponent();
+			LineGrid.setGroupColor(comp != null
+					&& JFD2.this.equals(comp) ? focusedLineColor
+					: unfocusedLineColor, JFD2.this);
+		}
+		repaint();
+	}
+	
 	/**
 	 * レイアウトを行う。
 	 * 

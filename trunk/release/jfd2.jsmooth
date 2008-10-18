@@ -20,7 +20,7 @@
 <classPath>lib\commons-net-1.4.1.jar</classPath>
 <classPath>lib\fastfile.jar</classPath>
 <classPath>lib\filefish.jar</classPath>
-<classPath>lib\groovy-1.5.4.jar</classPath>
+<classPath>lib\groovy-1.5.6.jar</classPath>
 <classPath>lib\h2.jar</classPath>
 <classPath>lib\HtmlTablePanel.jar</classPath>
 <classPath>lib\jakarta-oro-2.0.8.jar</classPath>
@@ -41,7 +41,7 @@
 <mainClassName>com.nullfish.app.jfd2.Launcher</mainClassName>
 <maximumMemoryHeap>134217728</maximumMemoryHeap>
 <maximumVersion></maximumVersion>
-<minimumVersion>1.4.0</minimumVersion>
+<minimumVersion>1.5.0</minimumVersion>
 <skeletonName>Windowed Wrapper</skeletonName>
 <skeletonProperties>
 <key>Message</key>

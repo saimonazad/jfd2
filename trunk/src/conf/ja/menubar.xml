@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menubar version="20080311">
+<menubar version="20081014">
 	<menu label="file" mnemonic="f">
 		<menu label="manipulation">
 			<menuitem label="create_file" command="create_file">
@@ -70,6 +70,8 @@
 		<separator/>
 
 		<menuitem label="exit" command="exit">
+		</menuitem>
+		<menuitem label="exit_all" command="exit_all">
 		</menuitem>
 	</menu>
 	<menu label="edit">

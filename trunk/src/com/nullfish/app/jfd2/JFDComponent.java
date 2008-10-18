@@ -22,6 +22,6 @@ public interface JFDComponent {
 	public JFDOwner getJFDOwner();
 	
 	public Component getComponent();
-
+	
 	public void dispose();
 }

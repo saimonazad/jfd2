@@ -11,9 +11,12 @@ import java.awt.Container;
 import java.awt.Rectangle;
 import java.awt.dnd.DropTarget;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,14 +24,17 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 
 import org.jdom.Document;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.JFD;
+import com.nullfish.app.jfd2.JFD2;
 import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.command.owner.OwnerCommandManager;
 import com.nullfish.app.jfd2.config.Configulation;
@@ -44,6 +50,7 @@ import com.nullfish.lib.resource.ResourceManager;
 import com.nullfish.lib.ui.ThreadSafeUtilities;
 import com.nullfish.lib.ui.layout.EqualSplitLayout;
 import com.nullfish.lib.ui.xml_menu.XMLMenuBar;
+import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 
@@ -111,12 +118,14 @@ public class JFDFrame extends JFrame implements JFDOwner {
 	public static final String MENUBAR_CONFIG = "menubar.xml";
 	public static int MAX_TITLE_LENGTH = 40;
 
+	public static final String CONFIG_RECT = "rect";
 	public static final String CONFIG_X = "frame_x";
 	public static final String CONFIG_Y = "frame_y";
 	public static final String CONFIG_WIDTH = "frame_width";
 	public static final String CONFIG_HEIGHT = "frame_height";
+	public static final String CONFIG_TABS = "tabs";
 	
-	public JFDFrame(VFile configDir) {
+	public JFDFrame(final VFile configDir) {
 		instances.add(this);
 
 		this.configDir = configDir;
@@ -124,15 +133,22 @@ public class JFDFrame extends JFrame implements JFDOwner {
 
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				while(components.size() > 0) {
-					JFDComponent c = (JFDComponent)components.get(0);
-					removeComponent(c);
-					c.dispose();
+				try {
+					Configulation commonConfig = Configulation.getInstance(configDir
+							.getChild(JFD.COMMON_PARAM_FILE));
+					
+					List data = new ArrayList();
+					data.add(toFrameBoundsTabConfig());
+					commonConfig.setParam("frame_tab_setting", data);
+				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
+				
+				removeAllComponents();
 				
 				dispose();
 			}
-			
+
 			public void windowActivated(WindowEvent e) {
 				JFDComponent c = getActiveComponent();
 				if(c != null) {
@@ -147,7 +163,15 @@ public class JFDFrame extends JFrame implements JFDOwner {
 			e1.printStackTrace();
 		}
 	}
-
+	
+	public void removeAllComponents() {
+		while(components.size() > 0) {
+			JFDComponent c = (JFDComponent)components.get(0);
+			removeComponent(c);
+			c.dispose();
+		}
+	}
+	
 	public void pack() {
 		super.pack();
 		try {
@@ -222,6 +246,17 @@ public class JFDFrame extends JFrame implements JFDOwner {
 		TabbedPaneDropTargetListener dropListener = new TabbedPaneDropTargetListener(
 				tabbedPane);
 		new DropTarget(tabbedPane, dropListener);
+		
+		
+		tabbedPane.addMouseWheelListener(new MouseWheelListener() {
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				try {
+					increasePosition(e.getWheelRotation());
+				} catch (VFSException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 
 	private void initMenu() {
@@ -419,6 +454,9 @@ public class JFDFrame extends JFrame implements JFDOwner {
 	
 	public void increasePosition(int delta) throws VFSException {
 		Component c = getFocusOwner();
+		if(c == null) {
+			return;
+		}
 
 		Container container = c.getParent();
 		int index = 0;
@@ -595,5 +633,134 @@ public class JFDFrame extends JFrame implements JFDOwner {
 
 	public void componentActivated(JFDComponent component) {
 		this.activeComponent = component;
+	}
+	
+	public static void saveSizeTabConfig(VFile configDir) throws JDOMException, IOException, VFSException {
+		Configulation commonConfig = Configulation.getInstance(configDir
+				.getChild(JFD.COMMON_PARAM_FILE));
+		
+		List data = new ArrayList();
+		
+		for(int i=0; i<instances.size(); i++) {
+			JFDFrame frame = (JFDFrame)instances.get(i);
+			data.add(frame.toFrameBoundsTabConfig());
+		}
+		
+		commonConfig.setParam("frame_tab_setting", data);
+	}
+	
+	public Map toFrameBoundsTabConfig() {
+		Map rtn = new HashMap();
+		
+		Rectangle rect = getBounds();
+		Map boundsMap = new HashMap();
+		boundsMap.put(CONFIG_X, new Integer(rect.x));
+		boundsMap.put(CONFIG_Y, new Integer(rect.y));
+		boundsMap.put(CONFIG_WIDTH, new Integer(rect.width));
+		boundsMap.put(CONFIG_HEIGHT, new Integer(rect.height));
+		
+		rtn.put(CONFIG_RECT, boundsMap);
+		
+		List tabs = new ArrayList();
+		
+		List mainTabList = tab2dirList(mainTabbedPane);
+		if(mainTabList != null) {
+			tabs.add(mainTabList);
+		}
+		List subTabList = tab2dirList(subTabbedPane);
+		if(subTabList != null) {
+			tabs.add(subTabList);
+		}
+		
+		rtn.put(CONFIG_TABS, tabs);
+		
+		return rtn;
+	}
+
+	private List tab2dirList(JTabbedPane tabbedPane) {
+		List directories = new ArrayList();
+		for(int i=0; i<tabbedPane.getTabCount(); i++) {
+			JFDComponent comp = ((TabContainer)tabbedPane.getComponentAt(i)).getComponent();
+			if(comp instanceof JFD) {
+				directories.add(((JFD)comp).getModel().getCurrentDirectory().getAbsolutePath());
+			}
+		}
+		return directories;
+	}
+	
+	public static void loadFromTabConfig(VFile configDir) throws Exception {
+		Configulation commonConfig = Configulation.getInstance(configDir
+				.getChild(JFD.COMMON_PARAM_FILE));
+		
+		List list = (List)commonConfig.getParam("frame_tab_setting", null);
+		if(list != null) {
+			try {
+				for(int i=0; i<list.size(); i++) {
+					JFDFrame frame = new JFDFrame(configDir);
+					frame.initFromFrameTabConfig((Map)list.get(i), configDir);
+					frame.setVisible(true);
+				}
+				
+				return;
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, JFDResource.MESSAGES.getString("broken_tab_config"));
+				e.printStackTrace();
+				throw e;
+			}
+		} 
+		
+		JFDFrame frame = new JFDFrame(configDir);
+		NumberedJFD2 newJFD = new NumberedJFD2();
+		
+		try {
+			newJFD.init(configDir);
+			newJFD.getModel().setDirectoryAsynchIfNecessary(VFS.getInstance(newJFD).getFile(System.getProperty("user.home")), 0, newJFD);
+			frame.addComponent(newJFD, ContainerPosition.MAIN_PANEL, new JFD2TitleUpdater(newJFD));
+			frame.pack();
+			frame.setBounds(new Rectangle(0, 0, 640, 480));
+			frame.setLocationByPlatform(true);
+			frame.setVisible(true);
+		} catch (VFSException e) {
+			e.printStackTrace();
+			newJFD.dispose();
+		}
+		
+	}
+	
+	private void initFromFrameTabConfig(Map data,VFile baseDir ) {
+		pack();
+		
+		Rectangle rect = new Rectangle();
+		
+		Map rectMap = (Map)data.get(CONFIG_RECT);
+		rect.x = ((Integer)rectMap.get(CONFIG_X)).intValue();
+		rect.y = ((Integer)rectMap.get(CONFIG_Y)).intValue();
+		rect.width = ((Integer)rectMap.get(CONFIG_WIDTH)).intValue();
+		rect.height = ((Integer)rectMap.get(CONFIG_HEIGHT)).intValue();
+		
+		setBounds(rect);
+		
+		List tabDatas = (List)data.get(CONFIG_TABS);
+		
+		initTabFromDirectoryList(ContainerPosition.MAIN_PANEL, (List)tabDatas.get(0), baseDir);
+		
+		if(tabDatas.size() > 1) {
+			initTabFromDirectoryList(ContainerPosition.SUB_PANEL, (List)tabDatas.get(1), baseDir);
+		}
+	}
+	
+	private void initTabFromDirectoryList(ContainerPosition position, List directories, VFile baseDir) {
+		for(int i=0; i<directories.size(); i++) {
+			NumberedJFD2 newJFD = new NumberedJFD2();
+			
+			try {
+				newJFD.init(getConfigDirectory());
+				addComponent(newJFD, position, new JFD2TitleUpdater(newJFD));
+				newJFD.getModel().setDirectoryAsynchIfNecessary(VFS.getInstance(newJFD).getFile((String)directories.get(i)), 0, newJFD);
+			} catch (VFSException e) {
+				e.printStackTrace();
+				newJFD.dispose();
+			}
+		}
 	}
 }

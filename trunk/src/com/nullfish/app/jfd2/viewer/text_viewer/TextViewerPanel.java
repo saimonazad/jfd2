@@ -43,6 +43,7 @@ import org.jdom.Document;
 import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.JFD;
+import com.nullfish.app.jfd2.JFD2;
 import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.command.embed.CursorMoveCommand;
 import com.nullfish.app.jfd2.config.Configulation;
@@ -58,6 +59,7 @@ import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.resource.ResourceManager;
 import com.nullfish.lib.ui.LineNumberView;
 import com.nullfish.lib.ui.ThreadSafeUtilities;
+import com.nullfish.lib.ui.grid.LineGrid;
 import com.nullfish.lib.ui.xml_menu.XMLPopupMenu;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
@@ -181,7 +183,13 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 			}
 			
 			private void changeColor() {
-				textArea.setForeground(textArea.isFocusOwner() || (dialog != null && dialog.isVisible()) ? focusedColor : unfocusedColor);
+				boolean changesColor = ((Boolean)getViewer().getJFD().getCommonConfigulation().getParam("change_color_with_focus", Boolean.TRUE)).booleanValue();
+				
+				if(changesColor) {
+					textArea.setForeground(textArea.isFocusOwner() || (dialog != null && dialog.isVisible()) ? focusedColor : unfocusedColor);
+				} else {
+					textArea.setForeground(focusedColor);
+				}
 			}
 		});
 	}

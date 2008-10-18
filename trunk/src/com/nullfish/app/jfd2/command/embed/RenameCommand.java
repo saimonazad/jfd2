@@ -27,6 +27,7 @@ import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.ManipulationStoppedException;
 import com.nullfish.lib.vfs.exception.VFSException;
 import com.nullfish.lib.vfs.exception.WrongPathException;
+import com.nullfish.lib.vfs.impl.DefaultOverwritePolicy;
 
 /**
  * リネームコマンド
@@ -140,7 +141,7 @@ public class RenameCommand extends Command {
 						return newFile;
 					}
 				} else {
-					file.moveTo(newFile, this);
+					file.moveTo(newFile, DefaultOverwritePolicy.OVERWRITE, this, true);
 					return newFile;
 				}
 			} catch (WrongPathException e) {

@@ -24,11 +24,27 @@ public class ThreadSafeUtilities {
 	 * @param runnable
 	 */
 	public static void executeRunnable(Runnable runnable) {
+		executeRunnable(runnable, true);
+	}
+	
+	/**
+	 * Runnableを実行する。
+	 * Swingのシングルスレッドルールに一致するようにし、
+	 * もしもイベントディスパッチスレッドではない場合は同期実行させる。
+	 * 
+	 * @param runnable
+	 * @param waits
+	 */
+	public static void executeRunnable(Runnable runnable, boolean waits) {
 		if(SwingUtilities.isEventDispatchThread()) {
 			runnable.run();
 		} else {
 			try {
-				SwingUtilities.invokeAndWait(runnable);
+				if(waits) {
+					SwingUtilities.invokeAndWait(runnable);
+				} else {
+					SwingUtilities.invokeLater(runnable);
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (InvocationTargetException e) {

@@ -297,7 +297,7 @@ public class FindCommand extends Command {
 			if (!caseSensitive) {
 				condition = condition.toLowerCase();
 				conditionExcept = conditionExcept.toLowerCase();
-			}
+			}	
 			try {
 				pattern = Pattern.compile(condition);
 			} catch (Exception e) {

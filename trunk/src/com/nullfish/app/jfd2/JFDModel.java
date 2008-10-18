@@ -19,6 +19,7 @@ import com.nullfish.app.jfd2.command.JFDManipulationListener;
 import com.nullfish.app.jfd2.comparator.JFDComparator;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.util.FileHistory;
+import com.nullfish.lib.ui.ThreadSafeUtilities;
 import com.nullfish.lib.vfs.FileListener;
 import com.nullfish.lib.vfs.FileSystem;
 import com.nullfish.lib.vfs.UpdateManager;
@@ -769,6 +770,8 @@ public class JFDModel implements FileListener {
 			}
 		} catch (VFSException e) {
 			e.printStackTrace();
+		} finally {
+			needsRefresh = false;
 		}
 	}
 
@@ -786,7 +789,7 @@ public class JFDModel implements FileListener {
 			if (!needsRefresh) {
 				return;
 			}
-			needsRefresh = false;
+			//needsRefresh = false;
 
 			if (!lock.isLocked()) {
 				refresh();

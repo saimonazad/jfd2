@@ -92,6 +92,7 @@ public class ProgressPanel extends JPanel {
 			if(manipulation.isStopped() || manipulation.isFinished()) {
 				listPanel.removePanel(this, manipulation);
 				timer.stop();
+				manipulation = null;
 				return;
 			}
 			

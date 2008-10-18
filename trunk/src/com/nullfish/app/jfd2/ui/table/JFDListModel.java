@@ -49,7 +49,7 @@ public class JFDListModel extends AbstractListModel implements JFDModelListener 
 			}
 		};
 		
-		ThreadSafeUtilities.executeRunnable(caller);
+		ThreadSafeUtilities.executeRunnable(caller, false);
 	}
 
 	/*
@@ -64,7 +64,7 @@ public class JFDListModel extends AbstractListModel implements JFDModelListener 
 			}
 		};
 		
-		ThreadSafeUtilities.executeRunnable(caller);
+		ThreadSafeUtilities.executeRunnable(caller, false);
 	}
 
 	/*

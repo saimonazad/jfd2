@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<commands version="20080211">
+<commands version="200801014">
 	<command name="cursor-up" class="com.nullfish.app.jfd2.command.embed.CursorMoveCommand" cache="true">
 		<param name="direction">
 			<int>0</int>
@@ -135,6 +135,8 @@
 	<command name="escape" class="com.nullfish.app.jfd2.command.embed.EscapeCommand">
 	</command>
 	<command name="exit" class="com.nullfish.app.jfd2.command.embed.ExitCommand">
+	</command>
+	<command name="exit_all" class="com.nullfish.app.jfd2.command.embed.ExitAllCommand">
 	</command>
 	<command name="paste_copy" class="com.nullfish.app.jfd2.command.embed.PasteCommand" asynch="true">
 	</command>

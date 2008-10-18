@@ -31,10 +31,10 @@ public class ConfigVersionManager {
 
 	private static final FileVersion[] ETC_FILES_XML_WIN = {
 		new FileVersion("aliase.xml", "aliase_win.xml", 0),
-		new FileVersion("command.xml", "command.xml", 20080211),
+		new FileVersion("command.xml", "command.xml", 20081014),
 		new FileVersion("external_command.xml", "external_command.xml", 0),
 		new FileVersion("keys.xml", "keys.xml", 20080211),
-		new FileVersion("menubar.xml", "menubar.xml", 20080311),
+		new FileVersion("menubar.xml", "menubar.xml", 20081014),
 		new FileVersion("owner_command.xml", "owner_command.xml", 1.0),
 		new FileVersion("owner_keys.xml", "owner_keys.xml", 1.0),
 		new FileVersion("popup.xml", "popup.xml", 20080311),
@@ -43,10 +43,10 @@ public class ConfigVersionManager {
 
 	private static final FileVersion[] ETC_FILES_XML_UNIX = {
 		new FileVersion("aliase.xml", "aliase_unix.xml", 0.3),
-		new FileVersion("command.xml", "command.xml", 20080211),
+		new FileVersion("command.xml", "command.xml", 20081014),
 		new FileVersion("external_command.xml", "external_command.xml", 0),
 		new FileVersion("keys.xml", "keys.xml", 20080211),
-		new FileVersion("menubar.xml", "menubar.xml", 20080311),
+		new FileVersion("menubar.xml", "menubar.xml", 20081014),
 		new FileVersion("owner_command.xml", "owner_command.xml", 1.0),
 		new FileVersion("owner_keys.xml", "owner_keys.xml", 1.0),
 		new FileVersion("popup.xml", "popup.xml", 20080311),

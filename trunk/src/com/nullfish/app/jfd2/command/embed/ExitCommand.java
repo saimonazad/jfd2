@@ -6,8 +6,14 @@
  */
 package com.nullfish.app.jfd2.command.embed;
 
+import java.io.IOException;
+
+import org.jdom.JDOMException;
+
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.Command;
+import com.nullfish.app.jfd2.command.JFDException;
+import com.nullfish.app.jfd2.ui.container2.JFDFrame;
 import com.nullfish.app.jfd2.ui.container2.JFDOwner;
 import com.nullfish.lib.vfs.exception.VFSException;
 
@@ -24,6 +30,14 @@ public class ExitCommand extends Command {
 		JFD jfd = getJFD();
 		JFDOwner owner = jfd.getJFDOwner();
 		if(owner != null) {
+			if(owner instanceof JFDFrame) {
+				try {
+					JFDFrame.saveSizeTabConfig(owner.getConfigDirectory());
+				} catch (Exception e) {
+					throw new JFDException(e, "Config error", new Object[0]);
+				}
+			}
+			
 			owner.removeComponent(jfd);
 		}
 

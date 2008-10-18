@@ -344,8 +344,7 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		boolean noFocus =
 			jfd != null
 			&& jfd.getJFDOwner() != null
-			&& jfd.getJFDOwner().getActiveComponent() != null
-			&& !jfd.getComponent().equals(jfd.getJFDOwner().getActiveComponent());
+			&& ((jfd.getJFDOwner().getActiveComponent() != null && !jfd.getComponent().equals(jfd.getJFDOwner().getActiveComponent())) || jfd.getJFDOwner().getActiveComponent() == null) ;
 		
 		if (changesColor && noFocus) {
 			foreColor = unfocusedColor;
