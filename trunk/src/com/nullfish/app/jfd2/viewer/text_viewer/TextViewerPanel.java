@@ -195,7 +195,8 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 	}
 
 	private void initGui() {
-		textArea.setEditable(false);
+		//	Linux版Javaのバグに対応するために編集可能にしてる.
+//		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setForeground(Color.WHITE);
 		textArea.setBackground(Color.BLACK);

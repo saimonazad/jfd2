@@ -696,6 +696,9 @@ public class JFDDialog extends JDialog {
 			public void run() {
 				JFDDialog.this.setLocationRelativeTo(getOwner());
 				JFDDialog.super.setVisible(bool);
+				if(bool) {
+					dispose();
+				}
 			}
 		};
 
