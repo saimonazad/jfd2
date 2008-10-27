@@ -52,6 +52,9 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 	private JLabel shellNotice = new JLabel(JFDResource.LABELS.getString("shell_notice"));
 	private JLabel appshellNotice = new JLabel(JFDResource.LABELS.getString("appshell_notice"));
 
+	private JLabel consoleConfigLabel = new JLabel(JFDResource.LABELS.getString("console"));
+	private JTextArea consoleConfig = new JTextArea(3, 25);
+
 	public PathConfigPanel() {
 		super(new BorderLayout());
 		try {
@@ -93,6 +96,9 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 
 		directoryPanel.addComponent(appShellConfigLabel, "app_shell_label");
 		directoryPanel.addComponent(new JScrollPane(appShellConfig), "app_shell_input");
+		
+		directoryPanel.addComponent(consoleConfigLabel, "console_label");
+		directoryPanel.addComponent(new JScrollPane(consoleConfig), "console_input");
 	}
 
 	/**
@@ -120,6 +126,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 		extensionMapperConfig.setText((String)commonConfig.getParam("extension_mapper", DefaultConfig.getDefaultConfig().getExtensionMapping()));
 		shellConfig.setText((String)commonConfig.getParam("shell", DefaultConfig.getDefaultConfig().getShell()));
 		appShellConfig.setText((String)commonConfig.getParam("app_shell", DefaultConfig.getDefaultConfig().getAppShell()));
+		consoleConfig.setText((String)commonConfig.getParam("open_console_command", DefaultConfig.getDefaultConfig().getConsole()));
 	}
 
 	/***
@@ -143,6 +150,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 		commonConfig.setParam("extension_mapper", extensionMapperConfig.getText());
 		commonConfig.setParam("shell", shellConfig.getText());
 		commonConfig.setParam("app_shell", appShellConfig.getText());
+		commonConfig.setParam("open_console_command", consoleConfig.getText());
 	}
 	
 	public 	String getTitle() {

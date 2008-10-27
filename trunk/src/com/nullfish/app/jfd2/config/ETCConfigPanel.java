@@ -42,6 +42,8 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 
 	private JCheckBox graphicViewerMouseOperationCheckBox = new JCheckBox(JFDResource.LABELS.getString("graphic_viewer_mouse_button_operate"));
 	
+	private JCheckBox textViewerEditableCheckBox = new JCheckBox(JFDResource.LABELS.getString("text_viewer_editable"));
+	
 	public ETCConfigPanel() {
 		super(new BorderLayout());
 		try {
@@ -78,6 +80,7 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		etcPanel.addComponent(filterTextArea, "filter_text");
 
 		etcPanel.addComponent(graphicViewerMouseOperationCheckBox, "mouse_operate_check");
+		etcPanel.addComponent(textViewerEditableCheckBox, "text_viewer_editable_check");
 	}
 
 	/**
@@ -102,6 +105,7 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		filterTextArea.setText(((String)commonConfig.getParam("filter_regex", "^\\..*")));
 		
 		graphicViewerMouseOperationCheckBox.setSelected(((Boolean)commonConfig.getParam("graphic_viewer_mouse_button_operate", Boolean.FALSE)).booleanValue());
+		textViewerEditableCheckBox.setSelected(((Boolean)commonConfig.getParam("text_viewer_editable", Boolean.FALSE)).booleanValue());
 	}
 
 	/***
@@ -123,6 +127,7 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		commonConfig.setParam("filter_regex", filterTextArea.getText());
 
 		commonConfig.setParam("graphic_viewer_mouse_button_operate", Boolean.valueOf(graphicViewerMouseOperationCheckBox.isSelected()));
+		commonConfig.setParam("text_viewer_editable", Boolean.valueOf(textViewerEditableCheckBox.isSelected()));
 	}
 	
 	public 	String getTitle() {

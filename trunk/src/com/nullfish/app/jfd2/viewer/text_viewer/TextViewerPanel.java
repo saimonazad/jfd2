@@ -195,8 +195,7 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 	}
 
 	private void initGui() {
-		//	Linux版Javaのバグに対応するために編集可能にしてる.
-//		textArea.setEditable(false);
+		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setForeground(Color.WHITE);
 		textArea.setBackground(Color.BLACK);
@@ -682,6 +681,7 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 			lineNumberTitleLabel.setFont((Font) config.getParam("label_font", null));
 			lineNumberLabel.setFont((Font) config.getParam("label_font", null));
 			formatLabel.setFont((Font) config.getParam("label_font", null));
+			textArea.setEditable(((Boolean)config.getParam("text_viewer_editable", Boolean.FALSE)).booleanValue());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

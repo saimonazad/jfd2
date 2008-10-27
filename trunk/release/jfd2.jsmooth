@@ -37,6 +37,7 @@
 <classPath>lib\saxpath.jar</classPath>
 <embeddedJar>false</embeddedJar>
 <executableName>jfd2.exe</executableName>
+<iconLocation>..\src\icon.png</iconLocation>
 <initialMemoryHeap>-1</initialMemoryHeap>
 <mainClassName>com.nullfish.app.jfd2.Launcher</mainClassName>
 <maximumMemoryHeap>134217728</maximumMemoryHeap>

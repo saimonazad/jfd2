@@ -48,6 +48,9 @@
 					<td vfix="true">shell_notice</td>
 				</tr>
 				<tr>
+					<td vfix="true">@ </td>
+				</tr>
+				<tr>
 					<td vfix="true">app_shell_label</td>
 				</tr>
 				<tr>
@@ -55,6 +58,15 @@
 				</tr>
 				<tr>
 					<td vfix="true">appshell_notice</td>
+				</tr>
+				<tr>
+					<td vfix="true">@ </td>
+				</tr>
+				<tr>
+					<td vfix="true">console_label</td>
+				</tr>
+				<tr>
+					<td vfix="true">console_input</td>
 				</tr>
 				<tr>
 					<td/>

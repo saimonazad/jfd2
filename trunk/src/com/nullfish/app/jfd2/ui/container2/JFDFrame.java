@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JOptionPane;
@@ -127,6 +128,12 @@ public class JFDFrame extends JFrame implements JFDOwner {
 	
 	public JFDFrame(final VFile configDir) {
 		instances.add(this);
+		
+		try {
+			setIconImage(ImageIO.read(VFS.getInstance().getFile("classpath:///icon.png").getInputStream()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		this.configDir = configDir;
 		initGUI();

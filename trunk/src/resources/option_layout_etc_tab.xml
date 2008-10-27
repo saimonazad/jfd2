@@ -34,6 +34,9 @@
 					<td colspan="2" vfix="true" fill="both">mouse_operate_check</td>
 				</tr>
 				<tr>
+					<td colspan="2" vfix="true" fill="both">text_viewer_editable_check</td>
+				</tr>
+				<tr>
 					<td/>
 				</tr>
 			</table>

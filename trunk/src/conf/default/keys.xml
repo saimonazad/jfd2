@@ -1,6 +1,6 @@
 <?xml version=	"1.0"?>
 
-<commandmaps version="20080211">
+<commandmaps version="20081028">
 	<commandmap name="cursor-up">
 		<key name="VK_UP"/>
 	</commandmap>
@@ -204,6 +204,7 @@
 	</commandmap>
 	<commandmap name="incremental_search">
 		<key name="VK_AT" onrelease="true"/>
+		<key name="VK_OPEN_BRACKET" onrelease="true"/>
 	</commandmap>
 	<commandmap name="show_popup">
 		<key name="VK_DOWN" ctrl="true"/>
