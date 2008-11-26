@@ -19,7 +19,6 @@ import com.nullfish.app.jfd2.ext_command.CommandExecuter;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.util.StringHistory;
 import com.nullfish.app.jfd2.util.WindowsUtil;
-import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 import com.nullfish.lib.vfs.exception.VFSIOException;
 import com.nullfish.lib.vfs.impl.local.LocalFile;
@@ -118,7 +117,6 @@ public class ShellCommand extends Command {
 			}
 			
 			history.add(command);
-			VFile currentDir = jfd.getModel().getCurrentDirectory();
 
 			dialog.applyConfig();
 			CommandExecuter.getInstance().exec(command,

@@ -190,8 +190,6 @@ public class ImagePanel extends JComponent {
 			return;
 		}
 		
-		AffineTransform t = null;
-
 		if(fixSize) {
 			this.transform = getSizeFixedTransform();
 		} else {

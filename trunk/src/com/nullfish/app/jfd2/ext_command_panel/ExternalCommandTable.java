@@ -20,14 +20,12 @@ import com.nullfish.lib.vfs.exception.VFSException;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class ExternalCommandTable extends JTable implements Initable {
-	private JFD jfd;
 	
 	private ExternalCommandTableModel model = new ExternalCommandTableModel();
 	
 	private ExternalCommandTableCellRenderer renderer;
 	
 	public ExternalCommandTable(JFD jfd) {
-		this.jfd = jfd;
 		setModel(model);
 		renderer = new ExternalCommandTableCellRenderer(jfd);
 		setDefaultRenderer(Object.class, renderer);

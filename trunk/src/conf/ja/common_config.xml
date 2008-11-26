@@ -33,18 +33,6 @@
   <param name="double_line">
     <boolean>true</boolean>
   </param>
-  <param name="script_dir">
-    <text></text>
-  </param>
-  <param name="shell">
-    <text></text>
-  </param>
-  <param name="editor">
-    <text></text>
-  </param>
-  <param name="temp_dir">
-    <text></text>
-  </param>
   <param name="grep_encode_all">
     <list>
       <text>JISAutoDetect</text>

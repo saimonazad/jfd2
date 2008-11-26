@@ -6,17 +6,11 @@
  */
 package com.nullfish.app.jfd2.command.embed;
 
-import java.util.List;
-
 import com.nullfish.app.jfd2.JFD;
-import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
-import com.nullfish.app.jfd2.config.Configulation;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
-import com.nullfish.app.jfd2.ui.container2.ContainerPosition;
-import com.nullfish.app.jfd2.ui.container2.JFDOwner;
 import com.nullfish.lib.vfs.FileUtil;
 import com.nullfish.lib.vfs.Manipulation;
 import com.nullfish.lib.vfs.VFS;
@@ -190,8 +184,6 @@ public class CopyCommand extends Command {
 	 */
 	private CopyFileManipulation[] initCopyManipulations(VFile selectedFile,
 			VFile[] markedFiles, VFile dest, boolean ignoreFileStructure) throws VFSException {
-		Configulation config = getJFD().getLocalConfigulation();
-
 		CopyOverwritePolicy policy = new CopyOverwritePolicy(this);
 		CopyFileManipulation[] rtn;
 		if (markedFiles.length == 0) {

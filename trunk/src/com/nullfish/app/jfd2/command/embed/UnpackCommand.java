@@ -16,7 +16,6 @@ import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
-import com.nullfish.app.jfd2.util.SortUtility;
 import com.nullfish.lib.vfs.FileSystem;
 import com.nullfish.lib.vfs.FileUtil;
 import com.nullfish.lib.vfs.Manipulation;
@@ -106,7 +105,6 @@ public class UnpackCommand extends Command {
 			model.getHistory().add(target);
 			model.getNoOverwrapHistory().add(target);
 
-			boolean showOverwriteDialog = dialog.isChecked(SHOW_OVERWRITE_DIALOG);
 			OverwritePolicy policy = dialog.isChecked(SHOW_OVERWRITE_DIALOG) ? new CopyOverwritePolicy(this) : DefaultOverwritePolicy.OVERWRITE;
 			
 			List childrenList = new ArrayList();

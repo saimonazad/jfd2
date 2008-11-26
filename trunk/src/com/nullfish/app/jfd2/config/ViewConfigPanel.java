@@ -17,7 +17,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
-import javax.swing.ListCellRenderer;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.UIManager;
 
@@ -29,7 +28,6 @@ import com.nullfish.app.jfd2.dialog.components.DialogComboBox;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.tablelayout.BgImagePainter;
 import com.nullfish.lib.tablelayout.HtmlTablePanel;
-import com.nullfish.lib.ui.ChooserPanel;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;

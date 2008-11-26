@@ -4,9 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,20 +15,25 @@ import com.nullfish.lib.vfs.exception.VFSException;
 import com.nullfish.lib.vfs.permission.FileAccess;
 import com.nullfish.lib.vfs.permission.PermissionType;
 
+/**
+ * TODO:èëÇ´Ç©ÇØ
+ * @author shunji
+ *
+ */
 public class PermissionPanel extends JPanel {
-	private VFile[] files;
+//	private VFile[] files;
 	
 	private List typesList = new ArrayList();
 	private List accessesList = new ArrayList();
 	
-	private List typeLabels = new ArrayList();
-	private List accessLabels = new ArrayList();
+//	private List typeLabels = new ArrayList();
+//	private List accessLabels = new ArrayList();
 
 	private List checkBoxs = new ArrayList();
 	
 	public PermissionPanel(VFile[] files) throws VFSException {
 		super(new GridBagLayout());
-		this.files = files;
+//		this.files = files;
 		
 		for(int i=0; i<files.length; i++) {
 			Permission permission = files[i].getPermission();
@@ -64,27 +67,27 @@ public class PermissionPanel extends JPanel {
 		}
 	}
 	
-	private class TypeAccess {
-		private PermissionType type;
-		private FileAccess access;
-		
-		TypeAccess(PermissionType type, FileAccess access) {
-			this.type = type;
-			this.access = access;
-		}
-		
-		public boolean equals(Object o) {
-			if(o == null) {
-				return false;
-			}
-			
-			TypeAccess other = (TypeAccess)o;
-			return type.equals(other.type) && access.equals(other.access);
-		}
-		
-		public int hashCode() {
-			return type.hashCode() + access.hashCode();
-		}
-	}
-	
+//	private class TypeAccess {
+//		private PermissionType type;
+//		private FileAccess access;
+//		
+//		TypeAccess(PermissionType type, FileAccess access) {
+//			this.type = type;
+//			this.access = access;
+//		}
+//		
+//		public boolean equals(Object o) {
+//			if(o == null) {
+//				return false;
+//			}
+//			
+//			TypeAccess other = (TypeAccess)o;
+//			return type.equals(other.type) && access.equals(other.access);
+//		}
+//		
+//		public int hashCode() {
+//			return type.hashCode() + access.hashCode();
+//		}
+//	}
+//	
 }

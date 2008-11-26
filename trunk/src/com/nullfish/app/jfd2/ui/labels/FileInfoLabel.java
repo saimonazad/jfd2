@@ -25,8 +25,6 @@ import com.nullfish.lib.vfs.exception.VFSException;
  * @author shunji
  */
 public class FileInfoLabel extends JLabel {
-	private JFDModel model;
-	
 	DecimalFormat format = new DecimalFormat("##,###,###,##0");
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -36,7 +34,6 @@ public class FileInfoLabel extends JLabel {
 	private StringBuffer buffer = new StringBuffer();
 	
 	public void setModel(JFDModel model) {
-		this.model = model;
 		model.addJFDModelListener(new JFDModelListenerImpl(this));
 	}
 

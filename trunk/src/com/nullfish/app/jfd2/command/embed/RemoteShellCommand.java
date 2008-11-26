@@ -95,8 +95,6 @@ public class RemoteShellCommand extends Command {
 			}
 
 			history.add(command);
-			VFile currentDir = jfd.getModel().getCurrentDirectory();
-
 			File directory = ((LocalFile)tempFile.getParent()).getFile();
 
 			dialog.applyConfig();

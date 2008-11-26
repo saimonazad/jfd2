@@ -7,12 +7,9 @@
 package com.nullfish.app.jfd2;
 
 import java.io.File;
-import java.io.IOException;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-
-import org.jdom.JDOMException;
 
 import com.nullfish.app.jfd2.config.ConfigVersionManager;
 import com.nullfish.app.jfd2.config.Configulation;
@@ -26,7 +23,6 @@ import com.nullfish.app.jfd2.util.MigemoInfo;
 import com.nullfish.app.jfd2.util.thumbnail.ThumbnailDataBase;
 import com.nullfish.app.jfd2.viewer.FileViewerManager;
 import com.nullfish.lib.plugin.PluginManager;
-import com.nullfish.lib.tablelayout.HtmlTablePanel;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;

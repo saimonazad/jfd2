@@ -79,7 +79,6 @@ public class CopyOverwritePolicy implements OverwritePolicy {
 				return decidePolicy(srcFile, dest, decidedAnswer);
 			}
 
-			boolean sameFile = srcFile.equals(dest);
 			dialog = showDialog(srcFile, dest);
 
 			String buttonAnswer = dialog.getButtonAnswer();

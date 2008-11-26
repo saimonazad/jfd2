@@ -13,7 +13,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.nullfish.app.jfd2.JFD;
@@ -22,8 +21,6 @@ import com.nullfish.app.jfd2.ui.shortcut_tree.ShortCutDialog;
 import com.nullfish.app.jfd2.ui.tree.TreeDialog;
 import com.nullfish.app.jfd2.util.ShortCutFile;
 import com.nullfish.lib.keymap.KeyStrokeMap;
-import com.nullfish.lib.ui.FocusAndSelectAllTextField;
-import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 
 public class TextEditorTreeExtension extends JPanel implements TextEditor {

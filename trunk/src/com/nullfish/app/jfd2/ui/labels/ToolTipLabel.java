@@ -6,8 +6,6 @@
  */
 package com.nullfish.app.jfd2.ui.labels;
 
-import java.awt.Dimension;
-
 import javax.swing.JLabel;
 
 /**

@@ -22,8 +22,6 @@ import com.nullfish.lib.vfs.exception.VFSException;
 public class VFileTree extends JPanel {
 	private JTree tree = new MigemoTree();
 	
-	private VFile root;
-	
 	private JScrollPane scroll = new JScrollPane(tree);
 	
 	private DefaultTreeModel model;
@@ -45,7 +43,6 @@ public class VFileTree extends JPanel {
 		VFileTreeNode rootNode = new VFileTreeNode(this, null, root);
 		model = new DefaultTreeModel(rootNode);
 		tree.setModel(model);
-		this.root = root;
 	}
 	
 	public void setSelectedFile(final VFile file) {

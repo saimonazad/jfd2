@@ -14,10 +14,9 @@ public class EncodeDetector {
 			int maxRead = 40960;
 			is.mark(maxRead);
 			byte[] buffer = new byte[4096];
-			boolean isDone = false;
 			
 			int l = 0;
-			while(read < maxRead && (l = is.read(buffer)) > 0 && !(isDone = detector.isDone())) {
+			while(read < maxRead && (l = is.read(buffer)) > 0 && !detector.isDone()) {
 				read += l;
 				detector.handleData(buffer, 0, l);
 			}

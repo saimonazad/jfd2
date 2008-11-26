@@ -2,8 +2,9 @@ package com.nullfish.lib.ui;
 
 //package eu.javaspecialists.tjsn.gui;
 
-import javax.swing.JToggleButton.ToggleButtonModel;
 import java.awt.event.ItemEvent;
+
+import javax.swing.JToggleButton.ToggleButtonModel;
 
 public class TristateButtonModel extends ToggleButtonModel {
   private TristateState state = TristateState.DESELECTED;

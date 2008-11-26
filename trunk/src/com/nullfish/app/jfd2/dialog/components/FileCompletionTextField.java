@@ -21,7 +21,6 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.AbstractAction;
@@ -38,7 +37,6 @@ import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.ui.FocusAndSelectAllTextField;
 import com.nullfish.lib.ui.SimpleChooserDialog;
 import com.nullfish.lib.ui.UIUtilities;
-import com.nullfish.lib.vfs.FileSystem;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -201,7 +199,6 @@ public class FileCompletionTextField extends FocusAndSelectAllTextField {
 	public VFile[] getCandidates(String path) {
 		try {
 			VFile file = vfs.getFile(path);
-			FileSystem fileSystem = file.getFileSystem();
 			if (!file.getFileSystem().isLocal()) {
 				return new VFile[0];
 			}
@@ -298,8 +295,6 @@ public class FileCompletionTextField extends FocusAndSelectAllTextField {
 				return;
 			}
 			
-			NumberedJFD2 jfd2 = (NumberedJFD2)jfd;
-			
 			NumberedJFD2 theJfd = NumberedJFD2.getJfdAt(number - 1);
 			if(theJfd == null) {
 				return;
@@ -313,19 +308,4 @@ public class FileCompletionTextField extends FocusAndSelectAllTextField {
 			setText(current.getSecurePath());
 		}
 	}
-	
-//	public void requestFocus() {
-//		super.requestFocus();
-//		System.out.println("requestFocus");
-//	}
-//	
-//	public boolean requestFocusInWindow() {
-//		System.out.println("requestFocusInWindow");
-//		return super.requestFocusInWindow();
-//	}
-//	
-//	public boolean requestFocusInWindow(boolean temporary) {
-//		System.out.println("requestFocusInWindow b");
-//		return super.requestFocusInWindow(temporary);
-//	}
 }

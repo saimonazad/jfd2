@@ -5,8 +5,6 @@ import com.nullfish.app.jfd2.ui.container2.TitleUpdater;
 import com.nullfish.lib.vfs.VFile;
 
 public class FileNameTitleUpdater implements TitleUpdater {
-	private VFile file;
-	
 	private JFDContainer container;
 	
 	public void setContainer(JFDContainer container) {
@@ -14,7 +12,6 @@ public class FileNameTitleUpdater implements TitleUpdater {
 	}
 
 	public void setFile(VFile file) {
-		this.file = file;
 		container.setTitle(file.getSecurePath());
 	}
 }

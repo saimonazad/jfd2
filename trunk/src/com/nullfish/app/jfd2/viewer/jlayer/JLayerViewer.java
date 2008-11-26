@@ -142,8 +142,6 @@ public class JLayerViewer extends AbstractFileViewer {
 		
 		Properties properties = new Properties();
 		
-		BufferedReader reader = null;
-		
 		try {
 			properties.load(plsFile.getInputStream());
 			String entriesStr = properties.getProperty("NumberOfEntries");
@@ -165,11 +163,6 @@ public class JLayerViewer extends AbstractFileViewer {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new StreamFactory[0];
-		} finally {
-			try {
-				reader.close();
-			} catch (Exception e) {
-			}
 		}
 	}
 }

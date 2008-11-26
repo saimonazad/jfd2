@@ -9,7 +9,6 @@ package com.nullfish.app.jfd2.command.embed;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-
 import com.nullfish.app.jfd2.JFD2;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.command.JFDException;

@@ -18,11 +18,6 @@ import javax.swing.ListSelectionModel;
 public class ListTableRowSelectionModel extends DefaultListSelectionModel
 		implements
 			ListCursorModelListener {
-	/**
-	 * カーソル位置
-	 */
-	private int cursorIndex;
-	
 	private ListTable listTable;
 
 	public ListTableRowSelectionModel(ListTable listTable) {

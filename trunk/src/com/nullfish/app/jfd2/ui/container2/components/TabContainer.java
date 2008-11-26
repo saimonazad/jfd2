@@ -8,19 +8,16 @@ package com.nullfish.app.jfd2.ui.container2.components;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Window;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-import javax.swing.FocusManager;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
 import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.ui.container2.JFDContainer;
-import com.nullfish.app.jfd2.ui.container2.TitleUpdater;
 import com.nullfish.lib.ui.ReturnableRunnable;
 import com.nullfish.lib.ui.ThreadSafeUtilities;
 
@@ -32,8 +29,6 @@ import com.nullfish.lib.ui.ThreadSafeUtilities;
  */
 public class TabContainer extends JPanel implements JFDContainer {
 	private JTabbedPane tabbedPane;
-	
-	private TitleUpdater updater;
 	
 	private JFDComponent component;
 	

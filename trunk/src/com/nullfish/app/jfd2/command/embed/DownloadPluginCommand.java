@@ -10,12 +10,10 @@ import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
-import com.nullfish.lib.vfs.VFS;
-import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 
 /**
- * ファイルマークコマンド
+ * 書きかけ
  * 
  * @author shunji
  */
@@ -26,8 +24,7 @@ public class DownloadPluginCommand extends Command {
 	public void doExecute() throws VFSException {
 		JFDDialog dialog = null;
 		try {
-			String pluginDirPath = (String)getJFD().getCommonConfigulation().getParam("plugin_dir", null);
-			VFile pluginDir = VFS.getInstance(getJFD()).getFile(pluginDirPath);
+			//String pluginDirPath = (String)getJFD().getCommonConfigulation().getParam("plugin_dir", null);
 			
 			dialog = DialogUtilities.createOkCancelDialog(getJFD(), JFDResource.LABELS.getString("import_plugin"));
 			
@@ -40,8 +37,6 @@ public class DownloadPluginCommand extends Command {
 			dialog.pack();
 			dialog.setVisible(true);
 			
-			String buttonAnswer = dialog.getButtonAnswer();
-			//if(buttonAnswer == null || JFDDialog buttonAnswer)
 		} finally {
 			dialog.dispose();
 		}

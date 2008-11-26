@@ -46,7 +46,6 @@ public class DeleteFileCommand extends Command {
 			model.lockAutoUpdate(this);
 			
 			VFile selectedFile = model.getSelectedFile();
-			int selectedIndex = model.getSelectedIndex();
 			VFile[] markedFiles = model.getMarkedFiles();
 			
 			if(selectedFile.isDirectory() && markedFiles.length == 0) {

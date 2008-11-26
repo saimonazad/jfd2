@@ -30,11 +30,6 @@ public abstract class FileViewerConstraints {
 	 */
 	private static Map nameInstanceMap = new HashMap();
 	
-	/**
-	 * ñºèÃ
-	 */
-	private String name;
-	
 	public static FileViewerConstraints MAIN = new MainConstraints();
 	public static FileViewerConstraints SUB = new SubConstraints();
 	public static FileViewerConstraints OPONENT = new OponentConstraints();
@@ -46,7 +41,6 @@ public abstract class FileViewerConstraints {
 	 * @param name
 	 */
 	public FileViewerConstraints(String name) {
-		this.name = name;
 		nameInstanceMap.put(name, this);
 	}
 	

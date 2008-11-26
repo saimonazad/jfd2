@@ -6,14 +6,10 @@
  */
 package com.nullfish.lib.ui.grid;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.geom.Rectangle2D;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -21,7 +17,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**

@@ -56,8 +56,6 @@ public class FileSystemConfigPanel extends JPanel implements ConfigPanel {
 	private JLabel ftpEncodeLabel = new JLabel(JFDResource.LABELS.getString("ftp_encoding"));
 	private JTextField ftpEncodeTextArea = new JTextField();
 	
-	private JLabel proxyHostLabel = new JLabel(JFDResource.LABELS.getString("proxy_host"));
-	private JLabel proxyPortLabel = new JLabel(JFDResource.LABELS.getString("proxy_port"));
 	private JTextField proxyHostText = new JTextField();
 	private JTextField proxyPortText = new JTextField();
 

@@ -13,7 +13,6 @@ import com.nullfish.lib.vfs.FileSystem;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
-import com.nullfish.lib.vfs.impl.root.RootFileName;
 
 /**
  * 親ディレクトリ移動コマンド

@@ -21,7 +21,6 @@ import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import com.nullfish.app.jfd2.dialog.components.ConfigCheckBox;
 import com.nullfish.app.jfd2.dialog.focus.FocusOrderManagingPanel;
 import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.ui.OneKeyButton;

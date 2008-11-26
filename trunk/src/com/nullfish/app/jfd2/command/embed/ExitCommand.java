@@ -6,10 +6,6 @@
  */
 package com.nullfish.app.jfd2.command.embed;
 
-import java.io.IOException;
-
-import org.jdom.JDOMException;
-
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.command.JFDException;

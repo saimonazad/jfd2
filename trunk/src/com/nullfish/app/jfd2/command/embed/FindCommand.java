@@ -134,6 +134,7 @@ public class FindCommand extends Command {
 
 			dialog.applyConfig();
 			String fileName = dialog.getTextFieldAnswer(FILE_NAME);
+			fileName = fileName != null ? fileName : "";
 			String fileNameExcept = dialog.getTextFieldAnswer(FILE_NAME_EXCEPT);
 			history.add(fileName);
 			exceptHistory.add(fileNameExcept);

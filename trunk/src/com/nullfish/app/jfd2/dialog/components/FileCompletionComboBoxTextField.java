@@ -31,14 +31,12 @@ import org.monazilla.migemo.Migemo;
 
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.config.DefaultConfig;
-import com.nullfish.app.jfd2.dialog.components.FileCompletionTextField.FileComparator;
 import com.nullfish.app.jfd2.ui.container2.NumberedJFD2;
 import com.nullfish.app.jfd2.util.MigemoInfo;
 import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.ui.SimpleChooserDialog;
 import com.nullfish.lib.ui.UIUtilities;
 import com.nullfish.lib.ui.combobox.ComboBoxTextField;
-import com.nullfish.lib.vfs.FileSystem;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -201,7 +199,6 @@ public class FileCompletionComboBoxTextField extends ComboBoxTextField {
 	public VFile[] getCandidates(String path) {
 		try {
 			VFile file = vfs.getFile(path);
-			FileSystem fileSystem = file.getFileSystem();
 			if (!file.getFileSystem().isLocal()) {
 				return new VFile[0];
 			}
@@ -297,8 +294,6 @@ public class FileCompletionComboBoxTextField extends ComboBoxTextField {
 			if(!(jfd instanceof NumberedJFD2)) {
 				return;
 			}
-			
-			NumberedJFD2 jfd2 = (NumberedJFD2)jfd;
 			
 			NumberedJFD2 theJfd = NumberedJFD2.getJfdAt(number - 1);
 			if(theJfd == null) {

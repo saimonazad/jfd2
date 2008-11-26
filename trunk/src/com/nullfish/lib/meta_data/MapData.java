@@ -6,7 +6,6 @@
  */
 package com.nullfish.lib.meta_data;
 
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,8 +13,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.jdom.Element;
-
-import com.nullfish.lib.ui.ColorUtility;
 
 /**
  * Mapのメタデータクラス。

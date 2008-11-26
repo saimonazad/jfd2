@@ -6,7 +6,6 @@
  */
 package com.nullfish.lib.ui.grid;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -26,7 +25,6 @@ public class VerticalLineGrid extends LineGrid {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Color color = getForeground();
 		int center = getWidth() / 2;
 
 		if(doubleLine) {

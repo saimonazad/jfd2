@@ -7,7 +7,6 @@
 package com.nullfish.app.jfd2.command.groovy;
 
 import groovy.lang.GroovyClassLoader;
-import groovy.lang.GroovyShell;
 import groovy.lang.Script;
 
 import java.io.InputStream;

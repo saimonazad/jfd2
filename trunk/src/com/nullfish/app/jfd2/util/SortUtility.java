@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.nullfish.app.jfd2.JFD;
-import com.nullfish.app.jfd2.JFD2;
 import com.nullfish.app.jfd2.comparator.ExtensionComparator;
 import com.nullfish.app.jfd2.comparator.FileComparator;
 import com.nullfish.app.jfd2.comparator.FileTypeComparator;
@@ -21,7 +20,6 @@ import com.nullfish.app.jfd2.comparator.PermissionComparator;
 import com.nullfish.app.jfd2.comparator.SizeComparator;
 import com.nullfish.app.jfd2.comparator.TimestampComparator;
 import com.nullfish.app.jfd2.config.Configulation;
-import com.nullfish.app.jfd2.ui.table.RendererMode;
 
 /**
  * @author shunji
@@ -73,7 +71,6 @@ public class SortUtility {
 		List comparators = new ArrayList();
 		
 		//	親ディレクトリでコンペア
-		RendererMode mode = (RendererMode)jfd.getLocalConfigulation().getParam(JFD2.CONFIG_RENDERER_MODE, RendererMode.TYPE_1);
 		if(jfd.showsRelativePath()) {
 			comparators.add(new ParentNameComparator(order));
 		}

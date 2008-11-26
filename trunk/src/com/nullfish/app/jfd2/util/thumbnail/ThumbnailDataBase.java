@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.nio.charset.Charset;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -113,7 +114,7 @@ public class ThumbnailDataBase {
 			
 			Class.forName("org.h2.Driver");
 			String dirUrl = iconDir.getURI().toString() + "icon_cache";
-			dirUrl = URLDecoder.decode(dirUrl); 
+			dirUrl = URLDecoder.decode(dirUrl, Charset.defaultCharset().name()); 
 	
 			conn = DriverManager.getConnection("jdbc:h2:" + dirUrl, "sa", "");
 			initTable();

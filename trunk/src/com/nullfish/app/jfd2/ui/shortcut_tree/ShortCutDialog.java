@@ -30,8 +30,6 @@ public class ShortCutDialog extends JDialog {
 
 	private JScrollPane scroll = new JScrollPane(tree);
 
-	private DefaultMutableTreeNode rootNode;
-
 	private VFile selectedFile;
 
 	private Component owner;

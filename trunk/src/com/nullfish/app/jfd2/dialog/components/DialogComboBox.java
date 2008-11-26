@@ -28,8 +28,6 @@ import com.nullfish.lib.keymap.KeyStrokeMap;
  * Preferences - Java - Code Style - Code Templates
  */
 public class DialogComboBox extends JComboBox implements TextEditor {
-	private JDialog dialog;
-
 	private ComboBoxEditor editor;
 
 	private FocusNextAction focusNextAction;
@@ -57,7 +55,6 @@ public class DialogComboBox extends JComboBox implements TextEditor {
 	}
 
 	private void initUI(ComboBoxEditor editor, JDialog dialog) {
-		this.dialog = dialog;
 		this.editor = editor;
 
 		setEditor(editor);

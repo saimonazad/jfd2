@@ -9,7 +9,6 @@ package com.nullfish.app.jfd2.command.embed;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.regex.Matcher;

@@ -26,7 +26,7 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 	//
 	//	‚»‚Ì‘¼ƒ^ƒu
 	private HtmlTablePanel etcPanel;
-	private JLabel grepEncodeLabel = new JLabel(JFDResource.LABELS.getString("grep_encode"));
+//	private JLabel grepEncodeLabel = new JLabel(JFDResource.LABELS.getString("grep_encode"));
 	private JTextField grepEncodeTextField = new JTextField(20);
 	private JLabel grepAllEncodeLabel = new JLabel(JFDResource.LABELS.getString("grep_all_encode"));
 	private ListConfigTextField grepAllEncodeTextArea = new ListConfigTextField("grep_encode_all");

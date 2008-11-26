@@ -21,7 +21,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.text.Element;
 
 import org.monazilla.migemo.Migemo;
 
@@ -367,7 +366,6 @@ public class FindDialog extends JDialog {
 		if(scroll == null) {
 			return pos;
 		}
-		Element root = textArea.getDocument().getDefaultRootElement();
 		Rectangle scrollRect = scroll.getViewport().getViewRect();
 		int scrollEndPos = textArea.viewToModel(new Point(scrollRect.x + scrollRect.width, scrollRect.y + scrollRect.height));
 		return pos < scrollEndPos ? pos : scrollEndPos;
@@ -379,20 +377,11 @@ public class FindDialog extends JDialog {
 		if(scroll == null) {
 			return pos;
 		}
-		Element root = textArea.getDocument().getDefaultRootElement();
 		Rectangle scrollRect = scroll.getViewport().getViewRect();
 		int scrollStartPos = textArea.viewToModel(new Point(scrollRect.x, scrollRect.y));
 		return pos > scrollStartPos ? pos : scrollStartPos;
 	}
 	
-	private Container getRootWindow(Container c) {
-		while (!(c instanceof Window) && c.getParent() != null) {
-			c = c.getParent();
-		}
-
-		return c;
-	}
-
 	public void setJfd(JFD jfd) {
 		this.jfd = jfd;
 	}

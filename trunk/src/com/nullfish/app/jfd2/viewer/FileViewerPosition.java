@@ -13,8 +13,6 @@ import java.util.Map;
 public class FileViewerPosition {
 	private static final Map instanceMap = new HashMap();
 	
-	private String position;
-	
 	/**
 	 * ‘O
 	 */
@@ -31,7 +29,6 @@ public class FileViewerPosition {
 	};
 		
 	private FileViewerPosition(String position) {
-		this.position = position;
 		instanceMap.put(position, this);
 	}
 	

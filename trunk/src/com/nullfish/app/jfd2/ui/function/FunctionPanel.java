@@ -15,14 +15,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ActionMap;
-import javax.swing.InputMap;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import com.nullfish.app.jfd2.Initable;
 import com.nullfish.app.jfd2.JFD;
@@ -40,6 +42,8 @@ import com.nullfish.lib.vfs.exception.VFSException;
 public class FunctionPanel extends JPanel implements Initable {
 	private JFD jfd;
 
+	private Map keyMap = new HashMap();
+	
 	private int mode = 0;
 
 	private CommandHolder[][] commands = new CommandHolder[2][12];
@@ -198,8 +202,30 @@ public class FunctionPanel extends JPanel implements Initable {
 			actionMap.put(FUNCTION_WITH_SHIFT + i, new CommandCaller(1, i));
 		}
 	}
+	
+	/**
+	 * キー入力を処理する。
+	 * 
+	 * @param e
+	 */
+	public void processKey(KeyEvent e) {
+		Object actionKey = keyMap.get(KeyStroke.getKeyStrokeForEvent(e));
+		if(actionKey == null) {
+			return;
+		}
+		
+		Action action = (Action)getActionMap().get(actionKey);
+		if(action == null) {
+			return;
+		}
+		
+		e.consume();
+		action.actionPerformed(new  ActionEvent(this, ActionEvent.ACTION_PERFORMED, "process key"));
+	}
 
 	private void initKey() {
+		//	InputMapだと複数存在する際に正しいパネルにKeyEventが渡らないので独自のMapを用意した。
+/*
 		InputMap inputMap = getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		inputMap.put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_SHIFT,
 				KeyEvent.SHIFT_MASK, false), MODE_1);
@@ -210,6 +236,18 @@ public class FunctionPanel extends JPanel implements Initable {
 			inputMap.put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_F1 + i, 0),
 					FUNCTION_NO_SHIFT + i);
 			inputMap.put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_F1 + i,
+					KeyEvent.SHIFT_MASK), FUNCTION_WITH_SHIFT + i);
+		}
+*/
+		
+		keyMap.put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_SHIFT,
+				KeyEvent.SHIFT_MASK, false), MODE_1);
+		keyMap.put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_SHIFT, 0, true), MODE_0);
+
+		for (int i = 0; i < 12; i++) {
+			keyMap.put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_F1 + i, 0),
+					FUNCTION_NO_SHIFT + i);
+			keyMap.put(KeyStrokeMap.getKeyStroke(KeyEvent.VK_F1 + i,
 					KeyEvent.SHIFT_MASK), FUNCTION_WITH_SHIFT + i);
 		}
 	}

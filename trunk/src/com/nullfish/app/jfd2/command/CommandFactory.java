@@ -53,11 +53,6 @@ public abstract class CommandFactory {
 	private boolean asynch = false;
 	
 	/**
-	 * 経過表示の待ち時間
-	 */
-	private int delay = -1;
-	
-	/**
 	 * 実行中の画面ロックを行うかのフラグ
 	 */
 	private boolean locks = false;
@@ -112,11 +107,10 @@ public abstract class CommandFactory {
 		}
 	}
 	
-	public void init(String commandName, boolean usesCache, boolean asynch, int delay, boolean locks, boolean primary, boolean showsStopped) {
+	public void init(String commandName, boolean usesCache, boolean asynch, boolean locks, boolean primary, boolean showsStopped) {
 		this.commandName = commandName;
 		this.usesCache = usesCache;
 		this.asynch = asynch;
-		this.delay = delay;
 		this.locks = locks;
 		this.primary = primary;
 		this.showsStopped = showsStopped;

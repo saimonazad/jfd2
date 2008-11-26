@@ -9,7 +9,6 @@ package com.nullfish.app.jfd2.command.embed;
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.Window;
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
@@ -62,8 +61,6 @@ public class EditCommand extends Command {
 					PARAM_EDITOR, null);
 			Boolean useShell = (Boolean) jfd.getCommonConfigulation().getParam(
 					PARAM_USE_SHELL, Boolean.valueOf(DefaultConfig.getDefaultConfig().isEditorUseShell()));
-			String shell = (String) jfd.getCommonConfigulation().getParam(
-					"shell", (String)DefaultConfig.getDefaultConfig().getShell());
 
 			if (editor == null) {
 				DialogUtilities.showMessageDialog(jfd, JFDResource.MESSAGES
@@ -77,8 +74,6 @@ public class EditCommand extends Command {
 			}
 			
 			if (model.getCurrentDirectory().getFileSystem().isShellCompatible()) {
-				File dir = new File(model.getCurrentDirectory().getAbsolutePath());
-				
 				String[] params = {selectedFile.getAbsolutePath()};
 				
 				CommandExecuter.getInstance().exec(

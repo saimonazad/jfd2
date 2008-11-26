@@ -23,7 +23,6 @@ import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.keymap.KeyStrokeMap;
-import com.nullfish.lib.ui.document.RegexRestriction;
 import com.nullfish.lib.ui.document.RestrictedDocument;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
@@ -91,7 +90,6 @@ public class SmartFileListEditorDialog extends JDialog {
 		buttonsPanel.add(cancelButton);
 		
 		RestrictedDocument numberDoc = new RestrictedDocument();
-		RegexRestriction numberRestriction = RegexRestriction.getInstance("[-\\d]*");
 		maxCountText.setDocument(numberDoc);
 		
 		okButton.addActionListener(new ActionListener() {

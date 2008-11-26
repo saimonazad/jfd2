@@ -170,8 +170,6 @@ public class TemporaryFilePutBackCommand extends Command {
 	 * @throws VFSException
 	 */
 	private VFile createTemporaryFile(VFile original) throws VFSException {
-		JFD jfd = getJFD();
-
 		VFile tempDir = getTempDir();
 		if(!tempDir.exists(this)) {
 			tempDir.createDirectory(this);

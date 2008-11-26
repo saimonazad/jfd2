@@ -2,20 +2,24 @@ package com.nullfish.app.jfd2.command.embed.attribute;
 
 import com.nullfish.lib.ui.TristateCheckBox;
 import com.nullfish.lib.ui.TristateState;
-import com.nullfish.lib.vfs.Permission;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 import com.nullfish.lib.vfs.permission.FileAccess;
 import com.nullfish.lib.vfs.permission.PermissionType;
 
+/**
+ * TODO: èëÇ´Ç©ÇØ
+ * @author shunji
+ *
+ */
 public class PermissionCheckBox extends TristateCheckBox {
-	private PermissionType type;
-	private FileAccess access;
+//	private PermissionType type;
+//	private FileAccess access;
 	
 	public PermissionCheckBox(PermissionType type, FileAccess access, VFile[] files) throws VFSException {
 		super("");
-		this.type = type;
-		this.access = access;
+//		this.type = type;
+//		this.access = access;
 		
 		boolean isTrue = false;
 		boolean isFalse = true;

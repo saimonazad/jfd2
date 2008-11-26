@@ -6,7 +6,6 @@
  */
 package com.nullfish.lib.ui.grid;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -31,7 +30,6 @@ public class CrossLineGrid extends LineGrid {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Color color = getForeground();
 		int centerX = getWidth() / 2;
 		int centerY = getHeight() / 2;
 

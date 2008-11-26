@@ -35,7 +35,6 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.JFD;
-import com.nullfish.app.jfd2.JFD2;
 import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.command.owner.OwnerCommandManager;
 import com.nullfish.app.jfd2.config.Configulation;
@@ -45,7 +44,6 @@ import com.nullfish.app.jfd2.ui.container2.components.VisibilityChangeTabbedPane
 import com.nullfish.app.jfd2.util.thumbnail.ThumbnailDataBase;
 import com.nullfish.app.jfd2.viewer.FileViewerManager;
 import com.nullfish.lib.command.CommandCallable;
-import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.plugin.PluginManager;
 import com.nullfish.lib.resource.ResourceManager;
 import com.nullfish.lib.ui.ThreadSafeUtilities;
@@ -763,11 +761,21 @@ public class JFDFrame extends JFrame implements JFDOwner {
 			try {
 				newJFD.init(getConfigDirectory());
 				addComponent(newJFD, position, new JFD2TitleUpdater(newJFD));
-				newJFD.getModel().setDirectoryAsynchIfNecessary(VFS.getInstance(newJFD).getFile((String)directories.get(i)), 0, newJFD);
+				VFile directory = VFS.getInstance(newJFD).getFile((String)directories.get(i));
+				if(!directory.exists()) {
+					directory = VFS.getInstance(newJFD).getFile(System.getProperty("user.dir"));
+				}
+				newJFD.getModel().setDirectoryAsynchIfNecessary(directory, 0, newJFD);
 			} catch (VFSException e) {
 				e.printStackTrace();
-				newJFD.dispose();
+				try {
+					newJFD.dispose();
+				} catch (Exception ex) {}
 			}
+		}
+		
+		if(getCount() == 0) {
+			dispose();
 		}
 	}
 }

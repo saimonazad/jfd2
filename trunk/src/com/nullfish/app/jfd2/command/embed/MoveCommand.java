@@ -6,17 +6,12 @@
  */
 package com.nullfish.app.jfd2.command.embed;
 
-import java.util.List;
-
 import com.nullfish.app.jfd2.JFD;
-import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.config.Configulation;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
-import com.nullfish.app.jfd2.ui.container2.ContainerPosition;
-import com.nullfish.app.jfd2.ui.container2.JFDOwner;
 import com.nullfish.lib.vfs.FileUtil;
 import com.nullfish.lib.vfs.Manipulation;
 import com.nullfish.lib.vfs.VFS;
@@ -102,9 +97,6 @@ public class MoveCommand extends Command {
 			}
 			
 			dialog.applyConfig();
-
-			Configulation config = jfd.getLocalConfigulation();
-			Boolean ignoreFileStructure = (Boolean)config.getParam(CopyCommand.IGNORE_FILE_STRUCTURE, Boolean.FALSE);
 
 			dest = VFS.getInstance(jfd).getFile(fileName);
 

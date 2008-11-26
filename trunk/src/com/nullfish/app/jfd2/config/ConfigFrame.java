@@ -25,8 +25,6 @@ import com.nullfish.lib.vfs.exception.VFSException;
 public class ConfigFrame extends JDialog {
 	private HtmlTablePanel mainPanel;
 
-	private VFile configDir;
-
 	private boolean modified = false;
 	
 	public static final String MAIN_LAYOUT = "classpath:///resources/option_layout.xml";
@@ -116,7 +114,6 @@ public class ConfigFrame extends JDialog {
 	 * @throws VFSException
 	 */
 	public void loadPreference(VFile configDir) throws Exception {
-		this.configDir = configDir;
 		for(int i=0; i<panels.length; i++) {
 			panels[i].loadPreference(configDir);
 		}

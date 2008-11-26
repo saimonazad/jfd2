@@ -6,7 +6,6 @@
  */
 package com.nullfish.app.jfd2;
 
-import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -15,7 +14,6 @@ import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -33,12 +31,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
@@ -925,7 +921,8 @@ public class JFD2 extends JPanel implements JFD, Initable {
 		if (!isLocked()) {
 			if(incrementalSearchMode) {
 				searcher.processKeyEvent(e);
-			} 
+			}
+			functionPanel.processKey(e);
 			if(!e.isConsumed()) {
 				if (commandManager.execute(keyStroke)) {
 					e.consume();
@@ -1132,34 +1129,6 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 		setLabelFont((Font) commonConfig.getParam("label_font", new Font(
 				"Monospaced", Font.PLAIN, 12)));
-	}
-
-	private Image createBgImage(String imagePath, float alpha)
-			throws IOException, VFSException {
-		Image bgImage = ImageIO.read(VFS.getInstance(this).getFile(imagePath)
-				.getInputStream());
-		AlphaComposite alphaComposite = AlphaComposite.getInstance(
-				AlphaComposite.SRC_OVER, alpha);
-
-		Image image = new BufferedImage(bgImage.getWidth(null), bgImage
-				.getHeight(null), BufferedImage.TYPE_INT_RGB);
-		Graphics2D g = null;
-		try {
-			g = (Graphics2D) image.getGraphics();
-			g.setComposite(alphaComposite);
-			g.drawImage(bgImage, 0, 0, this);
-
-			return image;
-		} finally {
-			try {
-				bgImage.flush();
-			} catch (Exception e) {
-			}
-
-			if (g != null) {
-				g.dispose();
-			}
-		}
 	}
 
 	// êFä÷òAèâä˙âª

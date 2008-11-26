@@ -81,14 +81,8 @@ public class ConfigVersionManager {
 		VFile userConfigDir = configDir.getParent().getChild(".jfd2_user");
 		
 		String editorPath = null;
-		String tempDir = null;
-		String scriptDir = null;
-		String shortCutDir = null;
-		String editableConfigDir = null;
 		String shell = null;
 		String appShell = null;
-		String console = null;
-		String pluginDir = null;
 		
 		if(!commonConfigFile.exists()) {
 			sourceDir.getChild(COMMON_CONFIG_FILE).copyTo(configDir.getChild(COMMON_CONFIG_FILE));
@@ -99,15 +93,16 @@ public class ConfigVersionManager {
 			config = Configulation
 					.getInstance(commonConfigFile);
 			editorPath = (String)config.getParam("editor", null);
-			tempDir = (String)config.getParam("temp_dir", configDir.getChild("temp").getAbsolutePath());
-			scriptDir = (String)config.getParam("script_dir", userConfigDir.getChild("script").getAbsolutePath());
-			shortCutDir = (String)config.getParam("shortcut_dir", userConfigDir.getChild("shortcut").getAbsolutePath());
-			editableConfigDir = (String)config.getParam("user_conf_dir", userConfigDir.getChild("conf").getAbsolutePath());
+			config.getParam("temp_dir", configDir.getChild("temp").getAbsolutePath());
+			config.getParam("script_dir", userConfigDir.getChild("script").getAbsolutePath());
+			config.getParam("shortcut_dir", userConfigDir.getChild("shortcut").getAbsolutePath());
+			config.getParam("user_conf_dir", userConfigDir.getChild("conf").getAbsolutePath());
 			shell = (String)config.getParam("shell", null);
 			appShell = (String)config.getParam("app_shell", null);
-			console = (String)config.getParam("open_console_command", null);
-			pluginDir = (String)config.getParam("plugin_dir", userConfigDir.getChild("plugin").getAbsolutePath());
+			config.getParam("open_console_command", DefaultConfig.getDefaultConfig().getConsole());
+			config.getParam("plugin_dir", userConfigDir.getChild("plugin").getAbsolutePath());
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		if(editorPath == null || editorPath.length() == 0) {
@@ -145,10 +140,6 @@ public class ConfigVersionManager {
 			JOptionPane.showMessageDialog(null, messages);
 			appShell = text.getText();
 			config.setParam("app_shell", appShell);
-		}
-		
-		if(console == null || console.length() == 0) {
-			config.setParam("open_console_command", DefaultConfig.getDefaultConfig().getConsole());
 		}
 	}
 	

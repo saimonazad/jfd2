@@ -143,6 +143,7 @@ public class ChooserPanel extends JPanel implements FocusListener {
 			buttons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					requestFocusInWindow();
+					noticeActionPerformed();
 				}
 			});
 			
@@ -304,11 +305,11 @@ public class ChooserPanel extends JPanel implements FocusListener {
 	}
 	
 	/**
-	 * 選択が変化したことを
+	 * 選択が変化したことを通知する。
 	 *
 	 */
 	private void noticeActionPerformed() {
-		ActionEvent e = new ActionEvent(this, 0, "");
+		ActionEvent e = new ActionEvent(this, ActionEvent.ACTION_PERFORMED, getSelectedAnswer());
 		
 		for(int i=0; i<listeners.size(); i++) {
 			((ActionListener)listeners.get(i)).actionPerformed(e);

@@ -7,9 +7,7 @@ import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.ui.container2.JFDOwner;
 import com.nullfish.app.jfd2.viewer.AbstractFileViewer;
-import com.nullfish.app.jfd2.viewer.FileViewerConstraints;
 import com.nullfish.app.jfd2.viewer.FileViewerContainerPanel;
-import com.nullfish.app.jfd2.viewer.constraints.SameConstraints;
 import com.nullfish.lib.vfs.VFile;
 
 public class TextFileViewer extends AbstractFileViewer {

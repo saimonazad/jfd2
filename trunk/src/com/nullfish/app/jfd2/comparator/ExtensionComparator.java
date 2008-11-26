@@ -24,9 +24,6 @@ public class ExtensionComparator implements FileComparator {
 	 * @see com.nullfish.app.jfd2.comparator.FileComparator#compare(com.nullfish.lib.vfs.VFile, com.nullfish.lib.vfs.VFile)
 	 */
 	public int compare(VFile file1, VFile file2) {
-		String name1 = file1.getName();
-		String name2 = file2.getName();
-		
 		String extension1 = file1.getFileName().getLowerExtension();
 		String extension2 = file2.getFileName().getLowerExtension();
 		

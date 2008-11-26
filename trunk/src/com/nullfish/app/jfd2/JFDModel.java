@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.nullfish.app.jfd2.command.Command;
@@ -19,7 +18,6 @@ import com.nullfish.app.jfd2.command.JFDManipulationListener;
 import com.nullfish.app.jfd2.comparator.JFDComparator;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.util.FileHistory;
-import com.nullfish.lib.ui.ThreadSafeUtilities;
 import com.nullfish.lib.vfs.FileListener;
 import com.nullfish.lib.vfs.FileSystem;
 import com.nullfish.lib.vfs.UpdateManager;

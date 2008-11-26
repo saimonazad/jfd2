@@ -1,7 +1,6 @@
 package com.nullfish.app.jfd2.util;
 
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.util.List;
 import java.util.regex.Pattern;
 

@@ -1,6 +1,5 @@
 package com.nullfish.app.jfd2.viewer.graphicviewer;
 
-import java.util.Date;
 import java.util.regex.Pattern;
 
 import com.nullfish.app.jfd2.JFD;

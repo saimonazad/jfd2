@@ -6,7 +6,6 @@
  */
 package com.nullfish.lib.ui.grid;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -26,7 +25,6 @@ public class HorizontalLineGrid extends LineGrid {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Color color = getForeground();
 		int center = getHeight() / 2;
 		if(doubleLine) {
 			g.drawLine(0, center - 2, getWidth(), center - 2);
