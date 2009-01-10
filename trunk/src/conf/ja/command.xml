@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<commands version="200801014">
+<commands version="20090110">
 	<command name="cursor-up" class="com.nullfish.app.jfd2.command.embed.CursorMoveCommand" cache="true">
 		<param name="direction">
 			<int>0</int>
@@ -313,9 +313,9 @@
 	</command>
 	<command name="change_dot_file_visible" class="com.nullfish.app.jfd2.command.embed.ChangeDotFileVisibilityCommand">
 	</command>
-	<command name="register_smart_filelist" class="com.nullfish.app.jfd2.command.embed.RegisterSmartFileListCommand">
+	<command name="register_smart_directory" class="com.nullfish.app.jfd2.command.embed.RegisterSmartFileListCommand">
 	</command>
-	<command name="register_filelist" class="com.nullfish.app.jfd2.command.embed.RegisterFileListCommand">
+	<command name="register_virtual_directory" class="com.nullfish.app.jfd2.command.embed.RegisterFileListCommand">
 	</command>
 	<command name="change_relative_mode" class="com.nullfish.app.jfd2.command.embed.ChangeRelativePathModeCommand">
 	</command>
@@ -332,5 +332,9 @@
 	<command name="change_auto_column_mode" class="com.nullfish.app.jfd2.command.embed.ChangeAutoAdjustsColumnCommand">
 	</command>
 	<command name="tree" class="com.nullfish.app.jfd2.command.embed.TreeCommand">
+	</command>
+	<command name="find_tag" class="com.nullfish.app.jfd2.command.embed.FindTagCommand" asynch="true" locks="true" primary="true">
+	</command>
+	<command name="clean_tag_db" class="com.nullfish.app.jfd2.command.embed.CleanTagDbCommand" asynch="true" locks="true" primary="true">
 	</command>
 </commands>

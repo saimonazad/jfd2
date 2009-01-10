@@ -103,6 +103,7 @@ import com.nullfish.lib.vfs.exception.VFSIOException;
 import com.nullfish.lib.vfs.impl.antzip.ZIPFileSystem;
 import com.nullfish.lib.vfs.impl.commons_http.CommonsHTTPFileSystem;
 import com.nullfish.lib.vfs.impl.ftp.FTPFileSystem;
+import com.nullfish.lib.vfs.tag_db.TagDataBase;
 
 /**
  * @author shunji
@@ -1266,6 +1267,16 @@ public class JFD2 extends JPanel implements JFD, Initable {
 				ZIPFileSystem.CONFIG_FILE_ENCODING,
 				commonConfig.getParam("zip_encoding",
 						"JISAutoDetect"));
+		
+		//	ƒ^ƒO‚ª‚ç‚Ý
+		config.setDefaultConfig(
+				TagDataBase.CONFIG_USE_TAG,
+				commonConfig.getParam("use_tag",
+						"true"));
+		config.setDefaultConfig(
+				TagDataBase.CONFIG_FILEFISH_DB_DIR,
+				commonConfig.getParam("tag_db_dir",
+						null));
 		
 		vfs.configChanged();
 	}

@@ -23,6 +23,7 @@ import com.nullfish.app.jfd2.util.MigemoInfo;
 import com.nullfish.app.jfd2.util.thumbnail.ThumbnailDataBase;
 import com.nullfish.app.jfd2.viewer.FileViewerManager;
 import com.nullfish.lib.plugin.PluginManager;
+import com.nullfish.lib.ui.ThreadSafeUtilities;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -45,81 +46,87 @@ public class Launcher {
 	 */
 	public static final String ARG_DIR = "-dir";
 
-	public static void main(String[] args) {
-		// HtmlTablePanel.setDebug(true);
-		try {
-			// Mac向け設定
-			System.setProperty("apple.laf.useScreenMenuBar", "true");
-			System.setProperty(
-					"com.apple.mrj.application.apple.menu.about.name", "jFD2");
-			System.setProperty("apple.awt.showGrowBox", "true");
-			// System.setProperty("apple.awt.brushMetalLook", "true");
-
-			// System.setProperty( "sun.java2d.translaccel", "true");
-			// System.setProperty( "sun.java2d.ddscale", "true");
-
-			// static部分（アカウント情報ダイアログ）初期化
-			Class clazz = NumberedJFD2.class;
-
-			CommandLineParameters params = new CommandLineParameters(args);
-			String configDirStr = params.getParameter(ARG_CONFIG);
-			if (configDirStr == null || configDirStr.length() == 0) {
-				configDirStr = getDefaultConfigDir();
-			} else {
-				String realPath = null;
+	public static void main(final String[] args) {
+		Runnable runnable = new Runnable() {
+			public void run() {
+				// HtmlTablePanel.setDebug(true);
 				try {
-					realPath = VFS.getInstance().getFile(configDirStr)
-							.getAbsolutePath();
+					// Mac向け設定
+					System.setProperty("apple.laf.useScreenMenuBar", "true");
+					System.setProperty(
+							"com.apple.mrj.application.apple.menu.about.name", "jFD2");
+					System.setProperty("apple.awt.showGrowBox", "true");
+					// System.setProperty("apple.awt.brushMetalLook", "true");
+
+					// System.setProperty( "sun.java2d.translaccel", "true");
+					// System.setProperty( "sun.java2d.ddscale", "true");
+
+					// static部分（アカウント情報ダイアログ）初期化
+					Class clazz = NumberedJFD2.class;
+
+					CommandLineParameters params = new CommandLineParameters(args);
+					String configDirStr = params.getParameter(ARG_CONFIG);
+					if (configDirStr == null || configDirStr.length() == 0) {
+						configDirStr = getDefaultConfigDir();
+					} else {
+						String realPath = null;
+						try {
+							realPath = VFS.getInstance().getFile(configDirStr)
+									.getAbsolutePath();
+						} catch (Exception e) {
+						}
+
+						if (realPath == null) {
+							configDirStr = new File(configDirStr).getAbsolutePath();
+						}
+					}
+
+					MigemoInfo.init(configDirStr);
+
+					VFile configDir = VFS.getInstance().getFile(configDirStr);
+
+					try {
+						ConfigVersionManager confManager = new ConfigVersionManager();
+						confManager.checkVersion(configDir);
+					} catch (Exception e) {
+						e.printStackTrace();
+						JOptionPane.showMessageDialog(null, JFDResource.MESSAGES
+								.getString("failed_to_install_config_file"));
+						System.exit(1);
+					}
+					// プラグイン機能
+					Configulation commonConfig = Configulation.getInstance(configDir
+							.getChild(JFD.COMMON_PARAM_FILE));
+
+					String uiName = (String) commonConfig.getParam("look_and_feel",
+							null);
+					uiName = uiName != null ? uiName : UIManager
+							.getSystemLookAndFeelClassName();
+					UIManager.setLookAndFeel(uiName);
+
+					ThumbnailDataBase.getInstance().setIconDir(
+							configDir.getChild("icon_cache"));
+
+					VFile pluginDir = VFS.getInstance().getFile(
+							(String) commonConfig.getParam("plugin_dir", null));
+
+					PluginManager.getInstance().init(pluginDir);
+
+					Runtime.getRuntime().addShutdownHook(new Thread() {
+						public void run() {
+							PluginManager.getInstance().systemExited();
+						}
+					});
+
+					openJFD(params, configDir);
+					PluginManager.getInstance().configulationChanged();
 				} catch (Exception e) {
-				}
-
-				if (realPath == null) {
-					configDirStr = new File(configDirStr).getAbsolutePath();
+					e.printStackTrace();
 				}
 			}
-
-			MigemoInfo.init(configDirStr);
-
-			VFile configDir = VFS.getInstance().getFile(configDirStr);
-
-			try {
-				ConfigVersionManager confManager = new ConfigVersionManager();
-				confManager.checkVersion(configDir);
-			} catch (Exception e) {
-				e.printStackTrace();
-				JOptionPane.showMessageDialog(null, JFDResource.MESSAGES
-						.getString("failed_to_install_config_file"));
-				System.exit(1);
-			}
-			// プラグイン機能
-			Configulation commonConfig = Configulation.getInstance(configDir
-					.getChild(JFD.COMMON_PARAM_FILE));
-
-			String uiName = (String) commonConfig.getParam("look_and_feel",
-					null);
-			uiName = uiName != null ? uiName : UIManager
-					.getSystemLookAndFeelClassName();
-			UIManager.setLookAndFeel(uiName);
-
-			ThumbnailDataBase.getInstance().setIconDir(
-					configDir.getChild("icon_cache"));
-
-			VFile pluginDir = VFS.getInstance().getFile(
-					(String) commonConfig.getParam("plugin_dir", null));
-
-			PluginManager.getInstance().init(pluginDir);
-
-			Runtime.getRuntime().addShutdownHook(new Thread() {
-				public void run() {
-					PluginManager.getInstance().systemExited();
-				}
-			});
-
-			openJFD(params, configDir);
-			PluginManager.getInstance().configulationChanged();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		};
+		
+		ThreadSafeUtilities.executeRunnable(runnable);
 	}
 
 	public static void openJFD(CommandLineParameters params, VFile configDir)

@@ -1,6 +1,6 @@
 <?xml version=	"1.0"?>
 
-<commandmaps version="20081028">
+<commandmaps version="20090110">
 	<commandmap name="cursor-up">
 		<key name="VK_UP"/>
 	</commandmap>
@@ -142,6 +142,9 @@
 	<commandmap name="find">
 		<key name="VK_F"/>
 	</commandmap>
+	<commandmap name="find_tag">
+		<key name="VK_F" shift="true"/>
+	</commandmap>
 	<commandmap name="grep">
 		<key name="VK_G"/>
 	</commandmap>
@@ -222,11 +225,11 @@
 	<commandmap name="change_dot_file_visible">
 		<key name="VK_PERIOD" shift="true"/>
 	</commandmap>
-	<commandmap name="register_smart_filelist">
+	<commandmap name="register_smart_directory">
 		<key name="VK_S" shift="true"/>
 	</commandmap>
-	<commandmap name="register_filelist">
-		<key name="VK_F" shift="true"/>
+	<commandmap name="register_virtual_directory">
+		<key name="VK_V" shift="true"/>
 	</commandmap>
 	<commandmap name="change_relative_mode">
 		<key name="VK_BACK_SLASH" shift="true"/>

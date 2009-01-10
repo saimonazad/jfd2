@@ -6,14 +6,23 @@
  */
 package com.nullfish.app.jfd2.command.embed;
 
+import java.awt.Frame;
+import java.util.Date;
+import java.util.List;
+
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.Command;
+import com.nullfish.app.jfd2.command.embed.attribute.AttributeDialog;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
+import com.nullfish.lib.ui.tristate_checkbox.TristateState;
 import com.nullfish.lib.vfs.Permission;
+import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
+import com.nullfish.lib.vfs.permission.FileAccess;
+import com.nullfish.lib.vfs.permission.PermissionType;
 
 /**
  * ëÆê´ê›íËÉRÉ}ÉìÉh
@@ -27,9 +36,11 @@ public class AttributeCommand extends Command {
 	 * @see com.nullfish.lib.vfs.manipulation.abst.AbstractManipulation#doExecute()
 	 */
 	public void doExecute() throws VFSException {
+		doExecuteNew();
+		/*
 		JFD jfd = getJFD();
 		VFile currentDir = jfd.getModel().getCurrentDirectory();
-
+		
 		JFDDialog dialog = null;
 		
 		try {
@@ -63,6 +74,77 @@ public class AttributeCommand extends Command {
 			e.printStackTrace();
 			
 			DialogUtilities.showMessageDialog(getJFD(), JFDResource.MESSAGES.getString("fail_set_permission"), "jFD2");
+		}
+		*/
+	}
+	
+	private void doExecuteNew() throws VFSException {
+		JFD jfd = getJFD();
+		
+		AttributeDialog attrDialog = null;
+		try {
+			VFile[] files = jfd.getModel().getMarkedOrSelectedFiles();
+			attrDialog = new AttributeDialog((Frame)null, jfd);
+			attrDialog.init(files);
+			attrDialog.pack();
+			attrDialog.setLocationRelativeTo(jfd.getComponent());
+			attrDialog.setVisible(true);
+			
+			if(!attrDialog.isOkPressed()) {
+				return;
+			}
+			
+			if(!attrDialog.isMultiFileMode() || attrDialog.isEditingPermission()) {
+				for(int i=0; i<files.length; i++) {
+					boolean changed = false;
+					Permission permission = files[i].getPermission();
+					PermissionType[] types = permission.getTypes();
+					FileAccess[] accesses = permission.getAccess();
+					for(int j=0; j<types.length; j++) {
+						for(int k=0; k<accesses.length; k++) {
+							TristateState state = attrDialog.getState(types[j], accesses[k]);
+							TristateState currentState = permission.hasPermission(types[j], accesses[k]) ? TristateState.SELECTED : TristateState.DESELECTED;
+							if(state != TristateState.INDETERMINATE && state != currentState) {
+								permission.setPermission(types[j], accesses[k], state == TristateState.SELECTED);
+								changed = true;
+							}
+						}
+	 				}
+					
+					if(changed) {
+						files[i].setPermission(permission, this);
+					}
+				}
+			}
+			
+			if(!attrDialog.isMultiFileMode() || !attrDialog.isEditingTimestamp()) {
+				Date date = attrDialog.getTimestamp();
+				for(int i=0; i<files.length; i++) {
+					files[i].setTimestamp(date);
+				}
+			}
+			
+			if(!attrDialog.isMultiFileMode() || attrDialog.isEditingTag()) {
+				List tags = attrDialog.getTags();
+				for(int i=0; i<files.length; i++) {
+					List currentTag = files[i].getTag();
+					for(int j=0; j<tags.size(); j++) {
+						String tag = (String) tags.get(j);
+						TristateState state = attrDialog.getTagState(tag);
+						if(state == TristateState.SELECTED && !currentTag.contains(tag)) {
+							files[i].addTag(tag);
+						} else if(state == TristateState.DESELECTED && currentTag.contains(tag)) {
+							files[i].removeTag(tag);
+						}
+					}
+				}
+			}
+		} catch (VFSException e) {
+			e.printStackTrace();
+			
+			DialogUtilities.showMessageDialog(getJFD(), JFDResource.MESSAGES.getString("fail_set_permission"), "jFD2");
+		} finally {
+			attrDialog.dispose();
 		}
 	}
 

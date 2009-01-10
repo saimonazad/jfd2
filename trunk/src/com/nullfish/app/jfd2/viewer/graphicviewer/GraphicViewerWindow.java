@@ -90,19 +90,6 @@ public class GraphicViewerWindow extends JFrame {
 				scroll.getHorizontalScrollBar().setValue(0);
 
 				pack();
-				
-				// paint(Graphics)を呼ぶのは問題あるが、MacOSX上でこうしないと
-				// 表示が更新されてくれない。
-/*
-				if(System.getProperty("os.name").indexOf("Mac OS") >= 0) {
-					Graphics g = imageComponent.getGraphics();
-					if(g == null) {
-						return;
-					}
-					g.setClip(0, 0, scroll.getViewport().getWidth(), scroll.getViewport().getHeight());
-					imageComponent.paint(g);
-				}
-*/
 			}
 		});
 		imageComponent.setBackground(Color.BLACK);
@@ -148,6 +135,12 @@ public class GraphicViewerWindow extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				viewer.close();
 			}
+			
+			public void windowActivated(WindowEvent e) {
+				requestFocus();
+				imageComponent.requestFocusInWindow();
+			}
+			
 		});
 	}
 

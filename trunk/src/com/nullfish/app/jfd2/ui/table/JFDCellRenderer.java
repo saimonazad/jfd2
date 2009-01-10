@@ -33,6 +33,7 @@ import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.config.Configulation;
 import com.nullfish.app.jfd2.util.ShortCutFile;
+import com.nullfish.app.jfd2.util.TagUtil;
 import com.nullfish.app.jfd2.util.thumbnail.ThumbnailCache;
 import com.nullfish.lib.ui.list_table.ListTableModel;
 import com.nullfish.lib.vfs.VFile;
@@ -87,6 +88,7 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 	JLabel nameLabel = new JLabel();
 	JLabel sizeLabel = new JLabel();
 	JLabel dateLabel = new JLabel();
+	JLabel tagLabel = new JLabel();
 
 	GridBagLayout layout = new GridBagLayout();
 
@@ -102,6 +104,7 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
     Color linkColor = Color.BLUE;
     Color listColor = Color.MAGENTA;
     Color unfocusedColor = Color.GRAY;
+    Color tagColor = Color.YELLOW;
 
 	private DecimalFormat sizeFormat = new DecimalFormat("###,###,###,##0 ");
 	
@@ -168,13 +171,21 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		lowerPanel.add(selectionLabel, new GridBagConstraints(0, 1, 1, 1, 0.0, 1.0,
 				GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0,
 						0, 0, 0), 0, 0));
-		lowerPanel.add(nameLabel, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0,
+		JPanel nameTagPanel = new JPanel(new GridBagLayout());
+		nameTagPanel.setOpaque(false);
+		nameTagPanel.add(nameLabel, new GridBagConstraints(0, 1, 1, 1, 0.0, 1.0,
 				GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0,
 						0, 0, 0), 0, 0));
-		lowerPanel.add(sizeLabel, new GridBagConstraints(2, 1, 1, 1, 0.0, 1.0,
+		nameTagPanel.add(tagLabel, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0,
 				GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0,
 						0, 0, 0), 0, 0));
-		lowerPanel.add(dateLabel, new GridBagConstraints(3, 1, 1, 1, 0.0, 1.0,
+		lowerPanel.add(nameTagPanel, new GridBagConstraints(1, 1, 1, 1, 1.0, 1.0,
+				GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0,
+						0, 0, 0), 0, 0));
+		lowerPanel.add(sizeLabel, new GridBagConstraints(3, 1, 1, 1, 0.0, 1.0,
+				GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0,
+						0, 0, 0), 0, 0));
+		lowerPanel.add(dateLabel, new GridBagConstraints(4, 1, 1, 1, 0.0, 1.0,
 				GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0,
 						0, 0, 0), 0, 0));
 		
@@ -184,6 +195,8 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		dateLabel.setOpaque(false);
 
 		sizeLabel.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
+		
+		tagLabel.setForeground(tagColor);
 	}
 
 	/*
@@ -197,6 +210,7 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		if (value == null) {
 			selectionLabel.setText(" ");
 			nameLabel.setText("");
+			tagLabel.setText("");
 			sizeLabel.setText("");
 			dateLabel.setText("");
 			initLabelColor(null, null, isSelected);
@@ -212,6 +226,7 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		boolean isCurrent = file.equals(current);
 		boolean isParent = file.equals(current.getParent());
 		
+		tagLabel.setText(TagUtil.file2TagString(file));
 		if (isMountPoint) {
 			isMountPoint = true;
 			nameLabel.setText("...");
@@ -379,6 +394,8 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		nameLabel.setForeground(foreColor);
 		sizeLabel.setForeground(foreColor);
 		dateLabel.setForeground(foreColor);
+		
+		tagLabel.setForeground(selected ? bgColor : tagColor);
 	}
 	
 	/**
@@ -451,6 +468,7 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 	public void setLabelFont(Font font) {
 		selectionLabel.setFont(font);
 		nameLabel.setFont(font);
+		tagLabel.setFont(font);
 		sizeLabel.setFont(font);
 		dateLabel.setFont(font);
 	}
@@ -518,5 +536,7 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		hidesCursor = ((Boolean)config.getParam("hides_cursor", Boolean.TRUE)).booleanValue();
 		
 		changesColor = ((Boolean)config.getParam("change_color_with_focus", Boolean.TRUE)).booleanValue();
+
+		tagColor = (Color)config.getParam("tag_color", Color.YELLOW);
 	}
 }

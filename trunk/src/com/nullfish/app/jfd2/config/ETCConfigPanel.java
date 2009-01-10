@@ -1,9 +1,12 @@
 package com.nullfish.app.jfd2.config;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -62,6 +65,7 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		grepAllEncodeTextArea.setBorder(BorderFactory.createEtchedBorder());
 		filterTextArea.setRows(5);
 		filterTextArea.setBorder(BorderFactory.createEtchedBorder());
+		
 	}
 
 	public void layoutComponent() {

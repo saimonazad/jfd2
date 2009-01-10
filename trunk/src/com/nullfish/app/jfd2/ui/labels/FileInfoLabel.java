@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.JFDModelListener;
+import com.nullfish.app.jfd2.util.TagUtil;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 
@@ -69,6 +70,9 @@ public class FileInfoLabel extends JLabel {
 			if(file.getPermission() != null) {
 				buffer.append(file.getPermission().getPermissionString());
 			}
+			
+			buffer.append(" ");
+			buffer.append(TagUtil.file2TagString(file));
 	
 			setText(buffer.toString());
 		} catch (VFSException e) {

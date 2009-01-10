@@ -16,7 +16,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -362,24 +361,6 @@ public class JFDDialog extends JDialog {
 		}
 
 		mainPanel.add(name, (TextEditor) editor, title);
-	}
-
-	public void addDateTextField(String name, Date date,
-			boolean closeOnDecision, String title) {
-/*
-		FocusAndSelectExceptExtensionTextField editor = new FocusAndSelectExceptExtensionTextField();
-		
-		editor.setColumns(DEFAULT_TEXT_WIDTH);
-		editor.setText(date);
-
-		if (closeOnDecision) {
-			editor.getActionMap().put(CLOSE_ACTION, new CloseAction());
-			editor.getInputMap(JComponent.WHEN_FOCUSED).put(
-					KeyStrokeMap.getKeyStroke(KeyEvent.VK_ENTER, 0), CLOSE_ACTION);
-		}
-
-		mainPanel.add(name, (TextEditor) editor, title);
-*/
 	}
 
 	public void addSpritFileNameField(String name, String defaultText,

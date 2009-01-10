@@ -66,4 +66,20 @@ public class ColorUtility {
 	public static String color2String(Color color) {
 		return "#" + Integer.toHexString(color.getRGB());
 	}
+	
+	public static Color getComplementaryColor(Color c) {
+	    int newRed = getComplement(c.getRed());
+	    int newGreen = getComplement(c.getGreen());
+	    int newBlue = getComplement(c.getBlue());
+
+	    return new Color(newRed, newGreen, newBlue, c.getAlpha());
+	}
+
+	private static int getComplement(int colorVal) {
+	    int maxDiff = colorVal >= 128 ? -colorVal : 255 - colorVal;
+	    int diff = (int) Math.round(maxDiff / 2.0);
+	    int newColorVal = colorVal + diff;
+
+	    return newColorVal;
+	}
 }

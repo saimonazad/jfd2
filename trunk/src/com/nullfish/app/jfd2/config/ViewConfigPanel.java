@@ -85,6 +85,9 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 	private ColorConfig inactiveColorConfig = new ColorConfig("grid_color_no_focus", "inactive",
 			Color.GRAY);
 
+	private ColorConfig tagColorConfig = new ColorConfig("tag_color", "tag",
+			Color.YELLOW);
+
 
 	private PathConfig bgImageConfig = new PathConfig("bg_image", "bg_image", JFileChooser.FILES_ONLY);
 	private DialogComboBox bgImageCombo = new DialogComboBox(frame);
@@ -178,6 +181,7 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		appearancePanel.addComponent(linkColorConfig, "color_link");
 		appearancePanel.addComponent(listColorConfig, "color_list");
 		appearancePanel.addComponent(inactiveColorConfig, "color_inactive");
+		appearancePanel.addComponent(tagColorConfig, "color_tag");
 
 		appearancePanel.addComponent(doubleLineCheckBox, "double_line_grid");
 		appearancePanel.addComponent(cursorRequresFocusCheckBox, "hides_cursor");
@@ -223,6 +227,7 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		linkColorConfig.setConfigulation(commonConfig);
 		listColorConfig.setConfigulation(commonConfig);
 		inactiveColorConfig.setConfigulation(commonConfig);
+		tagColorConfig.setConfigulation(commonConfig);
 		
 		doubleLineCheckBox.setSelected(((Boolean)commonConfig.getParam("double_line", Boolean.TRUE)).booleanValue());
 		cursorRequresFocusCheckBox.setSelected(((Boolean)commonConfig.getParam("hides_cursor", Boolean.TRUE)).booleanValue());
@@ -271,6 +276,7 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		linkColorConfig.apply(commonConfig);
 		listColorConfig.apply(commonConfig);
 		inactiveColorConfig.apply(commonConfig);
+		tagColorConfig.apply(commonConfig);
 		
 		commonConfig.setParam("double_line", new Boolean(doubleLineCheckBox.isSelected()));
 		commonConfig.setParam("hides_cursor", new Boolean(cursorRequresFocusCheckBox.isSelected()));

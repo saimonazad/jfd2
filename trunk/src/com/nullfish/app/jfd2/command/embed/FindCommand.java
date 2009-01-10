@@ -262,6 +262,8 @@ public class FindCommand extends Command {
 		 */
 		public NormalMatcher(String condition, String conditionExcept, int mode, boolean caseSensitive) {
 			super(mode, caseSensitive);
+			condition = condition  != null ? condition : "";
+			conditionExcept = conditionExcept  != null ? conditionExcept : "";
 			if (caseSensitive) {
 				this.condition = condition;
 				this.conditionExcept = conditionExcept;
@@ -295,6 +297,8 @@ public class FindCommand extends Command {
 		 */
 		public RegexMatcher(String condition, String conditionExcept, int mode, boolean caseSensitive) {
 			super(mode, caseSensitive);
+			condition = condition  != null ? condition : "";
+			conditionExcept = conditionExcept  != null ? conditionExcept : "";
 			if (!caseSensitive) {
 				condition = condition.toLowerCase();
 				conditionExcept = conditionExcept.toLowerCase();

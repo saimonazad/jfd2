@@ -7,13 +7,22 @@
 					<td hfix="true" vfix="true">grep_encode_label</td><td vfix="true">grep_encode_input</td>
 				</tr>
 				<tr>
-					<td vfix="true">grep_encode_all_label</td><td vfix="true">grep_encode_all_input</td>
+					<td vfix="true">grep_encode_all_label</td>
+				</tr>
+				<tr>
+					<td colspan="2" vfix="true">grep_encode_all_input</td>
 				</tr>
 				<tr>
 					<td colspan="2" vfix="true">cursor_loops_check</td>
 				</tr>
 				<tr>
 					<td colspan="2" vfix="true">afx_style_cursor_check</td>
+				</tr>
+				<tr>
+					<td colspan="2" vfix="true" fill="both">mouse_operate_check</td>
+				</tr>
+				<tr>
+					<td colspan="2" vfix="true" fill="both">text_viewer_editable_check</td>
 				</tr>
 				<tr>
 					<td colspan="2" vfix="true" height="10"></td>
@@ -29,12 +38,6 @@
 				</tr>
 				<tr>
 					<td colspan="2" vfix="true" fill="both">filter_text</td>
-				</tr>
-				<tr>
-					<td colspan="2" vfix="true" fill="both">mouse_operate_check</td>
-				</tr>
-				<tr>
-					<td colspan="2" vfix="true" fill="both">text_viewer_editable_check</td>
 				</tr>
 				<tr>
 					<td/>

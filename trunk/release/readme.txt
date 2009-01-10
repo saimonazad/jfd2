@@ -1,4 +1,4 @@
-jFD2@beta15
+jFD2@beta17
 
 œŠT—v
 
@@ -10,6 +10,8 @@ jFD2‚ÍJava‚Å‹Lq‚³‚ê‚½ƒL[ƒ{[ƒh‘€ì‚Ìƒtƒ@ƒCƒ‹ŠÇ—ƒ\ƒtƒg‚Å‚·BÙìjFD‚ÌŽŸŠúƒo[ƒ
 E_“î‚ÈƒŒƒCƒAƒEƒg‹@”\iƒ^ƒuA‰æ–Ê•ªŠ„j
 E‹­—Í‚ÈŒŸõ‹@”\iƒTƒuƒtƒHƒ‹ƒ_‚àŠÜ‚ñ‚¾ƒtƒ@ƒCƒ‹–¼ŒŸõAGrepŒŸõj
 E‹­—Í‚ÈƒJƒXƒ^ƒ}ƒCƒY‹@”\
+E“Á’è‚Ìƒtƒ@ƒCƒ‹‚âAƒtƒ@ƒCƒ‹’ŠoðŒ‚ª“o˜^‰Â”\‚È‰¼‘zƒfƒBƒŒƒNƒgƒŠ‹@”\
+Eƒ†[ƒU[ŠÇ—‰Â”\‚Èƒtƒ@ƒCƒ‹‚Ìƒ^ƒO•t‚¯‹@”\
 
 ¦jFD‚É‚Â‚¢‚Ä
 jFD‚ÍMS|DOS—p‚ÌFDioŽËŒúŽìjAWindows—p‚ÌWinFDi‚‹´’¼lŽìj‚Ì‘€ìŠ´Šo‚ðÄŒ»‚µ‚Â‚Â‹@”\‚ð‹­‰»‚µA‚³‚ç‚É‚»‚ê‚ð‘S‚Ä‚Ìƒvƒ‰ƒbƒgƒz[ƒ€ã‚ÅƒTƒ|[ƒg‚·‚é‚±‚Æ‚ð–Ú•W‚É§ì‚³‚ê‚Ü‚µ‚½B
@@ -17,16 +19,17 @@ jFD‚ÍMS|DOS—p‚ÌFDioŽËŒúŽìjAWindows—p‚ÌWinFDi‚‹´’¼lŽìj‚Ì‘€ìŠ´Šo‚ðÄ
 œ“®ìŠÂ‹«
 
 JavaSE 5 ˆÈãB‚½‚¾‚µAƒ[ƒJƒ‹ƒfƒBƒXƒN‚Ì—e—ÊA‹ó‚«—e—Ê‚Ì•\Ž¦‚ðs‚¤‚É‚ÍJava SE 6ˆÈã‚ª•K—v‚Å‚·B
-–{ƒo[ƒWƒ‡ƒ“‚ÍWindows2000AMacOSX10.4ˆÈ~‚Ì‚Ý‚ðƒTƒ|[ƒg‘ÎÛ‚Æ‚µ‚Ü‚·i‘¼ƒvƒ‰ƒbƒgƒtƒH[ƒ€‚ÍŠŽ‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅŒŸØ‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB‚¨‚»‚ç‚­“®‚«‚Ü‚·j
+Linux‚Å‚ÍJava‚ÌƒoƒO‚Ì‚½‚ßAŒ»Ý‚ÌÅVƒo[ƒWƒ‡ƒ“‚ÌJavaˆÈŠO‚ÍƒTƒ|[ƒg‘ÎÛŠO‚Æ‚µ‚Ü‚·B
+–{ƒo[ƒWƒ‡ƒ“‚ÍWindows XPAMacOSX10.4ˆÈ~AUbuntu Linux8.10‚ðƒTƒ|[ƒg‘ÎÛ‚Æ‚µ‚Ü‚·i‘¼ƒvƒ‰ƒbƒgƒtƒH[ƒ€‚ÍŠŽ‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅŒŸØ‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB‚¨‚»‚ç‚­“®‚«‚Ü‚·j
 ¦ƒOƒ‰ƒtƒBƒbƒNƒrƒ…[ƒA‚ÅBMPATIFFAJPEG2000‚ð•\Ž¦‚·‚é‚É‚ÍJava Advanced Imaging Image I/O Tools‚ÌƒCƒ“ƒXƒg[ƒ‹‚ª•K—v‚Å‚·B‚±‚¿‚ç‚©‚çƒ_ƒEƒ“ƒ[ƒh‚µ‚Ä‚­‚¾‚³‚¢B
 http://java.sun.com/products/java-media/jai/downloads/download-iio-1_0_01.html
 
 œ„§ŠÂ‹«
 
-EJava SE 6
+EÅV‚ÌJava SE 6
 E1GHzˆÈã‚ÌCPU
 E512MBˆÈã‚Ìƒƒ‚ƒŠ[
-EWindows XPˆÈãAMacOSX 10.4.10ˆÈã
+EWindows XPˆÈãAMacOSX 10.5ˆÈãAUbuntu 8.10ˆÈã
 
 œŽÀs•û–@
 
@@ -88,7 +91,7 @@ jFD2‚ðƒCƒ“ƒXƒg[ƒ‹‚µ‚½ƒfƒBƒŒƒNƒgƒŠ‚ÆAˆÈ‰º‚ÌƒfƒBƒŒƒNƒgƒŠ‚ðíœ‚µ‚Ä‚­‚¾‚³‚¢B
 
 œƒ‰ƒCƒZƒ“ƒX
 
-HtmlTablePanel‚ÍApacheƒ‰ƒCƒZƒ“ƒX2.0‚ÌŒ³‚ÅŒöŠJ‚³‚ê‚Ä‚¢‚Ü‚·B 
+jFD2‚ÍApacheƒ‰ƒCƒZƒ“ƒX2.0‚ÌŒ³‚ÅŒöŠJ‚³‚ê‚Ä‚¢‚Ü‚·B 
 Apacheƒ‰ƒCƒZƒ“ƒX2.0‚É‚Â‚¢‚Ä‚ÍAhttp://www.apache.org/licenses/LICENSE-2.0.html‚ðŽQÆ‚µ‚Ä‚­‚¾‚³‚¢B
 –{ƒvƒƒOƒ‰ƒ€‚Ì’˜ìŒ ‚ÍŽR‰YrŽi‚É‚ ‚è‚Ü‚·B
 –{ƒvƒƒOƒ‰ƒ€‚ÌŽg—p‚É‚æ‚Á‚Ä‰½‚ç‚©‚ÌáŠQ‚ª”­¶‚µ‚½ê‡‚Å‚àAìŽÒ‚ÍˆêØ‚ÌÓ”C‚ð•‰‚í‚È‚¢‚à‚Ì‚Æ‚µ‚Ü‚·B

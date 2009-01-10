@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menubar version="20081014">
+<menubar version="20090110">
 	<menu label="file" mnemonic="f">
 		<menu label="manipulation">
 			<menuitem label="create_file" command="create_file">
@@ -17,7 +17,7 @@
 					<key name="VK_S" shift="true"/>
 				</menuitem>
 				<menuitem label="register_filelist" command="register_filelist">
-					<key name="VK_F" shift="true"/>
+					<key name="VK_V" shift="true"/>
 				</menuitem>
 			<separator/>
 			<menuitem label="delete_file" command="delete_file">
@@ -36,6 +36,11 @@
 			</menuitem>
 			<menuitem label="move" command="move">
 				<key name="VK_M"/>
+			</menuitem>
+			
+			<separator/>
+			<menuitem label="attribute" command="attribute">
+				<key name="VK_A"/>
 			</menuitem>
 		</menu>
 
@@ -87,6 +92,9 @@
 		<separator/>
 		<menuitem label="find" command="find">
 			<key name="VK_F"/>
+		</menuitem>
+		<menuitem label="find_tag" command="find_tag">
+			<key name="VK_F" shift="true"/>
 		</menuitem>
 		<menuitem label="grep" command="grep">
 			<key name="VK_G"/>
@@ -212,6 +220,8 @@
 		<menuitem label="go_plugin_dir" command="go_plugin_dir">
 		</menuitem>
 		<menuitem label="go_script_dir" command="go_script_dir">
+		</menuitem>
+		<menuitem label="clean_tag_db" command="clean_tag_db">
 		</menuitem>
 	</menu>
 </menubar>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menubar version="20080311">
+<menubar version="20090110">
 	<menuitem label="go-parent" command="go-parent">
 		<key name="VK_BACK_SPACE"/>
 	</menuitem>
@@ -22,7 +22,7 @@
 				<key name="VK_S" shift="true"/>
 			</menuitem>
 			<menuitem label="register_filelist" command="register_filelist">
-				<key name="VK_F" shift="true"/>
+				<key name="VK_V" shift="true"/>
 			</menuitem>
 		<separator/>
 		<menuitem label="next_tab" command="next_tab">
@@ -69,6 +69,9 @@
 		<separator/>
 		<menuitem label="find" command="find">
 			<key name="VK_F"/>
+		</menuitem>
+		<menuitem label="find_tag" command="find_tag">
+			<key name="VK_F" shift="true"/>
 		</menuitem>
 		<menuitem label="grep" command="grep">
 			<key name="VK_G"/>
@@ -161,6 +164,11 @@
 		<menuitem label="move" command="move">
 			<key name="VK_M"/>
 		</menuitem>
+			
+		<separator/>
+		<menuitem label="attribute" command="attribute">
+			<key name="VK_A"/>
+		</menuitem>
 	</menu>
 	<menu label="execute_menu">
 		<menuitem label="execute" command="execute">
@@ -225,6 +233,8 @@
 		<menuitem label="go_plugin_dir" command="go_plugin_dir">
 		</menuitem>
 		<menuitem label="go_script_dir" command="go_script_dir">
+		</menuitem>
+		<menuitem label="clean_tag_db" command="clean_tag_db">
 		</menuitem>
 	</menu>
 </menubar>

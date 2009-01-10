@@ -40,6 +40,9 @@
 					<td vfix="true">color_inactive</td>
 				</tr>
 				<tr>
+					<td vfix="true">color_tag</td>
+				</tr>
+				<tr>
 					<td/>
 				</tr>
 			</table>

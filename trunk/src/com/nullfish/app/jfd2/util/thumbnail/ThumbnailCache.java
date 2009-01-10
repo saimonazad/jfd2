@@ -3,18 +3,23 @@ package com.nullfish.app.jfd2.util.thumbnail;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.nullfish.app.jfd2.util.NumberLimitedMap;
+import com.nullfish.app.jfd2.viewer.graphicviewer.ImageComponent;
 import com.nullfish.lib.ui.list_table.ListTableModel;
 import com.nullfish.lib.vfs.VFile;
 
@@ -126,6 +131,73 @@ e.printStackTrace();
 		}
 	}
 
+	private JPanel imageObserver = new JPanel();
+	/**
+	 * サムネイルを作成する。
+	 * @param file
+	 * @return
+	 */
+	private BufferedImage createThumbnailFast(VFile file) {
+		Image originalImage = null;
+		InputStream is = null;
+		Graphics2D g2 = null;
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		try {
+			is = file.getInputStream();
+			byte[] buffer = new byte[4096];
+			int l = 0;
+			while((l = is.read(buffer)) != -1) {
+				bos.write(buffer, 0, l);
+			}
+			
+			originalImage = Toolkit.getDefaultToolkit().createImage(bos.toByteArray());
+			MediaTracker tracker = new MediaTracker(imageObserver);
+			tracker.addImage(originalImage, 0);
+			try {
+				tracker.waitForID(0);
+			} catch (InterruptedException e) {
+				//e.printStackTrace();
+			}
+			if(originalImage == null) {
+				return null;
+			}
+			
+			int width = originalImage.getWidth(imageObserver);
+			int height = originalImage.getHeight(imageObserver);
+			
+			if(width <= 0 || height <= 0) {
+				return null;
+			}
+			
+			double widthRatio = (double)thumbnailWidth / (double)width;
+			double heightRatio = (double)thumbnailHeight / (double)height;
+			double ratio = widthRatio < heightRatio ? widthRatio : heightRatio;
+			
+			BufferedImage rtn = new BufferedImage((int)(width * ratio), (int)(height * ratio), BufferedImage.TYPE_INT_ARGB);
+			g2 = rtn.createGraphics();
+			g2.setColor(Color.BLACK);
+			g2.clearRect(0, 0, thumbnailWidth, thumbnailHeight);
+
+			g2.drawImage(originalImage, AffineTransform.getScaleInstance(ratio, ratio), null);
+
+			return rtn;
+		} catch (Exception e) {
+e.printStackTrace();
+			return null;
+		} catch (Throwable e) {
+e.printStackTrace();
+			return null;
+		} finally {
+			if(g2 != null) {
+				g2.dispose();
+			}
+			try {is.close(); } catch (Exception e) {}
+			if(originalImage != null) {
+				originalImage.flush();
+			}
+		}
+	}
+
 	public void setCacheSize(int size) {
 		fileThumbnailMap.setMaxItemNumber(size);
 	}
@@ -214,7 +286,17 @@ e.printStackTrace();
 							e.printStackTrace();
 						}
 						
-						BufferedImage thumbnail = createThumbnail(nextTask.getFile());
+						//BufferedImage thumbnail = createThumbnail(nextTask.getFile());
+						String extension = nextTask.getFile().getFileName().getExtension().toLowerCase();
+						BufferedImage thumbnail;
+						if("jpg".equals(extension)
+							|| "jpeg".equals(extension)
+							|| "gif".equals(extension)
+							|| "png".equals(extension)) {
+							thumbnail = createThumbnailFast(nextTask.getFile());
+						} else {
+							thumbnail = createThumbnail(nextTask.getFile());
+						}
 						if(thumbnail != null) {
 							cache(nextTask.getFile(), thumbnail);
 							try {

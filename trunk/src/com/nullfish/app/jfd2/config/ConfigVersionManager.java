@@ -31,25 +31,25 @@ public class ConfigVersionManager {
 
 	private static final FileVersion[] ETC_FILES_XML_WIN = {
 		new FileVersion("aliase.xml", "aliase_win.xml", 0),
-		new FileVersion("command.xml", "command.xml", 20081014),
+		new FileVersion("command.xml", "command.xml", 20090110),
 		new FileVersion("external_command.xml", "external_command.xml", 0),
-		new FileVersion("keys.xml", "keys.xml", 20081028),
-		new FileVersion("menubar.xml", "menubar.xml", 20081014),
+		new FileVersion("keys.xml", "keys.xml", 20090110),
+		new FileVersion("menubar.xml", "menubar.xml", 20090110),
 		new FileVersion("owner_command.xml", "owner_command.xml", 1.0),
 		new FileVersion("owner_keys.xml", "owner_keys.xml", 1.0),
-		new FileVersion("popup.xml", "popup.xml", 20080311),
+		new FileVersion("popup.xml", "popup.xml", 20090110),
 		new FileVersion("function.ini", "function.ini", 0)
 	};
 
 	private static final FileVersion[] ETC_FILES_XML_UNIX = {
 		new FileVersion("aliase.xml", "aliase_unix.xml", 0.3),
-		new FileVersion("command.xml", "command.xml", 20081014),
+		new FileVersion("command.xml", "command.xml", 20090110),
 		new FileVersion("external_command.xml", "external_command.xml", 0),
-		new FileVersion("keys.xml", "keys.xml", 20081028),
-		new FileVersion("menubar.xml", "menubar.xml", 20081014),
+		new FileVersion("keys.xml", "keys.xml", 20090110),
+		new FileVersion("menubar.xml", "menubar.xml", 20090110),
 		new FileVersion("owner_command.xml", "owner_command.xml", 1.0),
 		new FileVersion("owner_keys.xml", "owner_keys.xml", 1.0),
-		new FileVersion("popup.xml", "popup.xml", 20080311),
+		new FileVersion("popup.xml", "popup.xml", 20090110),
 		new FileVersion("function.ini", "function.ini", 0)
 	};
 
@@ -93,14 +93,15 @@ public class ConfigVersionManager {
 			config = Configulation
 					.getInstance(commonConfigFile);
 			editorPath = (String)config.getParam("editor", null);
-			config.getParam("temp_dir", configDir.getChild("temp").getAbsolutePath());
-			config.getParam("script_dir", userConfigDir.getChild("script").getAbsolutePath());
-			config.getParam("shortcut_dir", userConfigDir.getChild("shortcut").getAbsolutePath());
-			config.getParam("user_conf_dir", userConfigDir.getChild("conf").getAbsolutePath());
+			initConfig(config, "temp_dir", configDir.getChild("temp").getAbsolutePath());
+			initConfig(config, "script_dir", userConfigDir.getChild("script").getAbsolutePath());
+			initConfig(config, "shortcut_dir", userConfigDir.getChild("shortcut").getAbsolutePath());
+			initConfig(config, "user_conf_dir", userConfigDir.getChild("conf").getAbsolutePath());
 			shell = (String)config.getParam("shell", null);
 			appShell = (String)config.getParam("app_shell", null);
-			config.getParam("open_console_command", DefaultConfig.getDefaultConfig().getConsole());
-			config.getParam("plugin_dir", userConfigDir.getChild("plugin").getAbsolutePath());
+			initConfig(config, "open_console_command", DefaultConfig.getDefaultConfig().getConsole());
+			initConfig(config, "plugin_dir", userConfigDir.getChild("plugin").getAbsolutePath());
+			initConfig(config, "tag_db_dir", configDir.getChild("tags").getAbsolutePath());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -143,6 +144,12 @@ public class ConfigVersionManager {
 		}
 	}
 	
+	private void initConfig(Configulation config, String key, Object value) {
+		if("".equals(config.getParam(key, value))) {
+			config.setParam(key, value);
+		}
+	}
+	
 	/**
 	 * ローカル設定のバージョン管理
 	 * @param configDir
@@ -175,7 +182,10 @@ public class ConfigVersionManager {
 					currentVersion = getPropertyVersion(configFile);
 				}
 
-				if(currentVersion < fileVersions[i].getVersion()) {
+				if(currentVersion < fileVersions[i].getVersion()
+						//TODO: バージョン番号付け間違え対応。将来（ベータ20くらい？）消す。
+						|| currentVersion == 200801014 	
+				) {
 					toUpdate.add(fileVersions[i]);
 				}
 			} else {

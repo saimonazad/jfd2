@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.nullfish.app.jfd2.resource.JFDResource;
+import com.nullfish.lib.ui.ColorUtility;
 
 public class ColorConfig extends JPanel {
 	/**
@@ -94,6 +95,7 @@ public class ColorConfig extends JPanel {
 	 */
 	private void colorChanged() {
 		label.setBackground(color);
+		//label.setForeground(ColorUtility.getComplementaryColor(color));
 	}
 
 	/**

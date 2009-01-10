@@ -242,9 +242,14 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 			CommandCallable callable = new CommandCallable() {
 				public void callCommand(String command) {
 					Action action = textArea.getActionMap().get(command);
-					if (action == null) {
-						action = getActionMap().get(command);
+					if (action != null) {
+						action.actionPerformed(new ActionEvent(
+								textArea,
+								ActionEvent.ACTION_PERFORMED, null));
+						return;
 					}
+
+					action = getActionMap().get(command);
 					if (action != null) {
 						action.actionPerformed(new ActionEvent(
 								TextViewerPanel.this,
