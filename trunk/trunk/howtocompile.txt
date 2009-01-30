@@ -1,0 +1,9 @@
+Install Maven2 and configure path at first. 
+Then, check out source code of FileFish.
+
+http://code.google.com/p/filefish-vfs/source/checkout
+
+Type "mvn install" in "trunk" direcotry of FileFish.
+
+Then, type "mvn assembly:assembly" in "trunk" directory of jFD2.
+
