@@ -1,9 +1,0 @@
-<!ELEMENT script-server script*>
-
-<!ELEMENT script >
-<!ATTLIST script
-	name CDATA #REQUIRED
-	href CDATA #REQUIRED
-	encode CDATA #REQUIRED
-	version CDATA #REQUIRED
->

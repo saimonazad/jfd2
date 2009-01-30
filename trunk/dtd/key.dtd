@@ -1,4 +1,0 @@
-<!ELEMENT commandmap (key*) >
-<!ATTLIST commandmap
-	name CDATA #REQUIRED
->

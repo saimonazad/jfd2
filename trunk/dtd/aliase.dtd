@@ -1,7 +1,0 @@
-<!ELEMENT aliase name+>
-<!ATTLIST aliase
-	path CDATA #REQUIRED
-	last-opened-dir CDATA "false"
->
-
-<!ELEMENT name CDATA>
