@@ -15,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.nullfish.app.jfd2.resource.JFDResource;
-import com.nullfish.lib.ui.ColorUtility;
 
 public class ColorConfig extends JPanel {
 	/**

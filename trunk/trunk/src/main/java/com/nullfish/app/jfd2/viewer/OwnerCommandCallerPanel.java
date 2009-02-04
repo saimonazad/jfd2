@@ -14,9 +14,9 @@ import javax.swing.SwingUtilities;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.command.CommandManager;
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.lib.ui.KeyStrokeUtility;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -33,7 +33,7 @@ public class OwnerCommandCallerPanel extends JPanel {
 	}
 	
 	public void init(VFile file) throws JDOMException, IOException, VFSException {
-		Document doc = new SAXBuilder().build(file.getInputStream());
+		Document doc = DomCache.getInstance().getDocument(file);
 		init(doc.getRootElement());
 	}
 	

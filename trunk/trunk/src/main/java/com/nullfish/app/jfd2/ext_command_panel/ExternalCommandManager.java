@@ -10,11 +10,11 @@ import java.util.List;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.Initable;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.JFDException;
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 import com.nullfish.lib.vfs.exception.VFSIOException;
@@ -56,8 +56,7 @@ public class ExternalCommandManager implements Initable {
 	 */
 	public void init(VFile baseDir) throws VFSException {
 		try {
-			SAXBuilder builder = new SAXBuilder();
-			Document doc = builder.build(baseDir.getChild(CONFIG_FILE).getInputStream());
+			Document doc = DomCache.getInstance().getDocument(baseDir.getChild(CONFIG_FILE));
 			
 			List commandSetList = doc.getRootElement().getChildren(EXT_COMMAND_SET);
 			for(int i=0; i<commandSetList.size(); i++) {

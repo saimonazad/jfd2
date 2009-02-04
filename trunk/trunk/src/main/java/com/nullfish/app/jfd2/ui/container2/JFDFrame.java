@@ -30,7 +30,6 @@ import javax.swing.KeyStroke;
 
 import org.jdom.Document;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDComponent;
@@ -39,6 +38,7 @@ import com.nullfish.app.jfd2.config.Configulation;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.ui.container2.components.TabContainer;
 import com.nullfish.app.jfd2.ui.container2.components.VisibilityChangeTabbedPane;
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.app.jfd2.util.thumbnail.ThumbnailDataBase;
 import com.nullfish.app.jfd2.viewer.FileViewerManager;
 import com.nullfish.lib.command.CommandCallable;
@@ -281,8 +281,7 @@ public class JFDFrame extends JFrame implements JFDOwner {
 
 		menuBar = new XMLMenuBar(resource, callable);
 		try {
-			Document doc = new SAXBuilder().build(configDir.getChild(
-					MENUBAR_CONFIG).getInputStream());
+			Document doc = DomCache.getInstance().getDocument(configDir.getChild(MENUBAR_CONFIG));
 			menuBar.convertFromNode(doc.getRootElement());
 		} catch (Exception e) {
 			e.printStackTrace();

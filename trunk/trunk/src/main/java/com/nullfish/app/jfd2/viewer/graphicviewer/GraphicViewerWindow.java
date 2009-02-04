@@ -32,9 +32,9 @@ import javax.swing.JScrollPane;
 import javax.swing.RepaintManager;
 
 import org.jdom.Document;
-import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.resource.JFDResource;
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.app.jfd2.viewer.OwnerCommandCallerPanel;
 import com.nullfish.app.jfd2.viewer.action.CloseAction;
 import com.nullfish.app.jfd2.viewer.action.OpenOrCloseAction;
@@ -190,8 +190,7 @@ public class GraphicViewerWindow extends JFrame {
 				}
 			});
 
-			Document doc = new SAXBuilder().build(VFS.getInstance().getFile(
-					POPUP_FILE).getInputStream());
+			Document doc = DomCache.getInstance().getDocument(VFS.getInstance().getFile(POPUP_FILE));
 			popup.convertFromNode(doc.getRootElement());
 			
 			MouseListener mouseListener =  new MouseAdapter() {

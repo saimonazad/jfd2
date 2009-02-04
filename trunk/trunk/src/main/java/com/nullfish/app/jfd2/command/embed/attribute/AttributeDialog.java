@@ -37,7 +37,6 @@ import com.nullfish.lib.ui.OneKeyRadioButton;
 import com.nullfish.lib.ui.TagPanel;
 import com.nullfish.lib.ui.permissionpanel.PermissionPanel;
 import com.nullfish.lib.ui.tristate_checkbox.TristateState;
-import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 import com.nullfish.lib.vfs.permission.FileAccess;

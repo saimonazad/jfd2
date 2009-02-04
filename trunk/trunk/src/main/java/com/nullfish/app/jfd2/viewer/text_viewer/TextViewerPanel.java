@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -38,9 +39,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.Element;
 
+import org.apache.commons.vfs.util.MonitorInputStream;
 import org.dyndns.longinus.utils.HTMLUtil;
 import org.jdom.Document;
-import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDComponent;
@@ -50,6 +51,7 @@ import com.nullfish.app.jfd2.config.DefaultConfig;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.ui.container2.ContainerPosition;
 import com.nullfish.app.jfd2.ui.container2.JFDOwner;
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.app.jfd2.viewer.FileNameTitleUpdater;
 import com.nullfish.app.jfd2.viewer.FileViewerContainerPanel;
 import com.nullfish.lib.EncodeDetector;
@@ -268,8 +270,7 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 				}
 			});
 
-			Document doc = new SAXBuilder().build(VFS.getInstance().getFile(
-					POPUP_FILE).getInputStream());
+			Document doc = DomCache.getInstance().getDocument(VFS.getInstance().getFile(POPUP_FILE));
 			popup.convertFromNode(doc.getRootElement());
 			
 			MouseListener mouseListener =  new MouseAdapter() {
@@ -482,7 +483,8 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 			BufferedReader reader = null;
 
 			try {
-				is = new BufferedInputStream(file.getInputStream());
+				InputStream ins =file.getInputStream();
+				is = new BufferedInputStream(ins);
 				if(encAutoDetect) {
 					enc = EncodeDetector.detectEncoding(is);
 					enc = enc != null ? enc : (String)encodings.get(0);
@@ -494,6 +496,16 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 					});
 				}
 				Charset charset = Charset.forName(enc);
+
+				if(ins instanceof MonitorInputStream) {
+					// commons VFS対策
+					try {
+						is.close();
+					} catch (Exception e) {}
+					
+					is = new BufferedInputStream(file.getInputStream());
+				}
+				
 				reader = new BufferedReader(new InputStreamReader(is, charset));
 				String line;
 				if(html) {

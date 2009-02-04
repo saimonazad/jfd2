@@ -2,7 +2,6 @@ package com.nullfish.lib.keymap;
 
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +11,11 @@ import javax.swing.KeyStroke;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.lib.ui.KeyStrokeUtility;
+import com.nullfish.lib.vfs.VFile;
+import com.nullfish.lib.vfs.exception.VFSException;
 
 public class KeyStrokeMap {
 	private static KeyStrokeMap instance = new KeyStrokeMap();
@@ -51,11 +52,10 @@ public class KeyStrokeMap {
 		reverseKeyCodeMap.clear();
 	}
 	
-	public void init(InputStream is) throws JDOMException, IOException {
+	public void init(VFile file) throws JDOMException, IOException, VFSException {
 		clear();
 
-		SAXBuilder builder = new SAXBuilder();
-		Document doc = builder.build(is);
+		Document doc = DomCache.getInstance().getDocument(file);
 		List mappings = doc.getRootElement().getChildren("mapping");
 		for (int i = 0; i < mappings.size(); i++) {
 			Element mapping = (Element)mappings.get(i);

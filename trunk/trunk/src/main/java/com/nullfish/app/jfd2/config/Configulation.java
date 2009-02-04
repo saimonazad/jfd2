@@ -5,7 +5,6 @@
 package com.nullfish.app.jfd2.config;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,10 +15,10 @@ import java.util.Map;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.lib.meta_data.MetaDataManager;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -68,13 +67,13 @@ public class Configulation {
 
 	/**
 	 * 設定を読み込む。
-	 * @param is
+	 * @param file
 	 * @throws JDOMException
 	 * @throws IOException
+	 * @throws VFSException 
 	 */
-	public void load(InputStream is) throws JDOMException, IOException {
-		SAXBuilder builder = new SAXBuilder();
-		Document doc = builder.build(is);
+	public void load(VFile file) throws JDOMException, IOException, VFSException {
+		Document doc = DomCache.getInstance().getDocument(file);
 
 		Element root = doc.getRootElement();
 		
@@ -170,7 +169,7 @@ public class Configulation {
 		Configulation rtn = (Configulation) fileInstanceMap.get(file);
 		if (rtn == null) {
 			rtn = new Configulation();
-			rtn.load(file.getInputStream());
+			rtn.load(file);
 			fileInstanceMap.put(file, rtn);
 		}
 		

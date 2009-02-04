@@ -19,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.nullfish.app.jfd2.util.NumberLimitedMap;
-import com.nullfish.app.jfd2.viewer.graphicviewer.ImageComponent;
 import com.nullfish.lib.ui.list_table.ListTableModel;
 import com.nullfish.lib.vfs.VFile;
 
