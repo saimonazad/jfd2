@@ -10,7 +10,6 @@ import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.comparator.JFDComparator;
-import com.nullfish.app.jfd2.config.Configulation;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;

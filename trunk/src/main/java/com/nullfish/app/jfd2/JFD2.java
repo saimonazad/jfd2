@@ -43,7 +43,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Document;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
@@ -78,6 +77,7 @@ import com.nullfish.app.jfd2.ui.table.JFDCellRenderer;
 import com.nullfish.app.jfd2.ui.table.JFDListCursorModel;
 import com.nullfish.app.jfd2.ui.table.JFDListModel;
 import com.nullfish.app.jfd2.ui.table.RendererMode;
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.app.jfd2.util.IncrementalSearcher;
 import com.nullfish.app.jfd2.util.SortUtility;
 import com.nullfish.app.jfd2.util.thumbnail.ThumbnailCache;
@@ -204,7 +204,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	private JLabel clockLabelRightPad = new JLabel(" ");
 
 	private static Element layoutNode;
-	{
+	static {
 		try {
 			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance()
 					.newDocumentBuilder();
@@ -1044,8 +1044,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 		searcher.init(baseDir);
 
 		try {
-			localConfig.load(baseDir.getChild(JFD.LOCAL_PARAM_FILE)
-					.getInputStream());
+			localConfig.load(baseDir.getChild(JFD.LOCAL_PARAM_FILE));
 		} catch (VFSException e) {
 			throw e;
 		} catch (Exception e) {
@@ -1175,8 +1174,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 		}
 
 		try {
-			Document doc = new SAXBuilder().build(configDir.getChild(
-					"popup.xml").getInputStream());
+			Document doc = DomCache.getInstance().getDocument(configDir.getChild("popup.xml"));
 			popup.convertFromNode(doc.getRootElement());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1588,7 +1586,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 				try {
 					VFile keyMapFile = VFS.getInstance().getFile(keyMapPath);
 					if(keyMapFile.exists()) {
-						KeyStrokeMap.getInstance().init(keyMapFile.getInputStream());
+						KeyStrokeMap.getInstance().init(keyMapFile);
 					}
 				} catch (VFSException ex) {
 					ex.printStackTrace();

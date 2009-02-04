@@ -5,7 +5,6 @@
 package com.nullfish.app.jfd2.command;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,12 +18,12 @@ import javax.swing.KeyStroke;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.Initable;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.config.Configulation;
 import com.nullfish.app.jfd2.ui.container2.JFDOwner;
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.lib.ui.KeyStrokeUtility;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
@@ -81,15 +80,15 @@ public class CommandManager implements Initable {
 	 * @param is
 	 * @throws JDOMException
 	 * @throws IOException
+	 * @throws VFSException 
 	 */
-	public void initCommands(InputStream is, boolean override)
-			throws JDOMException, IOException {
+	public void initCommands(VFile file, boolean override)
+			throws JDOMException, IOException, VFSException {
 		if (!override) {
 			nameCommandMap.clear();
 		}
 
-		SAXBuilder builder = new SAXBuilder();
-		Document doc = builder.build(is);
+		Document doc = DomCache.getInstance().getDocument(file);
 		List commandNodes = doc.getRootElement().getChildren(
 				Command.COMMAND_TAG);
 		for (int i = 0; i < commandNodes.size(); i++) {
@@ -112,15 +111,15 @@ public class CommandManager implements Initable {
 	 * @param override
 	 * @throws JDOMException
 	 * @throws IOException
+	 * @throws VFSException 
 	 */
-	public void initKeyMap(InputStream is, boolean override)
-			throws JDOMException, IOException {
+	public void initKeyMap(VFile file, boolean override)
+			throws JDOMException, IOException, VFSException {
 		if (!override) {
 			keyNameMap.clear();
 		}
 
-		SAXBuilder builder = new SAXBuilder();
-		Document doc = builder.build(is);
+		Document doc = DomCache.getInstance().getDocument(file);
 		List commandMapList = doc.getRootElement().getChildren(COMMAND_MAP_TAG);
 		for (int i = 0; i < commandMapList.size(); i++) {
 			Element mapping = (Element) commandMapList.get(i);
@@ -217,8 +216,8 @@ public class CommandManager implements Initable {
 	 */
 	public void init(VFile baseDir) throws VFSException {
 		try {
-			initCommands(baseDir.getChild(COMMAND_FILE).getInputStream(), false);
-			initKeyMap(baseDir.getChild(KEY_FILE).getInputStream(), false);
+			initCommands(baseDir.getChild(COMMAND_FILE), false);
+			initKeyMap(baseDir.getChild(KEY_FILE), false);
 
 			Configulation commonConfig = Configulation.getInstance(baseDir.getChild(JFD.COMMON_PARAM_FILE));
 			VFile userConfDir = VFS.getInstance(jfd).getFile(
@@ -229,7 +228,7 @@ public class CommandManager implements Initable {
 			try {
 				VFile userCommandFile = userConfDir.getChild(COMMAND_FILE);
 				if (userCommandFile.exists()) {
-					initCommands(userCommandFile.getInputStream(), true);
+					initCommands(userCommandFile, true);
 				}
 			} catch (JDOMException e) {
 				e.printStackTrace();
@@ -237,7 +236,7 @@ public class CommandManager implements Initable {
 			try {
 				VFile userKeyFile = userConfDir.getChild(KEY_FILE);
 				if (userKeyFile.exists()) {
-					initKeyMap(userKeyFile.getInputStream(), true);
+					initKeyMap(userKeyFile, true);
 				}
 			} catch (JDOMException e) {
 				e.printStackTrace();

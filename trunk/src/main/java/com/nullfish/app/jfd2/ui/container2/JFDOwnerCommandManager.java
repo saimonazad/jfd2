@@ -35,8 +35,8 @@ public class JFDOwnerCommandManager extends CommandManager {
 	 */
 	public void init(VFile baseDir) throws VFSException {
 		try {
-			initCommands(baseDir.getChild(COMMAND_FILE).getInputStream(), false);
-			initKeyMap(baseDir.getChild(KEY_FILE).getInputStream(), false);
+			initCommands(baseDir.getChild(COMMAND_FILE), false);
+			initKeyMap(baseDir.getChild(KEY_FILE), false);
 			VFile userConfDir = VFS.getInstance().getFile(
 					(String)Configulation.getInstance(baseDir).getParam(
 							"user_conf_dir",
@@ -45,7 +45,7 @@ public class JFDOwnerCommandManager extends CommandManager {
 			try {
 				VFile userCommandFile = userConfDir.getChild(COMMAND_FILE);
 				if(userCommandFile.exists()) {
-					initCommands(userCommandFile.getInputStream(), true);
+					initCommands(userCommandFile, true);
 				}
 			} catch (JDOMException e) {
 				e.printStackTrace();
@@ -53,7 +53,7 @@ public class JFDOwnerCommandManager extends CommandManager {
 			try {
 				VFile userKeyFile = userConfDir.getChild(KEY_FILE);
 				if(userKeyFile.exists()) {
-					initKeyMap(userKeyFile.getInputStream(), true);
+					initKeyMap(userKeyFile, true);
 				}
 			} catch (JDOMException e) {
 				e.printStackTrace();

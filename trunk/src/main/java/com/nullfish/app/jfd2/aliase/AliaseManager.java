@@ -12,12 +12,12 @@ import java.util.Map;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.Initable;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.JFDException;
 import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -82,8 +82,7 @@ public class AliaseManager implements Initable {
 			if(!configFile.exists()) {
 				return;
 			}
-			SAXBuilder builder = new SAXBuilder();
-			Document doc = builder.build(configFile.getInputStream());
+			Document doc = DomCache.getInstance().getDocument(configFile);
 			Element root = doc.getRootElement();
 			List aliases = root.getChildren(TAG_ALIASE);
 			

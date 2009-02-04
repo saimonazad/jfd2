@@ -5,7 +5,6 @@
 package com.nullfish.app.jfd2.command.owner;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,11 +14,11 @@ import javax.swing.KeyStroke;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.Initable;
 import com.nullfish.app.jfd2.command.JFDException;
 import com.nullfish.app.jfd2.ui.container2.JFDOwner;
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.lib.ui.KeyStrokeUtility;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -76,15 +75,15 @@ public class OwnerCommandManager implements Initable {
 	
 	/**
 	 * コマンドをXMLのストリームから読み込み、初期化する。
-	 * @param is
+	 * @param file
 	 * @throws JDOMException
 	 * @throws IOException
+	 * @throws VFSException 
 	 */
-	public void initCommands(InputStream is) throws JDOMException, IOException {
+	public void initCommands(VFile file) throws JDOMException, IOException, VFSException {
 		nameCommandMap.clear();
 		
-		SAXBuilder builder = new SAXBuilder();
-		Document doc = builder.build(is);
+		Document doc = DomCache.getInstance().getDocument(file);
 		List commandNodes = doc.getRootElement().getChildren(
 				OwnerCommand.COMMAND_TAG);
 		for (int i = 0; i < commandNodes.size(); i++) {
@@ -97,15 +96,15 @@ public class OwnerCommandManager implements Initable {
 
 	/**
 	 * 入力キーをXMLのストリームから読み込み、初期化する。
-	 * @param is
+	 * @param file
 	 * @throws JDOMException
 	 * @throws IOException
+	 * @throws VFSException 
 	 */
-	public void initKeyMap(InputStream is) throws JDOMException, IOException {
+	public void initKeyMap(VFile file) throws JDOMException, IOException, VFSException {
 		keyNameMap.clear();
 		
-		SAXBuilder builder = new SAXBuilder();
-		Document doc = builder.build(is);
+		Document doc = DomCache.getInstance().getDocument(file);
 		List commandMapList = doc.getRootElement().getChildren(COMMAND_MAP_TAG);
 		for (int i = 0; i < commandMapList.size(); i++) {
 			Element mapping = (Element)commandMapList.get(i);
@@ -182,8 +181,8 @@ public class OwnerCommandManager implements Initable {
 	 */
 	public void init(VFile baseDir) throws VFSException {
 		try {
-			initCommands(baseDir.getChild(COMMAND_FILE).getInputStream());
-			initKeyMap(baseDir.getChild(KEY_FILE).getInputStream());
+			initCommands(baseDir.getChild(COMMAND_FILE));
+			initKeyMap(baseDir.getChild(KEY_FILE));
 		} catch (VFSException e) {
 			throw e;
 		} catch (Exception e) {

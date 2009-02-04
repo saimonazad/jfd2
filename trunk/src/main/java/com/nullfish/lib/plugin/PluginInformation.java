@@ -14,8 +14,8 @@ import java.util.StringTokenizer;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.lib.meta_data.MetaDataManager;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -74,11 +74,10 @@ public class PluginInformation {
 	public static final String ATTR_CLASSPATH = "classpath";
 	
 	public PluginInformation(VFile file) throws VFSException {
-		SAXBuilder builder = new SAXBuilder();
 		
 		Document doc = null;
 		try {
-			doc = builder.build(file.getInputStream());
+			doc = DomCache.getInstance().getDocument(file);
 		} catch (JDOMException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

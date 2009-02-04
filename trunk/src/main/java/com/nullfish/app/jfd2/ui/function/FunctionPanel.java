@@ -27,6 +27,7 @@ import javax.swing.KeyStroke;
 import com.nullfish.app.jfd2.Initable;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.JFDException;
+import com.nullfish.app.jfd2.util.PropertiesCache;
 import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -275,11 +276,10 @@ public class FunctionPanel extends JPanel implements Initable {
 		return mode;
 	}
 
-	public void initFromStream(InputStream is) throws IOException {
+	public void initFromStream(VFile file) throws IOException, VFSException {
 		invalidate();
 		try {
-			Properties prop = new Properties();
-			prop.load(is);
+			Properties prop = PropertiesCache.getInstance().getDocument(file);
 
 			for (int set = 0; set < 2; set++) {
 				for (int i = 0; i < 12; i++) {
@@ -293,10 +293,6 @@ public class FunctionPanel extends JPanel implements Initable {
 			}
 		} finally {
 			validate();
-			try {
-				is.close();
-			} catch (Exception e) {
-			}
 		}
 	}
 
@@ -353,7 +349,7 @@ public class FunctionPanel extends JPanel implements Initable {
 	 */
 	public void init(VFile baseDir) throws VFSException {
 		try {
-			initFromStream(baseDir.getChild(PREF_FILE).getInputStream());
+			initFromStream(baseDir.getChild(PREF_FILE));
 		} catch (IOException e) {
 			throw new JFDException(e, "", null);
 		} catch (VFSException e) {

@@ -2,14 +2,11 @@ package com.nullfish.app.jfd2.filelist;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.vfs.impl.filelist.condition.Condition;
-import com.nullfish.lib.vfs.impl.filelist.condition.NameCondition;
 import com.nullfish.lib.vfs.impl.filelist.condition.TagCondition;
 
 public class TagConditionEditor implements ConditionEditor {

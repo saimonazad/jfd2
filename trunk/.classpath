@@ -15,8 +15,9 @@
   <classpathentry kind="var" path="M2_REPO/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-net/commons-net/2.0/commons-net-2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-vfs/commons-vfs/1.0/commons-vfs-1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/fastfile/fastfile/1.0/fastfile-1.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/nullfish/filefish/1.0-SNAPSHOT/filefish-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/nullfish/filefish/20090201/filefish-20090201.jar"/>
   <classpathentry kind="var" path="M2_REPO/l2fprod/fontchooser/1.0/fontchooser-1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/codehaus/groovy/groovy/1.6-RC-2/groovy-1.6-RC-2.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/h2database/h2/1.1.107/h2-1.1.107.jar"/>
@@ -30,5 +31,6 @@
   <classpathentry kind="var" path="M2_REPO/monazilla/jmigemo/0.1/jmigemo-0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/3.8.1/junit-3.8.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/mozilla/juniversalchardet/1.0.2/juniversalchardet-1.0.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/mac-dummy/mac-dummy/1.0/mac-dummy-1.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/oro/oro/2.0.8/oro-2.0.8.jar"/>
 </classpath>

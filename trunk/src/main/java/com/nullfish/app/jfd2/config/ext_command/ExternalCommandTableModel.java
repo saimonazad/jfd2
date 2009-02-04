@@ -8,7 +8,6 @@ import javax.swing.table.AbstractTableModel;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
 
@@ -16,6 +15,7 @@ import com.nullfish.app.jfd2.command.JFDException;
 import com.nullfish.app.jfd2.ext_command_panel.ExternalCommand;
 import com.nullfish.app.jfd2.ext_command_panel.ExternalCommandManager;
 import com.nullfish.app.jfd2.resource.JFDResource;
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
 import com.nullfish.lib.vfs.exception.VFSIOException;
@@ -127,9 +127,8 @@ public class ExternalCommandTableModel extends AbstractTableModel {
 	 */
 	public void init(VFile baseDir) throws VFSException {
 		try {
-			SAXBuilder builder = new SAXBuilder();
-			Document doc = builder.build(baseDir.getChild(
-					ExternalCommandManager.CONFIG_FILE).getInputStream());
+			Document doc = DomCache.getInstance().getDocument(baseDir.getChild(
+					ExternalCommandManager.CONFIG_FILE));
 
 			List commandSetList = doc.getRootElement().getChildren(
 					ExternalCommandManager.EXT_COMMAND_SET);

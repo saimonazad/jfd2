@@ -12,10 +12,10 @@ import java.util.Map;
 
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 
 import com.nullfish.app.jfd2.Initable;
 import com.nullfish.app.jfd2.JFD;
+import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -117,7 +117,7 @@ public class FileViewerManager implements Initable {
 	 * @throws ClassNotFoundException
 	 */
 	private FileViewerFactory initFactory(VFile definition, ClassLoader loader) throws JDOMException, IOException, VFSException, InstantiationException, IllegalAccessException, ClassNotFoundException {
-		Element root = new SAXBuilder().build(definition.getInputStream()).getRootElement();
+		Element root = DomCache.getInstance().getDocument(definition).getRootElement();
 		FileViewerFactory factory = (FileViewerFactory) Class.forName(root.getAttributeValue("factory")).newInstance();
 		if(loader != null) {
 			factory.setLoader(loader);
