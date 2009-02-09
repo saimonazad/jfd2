@@ -39,7 +39,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.Element;
 
-import org.apache.commons.vfs.util.MonitorInputStream;
 import org.dyndns.longinus.utils.HTMLUtil;
 import org.jdom.Document;
 
@@ -497,15 +496,6 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 				}
 				Charset charset = Charset.forName(enc);
 
-				if(ins instanceof MonitorInputStream) {
-					// commons VFS対策
-					try {
-						is.close();
-					} catch (Exception e) {}
-					
-					is = new BufferedInputStream(file.getInputStream());
-				}
-				
 				reader = new BufferedReader(new InputStreamReader(is, charset));
 				String line;
 				if(html) {
