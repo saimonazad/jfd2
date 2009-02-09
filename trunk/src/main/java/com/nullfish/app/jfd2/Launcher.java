@@ -45,7 +45,6 @@ public class Launcher {
 	public static void main(final String[] args) {
 		Runnable runnable = new Runnable() {
 			public void run() {
-long start = System.currentTimeMillis();
 				// HtmlTablePanel.setDebug(true);
 				try {
 					// Mac向け設定
@@ -117,7 +116,6 @@ long start = System.currentTimeMillis();
 
 					openJFD(params, configDir);
 					PluginManager.getInstance().configulationChanged();
-System.out.println(System.currentTimeMillis() - start);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
