@@ -6,13 +6,11 @@ package com.nullfish.app.jfd2.command.groovy;
 
 import groovy.lang.Binding;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.PrintStream;
 
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.Command;
-import com.nullfish.app.jfd2.dialog.DialogUtilities;
+import com.nullfish.app.jfd2.ext_command.window.ConsoleFrame;
 import com.nullfish.lib.vfs.Manipulation;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
@@ -70,27 +68,13 @@ public abstract class AbstractGroovyCommand extends Command {
 		binding.setVariable("jfd", getJFD());
 		binding.setVariable("command", this);
 		binding.setVariable("vfs", VFS.getInstance(getJFD()));
+		binding.setVariable("console", ConsoleFrame.getInstance());
 		
 		return binding;
 	}
 
-	protected void showErrorMessage(Exception e, String message) {
-		PrintStream writer = null;
-		
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			writer = new PrintStream(baos);
-			if(message != null) {
-				writer.println(message);
-			}
-			e.printStackTrace(writer);
-			
-			baos.flush();
-			
-			DialogUtilities.showTextAreaMessageDialog(getJFD(), baos.toString(), false, "jFD2");
-		} catch (Exception ex) {
-		} finally {
-			try {writer.close(); } catch (Exception ex) {}
-		}
+	protected void showErrorMessage(Exception e) {
+//		ConsoleFrame.getInstance().println(e);
+		ConsoleFrame.getInstance().printStackTrace(e);
 	}
 }

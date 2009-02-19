@@ -38,13 +38,13 @@ public class GroovyStringCommand extends AbstractGroovyCommand {
 			shell.evaluate(script);
 		} catch (CompilationFailedException e) {
 			System.out.println(e.getLocalizedMessage());
-			e.printStackTrace();
+			showErrorMessage(e);
 			throw new JFDException(JFDResource.MESSAGES.getString("can_not_execute_script"), null);
 		} catch (RuntimeException e) {
-			e.printStackTrace();
+			showErrorMessage(e);
 			throw new JFDException(e, e.getMessage(), new Object[0]);
 		} catch (Exception e) {
-			e.printStackTrace();
+			showErrorMessage(e);
 			throw new JFDException(e, e.getMessage(), new Object[0]);
 		} finally {
 			if(is != null) {

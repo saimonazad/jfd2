@@ -269,4 +269,9 @@ beta19
 ・テキストビューアの文字色を単独で指定可能にした。
 ・FTPファイルの属性設定時にエラーが発生していたのを修正（タイムスタンプを設定しようとしていたがFTPファイルにはタイムスタンプ設定が無いため失敗していた）
 ・設定ファイルのキャッシュを導入し、多少高速化した。
-・tar、gzip、bzip2に対応した（2chのjFD2スレ437氏のコード提供。感謝）
+・tar、gzip、bzip2に対応した（Lei氏のコード提供。感謝）
+
+beta20
+・tar、gzip、bzip2の実装をリライトした（すみませんです、Lei氏）
+・Groovyのバインディングに"console"を追加（実体はcom.nullfish.app.jfd2.ext_command.window.ConsoleFrame）。console.print(foo)やconsole.println(bar)で出力が出来ます。
+・Groovyのコンパイル失敗時のエラーメッセージ等を独自コンソールに出力するようにした
