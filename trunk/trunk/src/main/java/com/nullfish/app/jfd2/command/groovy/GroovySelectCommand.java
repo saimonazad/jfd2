@@ -121,13 +121,13 @@ public class GroovySelectCommand extends AbstractGroovyCommand {
 			script.run();
 		} catch (ManipulationStoppedException e) {
 		} catch (CompilationFailedException e) {
-			showErrorMessage(e, e.getLocalizedMessage());
+			showErrorMessage(e);
 			//throw new JFDException(JFDResource.MESSAGES.getString("can_not_execute_script"), null);
 		} catch (RuntimeException e) {
-			showErrorMessage(e, null);
+			showErrorMessage(e);
 			//throw new JFDException(e, e.getMessage(), new Object[0]);
 		} catch (Exception e) {
-			showErrorMessage(e, null);
+			showErrorMessage(e);
 			//throw new JFDException(e, e.getMessage(), new Object[0]);
 		} finally {
 			if(is != null) {

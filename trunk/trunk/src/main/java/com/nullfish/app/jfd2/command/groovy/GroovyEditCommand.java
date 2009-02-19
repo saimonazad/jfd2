@@ -17,6 +17,7 @@ import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.JFDException;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
+import com.nullfish.app.jfd2.ext_command.window.ConsoleFrame;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
@@ -83,16 +84,16 @@ public class GroovyEditCommand extends AbstractGroovyCommand {
 			binding.setVariable("jfd", getJFD());
 			binding.setVariable("command", this);
 			binding.setVariable("vfs", vfs);
+			binding.setVariable("console", ConsoleFrame.getInstance());
 			GroovyShell shell = new GroovyShell(binding);
 
 			shell.evaluate(script);
 		} catch (CompilationFailedException e) {
-			System.out.println(e.getLocalizedMessage());
-			e.printStackTrace();
-			throw new JFDException(JFDResource.MESSAGES.getString("can_not_execute_script"), null);
+			showErrorMessage(e);
+//			throw new JFDException(JFDResource.MESSAGES.getString("can_not_execute_script"), null);
 		} catch (RuntimeException e) {
-			e.printStackTrace();
-			throw new JFDException(e, e.getMessage(), new Object[0]);
+			showErrorMessage(e);
+//			throw new JFDException(e, e.getMessage(), new Object[0]);
 		} finally {
 			if(dialog != null) {
 				dialog.dispose();

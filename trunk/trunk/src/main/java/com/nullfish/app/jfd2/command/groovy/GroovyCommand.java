@@ -10,6 +10,7 @@ import groovy.lang.GroovyShell;
 import org.codehaus.groovy.control.CompilationFailedException;
 
 import com.nullfish.app.jfd2.command.Command;
+import com.nullfish.app.jfd2.ext_command.window.ConsoleFrame;
 import com.nullfish.lib.vfs.Manipulation;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
@@ -34,6 +35,7 @@ public class GroovyCommand extends Command {
 			Binding binding = new Binding();
 			binding.setVariable("jfd", getJFD());
 			binding.setVariable("command", this);
+			binding.setVariable("console", ConsoleFrame.getInstance());
 			GroovyShell shell = new GroovyShell(binding);
 			String scriptDirPath = (String)getJFD().getCommonConfigulation().getParam(GroovySelectCommand.SCRIPT_DIR_PATH, GroovySelectCommand.DEFAULT_SCRIPT_DIR);
 			VFile scriptDir = vfs.getFile(scriptDirPath);

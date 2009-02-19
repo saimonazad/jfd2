@@ -48,7 +48,7 @@
 					<td vfix="true">shell_notice</td>
 				</tr>
 				<tr>
-					<td vfix="true">@ </td>
+					<td vfix="true" cellpadding="5">@ </td>
 				</tr>
 				<tr>
 					<td vfix="true">app_shell_label</td>
@@ -60,7 +60,7 @@
 					<td vfix="true">appshell_notice</td>
 				</tr>
 				<tr>
-					<td vfix="true">@ </td>
+					<td vfix="true" cellpadding="5">@ </td>
 				</tr>
 				<tr>
 					<td vfix="true">console_label</td>
