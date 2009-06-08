@@ -57,7 +57,9 @@ public class DeleteFileCommand extends Command {
 			}
 			
 			dialog = jfd.createDialog();
-	
+
+			dialog.setTitle("title_delete");
+			
 			//	メッセージ
 			if(markedFiles.length == 0) {
 				Object[] params = { 
@@ -68,10 +70,12 @@ public class DeleteFileCommand extends Command {
 				dialog.addMessage(JFDResource.MESSAGES.getString("message_delete_marked_files"));
 			}
 	
+			boolean defaultOk = ((Boolean)jfd.getCommonConfigulation().getParam("delete_ok_default", Boolean.TRUE)).booleanValue();
+			
 			//	ボタン
-			dialog.addButton(OK, JFDResource.LABELS.getString("ok"), 'y', true);
+			dialog.addButton(OK, JFDResource.LABELS.getString("ok"), 'y', defaultOk);
 			dialog.addButton(CANCEL, JFDResource.LABELS.getString("cancel"), 'n',
-					false);
+					!defaultOk);
 	
 			dialog.pack();
 			dialog.setVisible(true);
@@ -126,6 +130,8 @@ public class DeleteFileCommand extends Command {
 		JFDDialog dialog = null;
 		try {
 			dialog = getJFD().createDialog();
+			
+			dialog.setTitle(JFDResource.LABELS.getString("title_delete"));
 			
 			//	メッセージ
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_delete_filelist_file"));

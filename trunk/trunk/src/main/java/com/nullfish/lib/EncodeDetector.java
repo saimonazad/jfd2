@@ -30,4 +30,14 @@ public class EncodeDetector {
 		}
 	}
 
+	public static String detectEncoding(byte[] bytes, int l) throws IOException {
+		UniversalDetector detector = new UniversalDetector(null);
+		try {
+			detector.handleData(bytes, 0, l);
+			detector.dataEnd();
+			return detector.getDetectedCharset();
+		} finally {
+			detector.reset();
+		}
+	}
 }

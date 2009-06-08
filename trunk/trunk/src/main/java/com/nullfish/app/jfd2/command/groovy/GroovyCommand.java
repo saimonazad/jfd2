@@ -11,6 +11,7 @@ import org.codehaus.groovy.control.CompilationFailedException;
 
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.ext_command.window.ConsoleFrame;
+import com.nullfish.app.jfd2.util.GroovyScriptCache;
 import com.nullfish.lib.vfs.Manipulation;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
@@ -26,6 +27,8 @@ public class GroovyCommand extends Command {
 	 */
 	public static final String SCRIPT_PATH = "script";
 	
+	private static GroovyScriptCache cache = new GroovyScriptCache();
+	
 	/* (non-Javadoc)
 	 * @see com.nullfish.lib.vfs.manipulation.abst.AbstractManipulation#doExecute()
 	 */
@@ -36,7 +39,6 @@ public class GroovyCommand extends Command {
 			binding.setVariable("jfd", getJFD());
 			binding.setVariable("command", this);
 			binding.setVariable("console", ConsoleFrame.getInstance());
-			GroovyShell shell = new GroovyShell(binding);
 			String scriptDirPath = (String)getJFD().getCommonConfigulation().getParam(GroovySelectCommand.SCRIPT_DIR_PATH, GroovySelectCommand.DEFAULT_SCRIPT_DIR);
 			VFile scriptDir = vfs.getFile(scriptDirPath);
 			boolean found = false;
@@ -52,7 +54,7 @@ public class GroovyCommand extends Command {
 			if(!found) {
 				script = vfs.getFile(path);
 			}
-			shell.evaluate(script.getInputStream(this));
+			cache.makeScript(script, binding).run(); 
 		} catch (CompilationFailedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

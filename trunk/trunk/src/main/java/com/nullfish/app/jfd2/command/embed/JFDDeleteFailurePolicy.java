@@ -25,6 +25,7 @@ public class JFDDeleteFailurePolicy implements DeleteFailurePolicy {
 			}
 
 			dialog = jfd.createDialog();
+			dialog.setTitle(JFDResource.LABELS.getString("title_delete"));
 			Object[] values = {
 					file.getSecurePath()
 			};

@@ -516,6 +516,14 @@ public class JFDModel implements FileListener {
 		fireFilesChanged();
 	}
 
+	public void clearMark() {
+		for(int i=0; i<markedFiles.length; i++) {
+			markedFiles[i].setMarked(false);
+		}
+
+		fireFilesChanged();
+	}
+
 	/**
 	 * 選択されたインデックスを返す。
 	 * 

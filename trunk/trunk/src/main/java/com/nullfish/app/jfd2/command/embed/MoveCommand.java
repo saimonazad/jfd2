@@ -64,6 +64,8 @@ public class MoveCommand extends Command {
 
 			dialog = jfd.createDialog();
 
+			dialog.setTitle(JFDResource.LABELS.getString("title_move"));
+			
 			//	メッセージ
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_move"));
 
@@ -104,6 +106,8 @@ public class MoveCommand extends Command {
 			model.getNoOverwrapHistory().add(dest);
 			
 			showProgress(1000);
+			
+			jfd.getModel().clearMark();
 			
 			Manipulation[] moveManipulations = initManipulations(selectedFile, markedFiles, dest);
 			setChildManipulations(moveManipulations);

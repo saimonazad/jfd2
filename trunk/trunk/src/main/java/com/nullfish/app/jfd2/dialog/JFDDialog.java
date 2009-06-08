@@ -132,6 +132,7 @@ public class JFDDialog extends JDialog {
 	}
 
 	private void initGUI() {
+		setTitle("jFD2");
 		messagePanel.setVisible(false);
 		buttonsPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

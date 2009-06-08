@@ -64,6 +64,8 @@ public class PackCommand extends Command {
 		JFDDialog dialog = null;
 		try {
 			dialog = jfd.createDialog();
+			
+			dialog.setTitle(JFDResource.LABELS.getString("title_pack"));
 
 			// メッセージ
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_pack"));

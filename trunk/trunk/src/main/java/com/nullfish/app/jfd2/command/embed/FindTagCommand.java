@@ -43,6 +43,8 @@ public class FindTagCommand extends Command {
 
 			dialog = DialogUtilities.createOkCancelDialog(jfd);
 
+			dialog.setTitle(JFDResource.LABELS.getString("title_find"));
+			
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_tag_find"));
 			StringHistory history = (StringHistory) jfd.getLocalConfigulation()
 					.getParam("find_tag_history", null);

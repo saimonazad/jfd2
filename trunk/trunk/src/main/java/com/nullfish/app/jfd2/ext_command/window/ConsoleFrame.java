@@ -80,9 +80,17 @@ public class ConsoleFrame extends JFrame {
 		clearButton.setMnemonic('l');
 		clearButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textArea.setText("");
+				clear();
 			}
 		});
+	}
+	
+	public void clear() {
+		textArea.setText("");
+	}
+	
+	public void copy() {
+		textArea.copy();
 	}
 
 	public void printStackTrace(Throwable e) {

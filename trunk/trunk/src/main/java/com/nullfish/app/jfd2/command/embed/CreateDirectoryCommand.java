@@ -38,6 +38,8 @@ public class CreateDirectoryCommand extends Command {
 			model.lockAutoUpdate(this);
 			
 			dialog = jfd.createDialog();
+			
+			dialog.setTitle(JFDResource.LABELS.getString("title_mkdir"));
 	
 			//	メッセージ
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_create_directory"));

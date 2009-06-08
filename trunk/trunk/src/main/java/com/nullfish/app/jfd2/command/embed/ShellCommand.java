@@ -55,6 +55,7 @@ public class ShellCommand extends Command {
 			model.lockAutoUpdate(this);
 
 			dialog = jfd.createDialog();
+			dialog.setTitle(JFDResource.LABELS.getString("title_shell"));
 
 			//	メッセージ
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_shell"));

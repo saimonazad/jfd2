@@ -85,6 +85,8 @@ public class GrepCommand extends Command {
 
 			dialog = DialogUtilities.createOkCancelDialog(jfd);
 
+			dialog.setTitle(JFDResource.LABELS.getString("title_grep"));
+			
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_grep"));
 			StringHistory history = (StringHistory) jfd.getLocalConfigulation()
 					.getParam("grep_history", null);
