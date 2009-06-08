@@ -272,6 +272,10 @@ beta19
 ・tar、gzip、bzip2に対応した（Lei氏のコード提供。感謝）
 
 beta20
-・tar、gzip、bzip2の実装をリライトした（すみませんです、Lei氏）
+・tar、gzip、bzip2の実装をリライトした（せっかく書いてもらったのにすみませんです、Lei氏）
 ・Groovyのバインディングに"console"を追加（実体はcom.nullfish.app.jfd2.ext_command.window.ConsoleFrame）。console.print(foo)やconsole.println(bar)で出力が出来ます。
 ・Groovyのコンパイル失敗時のエラーメッセージ等を独自コンソールに出力するようにした
+・Groovyのキャッシュを追加した（2chjFD2スレ489氏、ありがとうございます）
+・外部コマンドとして登録したコマンドを実行するCommandクラスを追加（com.nullfish.app.jfd2.command.embed.ExternalCommand）。2chのjFD2スレ、486氏ありがとうございます。キーに割り振っては居ないので、設定のカスタマイズで使用してください。
+・ダイアログにタイトルを設定（漏れがあったら報告お願いします）	
+

@@ -44,6 +44,8 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 	
 	private JCheckBox textViewerEditableCheckBox = new JCheckBox(JFDResource.LABELS.getString("text_viewer_editable"));
 	
+	private JCheckBox deleteOkDefaultCheckBox = new JCheckBox(JFDResource.LABELS.getString("delete_ok_default"));
+	
 	public ETCConfigPanel() {
 		super(new BorderLayout());
 		try {
@@ -82,6 +84,7 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 
 		etcPanel.addComponent(graphicViewerMouseOperationCheckBox, "mouse_operate_check");
 		etcPanel.addComponent(textViewerEditableCheckBox, "text_viewer_editable_check");
+		etcPanel.addComponent(deleteOkDefaultCheckBox, "delete_ok_default_check");
 	}
 
 	/**
@@ -107,6 +110,7 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		
 		graphicViewerMouseOperationCheckBox.setSelected(((Boolean)commonConfig.getParam("graphic_viewer_mouse_button_operate", Boolean.FALSE)).booleanValue());
 		textViewerEditableCheckBox.setSelected(((Boolean)commonConfig.getParam("text_viewer_editable", Boolean.FALSE)).booleanValue());
+		deleteOkDefaultCheckBox.setSelected(((Boolean)commonConfig.getParam("delete_ok_default", Boolean.TRUE)).booleanValue());
 	}
 
 	/***
@@ -129,6 +133,7 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 
 		commonConfig.setParam("graphic_viewer_mouse_button_operate", Boolean.valueOf(graphicViewerMouseOperationCheckBox.isSelected()));
 		commonConfig.setParam("text_viewer_editable", Boolean.valueOf(textViewerEditableCheckBox.isSelected()));
+		commonConfig.setParam("delete_ok_default", Boolean.valueOf(deleteOkDefaultCheckBox.isSelected()));
 	}
 	
 	public 	String getTitle() {

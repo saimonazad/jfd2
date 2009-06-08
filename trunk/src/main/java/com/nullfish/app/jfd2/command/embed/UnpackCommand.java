@@ -61,6 +61,7 @@ public class UnpackCommand extends Command {
 		JFDDialog dialog = null;
 		try {
 			dialog = jfd.createDialog();
+			dialog.setTitle(JFDResource.LABELS.getString("title_unpack"));
 
 			// メッセージ
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_unpack"));

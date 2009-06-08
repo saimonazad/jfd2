@@ -107,6 +107,7 @@ public class Launcher {
 							(String) commonConfig.getParam("plugin_dir", null));
 
 					PluginManager.getInstance().init(pluginDir);
+					PluginManager.getInstance().systemStarted();
 
 					Runtime.getRuntime().addShutdownHook(new Thread() {
 						public void run() {

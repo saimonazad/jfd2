@@ -39,6 +39,7 @@ public class LogicalDiskCommand extends Command {
 			model.lockAutoUpdate(this);
 			
 			dialog = jfd.createDialog();
+			dialog.setTitle(JFDResource.LABELS.getString("title_logdsk"));
 	
 			//	メッセージ
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_logical_disk"));

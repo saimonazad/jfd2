@@ -73,6 +73,8 @@ public class CopyCommand extends Command {
 			}
 
 			dialog = jfd.createDialog();
+			
+			dialog.setTitle(JFDResource.LABELS.getString("title_copy"));
 
 			//	メッセージ
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_copy"));
@@ -115,6 +117,8 @@ public class CopyCommand extends Command {
 			model.getNoOverwrapHistory().add(dest);
 
 			showProgress(1000);
+			
+			jfd.getModel().clearMark();
 
 			if(dest.getFileSystem() instanceof FileListFileSystem) {
 				registerFileList(dest, selectedFile, markedFiles);

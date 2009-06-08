@@ -178,6 +178,8 @@ public class CopyOverwritePolicy implements OverwritePolicy {
 	private JFDDialog showDialog(VFile srcFile, VFile dest) {
 		boolean sameFile = srcFile.equals(dest);
 		JFDDialog dialog = command.getJFD().createDialog();
+		
+		dialog.setTitle("jFD2");
 
 		// メッセージ
 		String orgMessage = JFDResource.MESSAGES
@@ -275,6 +277,8 @@ public class CopyOverwritePolicy implements OverwritePolicy {
 		String NAME = "name";
 		try {
 			dialog = command.getJFD().createDialog();
+			
+			dialog.setTitle("jFD2");
 
 			// メッセージ
 			String message = JFDResource.MESSAGES.getString("message_rename");

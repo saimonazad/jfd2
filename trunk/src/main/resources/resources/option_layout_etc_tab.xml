@@ -25,6 +25,9 @@
 					<td colspan="2" vfix="true" fill="both">text_viewer_editable_check</td>
 				</tr>
 				<tr>
+					<td colspan="2" vfix="true" fill="both">delete_ok_default_check</td>
+				</tr>
+				<tr>
 					<td colspan="2" vfix="true" height="10"></td>
 				</tr>
 				<tr>

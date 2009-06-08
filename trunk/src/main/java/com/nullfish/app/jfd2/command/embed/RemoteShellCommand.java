@@ -57,6 +57,8 @@ public class RemoteShellCommand extends Command {
 			VFile tempFile = putBackCommand.getTemporaryFile();
 
 			dialog = jfd.createDialog();
+			
+			dialog.setTitle(JFDResource.LABELS.getString("title_shell"));
 
 			//	メッセージ
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_shell"));

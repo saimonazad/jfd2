@@ -217,6 +217,7 @@ public class RenameCommand extends Command {
 		JFDDialog dialog = null;
 		try {
 			dialog = getJFD().createDialog();
+			dialog.setTitle(JFDResource.LABELS.getString("title_rename"));
 
 			// メッセージ
 			dialog.setMessage(messages);
@@ -260,7 +261,7 @@ public class RenameCommand extends Command {
 	private VFile renameOnce(VFile[] files, VFile selectedFile) throws VFSException {
 		JFDDialog dialog = null;
 		try {
-			dialog = DialogUtilities.createOkCancelDialog(getJFD());
+			dialog = DialogUtilities.createOkCancelDialog(getJFD(), JFDResource.LABELS.getString("title_rename"));
 			String[] message = {
 				JFDResource.MESSAGES.getString("message_input_rename_pattern")
 			};

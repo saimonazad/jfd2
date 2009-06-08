@@ -82,6 +82,8 @@ public class FindCommand extends Command {
 			Configulation localConfig = jfd.getLocalConfigulation();
 
 			dialog = DialogUtilities.createOkCancelDialog(jfd);
+			
+			dialog.setTitle(JFDResource.LABELS.getString("title_find"));
 
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_find"));
 			StringHistory history = (StringHistory) jfd.getLocalConfigulation()
