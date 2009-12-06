@@ -1,4 +1,4 @@
-jFD2@beta18
+jFD2 ver.1.00
 
 œŠT—v
 

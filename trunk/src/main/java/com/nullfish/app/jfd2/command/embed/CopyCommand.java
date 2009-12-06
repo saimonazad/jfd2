@@ -105,7 +105,7 @@ public class CopyCommand extends Command {
 					|| fileName.length() == 0) {
 				return;
 			}
-
+			
 			dialog.applyConfig();
 
 			boolean ignoreFileStructure = dialog.isChecked(IGNORE_FILE_STRUCTURE);

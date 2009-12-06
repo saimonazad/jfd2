@@ -19,6 +19,12 @@
 					<td colspan="2" vfix="true">afx_style_cursor_check</td>
 				</tr>
 				<tr>
+					<td colspan="2" vfix="true">go_parent_cursor_check</td>
+				</tr>
+				<tr>
+					<td colspan="2" vfix="true">pane_change_cursor_check</td>
+				</tr>
+				<tr>
 					<td colspan="2" vfix="true" fill="both">mouse_operate_check</td>
 				</tr>
 				<tr>

@@ -41,19 +41,28 @@ public class ProgressListPanel extends JPanel {
 	}
 	
 	public void add(final Manipulation manipulation) {
-		final ProgressPanel panel = new ProgressPanel(manipulation,this);
+		Runnable runnable = new Runnable() {
+			
+			public void run() {
+				final ProgressPanel panel = new ProgressPanel(manipulation,ProgressListPanel.this);
 
-		manipulation.addManipulationListener(new ManipulationAdapter() {
-			public void finished(ManipulationEvent e) {
-				removePanel(panel, manipulation);
+				manipulation.addManipulationListener(new ManipulationAdapter() {
+					public void finished(ManipulationEvent e) {
+						removePanel(panel, manipulation);
+					}
+					public void manipulationStopping(ManipulationEvent e) {
+						removePanel(panel, manipulation);
+					}
+				});
+				
+				add(panel, new GridBagConstraints(0, yPosition, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+				yPosition++;
+				manipulations.add(manipulation);
+				revalidate();
 			}
-			public void manipulationStopping(ManipulationEvent e) {
-				removePanel(panel, manipulation);
-			}
-		});
+		};
 		
-		add(panel, new GridBagConstraints(0, yPosition, 1, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-		yPosition++;
+		ThreadSafeUtilities.executeRunnable(runnable);
 	}
 	
 	public void removePanel(final ProgressPanel panel, final Manipulation manipulation) {
@@ -65,6 +74,7 @@ public class ProgressListPanel extends JPanel {
 					yPosition = 0;
 				}
 				repaint();
+				revalidate();
 			}
 		};
 		

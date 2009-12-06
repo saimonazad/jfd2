@@ -1,6 +1,7 @@
 package com.nullfish.app.jfd2.command.embed.rename;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
@@ -49,9 +50,21 @@ public class LumpSumRenameDialog extends JDialog {
 
 	public static final int CANCEL = 1;
 
+	public LumpSumRenameDialog(Dialog dialog, LumpSumRenamer renamer) {
+		super(dialog, true);
+		this.renamer = renamer;
+		
+		init();
+	}
+	
 	public LumpSumRenameDialog(Frame frame, LumpSumRenamer renamer) {
 		super(frame, true);
 		this.renamer = renamer;
+		
+		init();
+	}
+	
+	private void init() {
 		model = new LumpSumRenameTableModel(renamer);
 
 		table.setModel(model);

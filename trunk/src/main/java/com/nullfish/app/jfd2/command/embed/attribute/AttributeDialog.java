@@ -1,12 +1,14 @@
 package com.nullfish.app.jfd2.command.embed.attribute;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -35,6 +37,7 @@ import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.ui.OneKeyButton;
 import com.nullfish.lib.ui.OneKeyRadioButton;
 import com.nullfish.lib.ui.TagPanel;
+import com.nullfish.lib.ui.UIUtilities;
 import com.nullfish.lib.ui.permissionpanel.PermissionPanel;
 import com.nullfish.lib.ui.tristate_checkbox.TristateState;
 import com.nullfish.lib.vfs.VFile;
@@ -73,8 +76,9 @@ public class AttributeDialog extends JDialog {
 	
 	private boolean okPressed = false;
 
-	public AttributeDialog(Frame owner, JFD jfd) {
-		super(owner, true);
+	public AttributeDialog(JFD jfd) {
+		super((Window)UIUtilities.getTopLevelOwner((Container)jfd));
+		setModal(true);
 		this.jfd = jfd;
 		tagPanel = new TagPanel(jfd);
 		init();

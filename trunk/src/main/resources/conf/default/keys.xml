@@ -1,6 +1,6 @@
 <?xml version=	"1.0"?>
 
-<commandmaps version="20090127">
+<commandmaps version="20091022">
 	<commandmap name="cursor-up">
 		<key name="VK_UP"/>
 	</commandmap>
@@ -113,6 +113,7 @@
 	</commandmap>
 	<commandmap name="copy_current_dir">
 		<key name="VK_L" ctrl="true"/>
+		<key name="VK_C" ctrl="true" shift="true"/>
 	</commandmap>
 	<commandmap name="shell">
 		<key name="VK_H"/>

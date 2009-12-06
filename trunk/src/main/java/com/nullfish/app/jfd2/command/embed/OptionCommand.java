@@ -68,6 +68,9 @@ public class OptionCommand extends Command {
 			});
 			
 			frame.setVisible(true);
+			frame.dispose();
+			
+			jfd.getJFDOwner().setActiveComponent(jfd);
 		} catch (VFSException e) {
 			throw e;
 		} catch (Exception e) {

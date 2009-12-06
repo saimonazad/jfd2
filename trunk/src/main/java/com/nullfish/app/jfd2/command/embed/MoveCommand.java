@@ -96,6 +96,8 @@ public class MoveCommand extends Command {
 				return;
 			}
 			
+			boolean ignoresFileStructure = dialog.isChecked(CopyCommand.IGNORE_FILE_STRUCTURE);
+			
 			dialog.applyConfig();
 
 			dest = VFS.getInstance(jfd).getFile(fileName);
@@ -109,7 +111,7 @@ public class MoveCommand extends Command {
 			
 			jfd.getModel().clearMark();
 			
-			Manipulation[] moveManipulations = initManipulations(selectedFile, markedFiles, dest);
+			Manipulation[] moveManipulations = initManipulations(selectedFile, markedFiles, dest, ignoresFileStructure);
 			setChildManipulations(moveManipulations);
 
 			for(int i=0; i<moveManipulations.length; i++) {
@@ -137,14 +139,13 @@ public class MoveCommand extends Command {
 	 * @throws VFSException
 	 */
 	private MoveManipulation[] initManipulations(VFile selectedFile, VFile[] markedFiles,
-			VFile dest) throws VFSException {
+			VFile dest, boolean ignoresFileStructure) throws VFSException {
 		Configulation config = getJFD().getLocalConfigulation();
-		Boolean ignoreFileStructure = (Boolean)config.getParam(CopyCommand.IGNORE_FILE_STRUCTURE, Boolean.FALSE);
 
 		CopyOverwritePolicy policy = new CopyOverwritePolicy(this);
 		MoveManipulation[] rtn;
 		if (markedFiles.length == 0) {
-			VFile target = ignoreFileStructure.booleanValue() ? dest : dest.getRelativeFile(getJFD().getModel().getCurrentDirectory().getRelation(selectedFile.getParent()));
+			VFile target = ignoresFileStructure ? dest : dest.getRelativeFile(getJFD().getModel().getCurrentDirectory().getRelation(selectedFile.getParent()));
 			
 			rtn = new MoveManipulation[1];
 			rtn[0] = FileUtil.prepareMoveTo(selectedFile, target
@@ -152,7 +153,7 @@ public class MoveCommand extends Command {
 		} else {
 			rtn = new MoveManipulation[markedFiles.length];
 			for (int i = 0; i < markedFiles.length; i++) {
-				VFile target = ignoreFileStructure.booleanValue() ? dest : dest.getRelativeFile(getJFD().getModel().getCurrentDirectory().getRelation(markedFiles[i].getParent()));
+				VFile target = ignoresFileStructure ? dest : dest.getRelativeFile(getJFD().getModel().getCurrentDirectory().getRelation(markedFiles[i].getParent()));
 				rtn[i] = FileUtil.prepareMoveTo(markedFiles[i], target
 						.getChild(markedFiles[i].getName()), policy, this);
 			}

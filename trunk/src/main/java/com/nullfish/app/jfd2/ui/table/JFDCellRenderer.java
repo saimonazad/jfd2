@@ -34,6 +34,7 @@ import javax.swing.table.TableCellRenderer;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.ui.labels.JFDLabelUI;
 import com.nullfish.app.jfd2.util.ShortCutFile;
 import com.nullfish.app.jfd2.util.TagUtil;
 import com.nullfish.app.jfd2.util.thumbnail.ThumbnailCache;
@@ -195,6 +196,8 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		sizeLabel.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
 		
 		tagLabel.setForeground(tagColor);
+		
+		nameLabel.setUI(new JFDLabelUI());
 	}
 
 	/*

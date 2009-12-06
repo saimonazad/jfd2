@@ -1,7 +1,9 @@
 package com.nullfish.app.jfd2.config.ext_command;
 
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -44,6 +46,7 @@ import com.nullfish.app.jfd2.ext_command_panel.ExternalCommandManager;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.tablelayout.HtmlTablePanel;
+import com.nullfish.lib.ui.UIUtilities;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -100,6 +103,7 @@ public class ExternalCommandConfigFrame extends JDialog {
 	private static final String MAIN_LAYOUT = "classpath:///resources/command_option_layout.xml";
 
 	public ExternalCommandConfigFrame(JFD jfd) {
+		super((Window)UIUtilities.getTopLevelOwner((Container)jfd));
 		setModal(true);
 		
 		this.jfd = jfd;

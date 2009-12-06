@@ -12,8 +12,8 @@ import java.text.MessageFormat;
 import jp.gr.java_conf.dangan.util.lha.LhaHeader;
 import jp.gr.java_conf.dangan.util.lha.LhaOutputStream;
 
-import org.apache.tools.zip.ZipEntry;
-import org.apache.tools.zip.ZipOutputStream;
+import jp.hishidama.zip.ZipEntry;
+import jp.hishidama.zip.ZipOutputStream;
 
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
@@ -35,6 +35,8 @@ import com.nullfish.lib.vfs.exception.VFSException;
  */
 public class PackCommand extends Command {
 	public static final String ARCHIVE_NAME = "archive";
+
+	public static final String ARCHIVE_PASSWORD = "password";
 
 	public static final String FORMAT = "format";
 
@@ -77,6 +79,7 @@ public class PackCommand extends Command {
 					.getString("cancel"), 'c', false);
 
 			dialog.addTextField(ARCHIVE_NAME, selectedFile.getName(), true);
+			dialog.addTextField(ARCHIVE_PASSWORD, "", true, JFDResource.LABELS.getString("zip_password"));
 
 			Choice[] formats = { new Choice(ZIP, "ZIP", 'z'),
 					new Choice(LHA, "LHA", 'l') };
@@ -131,9 +134,14 @@ public class PackCommand extends Command {
 				ZipOutputStream zos = null;
 				try {
 					zos = new ZipOutputStream(target.getOutputStream(this));
-					zos.setEncoding((String) jfd.getCommonConfigulation()
-							.getParam("zip_pack_encoding",
-									System.getProperty("file.encoding")));
+					String encoding = (String) jfd.getCommonConfigulation()
+					.getParam("zip_pack_encoding",
+							System.getProperty("file.encoding"));
+					zos.setEncoding(encoding);
+					String password = dialog.getTextFieldAnswer(ARCHIVE_PASSWORD);
+					if(password.length() > 0){
+						zos.setPassword(password.getBytes(encoding));
+					}
 					for (int i = 0; i < markedFiles.length; i++) {
 						packZip(zos, markedFiles[i], currentDir);
 					}

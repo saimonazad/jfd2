@@ -9,6 +9,9 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import com.apple.eawt.Application;
+import com.apple.eawt.ApplicationAdapter;
+import com.apple.eawt.ApplicationEvent;
 import com.nullfish.app.jfd2.config.ConfigVersionManager;
 import com.nullfish.app.jfd2.config.Configulation;
 import com.nullfish.app.jfd2.resource.JFDResource;
@@ -81,6 +84,19 @@ public class Launcher {
 
 					VFile configDir = VFS.getInstance().getFile(configDirStr);
 
+					// MacのCommand+Qを無効にする
+					try {
+				        Application app = Application.getApplication();
+				        app.addApplicationListener(new ApplicationAdapter() {
+				            public void handleQuit(ApplicationEvent e) {
+				                e.setHandled(false);
+				                NumberedJFD2.getActiveJFD().getCommandManager().execute("exit_all");
+				            }
+				        });
+					} catch (Throwable e) {
+						// WindowsではClassNotFoundErrorが出るはず
+					}
+					
 					try {
 						ConfigVersionManager confManager = new ConfigVersionManager();
 						confManager.checkVersion(configDir);
@@ -90,6 +106,7 @@ public class Launcher {
 								.getString("failed_to_install_config_file"));
 						System.exit(1);
 					}
+					
 					// プラグイン機能
 					Configulation commonConfig = Configulation.getInstance(configDir
 							.getChild(JFD.COMMON_PARAM_FILE));
