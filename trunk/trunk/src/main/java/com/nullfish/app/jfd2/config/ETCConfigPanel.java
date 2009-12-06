@@ -33,7 +33,9 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 	
 	private JCheckBox cursorLoopsCheckBox = new JCheckBox(JFDResource.LABELS.getString("cursor_loops"));
 	
-	private JCheckBox afxStyleCursorCheckBox = new JCheckBox(JFDResource.LABELS.getString("afx_style_cursor"));
+	private JCheckBox goParentCursorCheckBox = new JCheckBox(JFDResource.LABELS.getString("go_parent_cursor"));
+	private JCheckBox paneChangeCursorCheckBox = new JCheckBox(JFDResource.LABELS.getString("pane_change_cursor"));
+
 	
 	private PathConfig keyMapPathConfig = new PathConfig("key_map", "key_map", JFileChooser.FILES_ONLY);
 	
@@ -75,8 +77,11 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		etcPanel.addComponent(grepAllEncodeTextArea, "grep_encode_all_input");
 		
 		etcPanel.addComponent(cursorLoopsCheckBox, "cursor_loops_check");
-		etcPanel.addComponent(afxStyleCursorCheckBox, "afx_style_cursor_check");
 
+		etcPanel.addComponent(goParentCursorCheckBox, "go_parent_cursor_check");
+		etcPanel.addComponent(paneChangeCursorCheckBox, "pane_change_cursor_check");
+		
+		
 		etcPanel.addComponent(keyMapPathConfig, "key_map");
 		
 		etcPanel.addComponent(filterLabel, "filter_label");
@@ -102,7 +107,9 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		grepEncodeTextField.setText((String)commonConfig.getParam("grep_encode", "UTF-8"));
 		grepAllEncodeTextArea.setConfigulation(commonConfig);
 		cursorLoopsCheckBox.setSelected(((Boolean)commonConfig.getParam("cursor_loops", Boolean.FALSE)).booleanValue());
-		afxStyleCursorCheckBox.setSelected(((Boolean)commonConfig.getParam("multi_window_cursor", Boolean.FALSE)).booleanValue());
+
+		goParentCursorCheckBox.setSelected(((Boolean)commonConfig.getParam("go_parent_cursor", Boolean.FALSE)).booleanValue());
+		paneChangeCursorCheckBox.setSelected(((Boolean)commonConfig.getParam("pane_change_cursor", Boolean.FALSE)).booleanValue());
 
 		keyMapPathConfig.setConfigulation(commonConfig);
 		
@@ -126,7 +133,9 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 		commonConfig.setParam("grep_encode", grepEncodeTextField.getText());
 		grepAllEncodeTextArea.apply(commonConfig);
 		commonConfig.setParam("cursor_loops", Boolean.valueOf(cursorLoopsCheckBox.isSelected()));
-		commonConfig.setParam("multi_window_cursor", Boolean.valueOf(afxStyleCursorCheckBox.isSelected()));
+
+		commonConfig.setParam("go_parent_cursor", Boolean.valueOf(goParentCursorCheckBox.isSelected()));
+		commonConfig.setParam("pane_change_cursor", Boolean.valueOf(paneChangeCursorCheckBox.isSelected()));
 		keyMapPathConfig.apply(commonConfig);
 		
 		commonConfig.setParam("filter_regex", filterTextArea.getText());

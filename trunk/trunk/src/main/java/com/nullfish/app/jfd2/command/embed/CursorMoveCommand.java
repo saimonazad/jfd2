@@ -30,7 +30,10 @@ public class CursorMoveCommand extends Command {
 	
 	public static final String CURSOR_LOOPS = "cursor_loops";
 	
-	public static final String MULTI_WINDOW_CURSOR = "multi_window_cursor";
+//	public static final String MULTI_WINDOW_CURSOR = "multi_window_cursor";
+	
+	public static final String GO_PARENT_CURSOR = "go_parent_cursor";
+	public static final String PANE_CHANGE_CURSOR = "pane_change_cursor";
 	
 	/* (non-Javadoc)
 	 * @see com.nullfish.lib.vfs.manipulation.abst.AbstractManipulation#doExecute()
@@ -46,9 +49,12 @@ public class CursorMoveCommand extends Command {
 		
 		boolean cursorLoops = ((Boolean)jfd.getCommonConfigulation().getParam(CURSOR_LOOPS, Boolean.FALSE)).booleanValue();
 		ContainerPosition position = jfd.getJFDOwner().getComponentPosition(jfd);
+		
+		boolean goParent = ((Boolean)jfd.getCommonConfigulation().getParam(GO_PARENT_CURSOR, Boolean.FALSE)).booleanValue();
+		boolean paneChange = ((Boolean)jfd.getCommonConfigulation().getParam(PANE_CHANGE_CURSOR, Boolean.FALSE)).booleanValue();
 		boolean multiWindowCursor = 
 			!(jfd instanceof JFD2 && ((JFD2)jfd).isThumbnailVisible()) && 
-			((Boolean)jfd.getCommonConfigulation().getParam(MULTI_WINDOW_CURSOR, Boolean.FALSE)).booleanValue()
+			(goParent || paneChange)
 			&& jfd.getJFDOwner().getComponent( position.getOpenent() )  != null;
 		
 		switch(direction.intValue()) {
@@ -69,9 +75,13 @@ public class CursorMoveCommand extends Command {
 			case RIGHT : 
 				if(multiWindowCursor) {
 					if(position == ContainerPosition.MAIN_PANEL) {
-						jfd.getCommandManager().execute("focus_oponent");
+						if(paneChange) {
+							jfd.getCommandManager().execute("focus_oponent");
+						}
 					} else {
-						jfd.getCommandManager().execute("go-parent");
+						if(goParent) {
+							jfd.getCommandManager().execute("go-parent");
+						}
 					}
 				} else {
 					model.setSelectedIndex(model.getSelectedIndex() + jfd.getRowCount());
@@ -80,9 +90,13 @@ public class CursorMoveCommand extends Command {
 			case LEFT : 
 				if(multiWindowCursor) {
 					if(position == ContainerPosition.SUB_PANEL) {
-						jfd.getCommandManager().execute("focus_oponent");
+						if(paneChange) {
+							jfd.getCommandManager().execute("focus_oponent");
+						}
 					} else {
-						jfd.getCommandManager().execute("go-parent");
+						if(goParent) {
+							jfd.getCommandManager().execute("go-parent");
+						}
 					}
 				} else {
 					model.setSelectedIndex(model.getSelectedIndex() - jfd.getRowCount());

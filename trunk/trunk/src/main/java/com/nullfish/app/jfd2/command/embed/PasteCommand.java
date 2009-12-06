@@ -67,7 +67,7 @@ public class PasteCommand extends Command {
 				String text = (String) data
 						.getTransferData(DataFlavor.stringFlavor);
 
-				String[] paths = text.split("\r\n");
+				String[] paths = text.split("[\r\n]");
 				froms = new VFile[paths.length];
 
 				for (int i = 0; i < paths.length; i++) {
@@ -91,7 +91,7 @@ public class PasteCommand extends Command {
 		} catch (IOException e) {
 			new VFSIOException(e);
 		} finally {
-			for(int i=0; froms != null && i<froms.length; i++) {
+			for(int i=0; froms != null && i<froms.length; i++) {	
 				froms[i].getFileSystem().removeUser(this);
 			}
 		}

@@ -4,7 +4,6 @@
  */
 package com.nullfish.app.jfd2.command.embed;
 
-import java.awt.Frame;
 import java.util.Date;
 import java.util.List;
 
@@ -81,7 +80,8 @@ public class AttributeCommand extends Command {
 		AttributeDialog attrDialog = null;
 		try {
 			VFile[] files = jfd.getModel().getMarkedOrSelectedFiles();
-			attrDialog = new AttributeDialog((Frame)null, jfd);
+
+			attrDialog = new AttributeDialog(jfd);
 			attrDialog.init(files);
 			attrDialog.pack();
 			attrDialog.setLocationRelativeTo(jfd.getComponent());

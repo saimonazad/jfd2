@@ -4,6 +4,9 @@
  */
 package com.nullfish.app.jfd2.command.embed;
 
+import java.awt.Container;
+import java.awt.Dialog;
+import java.awt.Frame;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.nullfish.app.jfd2.JFD;
+import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.command.embed.rename.LumpSumRenameDialog;
@@ -20,6 +24,7 @@ import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.ui.Choice;
+import com.nullfish.lib.ui.UIUtilities;
 import com.nullfish.lib.ui.document.RegexRestriction;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.ManipulationStoppedException;
@@ -332,7 +337,13 @@ public class RenameCommand extends Command {
 			newFiles = (VFile[])newFilesList.toArray(newFiles);
 
 			LumpSumRenamer renamer = new LumpSumRenamer(files, newFiles);
-			LumpSumRenameDialog renameDialog = new LumpSumRenameDialog(null, renamer);
+			Container owner = UIUtilities.getTopLevelOwner((Container)((JFDComponent)getJFD()).getComponent());
+			LumpSumRenameDialog renameDialog;
+			if(owner instanceof Frame) {
+				renameDialog = new LumpSumRenameDialog((Frame)owner, renamer);
+			} else {
+				renameDialog = new LumpSumRenameDialog((Dialog)owner, renamer);
+			}
 
 			renameDialog.pack();
 			renameDialog.setLocationRelativeTo(null);

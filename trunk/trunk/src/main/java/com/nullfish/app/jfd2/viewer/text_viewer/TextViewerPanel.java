@@ -651,7 +651,7 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 			JFDComponent oponent = currentJFD.getJFDOwner().getComponent(position);
 			boolean multiWindowMode = 
 				((Boolean)currentJFD.getCommonConfigulation().getParam(
-						CursorMoveCommand.MULTI_WINDOW_CURSOR, Boolean.FALSE)).booleanValue()
+						CursorMoveCommand.PANE_CHANGE_CURSOR, Boolean.FALSE)).booleanValue()
 				&& !thisPosition.equals(position)
 				&& oponent != null;
 
