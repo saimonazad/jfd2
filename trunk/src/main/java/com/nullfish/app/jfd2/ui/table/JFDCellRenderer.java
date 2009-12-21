@@ -22,8 +22,10 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JLabel;
@@ -58,6 +60,8 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 	private ListTableModel listTableModel;
 
 	private RendererMode mode;
+	
+	private Map extensionColorMap = new HashMap();
 	
 	/**
 	 * 非フォーカス時にカーソルを隠すかどうかのフラグ
@@ -362,10 +366,13 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 			&& jfd.getJFDOwner() != null
 			&& ((jfd.getJFDOwner().getActiveComponent() != null && !jfd.getComponent().equals(jfd.getJFDOwner().getActiveComponent())) || jfd.getJFDOwner().getActiveComponent() == null) ;
 		
+		Color mappedColor = (Color) extensionColorMap.get(file.getFileName().getLowerExtension());
 		if (changesColor && noFocus) {
 			foreColor = unfocusedColor;
 	    } else if(file.equals(current)) {
 			foreColor = currentDirectoryColor;
+	    } else if(mappedColor != null) {
+	    	foreColor = mappedColor;
 		} else if(file.equals(current.getParent())) {
 			foreColor = parentDirectoryColor;
 		} else if(FileListFileFactory.EXTENSION_FILE_LIST.equals(extension)
@@ -541,6 +548,10 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 		tagColor = (Color)config.getParam("tag_color", Color.YELLOW);
 	}
 	
+	public void setExtensionColorMap(Map extensionColorMap) {
+		this.extensionColorMap = extensionColorMap;
+	}
+
 	private static class NameTagLayout implements LayoutManager2 {
 		private List components = new ArrayList();
 		

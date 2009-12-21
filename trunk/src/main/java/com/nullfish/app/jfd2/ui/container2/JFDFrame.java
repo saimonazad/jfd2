@@ -728,7 +728,7 @@ public class JFDFrame extends JFrame implements JFDOwner {
 		
 	}
 	
-	private void initFromFrameTabConfig(Map data,VFile baseDir ) {
+	private void initFromFrameTabConfig(Map data,VFile baseDir ) throws VFSException {
 		pack();
 		
 		Rectangle rect = new Rectangle();
@@ -755,7 +755,7 @@ public class JFDFrame extends JFrame implements JFDOwner {
 
 	}
 	
-	private void initTabFromDirectoryList(ContainerPosition position, List directories, VFile baseDir) {
+	private void initTabFromDirectoryList(ContainerPosition position, List directories, VFile baseDir) throws VFSException {
 		for(int i=0; i<directories.size(); i++) {
 			NumberedJFD2 newJFD = new NumberedJFD2();
 			
@@ -772,6 +772,7 @@ public class JFDFrame extends JFrame implements JFDOwner {
 				try {
 					newJFD.dispose();
 				} catch (Exception ex) {}
+				throw e;
 			}
 		}
 	}

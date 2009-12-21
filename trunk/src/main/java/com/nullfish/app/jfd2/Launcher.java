@@ -136,6 +136,7 @@ public class Launcher {
 					PluginManager.getInstance().configulationChanged();
 				} catch (Exception e) {
 					e.printStackTrace();
+					System.exit(1);
 				}
 			}
 		};
@@ -151,6 +152,8 @@ public class Launcher {
 		FileViewerManager.getInstance().init(configDir);
 		try {
 			JFDFrame.loadFromTabConfig(configDir);
+		} catch (VFSException e) {
+			throw e;
 		} catch (Exception e) {
 			throw new VFSSystemException(e);
 		}

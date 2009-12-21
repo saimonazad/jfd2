@@ -32,6 +32,8 @@ import java.awt.event.MouseWheelListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -1125,6 +1127,8 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 		setLabelFont((Font) commonConfig.getParam("label_font", new Font(
 				"Monospaced", Font.PLAIN, 12)));
+		
+		renderer.setExtensionColorMap((Map) commonConfig.getParam("color_map", new HashMap()));
 	}
 
 	// 色関連初期化
