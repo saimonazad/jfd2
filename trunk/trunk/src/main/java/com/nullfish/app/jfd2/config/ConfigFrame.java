@@ -37,6 +37,7 @@ public class ConfigFrame extends JDialog {
 
 	ConfigPanel[] panels = {
 			new ViewConfigPanel(this),
+			new View2ConfigPanel(),
 			new PathConfigPanel(),
 			new FileSystemConfigPanel(),
 			new ETCConfigPanel()
