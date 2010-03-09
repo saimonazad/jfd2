@@ -1,14 +1,22 @@
 package com.nullfish.app.jfd2.user;
 
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dialog;
 import java.awt.Frame;
+import java.awt.KeyboardFocusManager;
+import java.awt.Window;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import javax.swing.SwingUtilities;
 
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.ui.ReturnableRunnable;
 import com.nullfish.lib.ui.ThreadSafeUtilities;
+import com.nullfish.lib.ui.UIUtilities;
 import com.nullfish.lib.vfs.FileName;
 import com.nullfish.lib.vfs.UserInfo;
 import com.nullfish.lib.vfs.UserInfoManager;
@@ -48,7 +56,12 @@ public class GrobalUserInfoManager implements UserInfoManager {
 	public UserInfo showDialog(FileName fileName, UserInfo defaultInfo) {
 		JFDDialog dialog = null;
 		try {
-			dialog = new JFDDialog((Frame)null, true, null);
+			Container c = UIUtilities.getTopLevelOwner((Container)KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner());
+			if(c instanceof Frame) {
+				dialog = new JFDDialog((Frame)c, true, null);
+			} else {
+				dialog = new JFDDialog((Dialog)c, true, null);
+			}
 			dialog.setTitle("jFD2");
 			
 			dialog.addButton(JFDDialog.OK, JFDResource.LABELS.getString("ok"), 'o', true);

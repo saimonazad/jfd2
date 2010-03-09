@@ -14,6 +14,8 @@ public class DefaultConfig {
 
 	private String console;
 
+	private String openDirCommand;
+	
 	private boolean swapCtrlMeta = false;
 
 	private boolean useCustomComboBox;
@@ -21,14 +23,14 @@ public class DefaultConfig {
 	private static DefaultConfig instance;
 
 	public static DefaultConfig WINDOWS = new DefaultConfig(
-			"notepad.exe", true, "{0}", "cmd.exe /C $Q", "cmd.exe /C \"$A $BQ\"", "start cmd.exe", false, false);
+			"notepad.exe", true, "{0}", "cmd.exe /C $Q", "cmd.exe /C \"$A $BQ\"", "start cmd.exe", "explorer /root,{0}", false, false);
 
 	public static DefaultConfig MAC = new DefaultConfig(
 			"/Applications/TextEdit.app", true,
-			"{0}", "/usr/bin/open\n$C", "/usr/bin/open\n-W\n-a\n$A\n$BN", "/Applications/Utilities/Terminal.app", true, true);
+			"{0}", "/usr/bin/open\n$C", "/usr/bin/open\n-W\n-a\n$A\n$BN", "/Applications/Utilities/Terminal.app", "{0}", true, true);
 
 	public static DefaultConfig OTHER_UNIX = new DefaultConfig("gedit", true,
-			"/usr/bin/gnome-open {0}", "/bin/sh\n-c\n$C", "/bin/sh\n-c\n$A $BQ", "gnome-terminal", false, false);
+			"/usr/bin/gnome-open {0}", "/bin/sh\n-c\n$C", "/bin/sh\n-c\n$A $BQ", "gnome-terminal", "/usr/bin/gnome-open {0}", false, false);
 
 	static  {
 		String osName = System.getProperty("os.name");
@@ -43,13 +45,14 @@ public class DefaultConfig {
 
 	private DefaultConfig(String editor, boolean editorUseShell,
 			String extensionMapping, String shell, String appShell,
-			String console, boolean swapCtrlMeta, boolean useCustomComboBox) {
+			String console, String openDirCommand, boolean swapCtrlMeta, boolean useCustomComboBox) {
 		this.editor = editor;
 		this.editorUseShell = editorUseShell;
 		this.extensionMapping = extensionMapping;
 		this.shell = shell;
 		this.appShell = appShell;
 		this.console = console;
+		this.openDirCommand = openDirCommand;
 		this.swapCtrlMeta = swapCtrlMeta;
 		this.useCustomComboBox = useCustomComboBox;
 	}
@@ -88,5 +91,9 @@ public class DefaultConfig {
 
 	public boolean isUseCustomComboBox() {
 		return useCustomComboBox;
+	}
+
+	public String getOpenDirCommand() {
+		return openDirCommand;
 	}
 }

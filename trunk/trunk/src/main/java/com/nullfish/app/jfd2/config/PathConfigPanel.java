@@ -15,6 +15,7 @@ import org.jdom.JDOMException;
 
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.embed.EditCommand;
+import com.nullfish.app.jfd2.command.embed.ExtensionMapCommand;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.tablelayout.HtmlTablePanel;
 import com.nullfish.lib.vfs.VFS;
@@ -47,6 +48,9 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 
 	private JLabel appShellConfigLabel = new JLabel(JFDResource.LABELS.getString("app_shell"));
 	private JTextArea appShellConfig = new JTextArea(3, 25);
+
+	private JLabel openDirConfigLabel = new JLabel(JFDResource.LABELS.getString("open_dir_command"));
+	private JTextArea openDirConfig = new JTextArea(3, 25);
 
 	private JLabel pathNotice = new JLabel(JFDResource.LABELS.getString("path_notice"));
 	private JLabel shellNotice = new JLabel(JFDResource.LABELS.getString("shell_notice"));
@@ -93,6 +97,8 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 		directoryPanel.addComponent(new JScrollPane(shellConfig), "shell_input");
 		directoryPanel.addComponent(shellNotice, "shell_notice");
 		directoryPanel.addComponent(appshellNotice, "appshell_notice");
+		directoryPanel.addComponent(openDirConfigLabel, "open_dir_label");
+		directoryPanel.addComponent(new JScrollPane(openDirConfig), "open_dir_input");
 
 		directoryPanel.addComponent(appShellConfigLabel, "app_shell_label");
 		directoryPanel.addComponent(new JScrollPane(appShellConfig), "app_shell_input");
@@ -127,6 +133,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 		shellConfig.setText((String)commonConfig.getParam("shell", DefaultConfig.getDefaultConfig().getShell()));
 		appShellConfig.setText((String)commonConfig.getParam("app_shell", DefaultConfig.getDefaultConfig().getAppShell()));
 		consoleConfig.setText((String)commonConfig.getParam("open_console_command", DefaultConfig.getDefaultConfig().getConsole()));
+		openDirConfig.setText((String)commonConfig.getParam(ExtensionMapCommand.PARAM_DIR_OPEN, DefaultConfig.getDefaultConfig().getOpenDirCommand()));
 	}
 
 	/***
@@ -151,6 +158,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 		commonConfig.setParam("shell", shellConfig.getText());
 		commonConfig.setParam("app_shell", appShellConfig.getText());
 		commonConfig.setParam("open_console_command", consoleConfig.getText());
+		commonConfig.setParam(ExtensionMapCommand.PARAM_DIR_OPEN, openDirConfig.getText());
 	}
 	
 	public 	String getTitle() {

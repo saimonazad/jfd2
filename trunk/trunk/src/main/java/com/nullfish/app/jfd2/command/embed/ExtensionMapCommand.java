@@ -26,6 +26,8 @@ import com.nullfish.lib.vfs.impl.local.LocalFile;
 public class ExtensionMapCommand extends Command {
 	public static final String PARAM_MAPPER = "extension_mapper";
 	
+	public static final String PARAM_DIR_OPEN = "dir_open_command";
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -43,7 +45,9 @@ public class ExtensionMapCommand extends Command {
 			}
 			fileName = WindowsUtil.escapeFileName(fileName);
 			
-			String mapper = (String)jfd.getCommonConfigulation().getParam(PARAM_MAPPER, DefaultConfig.getDefaultConfig().getExtensionMapping());
+			String mapper = model.getSelectedFile().isFile(this) ?
+						(String)jfd.getCommonConfigulation().getParam(PARAM_MAPPER, DefaultConfig.getDefaultConfig().getExtensionMapping()) :
+						(String)jfd.getCommonConfigulation().getParam(PARAM_DIR_OPEN, DefaultConfig.getDefaultConfig().getOpenDirCommand());
 			
 			String[] values = {
 					fileName

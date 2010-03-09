@@ -6,11 +6,14 @@ package com.nullfish.app.jfd2.command.embed;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.Format;
+import java.text.MessageFormat;
 import java.util.List;
 
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
+import com.nullfish.app.jfd2.config.DefaultConfig;
 import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.ext_command.CommandExecuter;
@@ -79,6 +82,13 @@ public class ShellCommand extends Command {
 					fileName = "\"" + fileName + "\"";
 				}
 				fileName = WindowsUtil.escapeFileName(fileName);
+				if(!model.getSelectedFile().isFile(this)) {
+					Format format = new MessageFormat((String)jfd.getCommonConfigulation().getParam(ExtensionMapCommand.PARAM_DIR_OPEN, DefaultConfig.getDefaultConfig().getOpenDirCommand()));
+					Object[] params = {
+							fileName
+					};
+					fileName = format.format(params);
+				}
 				historyList.add(0, fileName);
 			}
 
