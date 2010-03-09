@@ -3,6 +3,7 @@ package com.nullfish.app.jfd2.config;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
@@ -67,6 +68,7 @@ public class View2ConfigPanel extends JPanel implements ConfigPanel {
 		colorTable.setRowSelectionAllowed(true);
 		colorTable.setColumnSelectionAllowed(false);
 		colorTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		colorTable.getTableHeader().setPreferredSize(new Dimension(0, 0));
 	}
 
 	public void apply() throws Exception {

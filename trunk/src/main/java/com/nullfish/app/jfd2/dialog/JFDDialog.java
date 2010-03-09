@@ -9,6 +9,7 @@ import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -98,6 +99,22 @@ public class JFDDialog extends JDialog {
 	 * デフォルトのテキストフィールド文字数
 	 */
 	public static final int DEFAULT_TEXT_WIDTH = 40;
+
+	/**
+	 * コンストラクタ
+	 * 
+	 * @param owner
+	 *            オーナーフレーム
+	 * @param modal
+	 *            モーダル
+	 * @param jfd
+	 *            JFD2
+	 */
+	public JFDDialog(Window owner, boolean modal, JFD jfd) {
+		super(owner, modal ? ModalityType.APPLICATION_MODAL : ModalityType.MODELESS);
+		this.jfd = jfd;
+		initGUI();
+	}
 
 	/**
 	 * コンストラクタ

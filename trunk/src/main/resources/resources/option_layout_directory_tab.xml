@@ -39,6 +39,12 @@
 					<td vfix="true">extension_mapper_input</td>
 				</tr>
 				<tr>
+					<td vfix="true">open_dir_label</td>
+				</tr>
+				<tr>
+					<td vfix="true">open_dir_input</td>
+				</tr>
+				<tr>
 					<td vfix="true">shell_label</td>
 				</tr>
 				<tr>

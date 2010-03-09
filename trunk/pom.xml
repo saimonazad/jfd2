@@ -4,7 +4,7 @@
   <groupId>nullfish</groupId>
   <artifactId>jfd2</artifactId>
   <packaging>jar</packaging>
-  <version>1.00</version>
+  <version>1.01</version>
   <name>jfd2</name>
   <url>http://maven.apache.org</url>
   
@@ -19,7 +19,7 @@
     <dependency>
       <groupId>nullfish</groupId>
       <artifactId>filefish</artifactId>
-      <version>20090201</version>
+      <version>20100301</version>
     </dependency>
 
     <dependency>
@@ -32,12 +32,6 @@
         <groupId>org.codehaus.groovy</groupId>
         <artifactId>groovy</artifactId>
         <version>1.6-RC-2</version>
-    </dependency> 
-
-    <dependency>
-        <groupId>nullfish</groupId>
-        <artifactId>html-table-panel</artifactId>
-        <version>1.1</version>
     </dependency> 
 
     <dependency>
@@ -69,6 +63,14 @@
         <artifactId>juniversalchardet</artifactId>
         <version>1.0.2</version>
     </dependency>
+
+    <dependency>
+      <groupId>mac-dummy</groupId>
+      <artifactId>mac-dummy</artifactId>
+      <version>1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    
   </dependencies>
 
   <build>

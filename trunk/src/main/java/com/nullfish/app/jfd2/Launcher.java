@@ -9,9 +9,6 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import com.apple.eawt.Application;
-import com.apple.eawt.ApplicationAdapter;
-import com.apple.eawt.ApplicationEvent;
 import com.nullfish.app.jfd2.config.ConfigVersionManager;
 import com.nullfish.app.jfd2.config.Configulation;
 import com.nullfish.app.jfd2.resource.JFDResource;
@@ -20,6 +17,7 @@ import com.nullfish.app.jfd2.ui.container2.JFD2TitleUpdater;
 import com.nullfish.app.jfd2.ui.container2.JFDFrame;
 import com.nullfish.app.jfd2.ui.container2.NumberedJFD2;
 import com.nullfish.app.jfd2.util.CommandLineParameters;
+import com.nullfish.app.jfd2.util.MacUtil;
 import com.nullfish.app.jfd2.util.MigemoInfo;
 import com.nullfish.app.jfd2.util.thumbnail.ThumbnailDataBase;
 import com.nullfish.app.jfd2.viewer.FileViewerManager;
@@ -84,17 +82,8 @@ public class Launcher {
 
 					VFile configDir = VFS.getInstance().getFile(configDirStr);
 
-					// MacのCommand+Qを無効にする
-					try {
-				        Application app = Application.getApplication();
-				        app.addApplicationListener(new ApplicationAdapter() {
-				            public void handleQuit(ApplicationEvent e) {
-				                e.setHandled(false);
-				                NumberedJFD2.getActiveJFD().getCommandManager().execute("exit_all");
-				            }
-				        });
-					} catch (Throwable e) {
-						// WindowsではClassNotFoundErrorが出るはず
+					if(System.getProperty("os.name").indexOf("Mac OS") >= 0) {
+						MacUtil.initShutDown();
 					}
 					
 					try {
