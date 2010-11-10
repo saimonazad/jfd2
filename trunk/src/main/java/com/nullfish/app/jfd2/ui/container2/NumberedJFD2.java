@@ -6,6 +6,9 @@ package com.nullfish.app.jfd2.ui.container2;
 
 import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -111,8 +114,12 @@ public class NumberedJFD2 extends JFD2 {
 			AlphaComposite alphaComposite = AlphaComposite.getInstance(
 					AlphaComposite.SRC_OVER, alpha);
 
-			Image image = new BufferedImage(bgImage.getWidth(null), bgImage
-					.getHeight(null), BufferedImage.TYPE_INT_RGB);
+			GraphicsEnvironment e = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			GraphicsDevice d = e.getDefaultScreenDevice();
+			GraphicsConfiguration c = d.getDefaultConfiguration();
+			
+			BufferedImage image = c.createCompatibleImage(bgImage
+					.getWidth(null), bgImage.getHeight(null));
 
 			g = (Graphics2D) image.getGraphics();
 			g.setComposite(alphaComposite);

@@ -60,6 +60,10 @@ public class MacroTranslator {
 			rtn = translators[i].translate(rtn, jfd);
 		}
 		
+		for(int i=0; i<rtn.length; i++) {
+			rtn[i] = rtn[i].trim();
+		}
+		
 		return rtn;
 	}
 	

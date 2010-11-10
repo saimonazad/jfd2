@@ -59,6 +59,7 @@ public class MainContainerPanel extends FocusOrderManagingPanel {
 	
 	public void addLabel(String text) {
 		JLabel label = new JLabel(text);
+		label.setFont(getFont());
 		super.add(label, new GridBagConstraints(0, getComponentCount(), 1, 1, 1,
 				1, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
 				new Insets(0, 0, 0, 0), 0, 0));

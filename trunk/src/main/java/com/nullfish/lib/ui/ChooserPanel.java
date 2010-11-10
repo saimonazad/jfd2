@@ -4,6 +4,7 @@
  */
 package com.nullfish.lib.ui;
 
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -312,5 +313,17 @@ public class ChooserPanel extends JPanel implements FocusListener {
 		for(int i=0; i<listeners.size(); i++) {
 			((ActionListener)listeners.get(i)).actionPerformed(e);
 		}
+	}
+	
+	public void setFont(Font font) {
+		for(int i=0; buttons != null && i<buttons.length; i++) {
+			buttons[i].setFont(font);
+		}
+		
+		if(border != null) {
+			border.setTitleFont(font);
+		}
+		
+		super.setFont(font);
 	}
 }

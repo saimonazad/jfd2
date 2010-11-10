@@ -4,7 +4,11 @@
  */
 package com.nullfish.app.jfd2;
 
+import java.beans.IntrospectionException;
 import java.io.File;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -51,7 +55,8 @@ public class Launcher {
 					// Mac向け設定
 					System.setProperty("apple.laf.useScreenMenuBar", "true");
 					System.setProperty(
-							"com.apple.mrj.application.apple.menu.about.name", "jFD2");
+							"com.apple.mrj.application.apple.menu.about.name",
+							"jFD2");
 					System.setProperty("apple.awt.showGrowBox", "true");
 					// System.setProperty("apple.awt.brushMetalLook", "true");
 
@@ -61,20 +66,19 @@ public class Launcher {
 					// static部分（アカウント情報ダイアログ）初期化
 					Class clazz = NumberedJFD2.class;
 
-					CommandLineParameters params = new CommandLineParameters(args);
-					String configDirStr = params.getParameter(ARG_CONFIG);
-					if (configDirStr == null || configDirStr.length() == 0) {
-						configDirStr = getDefaultConfigDir();
-					} else {
-						String realPath = null;
-						try {
-							realPath = VFS.getInstance().getFile(configDirStr)
-									.getAbsolutePath();
-						} catch (Exception e) {
-						}
-
-						if (realPath == null) {
-							configDirStr = new File(configDirStr).getAbsolutePath();
+					String configDirStr = getConfigDir(args);
+					
+					File libDir = new File(new File(configDirStr), "lib");
+					if (!libDir.exists()) {
+						libDir.mkdirs();
+					}
+					File[] libs = libDir.listFiles();
+					for (int i = 0; i < libs.length; i++) {
+						File lib = libs[i];
+						if (lib.isDirectory()) {
+							addURLToSystemClassLoader(lib.toURI().toURL());
+						} else {
+							addURLToSystemClassLoader(new URL("jar:" + lib.toURI().toURL() + "!/"));
 						}
 					}
 
@@ -82,29 +86,36 @@ public class Launcher {
 
 					VFile configDir = VFS.getInstance().getFile(configDirStr);
 
-					if(System.getProperty("os.name").indexOf("Mac OS") >= 0) {
+					if (System.getProperty("os.name").indexOf("Mac OS") >= 0) {
 						MacUtil.initShutDown();
 					}
-					
+
 					try {
 						ConfigVersionManager confManager = new ConfigVersionManager();
 						confManager.checkVersion(configDir);
 					} catch (Exception e) {
 						e.printStackTrace();
-						JOptionPane.showMessageDialog(null, JFDResource.MESSAGES
-								.getString("failed_to_install_config_file"));
+						JOptionPane
+								.showMessageDialog(
+										null,
+										JFDResource.MESSAGES
+												.getString("failed_to_install_config_file"));
 						System.exit(1);
 					}
-					
-					// プラグイン機能
-					Configulation commonConfig = Configulation.getInstance(configDir
-							.getChild(JFD.COMMON_PARAM_FILE));
 
-					String uiName = (String) commonConfig.getParam("look_and_feel",
-							null);
-					uiName = uiName != null ? uiName : UIManager
-							.getSystemLookAndFeelClassName();
-					UIManager.setLookAndFeel(uiName);
+					// プラグイン機能
+					Configulation commonConfig = Configulation
+							.getInstance(configDir
+									.getChild(JFD.COMMON_PARAM_FILE));
+
+					String uiName = (String) commonConfig.getParam(
+							"look_and_feel", UIManager
+									.getSystemLookAndFeelClassName());
+					try {
+						UIManager.setLookAndFeel(uiName);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 
 					ThumbnailDataBase.getInstance().setIconDir(
 							configDir.getChild("icon_cache"));
@@ -121,6 +132,8 @@ public class Launcher {
 						}
 					});
 
+					CommandLineParameters params = new CommandLineParameters(
+							args);
 					openJFD(params, configDir);
 					PluginManager.getInstance().configulationChanged();
 				} catch (Exception e) {
@@ -129,7 +142,7 @@ public class Launcher {
 				}
 			}
 		};
-		
+
 		ThreadSafeUtilities.executeRunnable(runnable);
 	}
 
@@ -137,7 +150,7 @@ public class Launcher {
 			throws VFSException {
 		NumberedJFD2.staticInit(configDir);
 		JFD2.initKeyMap(configDir);
-		
+
 		FileViewerManager.getInstance().init(configDir);
 		try {
 			JFDFrame.loadFromTabConfig(configDir);
@@ -146,9 +159,9 @@ public class Launcher {
 		} catch (Exception e) {
 			throw new VFSSystemException(e);
 		}
-		
+
 		String firstDirStr = params.getParameter(ARG_DIR);
-		if(firstDirStr != null) {
+		if (firstDirStr != null) {
 			JFDFrame frame = new JFDFrame(configDir);
 			frame.setLocationByPlatform(true);
 
@@ -196,6 +209,26 @@ public class Launcher {
 		}
 	}
 
+	public static String getConfigDir(String[] args) throws VFSException {
+		CommandLineParameters params = new CommandLineParameters(args);
+		String configDirStr = params.getParameter(ARG_CONFIG);
+		if (configDirStr == null || configDirStr.length() == 0) {
+			configDirStr = getDefaultConfigDir();
+		} else {
+			String realPath = null;
+			try {
+				realPath = VFS.getInstance().getFile(configDirStr)
+						.getAbsolutePath();
+			} catch (Exception e) {
+			}
+
+			if (realPath == null) {
+				configDirStr = new File(configDirStr).getAbsolutePath();
+			}
+		}
+		return configDirStr;
+	}
+
 	private static String getDefaultConfigDir() throws VFSException {
 		VFile homeDir = VFS.getInstance().getFile(
 				new File(System.getProperty("user.home")).getAbsolutePath());
@@ -205,6 +238,24 @@ public class Launcher {
 					"Application Data/Nullfish/jFD2/.jfd2").getAbsolutePath();
 		} else {
 			return homeDir.getRelativeFile(".jfd2").getAbsolutePath();
+		}
+	}
+
+	public static void addURLToSystemClassLoader(URL url)
+			throws IntrospectionException {
+		URLClassLoader systemClassLoader = (URLClassLoader) ClassLoader
+				.getSystemClassLoader();
+		Class classLoaderClass = URLClassLoader.class;
+
+		try {
+			Method method = classLoaderClass.getDeclaredMethod("addURL",
+					new Class[] { URL.class });
+			method.setAccessible(true);
+			method.invoke(systemClassLoader, new Object[] { url });
+		} catch (Throwable t) {
+			t.printStackTrace();
+			throw new IntrospectionException(
+					"Error when adding url to system ClassLoader ");
 		}
 	}
 }

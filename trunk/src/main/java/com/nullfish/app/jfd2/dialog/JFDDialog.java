@@ -5,6 +5,7 @@
 package com.nullfish.app.jfd2.dialog;
 
 import java.awt.Dialog;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -70,6 +71,8 @@ public class JFDDialog extends JDialog {
 
 	private ButtonsPanel buttonsPanel = new ButtonsPanel();
 
+	private Font labelFont;
+	
 	/**
 	 * ダイアログのクローズアクション
 	 */
@@ -156,6 +159,13 @@ public class JFDDialog extends JDialog {
 				setVisible(false);
 			}
 		});
+		
+		labelFont = (Font)jfd.getCommonConfigulation().getParam("dialog_font", new Font("monospaced", Font.BOLD | Font.ITALIC, 14));
+		messagePanel.setFont(labelFont);
+		mainPanel.setFont(labelFont);
+		chooserPanel.setFont(labelFont);
+		checkBoxPanel.setFont(labelFont);
+		buttonsPanel.setFont(labelFont);
 
 		this.setContentPane(basePanel);
 		basePanel.setLayout(new GridBagLayout());
@@ -223,6 +233,7 @@ public class JFDDialog extends JDialog {
 		messagePanel.setVisible(true);
 		int messagesCount = messagePanel.getComponentCount();
 		JLabel label = new JLabel(message);
+		label.setFont(labelFont);
 		messagePanel.add(label, new GridBagConstraints(0, messagesCount, 1, 1,
 				1, 0, GridBagConstraints.WEST, GridBagConstraints.BOTH,
 				new Insets(0, 2, 0, 2), 0, 0));
@@ -268,6 +279,7 @@ public class JFDDialog extends JDialog {
 		ConfigCheckBox check = new ConfigCheckBox(label, defaultValue);
 		check.setConfigulationInfo(config);
 		check.setMnemonic(mnemonic);
+		check.setFont(labelFont);
 		if (closeOnDecision) {
 			check.getActionMap().put(CLOSE_ACTION, new CloseAction());
 			check.getInputMap(JComponent.WHEN_FOCUSED).put(
@@ -304,6 +316,7 @@ public class JFDDialog extends JDialog {
 		ConfigChooserPanel chooser = new ConfigChooserPanel(title, choice,
 				cols, defaultChoice);
 		chooser.setConfigulationInfo(config);
+		chooser.setFont(labelFont);
 
 		if (closeOnDecision) {
 			chooser.getActionMap().put(CLOSE_ACTION, new CloseAction());

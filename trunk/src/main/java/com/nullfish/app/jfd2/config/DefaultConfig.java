@@ -30,7 +30,7 @@ public class DefaultConfig {
 			"{0}", "/usr/bin/open\n$C", "/usr/bin/open\n-W\n-a\n$A\n$BN", "/Applications/Utilities/Terminal.app", "{0}", true, true);
 
 	public static DefaultConfig OTHER_UNIX = new DefaultConfig("gedit", true,
-			"/usr/bin/gnome-open {0}", "/bin/sh\n-c\n$C", "/bin/sh\n-c\n$A $BQ", "gnome-terminal", "/usr/bin/gnome-open {0}", false, false);
+			"/usr/bin/gnome-open \"{0}\"", "/bin/sh\n-c\n$C", "/bin/sh\n-c\n$A $BQ", "gnome-terminal", "/usr/bin/gnome-open {0}", false, false);
 
 	static  {
 		String osName = System.getProperty("os.name");
