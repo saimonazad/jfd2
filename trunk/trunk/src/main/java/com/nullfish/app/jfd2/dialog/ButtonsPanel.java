@@ -61,6 +61,7 @@ public class ButtonsPanel extends FocusOrderManagingPanel {
 		AnswerAction action = new AnswerAction(name);
 		action.putValue(Action.NAME, label + "(" + Character.toUpperCase(mnemonic) + ")");
 		OneKeyButton button = new OneKeyButton(action, KeyStroke.getKeyStroke(mnemonic));
+		button.setFont(getFont());
 		if(isMac) {
 			this.add(button, 0);
 		} else {

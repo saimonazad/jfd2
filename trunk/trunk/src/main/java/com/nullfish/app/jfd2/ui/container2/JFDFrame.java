@@ -763,7 +763,11 @@ public class JFDFrame extends JFrame implements JFDOwner {
 				newJFD.init(getConfigDirectory());
 				addComponent(newJFD, position, new JFD2TitleUpdater(newJFD));
 				VFile directory = VFS.getInstance(newJFD).getFile((String)directories.get(i));
-				if(!directory.exists()) {
+				try {
+					if(!directory.exists()) {
+						directory = VFS.getInstance(newJFD).getFile(System.getProperty("user.dir"));
+					}
+				} catch (Exception e) {
 					directory = VFS.getInstance(newJFD).getFile(System.getProperty("user.dir"));
 				}
 				newJFD.getModel().setDirectoryAsynchIfNecessary(directory, 0, newJFD);

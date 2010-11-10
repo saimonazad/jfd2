@@ -89,6 +89,9 @@ public class ThumbnailDataBase {
 			+ "WHERE last_checked = "
 			+ "(SELECT MIN(last_checked) FROM thumbnail_cache)";
 
+	private static final String REMOVE_ALL = 
+		"DELETE FROM thumbnail_cache ";
+			
 	private int maxRowCount = 10000;
 
 	private ThumbnailDataBase() {
@@ -266,6 +269,12 @@ e.printStackTrace();
 		removeStatement.setString(1, file.getAbsolutePath());
 		
 		removeStatement.executeUpdate();
+	}
+	
+	public void removeAll() throws SQLException {
+		PreparedStatement stmt = conn.prepareStatement(REMOVE_ALL);
+		stmt.executeUpdate();
+		stmt.close();
 	}
 	
 	private void update(VFile file, BufferedImage image) throws SQLException {

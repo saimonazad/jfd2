@@ -56,6 +56,9 @@
 					<td vfix="true" hfix="true">font_label</td><td vfix="true" border="lowered">font_sample</td><td vfix="true" hfix="true">font_button</td>
 				</tr>
 				<tr>
+					<td vfix="true" hfix="true">dialog_font_label</td><td vfix="true" border="lowered">dialog_font_sample</td><td vfix="true" hfix="true">dialog_font_button</td>
+				</tr>
+				<tr>
 					<td cellpadding="5" vfix="true">bg_image_label</td>
 				</tr>
 				<tr>

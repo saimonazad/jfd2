@@ -52,6 +52,14 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 	private JButton fontButton = new JButton(JFDResource.LABELS
 			.getString("modify"));
 
+	private JLabel dialogFontLabel = new JLabel(JFDResource.LABELS.getString("dialog_font"));
+
+	private JLabel dialogFontSampleLabel = new JLabel(JFDResource.LABELS
+			.getString("font_sample"));
+
+	private JButton dialogFontButton = new JButton(JFDResource.LABELS
+			.getString("modify"));
+
 	private JLabel colorLabel = new JLabel(JFDResource.LABELS.getString("colors"));
 	private ColorConfig fileColorConfig = new ColorConfig(
 			"default_label_color", "file", Color.WHITE);
@@ -141,6 +149,15 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 			}
 		});
 		
+		dialogFontButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Font newFont = JFontChooser.showDialog(ViewConfigPanel.this, "jFD2", dialogFontSampleLabel.getFont());
+				if(newFont != null) {
+					dialogFontSampleLabel.setFont(newFont);
+				}
+			}
+		});
+		
 		bgImageCombo.setRenderer(new BgImageAlignComboBoxRenderer());
 		bgImageCombo.addItem("tile");
 		bgImageCombo.addItem("center");
@@ -172,6 +189,10 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 		appearancePanel.addComponent(fontSampleLabel, "font_sample");
 		appearancePanel.addComponent(fontButton, "font_button");
 
+		appearancePanel.addComponent(dialogFontLabel, "dialog_font_label");
+		appearancePanel.addComponent(dialogFontSampleLabel, "dialog_font_sample");
+		appearancePanel.addComponent(dialogFontButton, "dialog_font_button");
+		
 		appearancePanel.addComponent(colorLabel, "color_label");
 		appearancePanel.addComponent(fileColorConfig, "color_file");
 		appearancePanel.addComponent(readOnlyColorConfig, "color_readonly");
@@ -219,6 +240,7 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 				.getChild(JFD.COMMON_PARAM_FILE));
 
 		fontSampleLabel.setFont((Font) commonConfig.getParam("label_font", new Font("Monospaced", Font.PLAIN, 12)));
+		dialogFontSampleLabel.setFont((Font) commonConfig.getParam("dialog_font", new Font("SansSerif", Font.PLAIN, 12)));
 
 		fileColorConfig.setConfigulation(commonConfig);
 		readOnlyColorConfig.setConfigulation(commonConfig);
@@ -269,6 +291,8 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 				.getChild(JFD.COMMON_PARAM_FILE));
 
 		commonConfig.setParam("label_font", fontSampleLabel.getFont());
+		commonConfig.setParam("dialog_font", dialogFontSampleLabel.getFont());
+		
 		
 		fileColorConfig.apply(commonConfig);
 		readOnlyColorConfig.apply(commonConfig);
