@@ -67,8 +67,13 @@ public class Launcher {
 					Class clazz = NumberedJFD2.class;
 
 					String configDirStr = getConfigDir(args);
+					VFile configDir = VFS.getInstance().getFile(configDirStr);
+					Configulation commonConfig = Configulation
+							.getInstance(configDir
+									.getChild(JFD.COMMON_PARAM_FILE));
 					
-					File libDir = new File(new File(configDirStr), "lib");
+					String libDirStr = (String) commonConfig.getParam("lib_dir", configDir.getRelativeFile("../.jfd2_user/lib").getAbsolutePath());
+					File libDir =  new File(libDirStr);
 					if (!libDir.exists()) {
 						libDir.mkdirs();
 					}
@@ -83,8 +88,6 @@ public class Launcher {
 					}
 
 					MigemoInfo.init(configDirStr);
-
-					VFile configDir = VFS.getInstance().getFile(configDirStr);
 
 					if (System.getProperty("os.name").indexOf("Mac OS") >= 0) {
 						MacUtil.initShutDown();
@@ -104,10 +107,6 @@ public class Launcher {
 					}
 
 					// プラグイン機能
-					Configulation commonConfig = Configulation
-							.getInstance(configDir
-									.getChild(JFD.COMMON_PARAM_FILE));
-
 					String uiName = (String) commonConfig.getParam(
 							"look_and_feel", UIManager
 									.getSystemLookAndFeelClassName());

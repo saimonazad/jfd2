@@ -5,6 +5,7 @@
 package com.nullfish.app.jfd2.command.embed;
 
 import com.nullfish.app.jfd2.command.Command;
+import com.nullfish.app.jfd2.ext_command.window.ConsoleFrame;
 import com.nullfish.lib.vfs.exception.VFSException;
 
 /**
@@ -30,7 +31,7 @@ public class GCCommand extends Command {
 
     public void showMemory() {
         long total = Runtime.getRuntime().totalMemory();
-        System.out.println(
+        ConsoleFrame.getInstance().println(
             "Total Memory : " + total + "\n" +
             "Spent Memory : " + (total - Runtime.getRuntime().freeMemory()) + "\n"
         );

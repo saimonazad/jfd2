@@ -26,6 +26,9 @@
 					<td vfix="true">user_conf_dir</td>
 				</tr>
 				<tr>
+					<td vfix="true">lib_dir</td>
+				</tr>
+				<tr>
 					<td/>
 				</tr>
 			</table>

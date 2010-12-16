@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<commands version="20090110">
+<commands version="20101207">
 	<command name="cursor-up" class="com.nullfish.app.jfd2.command.embed.CursorMoveCommand" cache="true">
 		<param name="direction">
 			<int>0</int>
@@ -233,7 +233,9 @@
 	<command name="unpack" class="com.nullfish.app.jfd2.command.embed.UnpackCommand" asynch="true" locks="true"/>
 	<command name="swap_position" class="com.nullfish.app.jfd2.command.embed.ChangePositionCommand">
 	</command>
-	<command name="edit_groovy" class="com.nullfish.app.jfd2.command.groovy.GroovyEditCommand" cache="false" asynch="true" locks="true">
+	<command name="edit_groovy_old" class="com.nullfish.app.jfd2.command.groovy.GroovyEditCommand" cache="false" asynch="true" locks="true">
+	</command>
+	<command name="edit_groovy" class="com.nullfish.app.jfd2.command.groovy.GroovyConsoleCommand" cache="false" asynch="true" locks="true">
 	</command>
 	<command name="select_groovy" class="com.nullfish.app.jfd2.command.groovy.GroovySelectCommand" cache="false" asynch="true" locks="false">
 	</command>
@@ -297,6 +299,11 @@
 	<command name="go_script_dir" class="com.nullfish.app.jfd2.command.embed.GoToConfigDirCommand">
 		<param name="config_name">
 			<text>script_dir</text>
+		</param>
+	</command>
+	<command name="go_lib_dir" class="com.nullfish.app.jfd2.command.embed.GoToConfigDirCommand">
+		<param name="config_name">
+			<text>lib_dir</text>
 		</param>
 	</command>
 	<command name="change_thumbnail_mode" class="com.nullfish.app.jfd2.command.embed.ChangeThumbnailVisibilityCommand">

@@ -39,6 +39,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 	private PathConfig tempDirConfig = new PathConfig("temp_dir", "temp_dir", JFileChooser.DIRECTORIES_ONLY);
 	private PathConfig userConfigConfig = new PathConfig("user_conf_dir", "user_conf_dir", JFileChooser.DIRECTORIES_ONLY);
 	private PathConfig pluginDirConfig = new PathConfig("plugin_dir", "plugin_dir", JFileChooser.DIRECTORIES_ONLY);
+	private PathConfig libDirConfig = new PathConfig("lib_dir", "lib_dir", JFileChooser.DIRECTORIES_ONLY);
 
 	private JLabel extensionMapperConfigLabel = new JLabel(JFDResource.LABELS.getString("extension_mapper"));
 	private JTextField extensionMapperConfig = new JTextField(30);
@@ -75,6 +76,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 		tempDirConfig.setEscapesQuate(false);
 		userConfigConfig.setEscapesQuate(false);
 		pluginDirConfig.setEscapesQuate(false);
+		libDirConfig.setEscapesQuate(false);
 		
 		directoryPanel = new HtmlTablePanel(VFS.getInstance().getFile(
 				DIRECTORY_LAYOUT).getInputStream());
@@ -88,6 +90,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 		directoryPanel.addComponent(scriptDirConfig, "script_dir");
 		directoryPanel.addComponent(pluginDirConfig, "plugin_dir");
 		directoryPanel.addComponent(shortcutDirConfig, "shortcut_dir");
+		directoryPanel.addComponent(libDirConfig, "lib_dir");
 		directoryPanel.addComponent(tempDirConfig, "temp_dir");
 		directoryPanel.addComponent(userConfigConfig, "user_conf_dir");
 		directoryPanel.addComponent(pathNotice, "path_notice");
@@ -125,6 +128,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 //		shellPathConfig.setConfigulation(commonConfig);
 		scriptDirConfig.setConfigulation(commonConfig);
 		pluginDirConfig.setConfigulation(commonConfig);
+		libDirConfig.setConfigulation(commonConfig);
 		shortcutDirConfig.setConfigulation(commonConfig);
 		tempDirConfig.setConfigulation(commonConfig);
 		userConfigConfig.setConfigulation(commonConfig);
@@ -151,6 +155,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 		scriptDirConfig.apply(commonConfig);
 		pluginDirConfig.apply(commonConfig);
 		shortcutDirConfig.apply(commonConfig);
+		libDirConfig.apply(commonConfig);
 		tempDirConfig.apply(commonConfig);
 		userConfigConfig.apply(commonConfig);
 

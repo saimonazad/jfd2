@@ -33,24 +33,24 @@ public class ConfigVersionManager {
 
 	private static final FileVersion[] ETC_FILES_XML_WIN = {
 			new FileVersion("aliase.xml", "aliase_win.xml", 0),
-			new FileVersion("command.xml", "command.xml", 20090110),
+			new FileVersion("command.xml", "command.xml", 20101207),
 			new FileVersion("external_command.xml", "external_command.xml", 0),
 			new FileVersion("keys.xml", "keys.xml", 20091022),
-			new FileVersion("menubar.xml", "menubar.xml", 20090126),
+			new FileVersion("menubar.xml", "menubar.xml", 20101111),
 			new FileVersion("owner_command.xml", "owner_command.xml", 1.0),
 			new FileVersion("owner_keys.xml", "owner_keys.xml", 1.0),
-			new FileVersion("popup.xml", "popup.xml", 20090126),
+			new FileVersion("popup.xml", "popup.xml", 20101111),
 			new FileVersion("function.ini", "function.ini", 20090127) };
 
 	private static final FileVersion[] ETC_FILES_XML_UNIX = {
 			new FileVersion("aliase.xml", "aliase_unix.xml", 0.3),
-			new FileVersion("command.xml", "command.xml", 20090110),
+			new FileVersion("command.xml", "command.xml", 20101207),
 			new FileVersion("external_command.xml", "external_command.xml", 0),
 			new FileVersion("keys.xml", "keys.xml", 20091022),
-			new FileVersion("menubar.xml", "menubar.xml", 20090110),
+			new FileVersion("menubar.xml", "menubar.xml", 20101111),
 			new FileVersion("owner_command.xml", "owner_command.xml", 1.0),
 			new FileVersion("owner_keys.xml", "owner_keys.xml", 1.0),
-			new FileVersion("popup.xml", "popup.xml", 20090110),
+			new FileVersion("popup.xml", "popup.xml", 20101111),
 			new FileVersion("function.ini", "function.ini", 20090127) };
 
 	public void checkVersion(VFile configDir) throws VFSException,

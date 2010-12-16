@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menubar version="20090126">
+<menubar version="20101111">
 	<menu label="file" mnemonic="f">
 		<menu label="manipulation">
 			<menuitem label="create_file" command="create_file">
@@ -220,6 +220,8 @@
 		<menuitem label="go_plugin_dir" command="go_plugin_dir">
 		</menuitem>
 		<menuitem label="go_script_dir" command="go_script_dir">
+		</menuitem>
+		<menuitem label="go_lib_dir" command="go_lib_dir">
 		</menuitem>
 		<menuitem label="clean_tag_db" command="clean_tag_db">
 		</menuitem>
