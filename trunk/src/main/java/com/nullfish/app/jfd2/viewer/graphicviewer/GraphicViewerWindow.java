@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -331,8 +332,11 @@ public class GraphicViewerWindow extends JFrame {
 			
 			if (fullScreen) {
 				setExtendedState(JFrame.MAXIMIZED_BOTH);
-				imageComponent.fixSize(java.awt.Toolkit.getDefaultToolkit()
-						.getScreenSize());
+				Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+				Insets inset = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
+				size.height = size.height - inset.top - inset.bottom; 
+				size.width = size.width - inset.left - inset.right; 
+				imageComponent.fixSize(size);
 			} else {
 				setExtendedState(JFrame.NORMAL);
 				imageComponent.unfixSize();
