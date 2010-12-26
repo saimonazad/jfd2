@@ -68,7 +68,7 @@ public abstract class AbstractPlugin implements Plugin {
 	 * 
 	 * @throws VFSException
 	 */
-	public void configulationChanged() {
+	public void configurationChanged() {
 	}
 	
 	/**

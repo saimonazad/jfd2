@@ -101,17 +101,17 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 	 */
 	public void loadPreference(VFile configDir) throws Exception {
 		this.configDir = configDir;
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 
 		grepEncodeTextField.setText((String)commonConfig.getParam("grep_encode", "UTF-8"));
-		grepAllEncodeTextArea.setConfigulation(commonConfig);
+		grepAllEncodeTextArea.setConfiguration(commonConfig);
 		cursorLoopsCheckBox.setSelected(((Boolean)commonConfig.getParam("cursor_loops", Boolean.FALSE)).booleanValue());
 
 		goParentCursorCheckBox.setSelected(((Boolean)commonConfig.getParam("go_parent_cursor", Boolean.FALSE)).booleanValue());
 		paneChangeCursorCheckBox.setSelected(((Boolean)commonConfig.getParam("pane_change_cursor", Boolean.FALSE)).booleanValue());
 
-		keyMapPathConfig.setConfigulation(commonConfig);
+		keyMapPathConfig.setConfiguration(commonConfig);
 		
 		filterTextArea.setText(((String)commonConfig.getParam("filter_regex", "^\\..*")));
 		
@@ -127,7 +127,7 @@ public class ETCConfigPanel extends JPanel implements ConfigPanel {
 	 * @throws VFSException
 	 */
 	public void apply() throws JDOMException, IOException, VFSException {
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 
 		commonConfig.setParam("grep_encode", grepEncodeTextField.getText());

@@ -33,7 +33,7 @@ public interface Plugin {
 	 * 
 	 * @throws VFSException
 	 */
-	public void configulationChanged();
+	public void configurationChanged();
 	
 	/**
 	 * JFD2インスタンスが生成された際に呼び出される。

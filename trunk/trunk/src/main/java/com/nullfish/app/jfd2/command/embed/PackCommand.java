@@ -18,7 +18,7 @@ import jp.hishidama.zip.ZipOutputStream;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
-import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
+import com.nullfish.app.jfd2.dialog.ConfigurationInfo;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
@@ -85,7 +85,7 @@ public class PackCommand extends Command {
 					new Choice(LHA, "LHA", 'l') };
 
 			dialog.addChooser(FORMAT, "", formats, 2, ZIP,
-					new ConfigulationInfo(jfd.getCommonConfigulation(),
+					new ConfigurationInfo(jfd.getCommonConfiguration(),
 							"pack_format"), false);
 
 			dialog.pack();
@@ -134,7 +134,7 @@ public class PackCommand extends Command {
 				ZipOutputStream zos = null;
 				try {
 					zos = new ZipOutputStream(target.getOutputStream(this));
-					String encoding = (String) jfd.getCommonConfigulation()
+					String encoding = (String) jfd.getCommonConfiguration()
 					.getParam("zip_pack_encoding",
 							System.getProperty("file.encoding"));
 					zos.setEncoding(encoding);

@@ -66,13 +66,13 @@ public class ExternalCommandTableCellRenderer extends JPanel implements TableCel
 	 * @see com.nullfish.app.jfd2.Initable#init(com.nullfish.lib.vfs.VFile)
 	 */
 	public void init(VFile baseDir) throws VFSException {
-		labelLabel.setForeground((Color)jfd.getCommonConfigulation().getParam("read_only_color", Color.YELLOW));
-		padLabel.setForeground((Color)jfd.getCommonConfigulation().getParam("read_only_color", Color.YELLOW));
-		textLabel.setForeground((Color)jfd.getCommonConfigulation().getParam("default_label_color", Color.WHITE));
+		labelLabel.setForeground((Color)jfd.getCommonConfiguration().getParam("read_only_color", Color.YELLOW));
+		padLabel.setForeground((Color)jfd.getCommonConfiguration().getParam("read_only_color", Color.YELLOW));
+		textLabel.setForeground((Color)jfd.getCommonConfiguration().getParam("default_label_color", Color.WHITE));
 
-		labelLabel.setFont((Font)jfd.getCommonConfigulation().getParam("label_font", new Font("Monospaced", Font.PLAIN, 12)));
-		padLabel.setFont((Font)jfd.getCommonConfigulation().getParam("label_font", new Font("Monospaced", Font.PLAIN, 12)));
-		textLabel.setFont((Font)jfd.getCommonConfigulation().getParam("label_font", new Font("Monospaced", Font.PLAIN, 12)));
+		labelLabel.setFont((Font)jfd.getCommonConfiguration().getParam("label_font", new Font("Monospaced", Font.PLAIN, 12)));
+		padLabel.setFont((Font)jfd.getCommonConfiguration().getParam("label_font", new Font("Monospaced", Font.PLAIN, 12)));
+		textLabel.setFont((Font)jfd.getCommonConfiguration().getParam("label_font", new Font("Monospaced", Font.PLAIN, 12)));
 	}
 
 }

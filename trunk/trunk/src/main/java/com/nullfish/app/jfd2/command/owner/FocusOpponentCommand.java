@@ -10,7 +10,7 @@ import com.nullfish.lib.vfs.exception.VFSException;
  * 
  * @author shunji
  */
-public class FocusOponentCommand extends OwnerCommand {
+public class FocusOpponentCommand extends OwnerCommand {
 	/* (non-Javadoc)
 	 * @see com.nullfish.lib.vfs.manipulation.abst.AbstractManipulation#doExecute()
 	 */
@@ -23,7 +23,7 @@ public class FocusOponentCommand extends OwnerCommand {
 		}
 		
 		ContainerPosition position = owner.getComponentPosition(c);
-		JFDComponent component = owner.getComponent(position.getOpenent());
+		JFDComponent component = owner.getComponent(position.getOpponent());
 		if(component != null) {
 			owner.setActiveComponent(component);
 		}

@@ -55,9 +55,9 @@ public class EditCommand extends Command {
 				return;
 			}
 			
-			String editor = (String) jfd.getCommonConfigulation().getParam(
+			String editor = (String) jfd.getCommonConfiguration().getParam(
 					PARAM_EDITOR, null);
-			Boolean useShell = (Boolean) jfd.getCommonConfigulation().getParam(
+			Boolean useShell = (Boolean) jfd.getCommonConfiguration().getParam(
 					PARAM_USE_SHELL, Boolean.valueOf(DefaultConfig.getDefaultConfig().isEditorUseShell()));
 
 			if (editor == null) {

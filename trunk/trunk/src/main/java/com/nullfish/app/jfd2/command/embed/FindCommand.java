@@ -13,8 +13,8 @@ import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.comparator.JFDComparator;
-import com.nullfish.app.jfd2.config.Configulation;
-import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
+import com.nullfish.app.jfd2.config.Configuration;
+import com.nullfish.app.jfd2.dialog.ConfigurationInfo;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
@@ -79,25 +79,25 @@ public class FindCommand extends Command {
 		try {
 			JFD jfd = getJFD();
 			JFDModel model = jfd.getModel();
-			Configulation localConfig = jfd.getLocalConfigulation();
+			Configuration localConfig = jfd.getLocalConfiguration();
 
 			dialog = DialogUtilities.createOkCancelDialog(jfd);
 			
 			dialog.setTitle(JFDResource.LABELS.getString("title_find"));
 
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_find"));
-			StringHistory history = (StringHistory) jfd.getLocalConfigulation()
+			StringHistory history = (StringHistory) jfd.getLocalConfiguration()
 					.getParam("find_history", null);
 			if (history == null) {
 				history = new StringHistory(50, true);
-				jfd.getLocalConfigulation().setParam("find_history", history);
+				jfd.getLocalConfiguration().setParam("find_history", history);
 			}
 			dialog.addComboBox(FILE_NAME, history.toArray(), null, true, true, JFDResource.LABELS.getString("find_condition"));
 			StringHistory exceptHistory = (StringHistory) jfd
-					.getLocalConfigulation().getParam("not_find_history", null);
+					.getLocalConfiguration().getParam("not_find_history", null);
 			if (exceptHistory == null) {
 				exceptHistory = new StringHistory(50, true);
-				jfd.getLocalConfigulation().setParam("not_find_history",
+				jfd.getLocalConfiguration().setParam("not_find_history",
 						exceptHistory);
 			}
 			dialog.addComboBox(FILE_NAME_EXCEPT, exceptHistory.toArray(), null, true, true, JFDResource.LABELS.getString("not_find_condition"));
@@ -108,20 +108,20 @@ public class FindCommand extends Command {
 							JFDResource.LABELS.getString("search_directory"),
 							'd',
 							false,
-							new ConfigulationInfo(localConfig, SEARCH_DIRECTORY),
+							new ConfigurationInfo(localConfig, SEARCH_DIRECTORY),
 							false);
 			dialog.addCheckBox(CASE_SENSITIVE, JFDResource.LABELS
 					.getString("case_sensitive"), 's', false,
-					new ConfigulationInfo(localConfig, CASE_SENSITIVE), false);
+					new ConfigurationInfo(localConfig, CASE_SENSITIVE), false);
 			dialog.addCheckBox(USE_MIGEMO, JFDResource.LABELS
-					.getString("use_migemo"), 'm', false, new ConfigulationInfo(
+					.getString("use_migemo"), 'm', false, new ConfigurationInfo(
 					localConfig, USE_MIGEMO), false);
 			dialog.addCheckBox(USE_REGEX, JFDResource.LABELS
-					.getString("use_regex"), 'r', false, new ConfigulationInfo(
+					.getString("use_regex"), 'r', false, new ConfigurationInfo(
 					localConfig, USE_REGEX), false);
 			dialog.addCheckBox(SEARCH_SUB_DIRECTORY, JFDResource.LABELS
 					.getString("search_subdirectory"), 'u', true,
-					new ConfigulationInfo(localConfig, SEARCH_SUB_DIRECTORY),
+					new ConfigurationInfo(localConfig, SEARCH_SUB_DIRECTORY),
 					false);
 
 			dialog.pack();

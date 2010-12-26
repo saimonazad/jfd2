@@ -39,7 +39,7 @@ public class GroovyCommand extends Command {
 			binding.setVariable("jfd", getJFD());
 			binding.setVariable("command", this);
 			binding.setVariable("console", ConsoleFrame.getInstance());
-			String scriptDirPath = (String)getJFD().getCommonConfigulation().getParam(GroovySelectCommand.SCRIPT_DIR_PATH, GroovySelectCommand.DEFAULT_SCRIPT_DIR);
+			String scriptDirPath = (String)getJFD().getCommonConfiguration().getParam(GroovySelectCommand.SCRIPT_DIR_PATH, GroovySelectCommand.DEFAULT_SCRIPT_DIR);
 			VFile scriptDir = vfs.getFile(scriptDirPath);
 			boolean found = false;
 			String path = (String)getParameter(SCRIPT_PATH);

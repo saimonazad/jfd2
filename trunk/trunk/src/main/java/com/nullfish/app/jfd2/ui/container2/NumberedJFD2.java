@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFD2;
 import com.nullfish.app.jfd2.command.JFDException;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.user.GrobalUserInfoManager;
 import com.nullfish.app.jfd2.viewer.FileViewerManager;
@@ -71,7 +71,7 @@ public class NumberedJFD2 extends JFD2 {
 
 	public void init(VFile baseDir) throws VFSException {
 		super.init(baseDir);
-		setBgImage(bgImage, (String) getCommonConfigulation().getParam(
+		setBgImage(bgImage, (String) getCommonConfiguration().getParam(
 				"bg_image_align", BgImagePainter.DEFAULT
 						.getName()));
 		
@@ -81,7 +81,7 @@ public class NumberedJFD2 extends JFD2 {
 	public static void staticInit(VFile baseDir) throws VFSException {
 		// 背景
 		try {
-			Configulation commonConfig = Configulation.getInstance(baseDir
+			Configuration commonConfig = Configuration.getInstance(baseDir
 					.getChild(JFD.COMMON_PARAM_FILE));
 
 			String imagePath = (String) commonConfig.getParam("bg_image", "");

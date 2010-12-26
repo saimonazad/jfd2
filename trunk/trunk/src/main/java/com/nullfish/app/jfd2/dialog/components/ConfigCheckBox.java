@@ -12,14 +12,14 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
-import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
+import com.nullfish.app.jfd2.dialog.ConfigurationInfo;
 import com.nullfish.app.jfd2.dialog.DialogComponent;
 import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.ui.ThreadSafeUtilities;
 
 
 public class ConfigCheckBox extends JCheckBox implements DialogComponent {
-	private ConfigulationInfo config;
+	private ConfigurationInfo config;
 	
 	public static final String CLICK_ACTION = "click_action";
 
@@ -43,10 +43,7 @@ public class ConfigCheckBox extends JCheckBox implements DialogComponent {
 		});
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.nullfish.app.jfd2.ui.dialog.ConfigulationEditor#setConfigulationInfo(com.nullfish.app.jfd2.ui.dialog.ConfigulationInfo)
-	 */
-	public void setConfigulationInfo(final ConfigulationInfo config) {
+	public void setConfigueationInfo(final ConfigurationInfo config) {
 		if(config == null) {
 			return;
 		}
@@ -66,10 +63,7 @@ public class ConfigCheckBox extends JCheckBox implements DialogComponent {
 		ThreadSafeUtilities.executeRunnable(runnable);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.nullfish.app.jfd2.ui.dialog.ConfigulationEditor#applyConfigulation()
-	 */
-	public void applyConfigulation() {
+	public void applyConfiguration() {
 		Runnable runnable = new Runnable() {
 			public void run() {
 				if(config != null) {

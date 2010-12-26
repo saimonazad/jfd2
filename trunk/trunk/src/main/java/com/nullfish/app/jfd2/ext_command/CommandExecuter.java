@@ -65,9 +65,9 @@ public class CommandExecuter {
 	 * @see com.nullfish.app.jfd2.Initable#init(com.nullfish.lib.vfs.VFile)
 	 */
 	public void init(JFD jfd) throws VFSException {
-		shell = (String) jfd.getCommonConfigulation().getParam(PARAM_SHELL, null);
-		appShell = (String) jfd.getCommonConfigulation().getParam(PARAM_APP_SHELL, null);
-		processReader.setShowsAutomatic(((Boolean)jfd.getCommonConfigulation().getParam("shows_console_auto", Boolean.TRUE)).booleanValue());
+		shell = (String) jfd.getCommonConfiguration().getParam(PARAM_SHELL, null);
+		appShell = (String) jfd.getCommonConfiguration().getParam(PARAM_APP_SHELL, null);
+		processReader.setShowsAutomatic(((Boolean)jfd.getCommonConfiguration().getParam("shows_console_auto", Boolean.TRUE)).booleanValue());
 	}
 
 	public Process exec(String command, boolean useShell)

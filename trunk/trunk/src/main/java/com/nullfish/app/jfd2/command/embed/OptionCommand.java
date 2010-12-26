@@ -63,7 +63,7 @@ public class OptionCommand extends Command {
 						ex.printStackTrace();
 					}
 
-					PluginManager.getInstance().configulationChanged();
+					PluginManager.getInstance().configurationChanged();
 				}
 			});
 			

@@ -38,7 +38,7 @@ public class RegisterSmartFileListCommand extends Command {
 		VFS vfs = VFS.getInstance(getJFD());
 		JFD jfd = getJFD();
 
-		String shortCutDirPath = (String) jfd.getCommonConfigulation()
+		String shortCutDirPath = (String) jfd.getCommonConfiguration()
 				.getParam(QuickAccessCommand.SHORTCUT_DIR, QuickAccessCommand.DEFAULT_SHORTCUT_DIR);
 		VFile shortCutDir = vfs.getFile(shortCutDirPath);
 		if (!shortCutDir.exists(this)) {

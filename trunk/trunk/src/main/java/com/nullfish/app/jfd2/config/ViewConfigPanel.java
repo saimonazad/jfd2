@@ -236,31 +236,31 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 	public void loadPreference(VFile configDir) throws JDOMException,
 			IOException, VFSException {
 		this.configDir = configDir;
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 
 		fontSampleLabel.setFont((Font) commonConfig.getParam("label_font", new Font("Monospaced", Font.PLAIN, 12)));
 		dialogFontSampleLabel.setFont((Font) commonConfig.getParam("dialog_font", new Font("SansSerif", Font.PLAIN, 12)));
 
-		fileColorConfig.setConfigulation(commonConfig);
-		readOnlyColorConfig.setConfigulation(commonConfig);
-		subDirectoryColorConfig.setConfigulation(commonConfig);
-		messageColorConfig.setConfigulation(commonConfig);
-		bgColorConfig.setConfigulation(commonConfig);
-		gridColorConfig.setConfigulation(commonConfig);
-		currentDirColorConfig.setConfigulation(commonConfig);
-		parentDirColorConfig.setConfigulation(commonConfig);
-		linkColorConfig.setConfigulation(commonConfig);
-		listColorConfig.setConfigulation(commonConfig);
-		inactiveColorConfig.setConfigulation(commonConfig);
-		tagColorConfig.setConfigulation(commonConfig);
-		textViewerColorConfig.setConfigulation(commonConfig);
+		fileColorConfig.setConfiguration(commonConfig);
+		readOnlyColorConfig.setConfiguration(commonConfig);
+		subDirectoryColorConfig.setConfiguration(commonConfig);
+		messageColorConfig.setConfiguration(commonConfig);
+		bgColorConfig.setConfiguration(commonConfig);
+		gridColorConfig.setConfiguration(commonConfig);
+		currentDirColorConfig.setConfiguration(commonConfig);
+		parentDirColorConfig.setConfiguration(commonConfig);
+		linkColorConfig.setConfiguration(commonConfig);
+		listColorConfig.setConfiguration(commonConfig);
+		inactiveColorConfig.setConfiguration(commonConfig);
+		tagColorConfig.setConfiguration(commonConfig);
+		textViewerColorConfig.setConfiguration(commonConfig);
 		
 		doubleLineCheckBox.setSelected(((Boolean)commonConfig.getParam("double_line", Boolean.TRUE)).booleanValue());
 		cursorRequresFocusCheckBox.setSelected(((Boolean)commonConfig.getParam("hides_cursor", Boolean.TRUE)).booleanValue());
 		changeColorWhenNoFocusCheckBox.setSelected(((Boolean)commonConfig.getParam("change_color_with_focus", Boolean.TRUE)).booleanValue());
 		insetSpinner.setValue(commonConfig.getParam("row-inset", new Integer(0)));
-		bgImageConfig.setConfigulation(commonConfig);
+		bgImageConfig.setConfiguration(commonConfig);
 		transparencySlider.setValue(((Integer)commonConfig.getParam("bg_image_transparency", new Integer(100))).intValue());
 		
 		String bgAlign = (String)commonConfig.getParam("bg_image_align", BgImagePainter.DEFAULT.getName());
@@ -287,7 +287,7 @@ public class ViewConfigPanel extends JPanel implements ConfigPanel {
 	 * @throws VFSException
 	 */
 	public void apply() throws JDOMException, IOException, VFSException {
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 
 		commonConfig.setParam("label_font", fontSampleLabel.getFont());

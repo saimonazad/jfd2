@@ -52,11 +52,11 @@ public class GroovyEditCommand extends AbstractGroovyCommand {
 		try {
 			VFS vfs = VFS.getInstance(getJFD());
 			JFD jfd = getJFD();
-//			String scriptDirPath = (String)jfd.getCommonConfigulation().getParam(SCRIPT_DIR_PATH, DEFAULT_SCRIPT_DIR);
+//			String scriptDirPath = (String)jfd.getCommonConfiguration().getParam(SCRIPT_DIR_PATH, DEFAULT_SCRIPT_DIR);
 //			VFile scriptDir = vfs.getFile(scriptDirPath);
 			
 			dialog = DialogUtilities.createOkCancelDialog(jfd);
-			String script = (String)jfd.getCommonConfigulation().getParam(INPUT_SCRIPT, "");
+			String script = (String)jfd.getCommonConfiguration().getParam(INPUT_SCRIPT, "");
 			dialog.addTextArea(INPUT_SCRIPT, script, true);
 			dialog.addButton(SAVE_SCRIPT, JFDResource.LABELS.getString("save_script"), 's', false);
 			
@@ -73,7 +73,7 @@ public class GroovyEditCommand extends AbstractGroovyCommand {
 				return;
 			}
 			
-			jfd.getCommonConfigulation().setParam(INPUT_SCRIPT, script);
+			jfd.getCommonConfiguration().setParam(INPUT_SCRIPT, script);
 			
 			if(answer.equals(SAVE_SCRIPT)) {
 				saveScript(script);

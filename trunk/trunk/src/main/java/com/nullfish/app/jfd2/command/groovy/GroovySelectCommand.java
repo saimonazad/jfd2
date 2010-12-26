@@ -44,7 +44,7 @@ public class GroovySelectCommand extends AbstractGroovyCommand {
 		try {
 			VFS vfs = VFS.getInstance(getJFD());
 			JFD jfd = getJFD();
-			String scriptDirPath = (String)jfd.getCommonConfigulation().getParam(SCRIPT_DIR_PATH, DEFAULT_SCRIPT_DIR);
+			String scriptDirPath = (String)jfd.getCommonConfiguration().getParam(SCRIPT_DIR_PATH, DEFAULT_SCRIPT_DIR);
 			VFile scriptDir = vfs.getFile(scriptDirPath);
 			if(!scriptDir.exists(this)) {
 				scriptDir.createDirectory(this);
@@ -67,11 +67,11 @@ public class GroovySelectCommand extends AbstractGroovyCommand {
 			
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_select_script"));
 			
-			String lastScript = (String)jfd.getLocalConfigulation().getParam("last_script", null);
+			String lastScript = (String)jfd.getLocalConfiguration().getParam("last_script", null);
 			dialog.addComboBox(SCRIPT, scripts, lastScript, false, true, null);
 
-			List encodeList = (List)jfd.getCommonConfigulation().getParam("grep_encode_all", null);
-			dialog.addComboBox(CONFIG_ENCODING, encodeList, (String)jfd.getCommonConfigulation().getParam(CONFIG_ENCODING, "UTF-8"), false, false, null);
+			List encodeList = (List)jfd.getCommonConfiguration().getParam("grep_encode_all", null);
+			dialog.addComboBox(CONFIG_ENCODING, encodeList, (String)jfd.getCommonConfiguration().getParam(CONFIG_ENCODING, "UTF-8"), false, false, null);
 			
 			dialog.pack();
 			dialog.setVisible(true);
@@ -92,11 +92,11 @@ public class GroovySelectCommand extends AbstractGroovyCommand {
 				return;
 			}
 			
-			jfd.getLocalConfigulation().setParam("last_script", scriptName);
+			jfd.getLocalConfiguration().setParam("last_script", scriptName);
 			VFile scriptFile = scriptDir.getChild(scriptName);
 
 			String encoding = dialog.getTextFieldAnswer(CONFIG_ENCODING);
-			jfd.getCommonConfigulation().setParam(CONFIG_ENCODING, encoding);
+			jfd.getCommonConfiguration().setParam(CONFIG_ENCODING, encoding);
 
 			CacheKey key = new CacheKey();
 			key.file = scriptFile;

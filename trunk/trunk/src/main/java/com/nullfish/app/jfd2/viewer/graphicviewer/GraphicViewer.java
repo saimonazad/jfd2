@@ -89,7 +89,7 @@ public class GraphicViewer extends AbstractFileViewer {
 		try {
 			dialog = DialogUtilities.createOkCancelDialog(getJFD());
 			dialog.addMessage(JFDResource.MESSAGES.getString("input_slideshow_interval"));
-			dialog.addTextField("interval", (String)jfd.getCommonConfigulation().getParam(INTERVAL, "3"), true, "jFD2 - Slideshow", new Restriction() {
+			dialog.addTextField("interval", (String)jfd.getCommonConfiguration().getParam(INTERVAL, "3"), true, "jFD2 - Slideshow", new Restriction() {
 				public boolean isAllowed(String newText) {
 					return Pattern.matches("\\d*\\.?\\d*", newText);
 				}
@@ -107,7 +107,7 @@ public class GraphicViewer extends AbstractFileViewer {
 				return;
 			}
 			
-			jfd.getCommonConfigulation().setParam(INTERVAL, intervalStr);
+			jfd.getCommonConfiguration().setParam(INTERVAL, intervalStr);
 			
 			Thread timerThread = new Thread() {
 				public void run() {

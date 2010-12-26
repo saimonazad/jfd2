@@ -26,15 +26,15 @@ public class SameDirectoryCommand extends Command {
 	public void doExecute() throws VFSException {
 		JFD jfd = getJFD();
 		JFDOwner owner = jfd.getJFDOwner();
-		JFDComponent oponent = owner.getComponent(owner.getComponentPosition(jfd).getOpenent());
+		JFDComponent opponent = owner.getComponent(owner.getComponentPosition(jfd).getOpponent());
 		
-		if(oponent == null || !(oponent instanceof JFD)) {
+		if(opponent == null || !(opponent instanceof JFD)) {
 			return;
 		}
 		
 		String direction = (String)getParameter(DIRECTION);
 		
-		JFD other = (JFD)oponent;
+		JFD other = (JFD)opponent;
 		
 		if(direction == null || "this2opposit".equals(direction)) {
 			copyCurrentDir(jfd, other);

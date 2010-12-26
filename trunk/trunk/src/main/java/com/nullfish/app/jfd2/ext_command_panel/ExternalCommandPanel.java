@@ -103,7 +103,7 @@ public class ExternalCommandPanel extends JPanel implements Initable {
 	 */
 	public void init(VFile baseDir) throws VFSException {
 		ExternalCommandManager.getInstance().init(baseDir);
-		setBackground((Color) jfd.getCommonConfigulation().getParam("background_color", Color.BLACK));
+		setBackground((Color) jfd.getCommonConfiguration().getParam("background_color", Color.BLACK));
 		
 		table.init(baseDir);
 	}

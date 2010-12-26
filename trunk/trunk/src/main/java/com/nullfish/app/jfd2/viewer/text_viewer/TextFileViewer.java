@@ -21,7 +21,7 @@ public class TextFileViewer extends AbstractFileViewer {
 		panel.setFile(file, true);
 		
 		JFDOwner owner = jfd.getJFDOwner();
-		JFDComponent activeComponent = "oponent".equals((String)getParam(FileViewerContainerPanel.PARAM_CONSTRAINTS) ) ? (JFDComponent)jfd : panel;
+		JFDComponent activeComponent = "opponent".equals((String)getParam(FileViewerContainerPanel.PARAM_CONSTRAINTS) ) ? (JFDComponent)jfd : panel;
 		if(owner != null) {
 			owner.setActiveComponent(activeComponent);
 		}

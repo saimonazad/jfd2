@@ -111,19 +111,19 @@ public class PathConfig extends JPanel {
 	/**
 	 * 設定を表示に反映する。
 	 * 
-	 * @param configulation
+	 * @param configuration
 	 */
-	public void setConfigulation(Configulation configulation) {
-		textEditor.setText((String) configulation.getParam(configName, ""));
+	public void setConfiguration(Configuration configuration) {
+		textEditor.setText((String) configuration.getParam(configName, ""));
 	}
 
 	/**
 	 * 設定に反映する。
 	 * 
-	 * @param configulation
+	 * @param configuration
 	 */
-	public void apply(Configulation configulation) {
-		configulation.setParam(configName, textEditor.getText());
+	public void apply(Configuration configuration) {
+		configuration.setParam(configName, textEditor.getText());
 	}
 
 	public void setEscapesQuate(boolean escapesQuate) {

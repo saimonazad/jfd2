@@ -28,7 +28,7 @@ public class GrepConditionEditor implements ConditionEditor {
 	private JComboBox encodeCombo = new JComboBox();
 
 	public GrepConditionEditor(ConditionEditorPanel owner) {
-		List encodeList = (List)owner.getOwner().getJfd().getCommonConfigulation().getParam("grep_encode_all", null);
+		List encodeList = (List)owner.getOwner().getJfd().getCommonConfiguration().getParam("grep_encode_all", null);
 		for(int i=0; i<encodeList.size(); i++) {
 			encodeCombo.addItem(encodeList.get(i));
 		}

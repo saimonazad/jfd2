@@ -18,14 +18,14 @@ public class GCCommand extends Command {
 	 * @see com.nullfish.lib.vfs.manipulation.abst.AbstractManipulation#doExecute()
 	 */
 	public void doExecute() throws VFSException {
-        System.out.println("Before");
+		ConsoleFrame.getInstance().println("Before");
         showMemory();
 
 		Runtime.getRuntime().gc();
 		Runtime.getRuntime().runFinalization();
 		Runtime.getRuntime().gc();
 		
-        System.out.println("After");
+		ConsoleFrame.getInstance().println("After");
         showMemory();
     }
 

@@ -57,7 +57,7 @@ import com.nullfish.app.jfd2.command.progress.ProgressViewerFactory;
 import com.nullfish.app.jfd2.command.progress.WindowProgressViewerFactory;
 import com.nullfish.app.jfd2.comparator.FileComparator;
 import com.nullfish.app.jfd2.comparator.JFDComparator;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.dnd.JFDDragGestureListener;
 import com.nullfish.app.jfd2.dnd.JFDDropTargetListener;
@@ -150,17 +150,17 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	/**
 	 * 共通設定
 	 */
-	private Configulation commonConfig;
+	private Configuration commonConfig;
 
 	/**
 	 * 個別設定
 	 */
-	private Configulation localConfig = new Configulation();
+	private Configuration localConfig = new Configuration();
 
 	/**
 	 * 一時設定
 	 */
-	private Configulation tempConfig = new Configulation();
+	private Configuration tempConfig = new Configuration();
 
 	/**
 	 * このインスタンスのオーナー
@@ -855,7 +855,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 		}
 		table.setColumnCount(columnCount);
 
-		getLocalConfigulation().setParam(CONFIG_COLUMNS,
+		getLocalConfiguration().setParam(CONFIG_COLUMNS,
 				new Integer(columnCount));
 	}
 
@@ -907,7 +907,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	 */
 	private void updateRowHeight() {
 		table.setRowHeight(renderer.getPreferredRowHeight()
-				+ ((Integer) getCommonConfigulation().getParam("row-inset",
+				+ ((Integer) getCommonConfiguration().getParam("row-inset",
 						new Integer(0))).intValue());
 	}
 	
@@ -1015,7 +1015,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	 * 
 	 * @return
 	 */
-	public Configulation getCommonConfigulation() {
+	public Configuration getCommonConfiguration() {
 		return commonConfig;
 	}
 
@@ -1024,14 +1024,14 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	 * 
 	 * @return
 	 */
-	public Configulation getLocalConfigulation() {
+	public Configuration getLocalConfiguration() {
 		return localConfig;
 	}
 
 	/**
 	 * 一時設定を取得する
 	 */
-	public Configulation getTemporaryConfigulation() {
+	public Configuration getTemporaryConfiguration() {
 		return tempConfig;
 	}
 
@@ -1055,7 +1055,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 		}
 
 		try {
-			commonConfig = Configulation.getInstance(baseDir
+			commonConfig = Configuration.getInstance(baseDir
 					.getChild(JFD.COMMON_PARAM_FILE));
 		} catch (VFSException e) {
 			throw e;
@@ -1135,7 +1135,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	private void initColor() throws VFSException {
 		renderer.initColor();
 
-		Configulation commonConfig = getCommonConfigulation();
+		Configuration commonConfig = getCommonConfiguration();
 		Color messageColor = (Color) commonConfig.getParam("message_color",
 				Color.YELLOW);
 
@@ -1212,10 +1212,10 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	
 	// 色関連初期化
 	private void initFileSystem() throws VFSException {
-		Configulation commonConfig = getCommonConfigulation();
+		Configuration commonConfig = getCommonConfiguration();
 		VFS vfs = VFS.getInstance(this);
 		
-		com.nullfish.lib.vfs.Configulation config = vfs.getConfigulation();
+		com.nullfish.lib.vfs.Configuration config = vfs.getConfiguration();
 		//	FTP絡み
 		config.setDefaultConfig(
 						FTPFileSystem.TRANSFER_MODE,
@@ -1331,7 +1331,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 	}
 
 	public void save(VFile baseDir) throws VFSException {
-		getLocalConfigulation().setParam(CONFIG_LAST_OPENED,
+		getLocalConfiguration().setParam(CONFIG_LAST_OPENED,
 				getModel().getCurrentDirectory().getAbsolutePath());
 
 		try {
@@ -1340,8 +1340,8 @@ public class JFD2 extends JPanel implements JFD, Initable {
 				commonTemp.createFile();
 			}
 
-			if(getCommonConfigulation().isUpdatedAfterSave()) {
-				getCommonConfigulation().save(commonTemp.getOutputStream());
+			if(getCommonConfiguration().isUpdatedAfterSave()) {
+				getCommonConfiguration().save(commonTemp.getOutputStream());
 				VFile commonFile = baseDir.getChild(JFD.COMMON_PARAM_FILE);
 				commonTemp.moveTo(commonFile);
 			}
@@ -1350,7 +1350,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 			if (!localTemp.exists()) {
 				localTemp.createFile();
 			}
-			getLocalConfigulation().save(localTemp.getOutputStream());
+			getLocalConfiguration().save(localTemp.getOutputStream());
 			VFile localFile = baseDir.getChild(JFD.LOCAL_PARAM_FILE);
 			localTemp.moveTo(localFile);
 		} catch (IOException e) {
@@ -1583,7 +1583,7 @@ public class JFD2 extends JPanel implements JFD, Initable {
 
 	public static void initKeyMap(VFile configDir) {
 		try {
-			Configulation commonConfig = Configulation.getInstance(configDir
+			Configuration commonConfig = Configuration.getInstance(configDir
 					.getChild(JFD.COMMON_PARAM_FILE));
 			String keyMapPath = (String) commonConfig.getParam("key_map", null);
 			if(keyMapPath != null && keyMapPath.length() > 0) {

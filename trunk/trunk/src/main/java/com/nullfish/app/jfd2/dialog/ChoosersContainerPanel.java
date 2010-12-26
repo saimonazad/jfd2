@@ -88,7 +88,7 @@ public class ChoosersContainerPanel extends FocusOrderManagingPanel {
 	 */
 	public void applyConfig() {
 		for(int i=0; i<chooserList.size(); i++) {
-			((DialogComponent)chooserList.get(i)).applyConfigulation();
+			((DialogComponent)chooserList.get(i)).applyConfiguration();
 		}
 	}
 	

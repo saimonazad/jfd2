@@ -76,7 +76,7 @@ public class DeleteDirectoryCommand extends Command {
 			dialog.addMessage(MessageFormat.format(JFDResource.MESSAGES.getString("message_delete_file"), params));
 	
 			//	ボタン
-			boolean defaultOk = ((Boolean)jfd.getCommonConfigulation().getParam("delete_ok_default", Boolean.TRUE)).booleanValue();
+			boolean defaultOk = ((Boolean)jfd.getCommonConfiguration().getParam("delete_ok_default", Boolean.TRUE)).booleanValue();
 			dialog.addButton(OK, JFDResource.LABELS.getString("ok"), 'y', defaultOk);
 			dialog.addButton(CANCEL, JFDResource.LABELS.getString("cancel"), 'n',
 					!defaultOk);

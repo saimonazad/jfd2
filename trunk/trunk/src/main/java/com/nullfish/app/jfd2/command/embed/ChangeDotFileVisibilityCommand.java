@@ -2,7 +2,7 @@ package com.nullfish.app.jfd2.command.embed;
 
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.Command;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.vfs.exception.VFSException;
 
@@ -14,7 +14,7 @@ public class ChangeDotFileVisibilityCommand extends Command {
 
 	public void doExecute() throws VFSException {
 		JFD jfd = getJFD();
-		Configulation config = jfd.getLocalConfigulation();
+		Configuration config = jfd.getLocalConfiguration();
 		boolean value = !((Boolean) config.getParam("filters_dot_file", Boolean.FALSE)).booleanValue();
 		config.setParam("filters_dot_file", Boolean.valueOf(value));
 		jfd.getModel().setFiltersFile(value);

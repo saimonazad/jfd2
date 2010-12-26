@@ -23,7 +23,7 @@ public class GoToConfigDirCommand extends Command {
 	 */
 	public void doExecute() throws VFSException {
 		JFD jfd = getJFD();
-		String path = (String)jfd.getCommonConfigulation().getParam((String)getParameter(CONFIG_NAME), null);
+		String path = (String)jfd.getCommonConfiguration().getParam((String)getParameter(CONFIG_NAME), null);
 System.out.println(path);
 		if(path == null) {
 			return;

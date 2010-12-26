@@ -40,7 +40,7 @@ import org.xml.sax.SAXException;
 
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.groovy.AbstractGroovyCommand;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.ext_command_panel.ExternalCommand;
 import com.nullfish.app.jfd2.ext_command_panel.ExternalCommandManager;
 import com.nullfish.app.jfd2.resource.JFDResource;
@@ -391,7 +391,7 @@ public class ExternalCommandConfigFrame extends JDialog {
 	
 	private void showScriptRefer() {
 		try {
-			Configulation commonConfig = Configulation.getInstance(baseDir
+			Configuration commonConfig = Configuration.getInstance(baseDir
 					.getChild(JFD.COMMON_PARAM_FILE));
 			VFile scriptDir = VFS.getInstance().getFile(
 					(String) commonConfig.getParam("script_dir", AbstractGroovyCommand.DEFAULT_SCRIPT_DIR));

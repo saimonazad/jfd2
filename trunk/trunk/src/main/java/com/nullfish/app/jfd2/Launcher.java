@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import com.nullfish.app.jfd2.config.ConfigVersionManager;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.ui.container2.ContainerPosition;
 import com.nullfish.app.jfd2.ui.container2.JFD2TitleUpdater;
@@ -68,7 +68,7 @@ public class Launcher {
 
 					String configDirStr = getConfigDir(args);
 					VFile configDir = VFS.getInstance().getFile(configDirStr);
-					Configulation commonConfig = Configulation
+					Configuration commonConfig = Configuration
 							.getInstance(configDir
 									.getChild(JFD.COMMON_PARAM_FILE));
 					
@@ -134,7 +134,7 @@ public class Launcher {
 					CommandLineParameters params = new CommandLineParameters(
 							args);
 					openJFD(params, configDir);
-					PluginManager.getInstance().configulationChanged();
+					PluginManager.getInstance().configurationChanged();
 				} catch (Exception e) {
 					e.printStackTrace();
 					System.exit(1);
@@ -182,7 +182,7 @@ public class Launcher {
 					path = new File(firstDirStr).getAbsolutePath();
 					firstDirRequested = true;
 				} else {
-					path = (String) newJFD.getLocalConfigulation().getParam(
+					path = (String) newJFD.getLocalConfiguration().getParam(
 							JFD2.CONFIG_LAST_OPENED,
 							System.getProperty("user.home"));
 				}

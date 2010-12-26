@@ -94,7 +94,7 @@ public class CheckBoxPanel extends FocusOrderManagingPanel {
 	 */
 	public void applyConfig() {
 		for(int i=0; i<checkBoxList.size(); i++) {
-			((DialogComponent)checkBoxList.get(i)).applyConfigulation();
+			((DialogComponent)checkBoxList.get(i)).applyConfiguration();
 		}
 	}
 	

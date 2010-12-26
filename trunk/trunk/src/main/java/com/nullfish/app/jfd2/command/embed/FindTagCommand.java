@@ -46,11 +46,11 @@ public class FindTagCommand extends Command {
 			dialog.setTitle(JFDResource.LABELS.getString("title_find"));
 			
 			dialog.addMessage(JFDResource.MESSAGES.getString("message_tag_find"));
-			StringHistory history = (StringHistory) jfd.getLocalConfigulation()
+			StringHistory history = (StringHistory) jfd.getLocalConfiguration()
 					.getParam("find_tag_history", null);
 			if (history == null) {
 				history = new StringHistory(50, true);
-				jfd.getLocalConfigulation().setParam("find_tag_history", history);
+				jfd.getLocalConfiguration().setParam("find_tag_history", history);
 			}
 
 			List allTags = VFS.getInstance(jfd).getTagDataBase().findAllTags();

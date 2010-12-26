@@ -36,10 +36,10 @@ public class ConfigVersionManager {
 			new FileVersion("command.xml", "command.xml", 20101207),
 			new FileVersion("external_command.xml", "external_command.xml", 0),
 			new FileVersion("keys.xml", "keys.xml", 20091022),
-			new FileVersion("menubar.xml", "menubar.xml", 20101111),
-			new FileVersion("owner_command.xml", "owner_command.xml", 1.0),
-			new FileVersion("owner_keys.xml", "owner_keys.xml", 1.0),
-			new FileVersion("popup.xml", "popup.xml", 20101111),
+			new FileVersion("menubar.xml", "menubar.xml", 20101226),
+			new FileVersion("owner_command.xml", "owner_command.xml", 20101226),
+			new FileVersion("owner_keys.xml", "owner_keys.xml", 20101226),
+			new FileVersion("popup.xml", "popup.xml", 20101226),
 			new FileVersion("function.ini", "function.ini", 20090127) };
 
 	private static final FileVersion[] ETC_FILES_XML_UNIX = {
@@ -47,10 +47,10 @@ public class ConfigVersionManager {
 			new FileVersion("command.xml", "command.xml", 20101207),
 			new FileVersion("external_command.xml", "external_command.xml", 0),
 			new FileVersion("keys.xml", "keys.xml", 20091022),
-			new FileVersion("menubar.xml", "menubar.xml", 20101111),
-			new FileVersion("owner_command.xml", "owner_command.xml", 1.0),
-			new FileVersion("owner_keys.xml", "owner_keys.xml", 1.0),
-			new FileVersion("popup.xml", "popup.xml", 20101111),
+			new FileVersion("menubar.xml", "menubar.xml", 20101226),
+			new FileVersion("owner_command.xml", "owner_command.xml", 20101226),
+			new FileVersion("owner_keys.xml", "owner_keys.xml", 20101226),
+			new FileVersion("popup.xml", "popup.xml", 20101226),
 			new FileVersion("function.ini", "function.ini", 20090127) };
 
 	public void checkVersion(VFile configDir) throws VFSException,
@@ -91,9 +91,9 @@ public class ConfigVersionManager {
 					configDir.getChild(COMMON_CONFIG_FILE));
 		}
 
-		Configulation config = null;
+		Configuration config = null;
 		try {
-			config = Configulation.getInstance(commonConfigFile);
+			config = Configuration.getInstance(commonConfigFile);
 			editorPath = (String) config.getParam("editor", null);
 			initConfig(config, "temp_dir", configDir.getChild("temp")
 					.getAbsolutePath());
@@ -151,7 +151,7 @@ public class ConfigVersionManager {
 		}
 	}
 
-	private void initConfig(Configulation config, String key, Object value) {
+	private void initConfig(Configuration config, String key, Object value) {
 		if ("".equals(config.getParam(key, value))) {
 			config.setParam(key, value);
 		}

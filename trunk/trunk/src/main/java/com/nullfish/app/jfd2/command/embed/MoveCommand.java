@@ -7,7 +7,7 @@ package com.nullfish.app.jfd2.command.embed;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.lib.vfs.FileUtil;
@@ -140,7 +140,7 @@ public class MoveCommand extends Command {
 	 */
 	private MoveManipulation[] initManipulations(VFile selectedFile, VFile[] markedFiles,
 			VFile dest, boolean ignoresFileStructure) throws VFSException {
-		Configulation config = getJFD().getLocalConfigulation();
+		Configuration config = getJFD().getLocalConfiguration();
 
 		CopyOverwritePolicy policy = new CopyOverwritePolicy(this);
 		MoveManipulation[] rtn;

@@ -13,13 +13,13 @@ import com.nullfish.app.jfd2.viewer.FileViewerConstraints;
  * @author shunji
  *
  */
-public class OponentConstraints extends FileViewerConstraints {
-	public static final String NAME = "oponent";
+public class OpponentConstraints extends FileViewerConstraints {
+	public static final String NAME = "opponent";
 	
 	/**
 	 * @param name
 	 */
-	public OponentConstraints() {
+	public OpponentConstraints() {
 		super(NAME);
 	}
 
@@ -36,6 +36,6 @@ public class OponentConstraints extends FileViewerConstraints {
 		}
 		
 		ContainerPosition position = owner.getComponentPosition(component);
-		return position.getOpenent();
+		return position.getOpponent();
 	}
 }

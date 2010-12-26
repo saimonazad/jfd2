@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
 
-import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
+import com.nullfish.app.jfd2.dialog.ConfigurationInfo;
 import com.nullfish.app.jfd2.dialog.DialogComponent;
 import com.nullfish.lib.keymap.KeyStrokeMap;
 import com.nullfish.lib.ui.Choice;
@@ -16,7 +16,7 @@ import com.nullfish.lib.ui.ChooserPanel;
 
 
 public class ConfigChooserPanel extends ChooserPanel implements DialogComponent {
-	private ConfigulationInfo config;
+	private ConfigurationInfo config;
 	
 	private boolean closeOnDecision = false;
 	
@@ -47,10 +47,7 @@ public class ConfigChooserPanel extends ChooserPanel implements DialogComponent 
 		getActionMap().put(FocusNextAction.NAME, new FocusNextAction(this));
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.nullfish.app.jfd2.ui.dialog.ConfigulationEditor#setConfigulationInfo(com.nullfish.app.jfd2.ui.dialog.ConfigulationInfo)
-	 */
-	public void setConfigulationInfo(ConfigulationInfo config) {
+	public void setConfigueationInfo(ConfigurationInfo config) {
 		this.config = config;
 		if(config == null) {
 			return;
@@ -62,10 +59,7 @@ public class ConfigChooserPanel extends ChooserPanel implements DialogComponent 
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.nullfish.app.jfd2.ui.dialog.ConfigulationEditor#applyConfigulation()
-	 */
-	public void applyConfigulation() {
+	public void applyConfiguration() {
 		if(config != null) {
 			config.setParam(getSelectedAnswer());
 		}

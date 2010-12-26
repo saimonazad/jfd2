@@ -35,7 +35,7 @@ import javax.swing.table.TableCellRenderer;
 
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.ui.labels.JFDLabelUI;
 import com.nullfish.app.jfd2.util.ShortCutFile;
 import com.nullfish.app.jfd2.util.TagUtil;
@@ -521,7 +521,7 @@ public class JFDCellRenderer extends JPanel implements TableCellRenderer {
 	 * @see com.nullfish.app.jfd2.Initable#init(com.nullfish.lib.vfs.VFile)
 	 */
 	public void initColor() throws VFSException {
-		Configulation config = jfd.getCommonConfigulation();
+		Configuration config = jfd.getCommonConfiguration();
 
 		bgColor = (Color)config.getParam("background_color", Color.BLACK);
 		
