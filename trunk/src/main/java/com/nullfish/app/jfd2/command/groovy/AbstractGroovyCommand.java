@@ -59,7 +59,7 @@ public abstract class AbstractGroovyCommand extends Command {
 	protected VFile getScriptDirectory() throws VFSException {
 		VFS vfs = VFS.getInstance(getJFD());
 		JFD jfd = getJFD();
-		String scriptDirPath = (String)jfd.getCommonConfigulation().getParam(SCRIPT_DIR_PATH, DEFAULT_SCRIPT_DIR);
+		String scriptDirPath = (String)jfd.getCommonConfiguration().getParam(SCRIPT_DIR_PATH, DEFAULT_SCRIPT_DIR);
 		return vfs.getFile(scriptDirPath);
 	}
 	

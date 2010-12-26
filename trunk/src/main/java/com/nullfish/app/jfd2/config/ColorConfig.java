@@ -71,26 +71,25 @@ public class ColorConfig extends JPanel {
 	/**
 	 * 設定を表示に反映する。
 	 * 
-	 * @param configulation
+	 * @param configuration
 	 */
-	public void setConfigulation(Configulation configulation) {
-		color = (Color) configulation.getParam(configName, defaultColor);
+	public void setConfiguration(Configuration configuration) {
+		color = (Color) configuration.getParam(configName, defaultColor);
 		colorChanged();
 	}
 
 	/**
 	 * 設定に反映する。
 	 * 
-	 * @param configulation
+	 * @param configuration
 	 */
-	public void apply(Configulation configulation) {
-		configulation.setParam(configName, color);
+	public void apply(Configuration configuration) {
+		configuration.setParam(configName, color);
 	}
 
 	/**
 	 * 色が変更された際に呼び出される。
 	 * 
-	 * @param configulation
 	 */
 	private void colorChanged() {
 		label.setBackground(color);

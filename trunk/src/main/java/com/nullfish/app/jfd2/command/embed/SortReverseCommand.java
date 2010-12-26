@@ -10,7 +10,7 @@ import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.comparator.FileComparator;
 import com.nullfish.app.jfd2.comparator.JFDComparator;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.util.SortUtility;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -30,7 +30,7 @@ public class SortReverseCommand extends Command {
 		JFD jfd = getJFD();
 		JFDModel model = jfd.getModel();
 
-		Configulation config = jfd.getLocalConfigulation();
+		Configuration config = jfd.getLocalConfiguration();
 		String order = (String)config.getParam(SortUtility.ORDER, SortUtility.ASCEND);
 		if(SortUtility.ASCEND.equals(order)) {
 			order = SortUtility.DESCEND;

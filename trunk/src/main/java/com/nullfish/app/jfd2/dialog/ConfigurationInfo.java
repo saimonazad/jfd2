@@ -4,17 +4,17 @@
  */
 package com.nullfish.app.jfd2.dialog;
 
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 
 /**
  * @author shunji
  *
  */
-public class ConfigulationInfo {
+public class ConfigurationInfo {
 	/**
 	 * 設定クラス
 	 */
-	private Configulation config;
+	private Configuration config;
 	
 	/**
 	 * 設定名
@@ -26,7 +26,7 @@ public class ConfigulationInfo {
 	 * @param config
 	 * @param name
 	 */
-	public ConfigulationInfo(Configulation config, String paramName) {
+	public ConfigurationInfo(Configuration config, String paramName) {
 		this.config = config;
 		this.paramName = paramName;
 	}

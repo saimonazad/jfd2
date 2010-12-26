@@ -47,15 +47,15 @@ public class CursorMoveCommand extends Command {
 			return;
 		}
 		
-		boolean cursorLoops = ((Boolean)jfd.getCommonConfigulation().getParam(CURSOR_LOOPS, Boolean.FALSE)).booleanValue();
+		boolean cursorLoops = ((Boolean)jfd.getCommonConfiguration().getParam(CURSOR_LOOPS, Boolean.FALSE)).booleanValue();
 		ContainerPosition position = jfd.getJFDOwner().getComponentPosition(jfd);
 		
-		boolean goParent = ((Boolean)jfd.getCommonConfigulation().getParam(GO_PARENT_CURSOR, Boolean.FALSE)).booleanValue();
-		boolean paneChange = ((Boolean)jfd.getCommonConfigulation().getParam(PANE_CHANGE_CURSOR, Boolean.FALSE)).booleanValue();
+		boolean goParent = ((Boolean)jfd.getCommonConfiguration().getParam(GO_PARENT_CURSOR, Boolean.FALSE)).booleanValue();
+		boolean paneChange = ((Boolean)jfd.getCommonConfiguration().getParam(PANE_CHANGE_CURSOR, Boolean.FALSE)).booleanValue();
 		boolean multiWindowCursor = 
 			!(jfd instanceof JFD2 && ((JFD2)jfd).isThumbnailVisible()) && 
 			(goParent || paneChange)
-			&& jfd.getJFDOwner().getComponent( position.getOpenent() )  != null;
+			&& jfd.getJFDOwner().getComponent( position.getOpponent() )  != null;
 		
 		switch(direction.intValue()) {
 			case UP : 
@@ -76,7 +76,7 @@ public class CursorMoveCommand extends Command {
 				if(multiWindowCursor) {
 					if(position == ContainerPosition.MAIN_PANEL) {
 						if(paneChange) {
-							jfd.getCommandManager().execute("focus_oponent");
+							jfd.getCommandManager().execute("focus_opponent");
 						}
 					} else {
 						if(goParent) {
@@ -91,7 +91,7 @@ public class CursorMoveCommand extends Command {
 				if(multiWindowCursor) {
 					if(position == ContainerPosition.SUB_PANEL) {
 						if(paneChange) {
-							jfd.getCommandManager().execute("focus_oponent");
+							jfd.getCommandManager().execute("focus_opponent");
 						}
 					} else {
 						if(goParent) {

@@ -200,7 +200,7 @@ public class GraphicViewerWindow extends JFrame {
 				}
 				
 				public void mouseReleased(MouseEvent e) {
-					boolean mouseButtonOperation = ((Boolean)viewer.getJFD().getCommonConfigulation().getParam("graphic_viewer_mouse_button_operate", Boolean.TRUE)).booleanValue();
+					boolean mouseButtonOperation = ((Boolean)viewer.getJFD().getCommonConfiguration().getParam("graphic_viewer_mouse_button_operate", Boolean.TRUE)).booleanValue();
 					if(!mouseButtonOperation) {
 						showPopup(e);
 					} else {

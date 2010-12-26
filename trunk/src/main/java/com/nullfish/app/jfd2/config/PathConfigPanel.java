@@ -119,19 +119,19 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 	 */
 	public void loadPreference(VFile configDir) throws Exception {
 		this.configDir = configDir;
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 		String appShell = (String)commonConfig.getParam("app_shell", DefaultConfig.getDefaultConfig().getAppShell());
 		editorPathConfig.setEscapesQuate(appShell.indexOf("\n") == -1);
-		editorPathConfig.setConfigulation(commonConfig);
+		editorPathConfig.setConfiguration(commonConfig);
 		editorUseShellCheckBox.setSelected(((Boolean)commonConfig.getParam(EditCommand.PARAM_USE_SHELL, Boolean.valueOf(DefaultConfig.getDefaultConfig().isEditorUseShell()))).booleanValue());
-//		shellPathConfig.setConfigulation(commonConfig);
-		scriptDirConfig.setConfigulation(commonConfig);
-		pluginDirConfig.setConfigulation(commonConfig);
-		libDirConfig.setConfigulation(commonConfig);
-		shortcutDirConfig.setConfigulation(commonConfig);
-		tempDirConfig.setConfigulation(commonConfig);
-		userConfigConfig.setConfigulation(commonConfig);
+//		shellPathConfig.setConfiguration(commonConfig);
+		scriptDirConfig.setConfiguration(commonConfig);
+		pluginDirConfig.setConfiguration(commonConfig);
+		libDirConfig.setConfiguration(commonConfig);
+		shortcutDirConfig.setConfiguration(commonConfig);
+		tempDirConfig.setConfiguration(commonConfig);
+		userConfigConfig.setConfiguration(commonConfig);
 		
 		extensionMapperConfig.setText((String)commonConfig.getParam("extension_mapper", DefaultConfig.getDefaultConfig().getExtensionMapping()));
 		shellConfig.setText((String)commonConfig.getParam("shell", DefaultConfig.getDefaultConfig().getShell()));
@@ -147,7 +147,7 @@ public class PathConfigPanel extends JPanel implements ConfigPanel {
 	 * @throws VFSException
 	 */
 	public void apply() throws JDOMException, IOException, VFSException {
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 		editorPathConfig.apply(commonConfig);
 		commonConfig.setParam(EditCommand.PARAM_USE_SHELL, Boolean.valueOf(editorUseShellCheckBox.isSelected()));

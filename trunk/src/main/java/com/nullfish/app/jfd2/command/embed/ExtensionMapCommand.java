@@ -39,15 +39,15 @@ public class ExtensionMapCommand extends Command {
 		try {
 			model.lockAutoUpdate(this);
 			String fileName = model.getSelectedFile().getSecurePath();
-			String shell = (String)jfd.getCommonConfigulation().getParam("shell", DefaultConfig.getDefaultConfig().getShell());
+			String shell = (String)jfd.getCommonConfiguration().getParam("shell", DefaultConfig.getDefaultConfig().getShell());
 			if(fileName.indexOf(' ') != -1 && shell.indexOf('\n') == -1) {
 				fileName = "\"" + fileName + "\"";
 			}
 			fileName = WindowsUtil.escapeFileName(fileName);
 			
 			String mapper = model.getSelectedFile().isFile(this) ?
-						(String)jfd.getCommonConfigulation().getParam(PARAM_MAPPER, DefaultConfig.getDefaultConfig().getExtensionMapping()) :
-						(String)jfd.getCommonConfigulation().getParam(PARAM_DIR_OPEN, DefaultConfig.getDefaultConfig().getOpenDirCommand());
+						(String)jfd.getCommonConfiguration().getParam(PARAM_MAPPER, DefaultConfig.getDefaultConfig().getExtensionMapping()) :
+						(String)jfd.getCommonConfiguration().getParam(PARAM_DIR_OPEN, DefaultConfig.getDefaultConfig().getOpenDirCommand());
 			
 			String[] values = {
 					fileName

@@ -196,7 +196,7 @@ public class TemporaryFilePutBackCommand extends Command {
 
 	private VFile getTempDir() throws VFSException {
 		JFD jfd = getJFD();
-		String tempDirStr = (String) jfd.getCommonConfigulation().getParam(
+		String tempDirStr = (String) jfd.getCommonConfiguration().getParam(
 				PARAM_TEMP_DIR, DEFAULT_TEMP_DIR);
 		if (tempDirStr == null || tempDirStr.length() == 0) {
 			throw new JFDException(JFDResource.MESSAGES.getString("temp_dir_not_specified"));

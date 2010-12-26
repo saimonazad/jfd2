@@ -21,11 +21,11 @@ public interface DialogComponent {
 	 * 設定情報を設定する。
 	 * @param config
 	 */
-	public void setConfigulationInfo(ConfigulationInfo config);
+	public void setConfigueationInfo(ConfigurationInfo config);
 	
 	/**
 	 * 決定を設定に反映させる。
 	 *
 	 */
-	public void applyConfigulation();
+	public void applyConfiguration();
 }

@@ -21,7 +21,7 @@ public class ChangeAutoAdjustsColumnCommand extends Command {
 	public void doExecute() throws VFSException {
 		JFD2 jfd = (JFD2)getJFD();
 
-		int columnWidth = ((Integer)jfd.getCommonConfigulation().getParam("min_column_width", Integer.valueOf(300))).intValue();
+		int columnWidth = ((Integer)jfd.getCommonConfiguration().getParam("min_column_width", Integer.valueOf(300))).intValue();
 		jfd.setAdjustsColumnCountAuto(!jfd.isAdjustsColumnCountAuto(), columnWidth);
 	}
 

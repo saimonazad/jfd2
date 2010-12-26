@@ -4,7 +4,7 @@ import org.jdom.JDOMException;
 
 import com.nullfish.app.jfd2.command.CommandManager;
 import com.nullfish.app.jfd2.command.JFDException;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
 import com.nullfish.lib.vfs.exception.VFSException;
@@ -38,7 +38,7 @@ public class JFDOwnerCommandManager extends CommandManager {
 			initCommands(baseDir.getChild(COMMAND_FILE), false);
 			initKeyMap(baseDir.getChild(KEY_FILE), false);
 			VFile userConfDir = VFS.getInstance().getFile(
-					(String)Configulation.getInstance(baseDir).getParam(
+					(String)Configuration.getInstance(baseDir).getParam(
 							"user_conf_dir",
 							baseDir.getRelativeFile("../.jfd2_user/conf")
 									.getAbsolutePath()));

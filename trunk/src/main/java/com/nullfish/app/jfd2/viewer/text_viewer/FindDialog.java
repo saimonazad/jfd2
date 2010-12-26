@@ -26,7 +26,7 @@ import org.monazilla.migemo.Migemo;
 
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.embed.GrepCommand;
-import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
+import com.nullfish.app.jfd2.dialog.ConfigurationInfo;
 import com.nullfish.app.jfd2.dialog.components.ConfigCheckBox;
 import com.nullfish.app.jfd2.dialog.components.DialogComboBox;
 import com.nullfish.app.jfd2.util.MigemoInfo;
@@ -180,9 +180,9 @@ public class FindDialog extends JDialog {
 		ComboBoxModel model = new DefaultComboBoxModel(histories);
 		comboBox.setModel(model);
 		
-		caseSensitiveCheckBox.setConfigulationInfo(new ConfigulationInfo(jfd.getLocalConfigulation(), GrepCommand.CASE_SENSITIVE));
-		regexCheckBox.setConfigulationInfo(new ConfigulationInfo(jfd.getLocalConfigulation(), "grep_use_regex"));
-		migemoCheckBox.setConfigulationInfo(new ConfigulationInfo(jfd.getLocalConfigulation(), "grep_use_migemo"));
+		caseSensitiveCheckBox.setConfigueationInfo(new ConfigurationInfo(jfd.getLocalConfiguration(), GrepCommand.CASE_SENSITIVE));
+		regexCheckBox.setConfigueationInfo(new ConfigurationInfo(jfd.getLocalConfiguration(), "grep_use_regex"));
+		migemoCheckBox.setConfigueationInfo(new ConfigurationInfo(jfd.getLocalConfiguration(), "grep_use_migemo"));
 		
 		comboBox.requestFocusInWindow();
 	}
@@ -195,9 +195,9 @@ public class FindDialog extends JDialog {
 
 		history.add(text);
 		
-		caseSensitiveCheckBox.applyConfigulation();
-		regexCheckBox.applyConfigulation();
-		migemoCheckBox.applyConfigulation();
+		caseSensitiveCheckBox.applyConfiguration();
+		regexCheckBox.applyConfiguration();
+		migemoCheckBox.applyConfiguration();
 	}
 
 	private StringHistory getHistory() {
@@ -205,11 +205,11 @@ public class FindDialog extends JDialog {
 			return null;
 		}
 
-		StringHistory history = (StringHistory) jfd.getLocalConfigulation()
+		StringHistory history = (StringHistory) jfd.getLocalConfiguration()
 				.getParam("grep_history", null);
 		if (history == null) {
 			history = new StringHistory(50, true);
-			jfd.getLocalConfigulation().setParam("grep_history", history);
+			jfd.getLocalConfiguration().setParam("grep_history", history);
 		}
 
 		return history;

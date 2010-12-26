@@ -19,7 +19,7 @@ import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.command.embed.rename.LumpSumRenameDialog;
 import com.nullfish.app.jfd2.command.embed.rename.LumpSumRenamer;
-import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
+import com.nullfish.app.jfd2.dialog.ConfigurationInfo;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
@@ -232,7 +232,7 @@ public class RenameCommand extends Command {
 			dialog.addButton(CANCEL, JFDResource.LABELS.getString("cancel"),
 					'c', false);
 
-//			if(((Boolean)(getJFD().getCommonConfigulation().getParam("rename_sprit_text", Boolean.TRUE))).booleanValue() ) {
+//			if(((Boolean)(getJFD().getCommonConfiguration().getParam("rename_sprit_text", Boolean.TRUE))).booleanValue() ) {
 //				dialog.addSpritFileNameField(NAME, originalValue, true, null);
 //			} else {
 				dialog.addRenameTextField(NAME, originalValue, true, null);
@@ -429,8 +429,8 @@ public class RenameCommand extends Command {
 
 			dialog = DialogUtilities.createOkCancelDialog(getJFD(),
 					JFDResource.LABELS.getString("title_rename"));
-			ConfigulationInfo configInfo = new ConfigulationInfo(getJFD()
-					.getLocalConfigulation(), "rename_way");
+			ConfigurationInfo configInfo = new ConfigurationInfo(getJFD()
+					.getLocalConfiguration(), "rename_way");
 			dialog.addChooser("rename_way", JFDResource.MESSAGES
 					.getString("message_rename_files"), choices, 1, TO_UPPER,
 					configInfo, true);

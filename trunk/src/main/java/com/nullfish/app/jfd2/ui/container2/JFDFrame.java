@@ -34,7 +34,7 @@ import org.jdom.JDOMException;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.command.owner.OwnerCommandManager;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.ui.container2.components.TabContainer;
 import com.nullfish.app.jfd2.ui.container2.components.VisibilityChangeTabbedPane;
@@ -136,7 +136,7 @@ public class JFDFrame extends JFrame implements JFDOwner {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				try {
-					Configulation commonConfig = Configulation.getInstance(configDir
+					Configuration commonConfig = Configuration.getInstance(configDir
 							.getChild(JFD.COMMON_PARAM_FILE));
 					
 					List data = new ArrayList();
@@ -177,7 +177,7 @@ public class JFDFrame extends JFrame implements JFDOwner {
 	public void pack() {
 		super.pack();
 		try {
-			Configulation config = Configulation.getInstance(configDir.getChild(JFD.COMMON_PARAM_FILE));
+			Configuration config = Configuration.getInstance(configDir.getChild(JFD.COMMON_PARAM_FILE));
 			Rectangle rect = new Rectangle();
 			rect.x = ((Integer)config.getParam(CONFIG_X, new Integer(0))).intValue();
 			rect.y = ((Integer)config.getParam(CONFIG_Y, new Integer(0))).intValue();
@@ -192,7 +192,7 @@ public class JFDFrame extends JFrame implements JFDOwner {
 	public void dispose() {
 		try {
 			VFile commonConfigFile = configDir.getChild(JFD.COMMON_PARAM_FILE);
-			Configulation config = Configulation.getInstance(commonConfigFile);
+			Configuration config = Configuration.getInstance(commonConfigFile);
 			
 			Rectangle rect = getBounds();
 			config.setParam(CONFIG_X, new Integer(rect.x));
@@ -637,7 +637,7 @@ public class JFDFrame extends JFrame implements JFDOwner {
 	}
 	
 	public static void saveSizeTabConfig(VFile configDir) throws JDOMException, IOException, VFSException {
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 		
 		List data = new ArrayList();
@@ -690,7 +690,7 @@ public class JFDFrame extends JFrame implements JFDOwner {
 	}
 	
 	public static void loadFromTabConfig(VFile configDir) throws Exception {
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 		
 		List list = (List)commonConfig.getParam("frame_tab_setting", null);

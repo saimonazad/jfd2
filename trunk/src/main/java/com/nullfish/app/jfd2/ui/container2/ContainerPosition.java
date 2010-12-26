@@ -40,15 +40,15 @@ public class ContainerPosition {
 	/**
 	 * 対象名
 	 */
-	private String oponent;
+	private String opponent;
 	
 	/**
 	 * コンストラクタ
 	 * @param name
 	 */
-	private ContainerPosition(String name, String oponent) {
+	private ContainerPosition(String name, String opponent) {
 		this.name = name;
-		this.oponent = oponent;
+		this.opponent = opponent;
 		nameInstanceMap.put(name, this);
 	}
 	
@@ -60,7 +60,7 @@ public class ContainerPosition {
 		return "ContainerConstraints : " + name;
 	}
 	
-	public ContainerPosition getOpenent() {
-		return (ContainerPosition)nameInstanceMap.get(oponent);
+	public ContainerPosition getOpponent() {
+		return (ContainerPosition)nameInstanceMap.get(opponent);
 	}
 }

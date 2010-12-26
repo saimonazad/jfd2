@@ -14,7 +14,7 @@ import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.config.DefaultConfig;
-import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
+import com.nullfish.app.jfd2.dialog.ConfigurationInfo;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.ext_command.CommandExecuter;
 import com.nullfish.app.jfd2.resource.JFDResource;
@@ -68,11 +68,11 @@ public class ShellCommand extends Command {
 			dialog.addButton(CANCEL, JFDResource.LABELS.getString("cancel"),
 					'c', false);
 
-			StringHistory history = (StringHistory) jfd.getLocalConfigulation()
+			StringHistory history = (StringHistory) jfd.getLocalConfiguration()
 					.getParam("shell_history", null);
 			if (history == null) {
 				history = new StringHistory(50, true);
-				jfd.getLocalConfigulation().setParam("shell_history", history);
+				jfd.getLocalConfiguration().setParam("shell_history", history);
 			}
 			
 			List historyList = history.toList();
@@ -83,7 +83,7 @@ public class ShellCommand extends Command {
 				}
 				fileName = WindowsUtil.escapeFileName(fileName);
 				if(!model.getSelectedFile().isFile(this)) {
-					Format format = new MessageFormat((String)jfd.getCommonConfigulation().getParam(ExtensionMapCommand.PARAM_DIR_OPEN, DefaultConfig.getDefaultConfig().getOpenDirCommand()));
+					Format format = new MessageFormat((String)jfd.getCommonConfiguration().getParam(ExtensionMapCommand.PARAM_DIR_OPEN, DefaultConfig.getDefaultConfig().getOpenDirCommand()));
 					Object[] params = {
 							fileName
 					};
@@ -95,8 +95,8 @@ public class ShellCommand extends Command {
 			dialog.addComboBox(COMMAND, historyList, null, true, true, null);
 
 			dialog.addCheckBox(USE_SHELL, JFDResource.LABELS
-					.getString("use_shell"), 's', true, new ConfigulationInfo(
-					jfd.getLocalConfigulation(), USE_SHELL), false);
+					.getString("use_shell"), 's', true, new ConfigurationInfo(
+					jfd.getLocalConfiguration(), USE_SHELL), false);
 
 			dialog.pack();
 			dialog.setVisible(true);
@@ -114,7 +114,7 @@ public class ShellCommand extends Command {
 			}
 
 			if(command == null || command.length() == 0) {
-				command = (String)jfd.getCommonConfigulation().getParam("open_console_command", null);
+				command = (String)jfd.getCommonConfiguration().getParam("open_console_command", null);
 				if(command == null | command.length() == 0) {
 					return;
 				}

@@ -72,7 +72,7 @@ public class View2ConfigPanel extends JPanel implements ConfigPanel {
 	}
 
 	public void apply() throws Exception {
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 
 		commonConfig.setParam("color_map", tableModel.getColorMap());
@@ -84,7 +84,7 @@ public class View2ConfigPanel extends JPanel implements ConfigPanel {
 
 	public void loadPreference(VFile configDir) throws Exception {
 		this.configDir = configDir;
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 		tableModel.setColorMap((Map)commonConfig.getParam("color_map", new HashMap()));
 	}

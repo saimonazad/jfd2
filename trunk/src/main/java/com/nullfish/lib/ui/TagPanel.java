@@ -74,7 +74,7 @@ public class TagPanel extends JPanel {
 			dialog.addButton(JFDDialog.CANCEL, JFDResource.LABELS.getString("cancel"), 'c', false);
 			
 			List allTags = VFS.getInstance(jfd).getTagDataBase().findAllTags();
-			String lastSelection = (String) jfd.getLocalConfigulation().getParam("new_tag_last", "");
+			String lastSelection = (String) jfd.getLocalConfiguration().getParam("new_tag_last", "");
 			allTags.add(0, lastSelection);
 			dialog.addComboBox("tag_name", allTags, null, true, true);
 

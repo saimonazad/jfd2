@@ -8,7 +8,7 @@ import com.nullfish.app.jfd2.aliase.AliaseManager;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.command.CommandManager;
 import com.nullfish.app.jfd2.command.progress.ProgressViewer;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.ui.table.RendererMode;
 import com.nullfish.app.jfd2.util.IncrementalSearcher;
@@ -81,19 +81,19 @@ public interface JFD extends JFDComponent {
 	 * 共通設定を取得する。
 	 * @return
 	 */
-	public Configulation getCommonConfigulation();
+	public Configuration getCommonConfiguration();
 
 	/**
 	 * 個別設定を取得する。
 	 * @return
 	 */
-	public Configulation getLocalConfigulation();
+	public Configuration getLocalConfiguration();
 
 	/**
 	 * 非保存設定を取得する。
 	 * @return
 	 */
-	public Configulation getTemporaryConfigulation();
+	public Configuration getTemporaryConfiguration();
 
 	/**
 	 * 現在のファイル表示モードを設定する。

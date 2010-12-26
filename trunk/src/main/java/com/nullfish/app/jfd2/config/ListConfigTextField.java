@@ -19,11 +19,11 @@ public class ListConfigTextField extends JTextArea {
 	/**
 	 * 設定を表示に反映する。
 	 * 
-	 * @param configulation
+	 * @param configuration
 	 */
-	public void setConfigulation(Configulation configulation) {
+	public void setConfiguration(Configuration configuration) {
 		try {
-		List list = (List) configulation.getParam(configName, null);
+		List list = (List) configuration.getParam(configName, null);
 		setText("");
 		
 		Document doc = getDocument();
@@ -42,9 +42,9 @@ public class ListConfigTextField extends JTextArea {
 	/**
 	 * 設定に反映する。
 	 * 
-	 * @param configulation
+	 * @param configuration
 	 */
-	public void apply(Configulation configulation) {
+	public void apply(Configuration configuration) {
 		StringTokenizer tokenizer = new StringTokenizer(getText(), "\n\r");
 		List list = new ArrayList();
 		while(tokenizer.hasMoreTokens()) {
@@ -53,6 +53,6 @@ public class ListConfigTextField extends JTextArea {
 				list.add(line);
 			}
 		}
-		configulation.setParam(configName, list);
+		configuration.setParam(configName, list);
 	}
 }

@@ -11,7 +11,7 @@ import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.ui.container2.ContainerPosition;
 import com.nullfish.app.jfd2.viewer.constraints.MainConstraints;
 import com.nullfish.app.jfd2.viewer.constraints.NoneConstraints;
-import com.nullfish.app.jfd2.viewer.constraints.OponentConstraints;
+import com.nullfish.app.jfd2.viewer.constraints.OpponentConstraints;
 import com.nullfish.app.jfd2.viewer.constraints.SameConstraints;
 import com.nullfish.app.jfd2.viewer.constraints.SubConstraints;
 
@@ -28,7 +28,7 @@ public abstract class FileViewerConstraints {
 	
 	public static FileViewerConstraints MAIN = new MainConstraints();
 	public static FileViewerConstraints SUB = new SubConstraints();
-	public static FileViewerConstraints OPONENT = new OponentConstraints();
+	public static FileViewerConstraints OPPONENT = new OpponentConstraints();
 	public static FileViewerConstraints SAME = new SameConstraints();
 	public static FileViewerConstraints NONE = new NoneConstraints();
 

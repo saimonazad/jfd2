@@ -10,7 +10,7 @@ import java.util.List;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
-import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
+import com.nullfish.app.jfd2.dialog.ConfigurationInfo;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
@@ -75,11 +75,11 @@ public class UnpackCommand extends Command {
 			dialog.addFileComboBox(DIR_NAME, model.getNoOverwrapHistory()
 					.toArray(), true, true, jfd);
 
-			dialog.addCheckBox(CREATE_DIR, JFDResource.LABELS.getString("unpack_create_dir"), 'r', true, new ConfigulationInfo(
-					jfd.getLocalConfigulation(), CREATE_DIR), false);
+			dialog.addCheckBox(CREATE_DIR, JFDResource.LABELS.getString("unpack_create_dir"), 'r', true, new ConfigurationInfo(
+					jfd.getLocalConfiguration(), CREATE_DIR), false);
 			
-			dialog.addCheckBox(SHOW_OVERWRITE_DIALOG, JFDResource.LABELS.getString("unpack_overwrite_dialog"), 'd', false, new ConfigulationInfo(
-					jfd.getLocalConfigulation(), SHOW_OVERWRITE_DIALOG), false);
+			dialog.addCheckBox(SHOW_OVERWRITE_DIALOG, JFDResource.LABELS.getString("unpack_overwrite_dialog"), 'd', false, new ConfigurationInfo(
+					jfd.getLocalConfiguration(), SHOW_OVERWRITE_DIALOG), false);
 			
 			dialog.pack();
 			dialog.setVisible(true);

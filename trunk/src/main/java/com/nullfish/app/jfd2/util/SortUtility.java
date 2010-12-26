@@ -17,7 +17,7 @@ import com.nullfish.app.jfd2.comparator.ParentNameComparator;
 import com.nullfish.app.jfd2.comparator.PermissionComparator;
 import com.nullfish.app.jfd2.comparator.SizeComparator;
 import com.nullfish.app.jfd2.comparator.TimestampComparator;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 
 /**
  * @author shunji
@@ -50,7 +50,7 @@ public class SortUtility {
 	 * @return
 	 */
 	public static FileComparator[] createComparators(JFD jfd) {
-		Configulation config = jfd.getLocalConfigulation();
+		Configuration config = jfd.getLocalConfiguration();
 		
 		Boolean noSort = (Boolean)config.getParam(SortUtility.NO_SORT, Boolean.FALSE);
 		if(noSort != null && noSort.booleanValue()) {

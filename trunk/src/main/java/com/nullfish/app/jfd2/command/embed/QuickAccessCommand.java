@@ -28,7 +28,7 @@ public class QuickAccessCommand extends Command {
 	public void doExecute() throws VFSException {
 		VFS vfs = VFS.getInstance(getJFD());
 		JFD jfd = getJFD();
-		String shortCutDirPath = (String)jfd.getCommonConfigulation().getParam(SHORTCUT_DIR, DEFAULT_SHORTCUT_DIR);
+		String shortCutDirPath = (String)jfd.getCommonConfiguration().getParam(SHORTCUT_DIR, DEFAULT_SHORTCUT_DIR);
 		VFile shortCutDir = vfs.getFile(shortCutDirPath);
 		if(!shortCutDir.exists(this)) {
 			shortCutDir.createDirectory(this);

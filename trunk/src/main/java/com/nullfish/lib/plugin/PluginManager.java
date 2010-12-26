@@ -86,10 +86,10 @@ public class PluginManager implements Initable {
 	 * 
 	 * @throws VFSException
 	 */
-	public void configulationChanged() {
+	public void configurationChanged() {
 		for (int i = 0; i < plugins.size(); i++) {
 			try {
-				((Plugin) plugins.get(i)).configulationChanged();
+				((Plugin) plugins.get(i)).configurationChanged();
 			} catch (Exception e) {
 				showErrorMessage(e);
 			}

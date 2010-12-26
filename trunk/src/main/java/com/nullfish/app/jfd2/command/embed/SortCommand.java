@@ -10,7 +10,7 @@ import com.nullfish.app.jfd2.JFDModel;
 import com.nullfish.app.jfd2.command.Command;
 import com.nullfish.app.jfd2.comparator.FileComparator;
 import com.nullfish.app.jfd2.comparator.JFDComparator;
-import com.nullfish.app.jfd2.dialog.ConfigulationInfo;
+import com.nullfish.app.jfd2.dialog.ConfigurationInfo;
 import com.nullfish.app.jfd2.dialog.DialogUtilities;
 import com.nullfish.app.jfd2.dialog.JFDDialog;
 import com.nullfish.app.jfd2.resource.JFDResource;
@@ -47,8 +47,8 @@ public class SortCommand extends Command {
 				new Choice(SortUtility.DATE, JFDResource.LABELS.getString("date"), 't') };
 
 		dialog.addChooser(SortUtility.CONDITION, JFDResource.LABELS.getString("condition"),
-				conditions, 2, SortUtility.NAME, new ConfigulationInfo(jfd
-						.getLocalConfigulation(), SortUtility.CONDITION), false);
+				conditions, 2, SortUtility.NAME, new ConfigurationInfo(jfd
+						.getLocalConfiguration(), SortUtility.CONDITION), false);
 
 		//	昇順降順
 		Choice[] orders = {
@@ -57,34 +57,34 @@ public class SortCommand extends Command {
 						'd') };
 
 		dialog.addChooser(SortUtility.ORDER, JFDResource.LABELS.getString("order"), orders,
-				1, SortUtility.ASCEND, new ConfigulationInfo(jfd.getLocalConfigulation(),
+				1, SortUtility.ASCEND, new ConfigurationInfo(jfd.getLocalConfiguration(),
 						SortUtility.ORDER), true);
 
 		//	チェックボックス
 		//	属性ソート
 		dialog.addCheckBox(SortUtility.NO_ATTRIBUTE_SORT, JFDResource.LABELS
-				.getString("no_attribute_sort"), 'a', false, new ConfigulationInfo(
-				jfd.getLocalConfigulation(), SortUtility.NO_ATTRIBUTE_SORT), false);
+				.getString("no_attribute_sort"), 'a', false, new ConfigurationInfo(
+				jfd.getLocalConfiguration(), SortUtility.NO_ATTRIBUTE_SORT), false);
 
 		//	ディレクトリ優先
 		dialog.addCheckBox(SortUtility.DIRECTORY_FIRST, JFDResource.LABELS
-				.getString("directory_first"), 'p', false, new ConfigulationInfo(
-				jfd.getLocalConfigulation(), SortUtility.DIRECTORY_FIRST), false);
+				.getString("directory_first"), 'p', false, new ConfigurationInfo(
+				jfd.getLocalConfiguration(), SortUtility.DIRECTORY_FIRST), false);
 
 		//	ファイルとディレクトリの区別
 		dialog.addCheckBox(SortUtility.NO_DISTINCT_FILE_DIRECTORY, JFDResource.LABELS
-				.getString("no_file_directory_distinction"), 'i', false, new ConfigulationInfo(
-				jfd.getLocalConfigulation(), SortUtility.NO_DISTINCT_FILE_DIRECTORY), false);
+				.getString("no_file_directory_distinction"), 'i', false, new ConfigurationInfo(
+				jfd.getLocalConfiguration(), SortUtility.NO_DISTINCT_FILE_DIRECTORY), false);
 
 		//	数値ソート
 		dialog.addCheckBox(SortUtility.SORT_NAME_NUMBER, JFDResource.LABELS
-				.getString("sort_numbers"), 'm', false, new ConfigulationInfo(
-				jfd.getLocalConfigulation(), SortUtility.SORT_NAME_NUMBER), false);
+				.getString("sort_numbers"), 'm', false, new ConfigurationInfo(
+				jfd.getLocalConfiguration(), SortUtility.SORT_NAME_NUMBER), false);
 
 		//	ソートしない
 		dialog.addCheckBox(SortUtility.NO_SORT, JFDResource.LABELS
-				.getString("no_auto_sort"), 'r', false, new ConfigulationInfo(
-				jfd.getLocalConfigulation(), SortUtility.NO_SORT), false);
+				.getString("no_auto_sort"), 'r', false, new ConfigurationInfo(
+				jfd.getLocalConfiguration(), SortUtility.NO_SORT), false);
 
 		dialog.pack();
 		dialog.setVisible(true);

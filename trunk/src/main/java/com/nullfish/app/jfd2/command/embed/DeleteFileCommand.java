@@ -70,7 +70,7 @@ public class DeleteFileCommand extends Command {
 				dialog.addMessage(JFDResource.MESSAGES.getString("message_delete_marked_files"));
 			}
 	
-			boolean defaultOk = ((Boolean)jfd.getCommonConfigulation().getParam("delete_ok_default", Boolean.TRUE)).booleanValue();
+			boolean defaultOk = ((Boolean)jfd.getCommonConfiguration().getParam("delete_ok_default", Boolean.TRUE)).booleanValue();
 			
 			//	ボタン
 			dialog.addButton(OK, JFDResource.LABELS.getString("ok"), 'y', defaultOk);

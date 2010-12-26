@@ -28,7 +28,7 @@ import com.nullfish.lib.vfs.exception.VFSException;
  * 
  * Preferences - Java - Code Style - Code Templates
  */
-public class Configulation {
+public class Configuration {
 	/**
 	 * 設定
 	 */
@@ -62,7 +62,7 @@ public class Configulation {
 	 * コンストラクタ
 	 *  
 	 */
-	public Configulation() {
+	public Configuration() {
 	}
 
 	/**
@@ -165,10 +165,10 @@ public class Configulation {
 	 * @throws IOException
 	 * @throws VFSException
 	 */
-	public static Configulation getInstance(VFile file) throws JDOMException, IOException, VFSException {
-		Configulation rtn = (Configulation) fileInstanceMap.get(file);
+	public static Configuration getInstance(VFile file) throws JDOMException, IOException, VFSException {
+		Configuration rtn = (Configuration) fileInstanceMap.get(file);
 		if (rtn == null) {
-			rtn = new Configulation();
+			rtn = new Configuration();
 			rtn.load(file);
 			fileInstanceMap.put(file, rtn);
 		}

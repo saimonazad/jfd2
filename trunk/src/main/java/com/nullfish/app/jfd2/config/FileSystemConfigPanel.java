@@ -176,7 +176,7 @@ public class FileSystemConfigPanel extends JPanel implements ConfigPanel {
 	public void loadPreference(VFile configDir) throws JDOMException,
 			IOException, VFSException {
 		this.configDir = configDir;
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 
 		transferModeChooser.setSelectedAnser((String)commonConfig.getParam("ftp_transfer_mode", FTPFileSystem.TRANSFER_MODE_EXTENSION));
@@ -208,7 +208,7 @@ public class FileSystemConfigPanel extends JPanel implements ConfigPanel {
 	 * @throws VFSException
 	 */
 	public void apply() throws JDOMException, IOException, VFSException {
-		Configulation commonConfig = Configulation.getInstance(configDir
+		Configuration commonConfig = Configuration.getInstance(configDir
 				.getChild(JFD.COMMON_PARAM_FILE));
 
 		commonConfig.setParam("ftp_transfer_mode", transferModeChooser.getSelectedAnswer());

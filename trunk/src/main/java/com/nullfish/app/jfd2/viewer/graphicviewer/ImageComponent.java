@@ -3,16 +3,20 @@ package com.nullfish.app.jfd2.viewer.graphicviewer;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.awt.Transparency;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
+import java.awt.image.VolatileImage;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -529,7 +533,15 @@ public class ImageComponent extends JComponent implements Scrollable {
 		}
 		
 		public void setStopped() {
-			running = false;
+			synchronized (ImageComponent.this) {
+				running = false;
+			}
+		}
+		
+		private boolean isRunning() {
+			synchronized (ImageComponent.this) {
+				return running;
+			}
 		}
 		
 		public void run() {
@@ -541,7 +553,7 @@ public class ImageComponent extends JComponent implements Scrollable {
 				bos = new ByteArrayOutputStream();
 				byte[] buffer = new byte[4096];
 				is = new BufferedInputStream(file.getInputStream());
-				while(running) {
+				while(isRunning()) {
 					l = is.read(buffer);
 					if(l <= 0) {
 						break;
@@ -552,7 +564,7 @@ public class ImageComponent extends JComponent implements Scrollable {
 				
 				bos.flush();
 				
-				if(!running) {
+				if(!isRunning()) {
 					return;
 				}
 				
@@ -603,4 +615,5 @@ public class ImageComponent extends JComponent implements Scrollable {
 		this.expands = expands;
 		applyChange();
 	}
+	
 }

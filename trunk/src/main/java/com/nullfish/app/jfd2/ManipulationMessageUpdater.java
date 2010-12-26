@@ -91,26 +91,30 @@ public class ManipulationMessageUpdater {
 			return;
 		}
 		
-		messageBuffer.setLength(0);
-		messageBuffer.append(current.getProgressMessage());
-
-		long max = current.getProgressMax();
-		long progress = current.getProgress();
-		
-		if(max != Manipulation.PROGRESS_INDETERMINED
-			&& progress != Manipulation.PROGRESS_INDETERMINED) {
-			messageBuffer.append(' ');
-			messageBuffer.append(format.format(progress));
-			messageBuffer.append("/");
-			messageBuffer.append(format.format(max));
+		try {
+			messageBuffer.setLength(0);
+			messageBuffer.append(current.getProgressMessage());
+	
+			long max = current.getProgressMax();
+			long progress = current.getProgress();
 			
-			if(max/100 != 0) {
-				messageBuffer.append(" (");
-				messageBuffer.append(progress / (max / 100));
-				messageBuffer.append("%)");
+			if(max != Manipulation.PROGRESS_INDETERMINED
+				&& progress != Manipulation.PROGRESS_INDETERMINED) {
+				messageBuffer.append(' ');
+				messageBuffer.append(format.format(progress));
+				messageBuffer.append("/");
+				messageBuffer.append(format.format(max));
+				
+				if(max/100 != 0) {
+					messageBuffer.append(" (");
+					messageBuffer.append(progress / (max / 100));
+					messageBuffer.append("%)");
+				}
 			}
+				
+			jfd.setMessage(messageBuffer.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-			
-		jfd.setMessage(messageBuffer.toString());
 	}
 }

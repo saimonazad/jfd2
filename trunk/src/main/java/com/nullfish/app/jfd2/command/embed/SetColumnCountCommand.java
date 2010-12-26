@@ -31,11 +31,11 @@ public class SetColumnCountCommand extends Command {
 		if(columnCount != currentCount) {
 			jfd.setColumnCount(columnCount);
 		} else {
-			RendererMode currentMode = (RendererMode)jfd.getLocalConfigulation().getParam(JFD2.CONFIG_RENDERER_MODE, RendererMode.TYPE_1);
+			RendererMode currentMode = (RendererMode)jfd.getLocalConfiguration().getParam(JFD2.CONFIG_RENDERER_MODE, RendererMode.TYPE_1);
 				
 			RendererMode nextMode = RendererMode.getNextMode(currentMode);
 			jfd.setRendererMode(nextMode);
-			jfd.getLocalConfigulation().setParam(JFD2.CONFIG_RENDERER_MODE, nextMode);
+			jfd.getLocalConfiguration().setParam(JFD2.CONFIG_RENDERER_MODE, nextMode);
 		}
 	}
 

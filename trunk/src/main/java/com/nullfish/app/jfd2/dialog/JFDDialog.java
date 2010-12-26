@@ -160,7 +160,7 @@ public class JFDDialog extends JDialog {
 			}
 		});
 		
-		labelFont = (Font)jfd.getCommonConfigulation().getParam("dialog_font", new Font("monospaced", Font.BOLD | Font.ITALIC, 14));
+		labelFont = (Font)jfd.getCommonConfiguration().getParam("dialog_font", new Font("monospaced", Font.BOLD | Font.ITALIC, 14));
 		messagePanel.setFont(labelFont);
 		mainPanel.setFont(labelFont);
 		chooserPanel.setFont(labelFont);
@@ -274,10 +274,10 @@ public class JFDDialog extends JDialog {
 	 * @param defaultValue
 	 */
 	public void addCheckBox(String name, String label, char mnemonic,
-			boolean defaultValue, ConfigulationInfo config,
+			boolean defaultValue, ConfigurationInfo config,
 			boolean closeOnDecision) {
 		ConfigCheckBox check = new ConfigCheckBox(label, defaultValue);
-		check.setConfigulationInfo(config);
+		check.setConfigueationInfo(config);
 		check.setMnemonic(mnemonic);
 		check.setFont(labelFont);
 		if (closeOnDecision) {
@@ -311,11 +311,11 @@ public class JFDDialog extends JDialog {
 	 * @param config
 	 */
 	public void addChooser(String name, String title, Choice[] choice,
-			int cols, String defaultChoice, ConfigulationInfo config,
+			int cols, String defaultChoice, ConfigurationInfo config,
 			boolean closeOnDecision) {
 		ConfigChooserPanel chooser = new ConfigChooserPanel(title, choice,
 				cols, defaultChoice);
-		chooser.setConfigulationInfo(config);
+		chooser.setConfigueationInfo(config);
 		chooser.setFont(labelFont);
 
 		if (closeOnDecision) {
@@ -627,7 +627,7 @@ public class JFDDialog extends JDialog {
 		VFile shortCutDir = null;
 		try {
 			shortCutDir = VFS.getInstance(jfd).getFile(
-					(String) jfd.getCommonConfigulation().getParam(
+					(String) jfd.getCommonConfiguration().getParam(
 							"shortcut_dir", null));
 		} catch (VFSException e) {
 		}
@@ -647,11 +647,11 @@ public class JFDDialog extends JDialog {
 		List history = model.getNoOverwrapHistory().toList();
 		JFDOwner owner = jfd.getJFDOwner();
 		if(owner != null) {
-			ContainerPosition oponentPos = owner.getComponentPosition(jfd).getOpenent();
-			JFDComponent oponent = owner.getComponent(oponentPos);
-			if(oponent instanceof JFD) {
-				history.remove(((JFD)oponent).getModel().getCurrentDirectory() );
-				history.add(0, ((JFD)oponent).getModel().getCurrentDirectory() );
+			ContainerPosition opponentPos = owner.getComponentPosition(jfd).getOpponent();
+			JFDComponent opponent = owner.getComponent(opponentPos);
+			if(opponent instanceof JFD) {
+				history.remove(((JFD)opponent).getModel().getCurrentDirectory() );
+				history.add(0, ((JFD)opponent).getModel().getCurrentDirectory() );
 			}
 			
 			if(selfFirst) {
@@ -764,7 +764,7 @@ public class JFDDialog extends JDialog {
 	private VFile getShortcutRoot() {
 		try {
 		return VFS.getInstance(jfd).getFile(
-				(String) jfd.getCommonConfigulation().getParam(
+				(String) jfd.getCommonConfiguration().getParam(
 						"shortcut_dir", null));
 		} catch (VFSException e) {
 			return null;

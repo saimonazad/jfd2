@@ -45,7 +45,7 @@ import org.jdom.Document;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.JFDComponent;
 import com.nullfish.app.jfd2.command.embed.CursorMoveCommand;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.config.DefaultConfig;
 import com.nullfish.app.jfd2.resource.JFDResource;
 import com.nullfish.app.jfd2.ui.container2.ContainerPosition;
@@ -182,7 +182,7 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 			}
 			
 			private void changeColor() {
-				boolean changesColor = ((Boolean)getViewer().getJFD().getCommonConfigulation().getParam("change_color_with_focus", Boolean.TRUE)).booleanValue();
+				boolean changesColor = ((Boolean)getViewer().getJFD().getCommonConfiguration().getParam("change_color_with_focus", Boolean.TRUE)).booleanValue();
 				
 				if(changesColor) {
 					textArea.setForeground(textArea.isFocusOwner() || (dialog != null && dialog.isVisible()) ? focusedColor : unfocusedColor);
@@ -648,15 +648,15 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 				position = ContainerPosition.SUB_PANEL;
 			}
 
-			JFDComponent oponent = currentJFD.getJFDOwner().getComponent(position);
+			JFDComponent opponent = currentJFD.getJFDOwner().getComponent(position);
 			boolean multiWindowMode = 
-				((Boolean)currentJFD.getCommonConfigulation().getParam(
+				((Boolean)currentJFD.getCommonConfiguration().getParam(
 						CursorMoveCommand.PANE_CHANGE_CURSOR, Boolean.FALSE)).booleanValue()
 				&& !thisPosition.equals(position)
-				&& oponent != null;
+				&& opponent != null;
 
 			if(multiWindowMode) {
-				owner.setActiveComponent(oponent);
+				owner.setActiveComponent(opponent);
 			} else {
 				super.actionPerformed(e);
 			}
@@ -667,7 +667,7 @@ public class TextViewerPanel extends FileViewerContainerPanel {
 	
 	public void init(VFile baseDir) {
 		try {
-			Configulation config = Configulation.getInstance(baseDir
+			Configuration config = Configuration.getInstance(baseDir
 					.getChild(JFD.COMMON_PARAM_FILE));
 			focusedColor = (Color) (config.getParam(
 					"text_viewer_color", Color.WHITE));

@@ -63,7 +63,7 @@ public class NewJFDCommand extends Command {
 				new JFD2TitleUpdater(newJFD));
 
 		try {
-			String path = (String) newJFD.getLocalConfigulation().getParam(
+			String path = (String) newJFD.getLocalConfiguration().getParam(
 					JFD2.CONFIG_LAST_OPENED, System.getProperty("user.home"));
 			if (getParameter(OPENS_DIR) != null
 					&& ((Boolean) getParameter(OPENS_DIR)).booleanValue()

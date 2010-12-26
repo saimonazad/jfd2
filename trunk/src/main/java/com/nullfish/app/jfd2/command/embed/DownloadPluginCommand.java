@@ -22,7 +22,7 @@ public class DownloadPluginCommand extends Command {
 	public void doExecute() throws VFSException {
 		JFDDialog dialog = null;
 		try {
-			//String pluginDirPath = (String)getJFD().getCommonConfigulation().getParam("plugin_dir", null);
+			//String pluginDirPath = (String)getJFD().getCommonConfiguration().getParam("plugin_dir", null);
 			
 			dialog = DialogUtilities.createOkCancelDialog(getJFD(), JFDResource.LABELS.getString("import_plugin"));
 			

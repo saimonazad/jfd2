@@ -34,23 +34,23 @@ public class ChangeSortKeyCommand extends Command {
 		JFDModel model = jfd.getModel();
 
 		String sortKey = (String)getParameter(SORT_KEY);
-		if(sortKey.equals(jfd.getLocalConfigulation().getParam(SortUtility.CONDITION, SortUtility.NAME))) {
-			String order = (String)jfd.getLocalConfigulation().getParam(SortUtility.ORDER, SortUtility.ASCEND);
+		if(sortKey.equals(jfd.getLocalConfiguration().getParam(SortUtility.CONDITION, SortUtility.NAME))) {
+			String order = (String)jfd.getLocalConfiguration().getParam(SortUtility.ORDER, SortUtility.ASCEND);
 			if(SortUtility.ASCEND.equals(order)) {
-				jfd.getLocalConfigulation().setParam(SortUtility.ORDER, SortUtility.DESCEND);
+				jfd.getLocalConfiguration().setParam(SortUtility.ORDER, SortUtility.DESCEND);
 			} else {
-				jfd.getLocalConfigulation().setParam(SortUtility.ORDER, SortUtility.ASCEND);
+				jfd.getLocalConfiguration().setParam(SortUtility.ORDER, SortUtility.ASCEND);
 			}
 		}
 		
-		jfd.getLocalConfigulation().setParam(SortUtility.CONDITION, (String)getParameter(SORT_KEY));
+		jfd.getLocalConfiguration().setParam(SortUtility.CONDITION, (String)getParameter(SORT_KEY));
 		FileComparator[] comparators = SortUtility.createComparators(jfd);
 
 		model.setComparator(new JFDComparator(comparators));
 		model.setFiles(model.getCurrentDirectory(), model.getFiles(), model
 				.getSelectedFile());
 		
-		boolean ascend = SortUtility.ASCEND.equals(jfd.getLocalConfigulation().getParam(SortUtility.ORDER, SortUtility.ASCEND));
+		boolean ascend = SortUtility.ASCEND.equals(jfd.getLocalConfiguration().getParam(SortUtility.ORDER, SortUtility.ASCEND));
 		String message = 
 			JFDResource.LABELS.getString((String)getParameter(LABEL)) + " "
 					+ (ascend ? JFDResource.LABELS.getString("ascend") : JFDResource.LABELS.getString("descend"));

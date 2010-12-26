@@ -16,7 +16,7 @@ import org.jdom.JDOMException;
 import com.nullfish.app.jfd2.Initable;
 import com.nullfish.app.jfd2.JFD;
 import com.nullfish.app.jfd2.command.JFDException;
-import com.nullfish.app.jfd2.config.Configulation;
+import com.nullfish.app.jfd2.config.Configuration;
 import com.nullfish.app.jfd2.util.DomCache;
 import com.nullfish.lib.vfs.VFS;
 import com.nullfish.lib.vfs.VFile;
@@ -63,7 +63,7 @@ public class AliaseManager implements Initable {
 		try {
 			initFromFile(baseDir.getChild(CONFIG_FILE));
 			
-			Configulation commonConfig = Configulation.getInstance(baseDir.getChild(JFD.COMMON_PARAM_FILE));
+			Configuration commonConfig = Configuration.getInstance(baseDir.getChild(JFD.COMMON_PARAM_FILE));
 			VFile userConfDir = VFS.getInstance(jfd).getFile(
 					(String) commonConfig.getParam(
 							"user_conf_dir",
