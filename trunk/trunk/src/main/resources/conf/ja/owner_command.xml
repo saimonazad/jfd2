@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<commands version="1.0">
+<commands version="20101226">
 	<command name="change_split" class="com.nullfish.app.jfd2.command.owner.ChangeSplitCommand">
 	</command>
 	<command name="next_tab" class="com.nullfish.app.jfd2.command.owner.ChangeTabCommand">
@@ -18,7 +18,7 @@
 			<int>1</int>
 		</param>
 	</command>
-	<command name="focus_oponent" class="com.nullfish.app.jfd2.command.owner.FocusOponentCommand">
+	<command name="focus_opponent" class="com.nullfish.app.jfd2.command.owner.FocusOpponentCommand">
 	</command>
 	<command name="focus_main" class="com.nullfish.app.jfd2.command.owner.FocusCommand">
 		<param name="position">

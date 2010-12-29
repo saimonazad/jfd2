@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<commandmaps version="1.0">
+<commandmaps version="20101226">
 	<commandmap name="change_split">
 		<key name="VK_UP" alt="true"/>
 	</commandmap>
@@ -10,7 +10,7 @@
 	<commandmap name="prev_tab">
 		<key name="VK_9"/>
 	</commandmap>
-	<commandmap name="focus_oponent">
+	<commandmap name="focus_opponent">
 		<key name="VK_8"/>
 	</commandmap>
 	<commandmap name="next_frame">
