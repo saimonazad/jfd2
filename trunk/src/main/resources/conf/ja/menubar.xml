@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<menubar version="20101111">
+<menubar version="20101226">
 	<menu label="file" mnemonic="f">
 		<menu label="manipulation">
 			<menuitem label="create_file" command="create_file">
@@ -60,7 +60,7 @@
 		<menuitem label="prev_tab" command="prev_tab">
 			<key name="VK_9"/>
 		</menuitem>
-		<menuitem label="focus_oponent" command="focus_oponent">
+		<menuitem label="focus_opponent" command="focus_opponent">
 			<key name="VK_8"/>
 		</menuitem>
 		<menuitem label="next_frame" command="next_frame">

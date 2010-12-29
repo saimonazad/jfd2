@@ -163,6 +163,8 @@ public class ConsoleFrame extends JFrame {
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
+		
+		toFront();
 	}
 	
 	public void setShowsAutomatic(boolean shows) {
