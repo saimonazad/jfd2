@@ -58,7 +58,7 @@ public class DeleteFileCommand extends Command {
 			
 			dialog = jfd.createDialog();
 
-			dialog.setTitle("title_delete");
+			dialog.setTitle(JFDResource.LABELS.getString("title_delete"));
 			
 			//	メッセージ
 			if(markedFiles.length == 0) {

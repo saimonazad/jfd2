@@ -160,7 +160,7 @@ public class JFDDialog extends JDialog {
 			}
 		});
 		
-		labelFont = (Font)jfd.getCommonConfiguration().getParam("dialog_font", new Font("monospaced", Font.BOLD | Font.ITALIC, 14));
+		labelFont = (Font)jfd.getCommonConfiguration().getParam("dialog_font", new Font("monospaced", 0, 14));
 		messagePanel.setFont(labelFont);
 		mainPanel.setFont(labelFont);
 		chooserPanel.setFont(labelFont);
