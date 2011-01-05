@@ -68,6 +68,20 @@ public class Launcher {
 
 					String configDirStr = getConfigDir(args);
 					VFile configDir = VFS.getInstance().getFile(configDirStr);
+
+					try {
+						ConfigVersionManager confManager = new ConfigVersionManager();
+						confManager.checkVersion(configDir);
+					} catch (Exception e) {
+						e.printStackTrace();
+						JOptionPane
+								.showMessageDialog(
+										null,
+										JFDResource.MESSAGES
+												.getString("failed_to_install_config_file"));
+						System.exit(1);
+					}
+
 					Configuration commonConfig = Configuration
 							.getInstance(configDir
 									.getChild(JFD.COMMON_PARAM_FILE));
@@ -91,19 +105,6 @@ public class Launcher {
 
 					if (System.getProperty("os.name").indexOf("Mac OS") >= 0) {
 						MacUtil.initShutDown();
-					}
-
-					try {
-						ConfigVersionManager confManager = new ConfigVersionManager();
-						confManager.checkVersion(configDir);
-					} catch (Exception e) {
-						e.printStackTrace();
-						JOptionPane
-								.showMessageDialog(
-										null,
-										JFDResource.MESSAGES
-												.getString("failed_to_install_config_file"));
-						System.exit(1);
 					}
 
 					// プラグイン機能
